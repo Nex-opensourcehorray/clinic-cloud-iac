@@ -1,0 +1,6 @@
+aws_region   = "ap-east-1"
+environment  = "nonprod"
+project_name = "clinic"
+
+training_parameter_name  = "/clinic/nonprod/iac/wave1/owner"
+training_parameter_value = "terraform-training"

@@ -1,0 +1,3 @@
+aws_region   = "ap-east-1"
+environment  = "nonprod"
+project_name = "clinic"
