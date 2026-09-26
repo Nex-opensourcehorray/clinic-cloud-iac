@@ -1,0 +1,19 @@
+﻿{
+    "GroupId": "sg-07659b5c68fe16b2a",
+    "GroupName": "Clinic-NonProd-Group",
+    "Ingress": [],
+    "Egress": [
+        {
+            "IpProtocol": "-1",
+            "UserIdGroupPairs": [
+                {
+                    "UserId": "119033255630",
+                    "GroupId": "sg-0f43ac70d383b4859"
+                }
+            ],
+            "IpRanges": [],
+            "Ipv6Ranges": [],
+            "PrefixListIds": []
+        }
+    ]
+}

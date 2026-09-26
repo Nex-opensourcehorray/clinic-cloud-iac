@@ -1,0 +1,14 @@
+﻿[
+    {
+        "DirectoryId": "d-c4677826f0",
+        "Name": "corp.clinicnonprod.com",
+        "Type": "MicrosoftAD",
+        "Stage": "Active",
+        "VpcId": "vpc-0dfbc450b3120b16c",
+        "SubnetIds": [
+            "subnet-0c7ffc0456bbfcb56",
+            "subnet-06836be6443e37a7c"
+        ],
+        "SecurityGroupId": "sg-0f43ac70d383b4859"
+    }
+]

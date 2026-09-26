@@ -1,0 +1,66 @@
+﻿[
+    {
+        "GroupId":  "sg-0b57a86cb71e1b258",
+        "GroupName":  "default",
+        "Description":  "default VPC security group",
+        "AttachedENIs":  {
+                             "value":  [
+
+                                       ],
+                             "Count":  0
+                         }
+    },
+    {
+        "GroupId":  "sg-0f43ac70d383b4859",
+        "GroupName":  "d-c4677826f0_controllers",
+        "Description":  "AWS created security group for d-c4677826f0 directory controllers",
+        "AttachedENIs":  {
+                             "value":  [
+                                           {
+                                               "NetworkInterfaceId":  "eni-09d09e3af52be9bdc",
+                                               "InterfaceType":  "interface",
+                                               "Status":  "in-use",
+                                               "Description":  "AWS created network interface for directory d-c4677826f0",
+                                               "PrivateIpAddress":  "10.0.137.247",
+                                               "SubnetId":  "subnet-0c7ffc0456bbfcb56",
+                                               "AttachmentInstanceId":  null,
+                                               "RequesterManaged":  true,
+                                               "RequesterId":  "418393558065"
+                                           },
+                                           {
+                                               "NetworkInterfaceId":  "eni-0e6000b3651a3eb6d",
+                                               "InterfaceType":  "interface",
+                                               "Status":  "in-use",
+                                               "Description":  "AWS created network interface for directory d-c4677826f0",
+                                               "PrivateIpAddress":  "10.0.149.247",
+                                               "SubnetId":  "subnet-06836be6443e37a7c",
+                                               "AttachmentInstanceId":  null,
+                                               "RequesterManaged":  true,
+                                               "RequesterId":  "418393558065"
+                                           }
+                                       ],
+                             "Count":  2
+                         }
+    },
+    {
+        "GroupId":  "sg-07659b5c68fe16b2a",
+        "GroupName":  "Clinic-NonProd-Group",
+        "Description":  "Proceed SMB to the Private Group.",
+        "AttachedENIs":  {
+                             "value":  [
+                                           {
+                                               "NetworkInterfaceId":  "eni-00d4bf7516cdc761f",
+                                               "InterfaceType":  "interface",
+                                               "Status":  "in-use",
+                                               "Description":  "[Do not detach or untag] Amazon FSx network interface for fs-0c520115e42a87b17",
+                                               "PrivateIpAddress":  "10.0.131.209",
+                                               "SubnetId":  "subnet-0c7ffc0456bbfcb56",
+                                               "AttachmentInstanceId":  null,
+                                               "RequesterManaged":  false,
+                                               "RequesterId":  "165409884345"
+                                           }
+                                       ],
+                             "Count":  1
+                         }
+    }
+]

@@ -1,0 +1,173 @@
+﻿{
+    "EvidenceBlock":  "W2.6.3",
+    "Purpose":  "S3 Gateway Endpoint pre-adoption baseline",
+    "CollectedUTC":  "2026-09-25T16:42:19.9741416Z",
+    "Caller":  {
+                   "UserId":  "AROARXNXPK3HCLAHUV6E7:Clinic-NonProd-Administrator",
+                   "Account":  "119033255630",
+                   "Arn":  "arn:aws:sts::119033255630:assumed-role/AWSReservedSSO_Clinic-NonProd-Operator_96b414772d96df13/Clinic-NonProd-Administrator"
+               },
+    "Target":  {
+                   "Region":  "ap-east-1",
+                   "PrivateSubnetB":  "subnet-06836be6443e37a7c",
+                   "VpcId":  "vpc-0dfbc450b3120b16c",
+                   "S3ServiceName":  "com.amazonaws.ap-east-1.s3",
+                   "PrivateSubnetA":  "subnet-0c7ffc0456bbfcb56"
+               },
+    "Vpc":  [
+                {
+                    "OwnerId":  "119033255630",
+                    "InstanceTenancy":  "default",
+                    "CidrBlockAssociationSet":  [
+                                                    {
+                                                        "AssociationId":  "vpc-cidr-assoc-097b441d245b1c3f5",
+                                                        "CidrBlock":  "10.0.0.0/16",
+                                                        "CidrBlockState":  {
+                                                                               "State":  "associated"
+                                                                           }
+                                                    }
+                                                ],
+                    "IsDefault":  false,
+                    "Tags":  [
+                                 {
+                                     "Key":  "ManagedBy",
+                                     "Value":  "manual-exception"
+                                 },
+                                 {
+                                     "Key":  "DataClassification",
+                                     "Value":  "internal"
+                                 },
+                                 {
+                                     "Key":  "Name",
+                                     "Value":  "clinic-nonproduction-vpc"
+                                 },
+                                 {
+                                     "Key":  "BackupPolicy",
+                                     "Value":  "none-approved"
+                                 },
+                                 {
+                                     "Key":  "Environment",
+                                     "Value":  "nonprod"
+                                 },
+                                 {
+                                     "Key":  "System",
+                                     "Value":  "shared-platform"
+                                 },
+                                 {
+                                     "Key":  "Owner",
+                                     "Value":  "IT-Administrator"
+                                 },
+                                 {
+                                     "Key":  "CostCenter",
+                                     "Value":  "CC-CLINIC-MIG-2026"
+                                 }
+                             ],
+                    "BlockPublicAccessStates":  {
+                                                    "InternetGatewayBlockMode":  "block-ingress"
+                                                },
+                    "VpcId":  "vpc-0dfbc450b3120b16c",
+                    "State":  "available",
+                    "CidrBlock":  "10.0.0.0/16",
+                    "DhcpOptionsId":  "dopt-07ec0c17ac1c9534a"
+                }
+            ],
+    "ExistingVpcEndpoints":  [
+
+                             ],
+    "S3EndpointService":  {
+                              "ServiceNames":  [
+                                                   "com.amazonaws.ap-east-1.s3",
+                                                   "com.amazonaws.ap-east-1.s3"
+                                               ]
+                          },
+    "RouteTables":  [
+                        {
+                            "RouteTableId":  "rtb-00425870121117812",
+                            "Associations":  [
+                                                 {
+                                                     "AssociationId":  "rtbassoc-02205eb8d58fe1593",
+                                                     "SubnetId":  "subnet-0c7ffc0456bbfcb56",
+                                                     "Main":  false
+                                                 }
+                                             ],
+                            "Routes":  [
+                                           {
+                                               "GatewayId":  "local",
+                                               "DestinationPrefixListId":  null,
+                                               "NatGatewayId":  null,
+                                               "DestinationCidrBlock":  "10.0.0.0/16",
+                                               "State":  "active"
+                                           }
+                                       ]
+                        },
+                        {
+                            "RouteTableId":  "rtb-0487fc2e33a5e2294",
+                            "Associations":  [
+                                                 {
+                                                     "AssociationId":  "rtbassoc-01b8212f3690030cb",
+                                                     "SubnetId":  "subnet-06a1767aa230f8f8f",
+                                                     "Main":  false
+                                                 },
+                                                 {
+                                                     "AssociationId":  "rtbassoc-0dd3b7845ebbd2496",
+                                                     "SubnetId":  "subnet-0e3ef16148620ea50",
+                                                     "Main":  false
+                                                 }
+                                             ],
+                            "Routes":  [
+                                           {
+                                               "GatewayId":  "local",
+                                               "DestinationPrefixListId":  null,
+                                               "NatGatewayId":  null,
+                                               "DestinationCidrBlock":  "10.0.0.0/16",
+                                               "State":  "active"
+                                           },
+                                           {
+                                               "GatewayId":  "igw-0100d0c7fef28f38f",
+                                               "DestinationPrefixListId":  null,
+                                               "NatGatewayId":  null,
+                                               "DestinationCidrBlock":  "0.0.0.0/0",
+                                               "State":  "active"
+                                           }
+                                       ]
+                        },
+                        {
+                            "RouteTableId":  "rtb-0914698fd756a45ff",
+                            "Associations":  [
+                                                 {
+                                                     "AssociationId":  "rtbassoc-04a8d0f894b698329",
+                                                     "SubnetId":  "subnet-06836be6443e37a7c",
+                                                     "Main":  false
+                                                 }
+                                             ],
+                            "Routes":  [
+                                           {
+                                               "GatewayId":  "local",
+                                               "DestinationPrefixListId":  null,
+                                               "NatGatewayId":  null,
+                                               "DestinationCidrBlock":  "10.0.0.0/16",
+                                               "State":  "active"
+                                           }
+                                       ]
+                        },
+                        {
+                            "RouteTableId":  "rtb-062e9fd25e8c2e698",
+                            "Associations":  [
+                                                 {
+                                                     "AssociationId":  "rtbassoc-0a86d3e7de4cd432e",
+                                                     "SubnetId":  null,
+                                                     "Main":  true
+                                                 }
+                                             ],
+                            "Routes":  [
+                                           {
+                                               "GatewayId":  "local",
+                                               "DestinationPrefixListId":  null,
+                                               "NatGatewayId":  null,
+                                               "DestinationCidrBlock":  "10.0.0.0/16",
+                                               "State":  "active"
+                                           }
+                                       ]
+                        }
+                    ]
+}

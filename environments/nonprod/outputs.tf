@@ -9,13 +9,13 @@ output "aws_region" {
 }
 
 output "nonprod_vpc_id" {
-  description = "Existing NonProduction VPC ID"
-  value       = data.aws_vpc.clinic_nonprod.id
+  description = "Terraform-managed NonProduction VPC ID"
+  value       = module.network.vpc_id
 }
 
 output "nonprod_vpc_cidr" {
-  description = "Existing NonProduction VPC CIDR"
-  value       = data.aws_vpc.clinic_nonprod.cidr_block
+  description = "CIDR block of the Terraform-managed NonProduction VPC"
+  value       = module.network.vpc_cidr
 }
 
 output "name_prefix" {
@@ -26,4 +26,27 @@ output "name_prefix" {
 output "wave1_training_parameter_arn" {
   description = "ARN of the Terraform-managed Wave 1 training parameter"
   value       = aws_ssm_parameter.wave1_training.arn
+}
+
+output "nonprod_subnet_ids" {
+  description = "Terraform-managed NonProduction subnet IDs"
+  value       = module.network.subnet_ids
+}
+
+output "nonprod_route_table_ids" {
+  value = module.network.route_table_ids
+}
+
+output "nonprod_internet_gateway_id" {
+  value = module.network.internet_gateway_id
+}
+
+output "nonprod_security_group_ids" {
+  description = "Explicit security group boundaries for the non-production VPC"
+  value       = module.network.security_group_ids
+}
+
+output "nonprod_s3_gateway_endpoint_id" {
+  description = "S3 Gateway VPC Endpoint managed by Terraform for NonProd private routing."
+  value       = module.network.s3_gateway_endpoint_id
 }

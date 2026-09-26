@@ -1,0 +1,166 @@
+﻿[
+    {
+        "SubnetId": "subnet-06836be6443e37a7c",
+        "CIDR": "10.0.144.0/20",
+        "AZ": "ap-east-1b",
+        "MapPublicIpOnLaunch": false,
+        "AssignIpv6OnCreation": false,
+        "Tags": [
+            {
+                "Key": "System",
+                "Value": "shared-platform"
+            },
+            {
+                "Key": "Environment",
+                "Value": "nonprod"
+            },
+            {
+                "Key": "BackupPolicy",
+                "Value": "none-approved"
+            },
+            {
+                "Key": "ManagedBy",
+                "Value": "manual-exception"
+            },
+            {
+                "Key": "CostCenter",
+                "Value": "CC-CLINIC-MIG-2026"
+            },
+            {
+                "Key": "DataClassification",
+                "Value": "internal"
+            },
+            {
+                "Key": "Name",
+                "Value": "clinic-nonproduction-subnet-private2-ap-east-1b"
+            },
+            {
+                "Key": "Owner",
+                "Value": "IT-Administrator"
+            }
+        ]
+    },
+    {
+        "SubnetId": "subnet-0e3ef16148620ea50",
+        "CIDR": "10.0.16.0/20",
+        "AZ": "ap-east-1b",
+        "MapPublicIpOnLaunch": false,
+        "AssignIpv6OnCreation": false,
+        "Tags": [
+            {
+                "Key": "ManagedBy",
+                "Value": "manual-exception"
+            },
+            {
+                "Key": "Name",
+                "Value": "clinic-nonproduction-subnet-public2-ap-east-1b"
+            },
+            {
+                "Key": "DataClassification",
+                "Value": "internal"
+            },
+            {
+                "Key": "Owner",
+                "Value": "IT-Administrator"
+            },
+            {
+                "Key": "CostCenter",
+                "Value": "CC-CLINIC-MIG-2026"
+            },
+            {
+                "Key": "BackupPolicy",
+                "Value": "none-approved"
+            },
+            {
+                "Key": "Environment",
+                "Value": "nonprod"
+            },
+            {
+                "Key": "System",
+                "Value": "shared-platform"
+            }
+        ]
+    },
+    {
+        "SubnetId": "subnet-0c7ffc0456bbfcb56",
+        "CIDR": "10.0.128.0/20",
+        "AZ": "ap-east-1a",
+        "MapPublicIpOnLaunch": false,
+        "AssignIpv6OnCreation": false,
+        "Tags": [
+            {
+                "Key": "Owner",
+                "Value": "IT-Administrator"
+            },
+            {
+                "Key": "ManagedBy",
+                "Value": "manual-exception"
+            },
+            {
+                "Key": "Environment",
+                "Value": "nonprod"
+            },
+            {
+                "Key": "DataClassification",
+                "Value": "internal"
+            },
+            {
+                "Key": "BackupPolicy",
+                "Value": "none-approved"
+            },
+            {
+                "Key": "CostCenter",
+                "Value": "CC-CLINIC-MIG-2026"
+            },
+            {
+                "Key": "Name",
+                "Value": "clinic-nonproduction-subnet-private1-ap-east-1a"
+            },
+            {
+                "Key": "System",
+                "Value": "shared-platform"
+            }
+        ]
+    },
+    {
+        "SubnetId": "subnet-06a1767aa230f8f8f",
+        "CIDR": "10.0.0.0/20",
+        "AZ": "ap-east-1a",
+        "MapPublicIpOnLaunch": false,
+        "AssignIpv6OnCreation": false,
+        "Tags": [
+            {
+                "Key": "Environment",
+                "Value": "nonprod"
+            },
+            {
+                "Key": "System",
+                "Value": "shared-platform"
+            },
+            {
+                "Key": "DataClassification",
+                "Value": "internal"
+            },
+            {
+                "Key": "CostCenter",
+                "Value": "CC-CLINIC-MIG-2026"
+            },
+            {
+                "Key": "Owner",
+                "Value": "IT-Administrator"
+            },
+            {
+                "Key": "ManagedBy",
+                "Value": "manual-exception"
+            },
+            {
+                "Key": "Name",
+                "Value": "clinic-nonproduction-subnet-public1-ap-east-1a"
+            },
+            {
+                "Key": "BackupPolicy",
+                "Value": "none-approved"
+            }
+        ]
+    }
+]

@@ -1,0 +1,82 @@
+﻿{
+    "EvidenceId":  "W2.6.5",
+    "Purpose":  "Interface Endpoint Justification Decision",
+    "Timestamp":  "2026-09-26T05:25:45.4920184Z",
+    "Region":  "ap-east-1",
+    "VpcId":  "vpc-0dfbc450b3120b16c",
+    "SourceEvidence":  {
+                           "File":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.6.4-interface-endpoint-readiness.json",
+                           "SHA256":  "A93B00DFC88DC6C833115D0C9EFD535C2482F8F2DB6E04153336CDD0D07728CC"
+                       },
+    "CurrentState":  {
+                         "PrivateSubnetCount":  2,
+                         "PrivateEc2InstanceCount":  0,
+                         "SsmManagedNodeCount":  0,
+                         "ExistingInterfaceEndpointCount":  0,
+                         "ExistingVpcEndpointCount":  1
+                     },
+    "InterfaceEndpointDecision":  {
+                                      "RequiredNowCount":  0,
+                                      "ImplementationDecision":  "DEFER_INTERFACE_ENDPOINTS_UNTIL_DEMONSTRATED_WORKLOAD_NEED",
+                                      "EndpointResourcesToCreate":  0
+                                  },
+    "ServiceMatrix":  [
+                          {
+                              "ShortName":  "ssm",
+                              "ServiceName":  "com.amazonaws.ap-east-1.ssm",
+                              "ServiceAvailable":  true,
+                              "RequiredNow":  false,
+                              "Decision":  "DEFER",
+                              "Reason":  "No private EC2 instance or SSM managed node currently requires private Systems Manager API connectivity."
+                          },
+                          {
+                              "ShortName":  "ssmmessages",
+                              "ServiceName":  "com.amazonaws.ap-east-1.ssmmessages",
+                              "ServiceAvailable":  true,
+                              "RequiredNow":  false,
+                              "Decision":  "DEFER",
+                              "Reason":  "No SSM managed node currently requires the Systems Manager message channel."
+                          },
+                          {
+                              "ShortName":  "ec2messages",
+                              "ServiceName":  "com.amazonaws.ap-east-1.ec2messages",
+                              "ServiceAvailable":  true,
+                              "RequiredNow":  false,
+                              "Decision":  "DEFER",
+                              "Reason":  "No SSM managed node exists. Retain only as a future compatibility consideration; do not deploy solely because the service is available."
+                          },
+                          {
+                              "ShortName":  "logs",
+                              "ServiceName":  "com.amazonaws.ap-east-1.logs",
+                              "ServiceAvailable":  true,
+                              "RequiredNow":  false,
+                              "Decision":  "DEFER",
+                              "Reason":  "No private workload currently requires direct private CloudWatch Logs API connectivity."
+                          },
+                          {
+                              "ShortName":  "kms",
+                              "ServiceName":  "com.amazonaws.ap-east-1.kms",
+                              "ServiceAvailable":  true,
+                              "RequiredNow":  false,
+                              "Decision":  "DEFER",
+                              "Reason":  "Existing AWS service encryption does not by itself justify a KMS interface endpoint. Deploy only when a VPC workload must call the KMS API privately."
+                          },
+                          {
+                              "ShortName":  "sts",
+                              "ServiceName":  "com.amazonaws.ap-east-1.sts",
+                              "ServiceAvailable":  true,
+                              "RequiredNow":  false,
+                              "Decision":  "DEFER",
+                              "Reason":  "No private workload currently demonstrates a requirement for direct private STS API access."
+                          },
+                          {
+                              "ShortName":  "secretsmanager",
+                              "ServiceName":  "com.amazonaws.ap-east-1.secretsmanager",
+                              "ServiceAvailable":  true,
+                              "RequiredNow":  false,
+                              "Decision":  "DEFER",
+                              "Reason":  "No private workload currently demonstrates a requirement for private Secrets Manager API access."
+                          }
+                      ],
+    "Result":  "PASS"
+}

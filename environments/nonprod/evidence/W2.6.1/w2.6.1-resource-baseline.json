@@ -1,0 +1,267 @@
+﻿{
+    "Evidence":  {
+                     "Stage":  "W2.6.1",
+                     "Purpose":  "Private connectivity and VPC endpoint resource discovery",
+                     "GeneratedUtc":  "2026-09-25T06:36:49.0284081Z",
+                     "ReadOnly":  true,
+                     "AwsProfile":  "clinic-nonprod",
+                     "Region":  "ap-east-1"
+                 },
+    "Terraform":  {
+                      "VpcId":  "vpc-0dfbc450b3120b16c",
+                      "Subnets":  {
+                                      "PrivateA":  "subnet-0c7ffc0456bbfcb56",
+                                      "PrivateB":  "subnet-06836be6443e37a7c",
+                                      "PublicA":  "subnet-06a1767aa230f8f8f",
+                                      "PublicB":  "subnet-0e3ef16148620ea50"
+                                  }
+                  },
+    "Summary":  {
+                    "ExistingVpcEndpointCount":  0,
+                    "NatGatewayCount":  0,
+                    "PrivateSubnetEniCount":  3,
+                    "PrivateRouteTableCount":  2,
+                    "CandidateEndpointServices":  [
+                                                      "com.amazonaws.ap-east-1.dynamodb",
+                                                      "com.amazonaws.ap-east-1.ec2messages",
+                                                      "com.amazonaws.ap-east-1.ecr.api",
+                                                      "com.amazonaws.ap-east-1.ecr.dkr",
+                                                      "com.amazonaws.ap-east-1.kms",
+                                                      "com.amazonaws.ap-east-1.logs",
+                                                      "com.amazonaws.ap-east-1.s3",
+                                                      "com.amazonaws.ap-east-1.secretsmanager",
+                                                      "com.amazonaws.ap-east-1.ssm",
+                                                      "com.amazonaws.ap-east-1.ssmmessages",
+                                                      "com.amazonaws.ap-east-1.sts"
+                                                  ]
+                },
+    "PrivateRouteTables":  [
+                               {
+                                   "RouteTableId":  "rtb-00425870121117812",
+                                   "Subnets":  [
+                                                   "subnet-0c7ffc0456bbfcb56"
+                                               ],
+                                   "Routes":  [
+                                                  {
+                                                      "DestinationCidrBlock":  "10.0.0.0/16",
+                                                      "DestinationPrefixListId":  null,
+                                                      "GatewayId":  "local",
+                                                      "NatGatewayId":  null,
+                                                      "VpcEndpointId":  null,
+                                                      "State":  "active"
+                                                  }
+                                              ]
+                               },
+                               {
+                                   "RouteTableId":  "rtb-0914698fd756a45ff",
+                                   "Subnets":  [
+                                                   "subnet-06836be6443e37a7c"
+                                               ],
+                                   "Routes":  [
+                                                  {
+                                                      "DestinationCidrBlock":  "10.0.0.0/16",
+                                                      "DestinationPrefixListId":  null,
+                                                      "GatewayId":  "local",
+                                                      "NatGatewayId":  null,
+                                                      "VpcEndpointId":  null,
+                                                      "State":  "active"
+                                                  }
+                                              ]
+                               }
+                           ],
+    "PrivateSubnetNetworkInterfaces":  [
+                                           {
+                                               "NetworkInterfaceId":  "eni-09d09e3af52be9bdc",
+                                               "Description":  "AWS created network interface for directory d-c4677826f0",
+                                               "InterfaceType":  "interface",
+                                               "RequesterManaged":  true,
+                                               "Status":  "in-use",
+                                               "SubnetId":  "subnet-0c7ffc0456bbfcb56",
+                                               "PrivateIpAddress":  "10.0.137.247",
+                                               "SecurityGroups":  [
+                                                                      {
+                                                                          "GroupId":  "sg-0f43ac70d383b4859",
+                                                                          "GroupName":  "d-c4677826f0_controllers"
+                                                                      }
+                                                                  ]
+                                           },
+                                           {
+                                               "NetworkInterfaceId":  "eni-00d4bf7516cdc761f",
+                                               "Description":  "[Do not detach or untag] Amazon FSx network interface for fs-0c520115e42a87b17",
+                                               "InterfaceType":  "interface",
+                                               "RequesterManaged":  false,
+                                               "Status":  "in-use",
+                                               "SubnetId":  "subnet-0c7ffc0456bbfcb56",
+                                               "PrivateIpAddress":  "10.0.131.209",
+                                               "SecurityGroups":  [
+                                                                      {
+                                                                          "GroupId":  "sg-07659b5c68fe16b2a",
+                                                                          "GroupName":  "Clinic-NonProd-Group"
+                                                                      }
+                                                                  ]
+                                           },
+                                           {
+                                               "NetworkInterfaceId":  "eni-0e6000b3651a3eb6d",
+                                               "Description":  "AWS created network interface for directory d-c4677826f0",
+                                               "InterfaceType":  "interface",
+                                               "RequesterManaged":  true,
+                                               "Status":  "in-use",
+                                               "SubnetId":  "subnet-06836be6443e37a7c",
+                                               "PrivateIpAddress":  "10.0.149.247",
+                                               "SecurityGroups":  [
+                                                                      {
+                                                                          "GroupId":  "sg-0f43ac70d383b4859",
+                                                                          "GroupName":  "d-c4677826f0_controllers"
+                                                                      }
+                                                                  ]
+                                           }
+                                       ],
+    "VpcEndpoints":  {
+
+                     },
+    "NatGateways":  {
+
+                    },
+    "DirectoryService":  {
+                             "DirectoryId":  "d-c4677826f0",
+                             "Name":  "corp.clinicnonprod.com",
+                             "ShortName":  "corp",
+                             "Size":  "Small",
+                             "Edition":  "Standard",
+                             "Alias":  "d-c4677826f0",
+                             "AccessUrl":  "d-c4677826f0.awsapps.com",
+                             "DnsIpAddrs":  [
+                                                "10.0.137.247",
+                                                "10.0.149.247"
+                                            ],
+                             "DnsIpv6Addrs":  [
+
+                                              ],
+                             "Stage":  "Active",
+                             "LaunchTime":  "2026-08-09T15:29:36.138000+08:00",
+                             "StageLastUpdatedDateTime":  "2026-08-09T15:59:10.640000+08:00",
+                             "Type":  "MicrosoftAD",
+                             "VpcSettings":  {
+                                                 "VpcId":  "vpc-0dfbc450b3120b16c",
+                                                 "SubnetIds":  [
+                                                                   "subnet-0c7ffc0456bbfcb56",
+                                                                   "subnet-06836be6443e37a7c"
+                                                               ],
+                                                 "SecurityGroupId":  "sg-0f43ac70d383b4859",
+                                                 "AvailabilityZones":  [
+                                                                           "ap-east-1a",
+                                                                           "ap-east-1b"
+                                                                       ]
+                                             },
+                             "SsoEnabled":  false,
+                             "DesiredNumberOfDomainControllers":  2,
+                             "RegionsInfo":  {
+                                                 "PrimaryRegion":  "ap-east-1",
+                                                 "AdditionalRegions":  [
+
+                                                                       ]
+                                             },
+                             "OsVersion":  "SERVER_2019",
+                             "NetworkType":  "IPv4"
+                         },
+    "FileSystems":  {
+                        "OwnerId":  "119033255630",
+                        "CreationTime":  "2026-08-14T16:33:09.567000+08:00",
+                        "FileSystemId":  "fs-0c520115e42a87b17",
+                        "FileSystemType":  "WINDOWS",
+                        "Lifecycle":  "AVAILABLE",
+                        "StorageCapacity":  32,
+                        "StorageType":  "SSD",
+                        "VpcId":  "vpc-0dfbc450b3120b16c",
+                        "SubnetIds":  [
+                                          "subnet-0c7ffc0456bbfcb56"
+                                      ],
+                        "NetworkInterfaceIds":  [
+                                                    "eni-00d4bf7516cdc761f"
+                                                ],
+                        "DNSName":  "amznfsxylk5ew0w.corp.clinicnonprod.com",
+                        "KmsKeyId":  "arn:aws:kms:ap-east-1:119033255630:key/d49def22-0d89-485e-a04a-3c5206f5a3cb",
+                        "ResourceARN":  "arn:aws:fsx:ap-east-1:119033255630:file-system/fs-0c520115e42a87b17",
+                        "Tags":  [
+                                     {
+                                         "Key":  "Owner",
+                                         "Value":  "IT-Administrator"
+                                     },
+                                     {
+                                         "Key":  "ManagedBy",
+                                         "Value":  "manual-exception"
+                                     },
+                                     {
+                                         "Key":  "CostCenter",
+                                         "Value":  "CC-CLINIC-MIG-2026"
+                                     },
+                                     {
+                                         "Key":  "DataClassification",
+                                         "Value":  "clinical"
+                                     },
+                                     {
+                                         "Key":  "Environment",
+                                         "Value":  "nonprod"
+                                     },
+                                     {
+                                         "Key":  "System",
+                                         "Value":  "files"
+                                     },
+                                     {
+                                         "Key":  "BackupPolicy",
+                                         "Value":  "critical-12h"
+                                     },
+                                     {
+                                         "Key":  "Name",
+                                         "Value":  "Clinic-Nonprod-WindowsFS"
+                                     }
+                                 ],
+                        "WindowsConfiguration":  {
+                                                     "ActiveDirectoryId":  "d-c4677826f0",
+                                                     "DeploymentType":  "SINGLE_AZ_2",
+                                                     "RemoteAdministrationEndpoint":  "amznfsxa9ycfhus.corp.clinicnonprod.com",
+                                                     "PreferredSubnetId":  "subnet-0c7ffc0456bbfcb56",
+                                                     "PreferredFileServerIp":  "10.0.129.94",
+                                                     "ThroughputCapacity":  32,
+                                                     "WeeklyMaintenanceStartTime":  "2:14:00",
+                                                     "DailyAutomaticBackupStartTime":  "18:00",
+                                                     "AutomaticBackupRetentionDays":  0,
+                                                     "CopyTagsToBackups":  false,
+                                                     "AuditLogConfiguration":  {
+                                                                                   "FileAccessAuditLogLevel":  "SUCCESS_AND_FAILURE",
+                                                                                   "FileShareAccessAuditLogLevel":  "SUCCESS_AND_FAILURE",
+                                                                                   "AuditLogDestination":  "arn:aws:logs:ap-east-1:119033255630:log-group:/aws/fsx/windows:log-stream:audit_fs-0c520115e42a87b17"
+                                                                               },
+                                                     "DiskIopsConfiguration":  {
+                                                                                   "Mode":  "AUTOMATIC",
+                                                                                   "Iops":  96
+                                                                               },
+                                                     "FsrmConfiguration":  {
+                                                                               "FsrmServiceEnabled":  false
+                                                                           }
+                                                 },
+                        "AdministrativeActions":  [
+                                                      {
+                                                          "AdministrativeActionType":  "FILE_SYSTEM_UPDATE",
+                                                          "RequestTime":  "2026-09-08T16:38:05.330000+08:00",
+                                                          "Status":  "COMPLETED",
+                                                          "TargetFileSystemValues":  {
+                                                                                         "WindowsConfiguration":  {
+                                                                                                                      "AuditLogConfiguration":  {
+                                                                                                                                                    "FileAccessAuditLogLevel":  "SUCCESS_AND_FAILURE",
+                                                                                                                                                    "FileShareAccessAuditLogLevel":  "SUCCESS_AND_FAILURE",
+                                                                                                                                                    "AuditLogDestination":  "arn:aws:logs:ap-east-1:119033255630:log-group:/aws/fsx/windows:log-stream:audit_fs-0c520115e42a87b17"
+                                                                                                                                                }
+                                                                                                                  }
+                                                                                     }
+                                                      }
+                                                  ],
+                        "NetworkType":  "IPV4"
+                    },
+    "Ec2Reservations":  {
+
+                        },
+    "CollectorErrors":  [
+
+                        ]
+}

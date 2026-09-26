@@ -1,0 +1,1605 @@
+﻿{
+    "EvidenceId":  "W2.8.1",
+    "Purpose":  "Final Wave 2 Security and Closure Discovery",
+    "Timestamp":  "2026-09-26T09:03:43.1461279Z",
+    "TerraformState":  {
+                           "TotalResourceCount":  22,
+                           "ModuleNetworkResourceCount":  18,
+                           "OldRootNetworkResourceCount":  0,
+                           "ModuleNetworkResources":  [
+                                                          "module.network.aws_default_security_group.clinic_nonprod",
+                                                          "module.network.aws_internet_gateway.clinic_nonprod",
+                                                          "module.network.aws_route.public_internet",
+                                                          "module.network.aws_route_table.private_a",
+                                                          "module.network.aws_route_table.private_b",
+                                                          "module.network.aws_route_table.public",
+                                                          "module.network.aws_route_table_association.private_a",
+                                                          "module.network.aws_route_table_association.private_b",
+                                                          "module.network.aws_route_table_association.public_a",
+                                                          "module.network.aws_route_table_association.public_b",
+                                                          "module.network.aws_security_group.clinic_nonprod",
+                                                          "module.network.aws_subnet.private_a",
+                                                          "module.network.aws_subnet.private_b",
+                                                          "module.network.aws_subnet.public_a",
+                                                          "module.network.aws_subnet.public_b",
+                                                          "module.network.aws_vpc.clinic_nonprod",
+                                                          "module.network.aws_vpc_endpoint.s3_gateway",
+                                                          "module.network.aws_vpc_security_group_egress_rule.clinic_to_directory"
+                                                      ],
+                           "OldRootNetworkResources":  [
+
+                                                       ]
+                       },
+    "SourceStructure":  {
+                            "ActiveEnvironmentTfFiles":  [
+                                                             {
+                                                                 "Name":  "backend.tf",
+                                                                 "Length":  238,
+                                                                 "SHA256":  "0C79B0B89AD4A3C96EC9A428CF17D3888BA00D4CE79075DEA1D037190731153A"
+                                                             },
+                                                             {
+                                                                 "Name":  "directory-data.tf",
+                                                                 "Length":  199,
+                                                                 "SHA256":  "24738890E9DC13C3BC21C20507825104C9701CD1EC69D42A37FD5C15E1550884"
+                                                             },
+                                                             {
+                                                                 "Name":  "endpoint.tf",
+                                                                 "Length":  2655,
+                                                                 "SHA256":  "FEBE846357356F1A10D434AA9E111F25696308B4566B2EBE2F6B773EEAC06C67"
+                                                             },
+                                                             {
+                                                                 "Name":  "locals.tf",
+                                                                 "Length":  197,
+                                                                 "SHA256":  "BCF755FAD24C9A14C811768435BB6AEAD7BF53805CE1651F747CA7211B2F6D40"
+                                                             },
+                                                             {
+                                                                 "Name":  "main.tf",
+                                                                 "Length":  341,
+                                                                 "SHA256":  "2BB897BB7D9A596AC9F2C917D73435DE62A77889D846ABA16D8CC3BB9C7120AF"
+                                                             },
+                                                             {
+                                                                 "Name":  "moved.tf",
+                                                                 "Length":  2083,
+                                                                 "SHA256":  "6F1EC8D85D0529BE5805F5124D194BAECBC9BB55B1A5B96A7437D0789AA05411"
+                                                             },
+                                                             {
+                                                                 "Name":  "network-module.tf",
+                                                                 "Length":  1013,
+                                                                 "SHA256":  "20BFF48419DCC8EB88F5776BEE4D604CCCD4AE7DB9FC0261EB13A00070C023D8"
+                                                             },
+                                                             {
+                                                                 "Name":  "outputs.tf",
+                                                                 "Length":  1535,
+                                                                 "SHA256":  "9CBFD848AC723B347C1C83743517ADEB7AE8F7B760D182FD49100C420FDBA6C9"
+                                                             },
+                                                             {
+                                                                 "Name":  "providers.tf",
+                                                                 "Length":  46,
+                                                                 "SHA256":  "C226C97D2FC32BA95AC5078FE454F307690763D9A7E7F572C9C4FFB2BAE94B4B"
+                                                             },
+                                                             {
+                                                                 "Name":  "variables.tf",
+                                                                 "Length":  630,
+                                                                 "SHA256":  "F30F9BAA5EE5CC6ED27043CFFFE217E0DCFCCC122E1DC51426660F1615E2931B"
+                                                             },
+                                                             {
+                                                                 "Name":  "versions.tf",
+                                                                 "Length":  157,
+                                                                 "SHA256":  "B8FC930DE8854570481C1DA976FBAA68F1CF6F54AFD41FF403FFF5A61DD082D1"
+                                                             }
+                                                         ],
+                            "NetworkModuleTfFiles":  [
+                                                         {
+                                                             "Name":  "main.tf",
+                                                             "Length":  6071,
+                                                             "SHA256":  "541634738455D5E617C77732E631BFC25BAE72D25616E63125D9BA86910C0BFC"
+                                                         },
+                                                         {
+                                                             "Name":  "outputs.tf",
+                                                             "Length":  1474,
+                                                             "SHA256":  "BB3B0AB1FB33D20C0C8D79AA100A0BEA066B8E7ECE24DB781581685A03089B92"
+                                                         },
+                                                         {
+                                                             "Name":  "variables.tf",
+                                                             "Length":  1729,
+                                                             "SHA256":  "4B4C8963E29EAB08FEE2C21BD73320A962E0A93486BE7598A1AC23A900DA988A"
+                                                         }
+                                                     ],
+                            "MovedTfPresent":  true,
+                            "RollbackFiles":  [
+                                                  "network.tf.pre-w2.7.5.3",
+                                                  "outputs.tf.pre-w2.7.5.3",
+                                                  "route_associations.tf.pre-w2.7.5.3",
+                                                  "s3-endpoint.tf.pre-w2.7.5.3",
+                                                  "security-groups.tf.pre-w2.7.5.3"
+                                              ],
+                            "PendingFiles":  [
+
+                                             ]
+                        },
+    "RepositoryHygiene":  {
+                              "TerraformDirectories":  [
+                                                           ".\\bootstrap\\state-backend\\.terraform",
+                                                           ".\\environments\\nonprod\\.terraform"
+                                                       ],
+                              "TfvarsFiles":  [
+                                                  ".\\bootstrap\\state-backend\\terraform.tfvars",
+                                                  ".\\environments\\nonprod\\terraform.tfvars"
+                                              ],
+                              "PotentialSensitiveArtifacts":  [
+                                                                  ".\\bootstrap\\state-backend\\terraform.tfstate",
+                                                                  ".\\environments\\nonprod\\.terraform\\terraform.tfstate",
+                                                                  ".\\environments\\nonprod\\terraform.tfstate",
+                                                                  ".\\environments\\nonprod\\terraform.tfstate.1790006065.backup",
+                                                                  ".\\environments\\nonprod\\terraform.tfstate.backup",
+                                                                  ".\\environments\\nonprod\\terraform.tfstate.pre-s3-migration-backup",
+                                                                  ".\\environments\\nonprod\\terraform.tfstate.w1.3-backup",
+                                                                  ".\\environments\\nonprod\\w2.2-postimport.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.2-preimport.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.2-refactor.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.3-output-reconcile.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.3-postimport.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.3-preimport.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.4.7-final-reconcile.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.4-assoc-postimport.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.4-assoc-preimport.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.4-igw-postimport.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.4-igw-preimport.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.4-main-boundary.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.4-route-postimport.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.4-route-preimport.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.4-rtb-postimport.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.4-rtb-preimport.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.5.2-ownership-boundary.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.5.3-sg-postimport.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.5.3-sg-preimport.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.5.4-rule-postimport.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.5.4-rule-preimport.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.5.5-default-sg-postimport.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.5.5-default-sg-preimport.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.5.6-directory-boundary.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.5.6-directory-final.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.5.7-discovery-cleanup.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.5.7-final.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.5.8-final-reconcile.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.6.2-endpoint-design.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.6.3-s3-endpoint-preapply.tfplan",
+                                                                  ".\\environments\\nonprod\\w2.6.3-s3-endpoint-preapply-v2.tfplan"
+                                                              ]
+                          },
+    "StaticSecurityReview":  {
+                                 "Findings":  [
+                                                  {
+                                                      "Pattern":  "MovedBlock",
+                                                      "File":  ".\\environments\\nonprod\\moved.tf",
+                                                      "Line":  5,
+                                                      "Text":  "moved {"
+                                                  },
+                                                  {
+                                                      "Pattern":  "MovedBlock",
+                                                      "File":  ".\\environments\\nonprod\\moved.tf",
+                                                      "Line":  10,
+                                                      "Text":  "moved {"
+                                                  },
+                                                  {
+                                                      "Pattern":  "MovedBlock",
+                                                      "File":  ".\\environments\\nonprod\\moved.tf",
+                                                      "Line":  15,
+                                                      "Text":  "moved {"
+                                                  },
+                                                  {
+                                                      "Pattern":  "MovedBlock",
+                                                      "File":  ".\\environments\\nonprod\\moved.tf",
+                                                      "Line":  20,
+                                                      "Text":  "moved {"
+                                                  },
+                                                  {
+                                                      "Pattern":  "MovedBlock",
+                                                      "File":  ".\\environments\\nonprod\\moved.tf",
+                                                      "Line":  25,
+                                                      "Text":  "moved {"
+                                                  },
+                                                  {
+                                                      "Pattern":  "MovedBlock",
+                                                      "File":  ".\\environments\\nonprod\\moved.tf",
+                                                      "Line":  30,
+                                                      "Text":  "moved {"
+                                                  },
+                                                  {
+                                                      "Pattern":  "MovedBlock",
+                                                      "File":  ".\\environments\\nonprod\\moved.tf",
+                                                      "Line":  35,
+                                                      "Text":  "moved {"
+                                                  },
+                                                  {
+                                                      "Pattern":  "MovedBlock",
+                                                      "File":  ".\\environments\\nonprod\\moved.tf",
+                                                      "Line":  40,
+                                                      "Text":  "moved {"
+                                                  },
+                                                  {
+                                                      "Pattern":  "MovedBlock",
+                                                      "File":  ".\\environments\\nonprod\\moved.tf",
+                                                      "Line":  45,
+                                                      "Text":  "moved {"
+                                                  },
+                                                  {
+                                                      "Pattern":  "MovedBlock",
+                                                      "File":  ".\\environments\\nonprod\\moved.tf",
+                                                      "Line":  50,
+                                                      "Text":  "moved {"
+                                                  },
+                                                  {
+                                                      "Pattern":  "MovedBlock",
+                                                      "File":  ".\\environments\\nonprod\\moved.tf",
+                                                      "Line":  55,
+                                                      "Text":  "moved {"
+                                                  },
+                                                  {
+                                                      "Pattern":  "MovedBlock",
+                                                      "File":  ".\\environments\\nonprod\\moved.tf",
+                                                      "Line":  60,
+                                                      "Text":  "moved {"
+                                                  },
+                                                  {
+                                                      "Pattern":  "MovedBlock",
+                                                      "File":  ".\\environments\\nonprod\\moved.tf",
+                                                      "Line":  65,
+                                                      "Text":  "moved {"
+                                                  },
+                                                  {
+                                                      "Pattern":  "MovedBlock",
+                                                      "File":  ".\\environments\\nonprod\\moved.tf",
+                                                      "Line":  70,
+                                                      "Text":  "moved {"
+                                                  },
+                                                  {
+                                                      "Pattern":  "MovedBlock",
+                                                      "File":  ".\\environments\\nonprod\\moved.tf",
+                                                      "Line":  75,
+                                                      "Text":  "moved {"
+                                                  },
+                                                  {
+                                                      "Pattern":  "MovedBlock",
+                                                      "File":  ".\\environments\\nonprod\\moved.tf",
+                                                      "Line":  80,
+                                                      "Text":  "moved {"
+                                                  },
+                                                  {
+                                                      "Pattern":  "MovedBlock",
+                                                      "File":  ".\\environments\\nonprod\\moved.tf",
+                                                      "Line":  85,
+                                                      "Text":  "moved {"
+                                                  },
+                                                  {
+                                                      "Pattern":  "MovedBlock",
+                                                      "File":  ".\\environments\\nonprod\\moved.tf",
+                                                      "Line":  90,
+                                                      "Text":  "moved {"
+                                                  },
+                                                  {
+                                                      "Pattern":  "PreventDestroy",
+                                                      "File":  ".\\modules\\network\\main.tf",
+                                                      "Line":  16,
+                                                      "Text":  "prevent_destroy = true"
+                                                  },
+                                                  {
+                                                      "Pattern":  "PreventDestroy",
+                                                      "File":  ".\\modules\\network\\main.tf",
+                                                      "Line":  35,
+                                                      "Text":  "prevent_destroy = true"
+                                                  },
+                                                  {
+                                                      "Pattern":  "PreventDestroy",
+                                                      "File":  ".\\modules\\network\\main.tf",
+                                                      "Line":  54,
+                                                      "Text":  "prevent_destroy = true"
+                                                  },
+                                                  {
+                                                      "Pattern":  "PreventDestroy",
+                                                      "File":  ".\\modules\\network\\main.tf",
+                                                      "Line":  73,
+                                                      "Text":  "prevent_destroy = true"
+                                                  },
+                                                  {
+                                                      "Pattern":  "PreventDestroy",
+                                                      "File":  ".\\modules\\network\\main.tf",
+                                                      "Line":  92,
+                                                      "Text":  "prevent_destroy = true"
+                                                  },
+                                                  {
+                                                      "Pattern":  "PreventDestroy",
+                                                      "File":  ".\\modules\\network\\main.tf",
+                                                      "Line":  108,
+                                                      "Text":  "prevent_destroy = true"
+                                                  },
+                                                  {
+                                                      "Pattern":  "PreventDestroy",
+                                                      "File":  ".\\modules\\network\\main.tf",
+                                                      "Line":  124,
+                                                      "Text":  "prevent_destroy = true"
+                                                  },
+                                                  {
+                                                      "Pattern":  "PreventDestroy",
+                                                      "File":  ".\\modules\\network\\main.tf",
+                                                      "Line":  140,
+                                                      "Text":  "prevent_destroy = true"
+                                                  },
+                                                  {
+                                                      "Pattern":  "PreventDestroy",
+                                                      "File":  ".\\modules\\network\\main.tf",
+                                                      "Line":  156,
+                                                      "Text":  "prevent_destroy = true"
+                                                  },
+                                                  {
+                                                      "Pattern":  "OpenIngressIPv4",
+                                                      "File":  ".\\modules\\network\\main.tf",
+                                                      "Line":  162,
+                                                      "Text":  "destination_cidr_block = \"0.0.0.0/0\""
+                                                  },
+                                                  {
+                                                      "Pattern":  "PreventDestroy",
+                                                      "File":  ".\\modules\\network\\main.tf",
+                                                      "Line":  166,
+                                                      "Text":  "prevent_destroy = true"
+                                                  },
+                                                  {
+                                                      "Pattern":  "WildcardAction",
+                                                      "File":  ".\\modules\\network\\main.tf",
+                                                      "Line":  239,
+                                                      "Text":  "Action    = \"s3:*\""
+                                                  },
+                                                  {
+                                                      "Pattern":  "WildcardResource",
+                                                      "File":  ".\\modules\\network\\main.tf",
+                                                      "Line":  240,
+                                                      "Text":  "Resource  = \"*\""
+                                                  }
+                                              ]
+                             },
+    "LiveAws":  {
+                    "Vpc":  [
+                                {
+                                    "OwnerId":  "119033255630",
+                                    "InstanceTenancy":  "default",
+                                    "CidrBlockAssociationSet":  [
+                                                                    {
+                                                                        "AssociationId":  "vpc-cidr-assoc-097b441d245b1c3f5",
+                                                                        "CidrBlock":  "10.0.0.0/16",
+                                                                        "CidrBlockState":  {
+                                                                                               "State":  "associated"
+                                                                                           }
+                                                                    }
+                                                                ],
+                                    "IsDefault":  false,
+                                    "Tags":  [
+                                                 {
+                                                     "Key":  "ManagedBy",
+                                                     "Value":  "manual-exception"
+                                                 },
+                                                 {
+                                                     "Key":  "DataClassification",
+                                                     "Value":  "internal"
+                                                 },
+                                                 {
+                                                     "Key":  "Name",
+                                                     "Value":  "clinic-nonproduction-vpc"
+                                                 },
+                                                 {
+                                                     "Key":  "BackupPolicy",
+                                                     "Value":  "none-approved"
+                                                 },
+                                                 {
+                                                     "Key":  "Environment",
+                                                     "Value":  "nonprod"
+                                                 },
+                                                 {
+                                                     "Key":  "System",
+                                                     "Value":  "shared-platform"
+                                                 },
+                                                 {
+                                                     "Key":  "Owner",
+                                                     "Value":  "IT-Administrator"
+                                                 },
+                                                 {
+                                                     "Key":  "CostCenter",
+                                                     "Value":  "CC-CLINIC-MIG-2026"
+                                                 }
+                                             ],
+                                    "BlockPublicAccessStates":  {
+                                                                    "InternetGatewayBlockMode":  "block-ingress"
+                                                                },
+                                    "VpcId":  "vpc-0dfbc450b3120b16c",
+                                    "State":  "available",
+                                    "CidrBlock":  "10.0.0.0/16",
+                                    "DhcpOptionsId":  "dopt-07ec0c17ac1c9534a"
+                                }
+                            ],
+                    "Subnets":  [
+                                    {
+                                        "AvailabilityZoneId":  "ape1-az2",
+                                        "MapCustomerOwnedIpOnLaunch":  false,
+                                        "OwnerId":  "119033255630",
+                                        "AssignIpv6AddressOnCreation":  false,
+                                        "Ipv6CidrBlockAssociationSet":  [
+
+                                                                        ],
+                                        "Tags":  [
+                                                     {
+                                                         "Key":  "System",
+                                                         "Value":  "shared-platform"
+                                                     },
+                                                     {
+                                                         "Key":  "Environment",
+                                                         "Value":  "nonprod"
+                                                     },
+                                                     {
+                                                         "Key":  "BackupPolicy",
+                                                         "Value":  "none-approved"
+                                                     },
+                                                     {
+                                                         "Key":  "ManagedBy",
+                                                         "Value":  "manual-exception"
+                                                     },
+                                                     {
+                                                         "Key":  "CostCenter",
+                                                         "Value":  "CC-CLINIC-MIG-2026"
+                                                     },
+                                                     {
+                                                         "Key":  "DataClassification",
+                                                         "Value":  "internal"
+                                                     },
+                                                     {
+                                                         "Key":  "Name",
+                                                         "Value":  "clinic-nonproduction-subnet-private2-ap-east-1b"
+                                                     },
+                                                     {
+                                                         "Key":  "Owner",
+                                                         "Value":  "IT-Administrator"
+                                                     }
+                                                 ],
+                                        "SubnetArn":  "arn:aws:ec2:ap-east-1:119033255630:subnet/subnet-06836be6443e37a7c",
+                                        "EnableDns64":  false,
+                                        "Ipv6Native":  false,
+                                        "PrivateDnsNameOptionsOnLaunch":  {
+                                                                              "HostnameType":  "ip-name",
+                                                                              "EnableResourceNameDnsARecord":  false,
+                                                                              "EnableResourceNameDnsAAAARecord":  false
+                                                                          },
+                                        "BlockPublicAccessStates":  {
+                                                                        "InternetGatewayBlockMode":  "block-ingress"
+                                                                    },
+                                        "SubnetId":  "subnet-06836be6443e37a7c",
+                                        "State":  "available",
+                                        "VpcId":  "vpc-0dfbc450b3120b16c",
+                                        "CidrBlock":  "10.0.144.0/20",
+                                        "AvailableIpAddressCount":  4090,
+                                        "AvailabilityZone":  "ap-east-1b",
+                                        "DefaultForAz":  false,
+                                        "MapPublicIpOnLaunch":  false
+                                    },
+                                    {
+                                        "AvailabilityZoneId":  "ape1-az2",
+                                        "MapCustomerOwnedIpOnLaunch":  false,
+                                        "OwnerId":  "119033255630",
+                                        "AssignIpv6AddressOnCreation":  false,
+                                        "Ipv6CidrBlockAssociationSet":  [
+
+                                                                        ],
+                                        "Tags":  [
+                                                     {
+                                                         "Key":  "ManagedBy",
+                                                         "Value":  "manual-exception"
+                                                     },
+                                                     {
+                                                         "Key":  "Name",
+                                                         "Value":  "clinic-nonproduction-subnet-public2-ap-east-1b"
+                                                     },
+                                                     {
+                                                         "Key":  "DataClassification",
+                                                         "Value":  "internal"
+                                                     },
+                                                     {
+                                                         "Key":  "Owner",
+                                                         "Value":  "IT-Administrator"
+                                                     },
+                                                     {
+                                                         "Key":  "CostCenter",
+                                                         "Value":  "CC-CLINIC-MIG-2026"
+                                                     },
+                                                     {
+                                                         "Key":  "BackupPolicy",
+                                                         "Value":  "none-approved"
+                                                     },
+                                                     {
+                                                         "Key":  "Environment",
+                                                         "Value":  "nonprod"
+                                                     },
+                                                     {
+                                                         "Key":  "System",
+                                                         "Value":  "shared-platform"
+                                                     }
+                                                 ],
+                                        "SubnetArn":  "arn:aws:ec2:ap-east-1:119033255630:subnet/subnet-0e3ef16148620ea50",
+                                        "EnableDns64":  false,
+                                        "Ipv6Native":  false,
+                                        "PrivateDnsNameOptionsOnLaunch":  {
+                                                                              "HostnameType":  "ip-name",
+                                                                              "EnableResourceNameDnsARecord":  false,
+                                                                              "EnableResourceNameDnsAAAARecord":  false
+                                                                          },
+                                        "BlockPublicAccessStates":  {
+                                                                        "InternetGatewayBlockMode":  "block-ingress"
+                                                                    },
+                                        "SubnetId":  "subnet-0e3ef16148620ea50",
+                                        "State":  "available",
+                                        "VpcId":  "vpc-0dfbc450b3120b16c",
+                                        "CidrBlock":  "10.0.16.0/20",
+                                        "AvailableIpAddressCount":  4091,
+                                        "AvailabilityZone":  "ap-east-1b",
+                                        "DefaultForAz":  false,
+                                        "MapPublicIpOnLaunch":  false
+                                    },
+                                    {
+                                        "AvailabilityZoneId":  "ape1-az1",
+                                        "MapCustomerOwnedIpOnLaunch":  false,
+                                        "OwnerId":  "119033255630",
+                                        "AssignIpv6AddressOnCreation":  false,
+                                        "Ipv6CidrBlockAssociationSet":  [
+
+                                                                        ],
+                                        "Tags":  [
+                                                     {
+                                                         "Key":  "Owner",
+                                                         "Value":  "IT-Administrator"
+                                                     },
+                                                     {
+                                                         "Key":  "ManagedBy",
+                                                         "Value":  "manual-exception"
+                                                     },
+                                                     {
+                                                         "Key":  "Environment",
+                                                         "Value":  "nonprod"
+                                                     },
+                                                     {
+                                                         "Key":  "DataClassification",
+                                                         "Value":  "internal"
+                                                     },
+                                                     {
+                                                         "Key":  "BackupPolicy",
+                                                         "Value":  "none-approved"
+                                                     },
+                                                     {
+                                                         "Key":  "CostCenter",
+                                                         "Value":  "CC-CLINIC-MIG-2026"
+                                                     },
+                                                     {
+                                                         "Key":  "Name",
+                                                         "Value":  "clinic-nonproduction-subnet-private1-ap-east-1a"
+                                                     },
+                                                     {
+                                                         "Key":  "System",
+                                                         "Value":  "shared-platform"
+                                                     }
+                                                 ],
+                                        "SubnetArn":  "arn:aws:ec2:ap-east-1:119033255630:subnet/subnet-0c7ffc0456bbfcb56",
+                                        "EnableDns64":  false,
+                                        "Ipv6Native":  false,
+                                        "PrivateDnsNameOptionsOnLaunch":  {
+                                                                              "HostnameType":  "ip-name",
+                                                                              "EnableResourceNameDnsARecord":  false,
+                                                                              "EnableResourceNameDnsAAAARecord":  false
+                                                                          },
+                                        "BlockPublicAccessStates":  {
+                                                                        "InternetGatewayBlockMode":  "block-ingress"
+                                                                    },
+                                        "SubnetId":  "subnet-0c7ffc0456bbfcb56",
+                                        "State":  "available",
+                                        "VpcId":  "vpc-0dfbc450b3120b16c",
+                                        "CidrBlock":  "10.0.128.0/20",
+                                        "AvailableIpAddressCount":  4088,
+                                        "AvailabilityZone":  "ap-east-1a",
+                                        "DefaultForAz":  false,
+                                        "MapPublicIpOnLaunch":  false
+                                    },
+                                    {
+                                        "AvailabilityZoneId":  "ape1-az1",
+                                        "MapCustomerOwnedIpOnLaunch":  false,
+                                        "OwnerId":  "119033255630",
+                                        "AssignIpv6AddressOnCreation":  false,
+                                        "Ipv6CidrBlockAssociationSet":  [
+
+                                                                        ],
+                                        "Tags":  [
+                                                     {
+                                                         "Key":  "Environment",
+                                                         "Value":  "nonprod"
+                                                     },
+                                                     {
+                                                         "Key":  "System",
+                                                         "Value":  "shared-platform"
+                                                     },
+                                                     {
+                                                         "Key":  "DataClassification",
+                                                         "Value":  "internal"
+                                                     },
+                                                     {
+                                                         "Key":  "CostCenter",
+                                                         "Value":  "CC-CLINIC-MIG-2026"
+                                                     },
+                                                     {
+                                                         "Key":  "Owner",
+                                                         "Value":  "IT-Administrator"
+                                                     },
+                                                     {
+                                                         "Key":  "ManagedBy",
+                                                         "Value":  "manual-exception"
+                                                     },
+                                                     {
+                                                         "Key":  "Name",
+                                                         "Value":  "clinic-nonproduction-subnet-public1-ap-east-1a"
+                                                     },
+                                                     {
+                                                         "Key":  "BackupPolicy",
+                                                         "Value":  "none-approved"
+                                                     }
+                                                 ],
+                                        "SubnetArn":  "arn:aws:ec2:ap-east-1:119033255630:subnet/subnet-06a1767aa230f8f8f",
+                                        "EnableDns64":  false,
+                                        "Ipv6Native":  false,
+                                        "PrivateDnsNameOptionsOnLaunch":  {
+                                                                              "HostnameType":  "ip-name",
+                                                                              "EnableResourceNameDnsARecord":  false,
+                                                                              "EnableResourceNameDnsAAAARecord":  false
+                                                                          },
+                                        "BlockPublicAccessStates":  {
+                                                                        "InternetGatewayBlockMode":  "block-ingress"
+                                                                    },
+                                        "SubnetId":  "subnet-06a1767aa230f8f8f",
+                                        "State":  "available",
+                                        "VpcId":  "vpc-0dfbc450b3120b16c",
+                                        "CidrBlock":  "10.0.0.0/20",
+                                        "AvailableIpAddressCount":  4091,
+                                        "AvailabilityZone":  "ap-east-1a",
+                                        "DefaultForAz":  false,
+                                        "MapPublicIpOnLaunch":  false
+                                    }
+                                ],
+                    "RouteTables":  [
+                                        {
+                                            "Associations":  [
+                                                                 {
+                                                                     "Main":  false,
+                                                                     "RouteTableAssociationId":  "rtbassoc-02205eb8d58fe1593",
+                                                                     "RouteTableId":  "rtb-00425870121117812",
+                                                                     "SubnetId":  "subnet-0c7ffc0456bbfcb56",
+                                                                     "AssociationState":  {
+                                                                                              "State":  "associated"
+                                                                                          }
+                                                                 }
+                                                             ],
+                                            "PropagatingVgws":  [
+
+                                                                ],
+                                            "RouteTableId":  "rtb-00425870121117812",
+                                            "Routes":  [
+                                                           {
+                                                               "DestinationCidrBlock":  "10.0.0.0/16",
+                                                               "GatewayId":  "local",
+                                                               "Origin":  "CreateRouteTable",
+                                                               "State":  "active"
+                                                           },
+                                                           {
+                                                               "DestinationPrefixListId":  "pl-64a5400d",
+                                                               "GatewayId":  "vpce-02c654afe0052628a",
+                                                               "Origin":  "CreateRoute",
+                                                               "State":  "active"
+                                                           }
+                                                       ],
+                                            "Tags":  [
+                                                         {
+                                                             "Key":  "Owner",
+                                                             "Value":  "IT-Administrator"
+                                                         },
+                                                         {
+                                                             "Key":  "BackupPolicy",
+                                                             "Value":  "none-approved"
+                                                         },
+                                                         {
+                                                             "Key":  "System",
+                                                             "Value":  "shared-platform"
+                                                         },
+                                                         {
+                                                             "Key":  "CostCenter",
+                                                             "Value":  "CC-CLINIC-MIG-2026"
+                                                         },
+                                                         {
+                                                             "Key":  "Name",
+                                                             "Value":  "clinic-nonproduction-rtb-private1-ap-east-1a"
+                                                         },
+                                                         {
+                                                             "Key":  "ManagedBy",
+                                                             "Value":  "manual-exception"
+                                                         },
+                                                         {
+                                                             "Key":  "DataClassification",
+                                                             "Value":  "internal"
+                                                         },
+                                                         {
+                                                             "Key":  "Environment",
+                                                             "Value":  "nonprod"
+                                                         }
+                                                     ],
+                                            "VpcId":  "vpc-0dfbc450b3120b16c",
+                                            "OwnerId":  "119033255630"
+                                        },
+                                        {
+                                            "Associations":  [
+                                                                 {
+                                                                     "Main":  false,
+                                                                     "RouteTableAssociationId":  "rtbassoc-01b8212f3690030cb",
+                                                                     "RouteTableId":  "rtb-0487fc2e33a5e2294",
+                                                                     "SubnetId":  "subnet-06a1767aa230f8f8f",
+                                                                     "AssociationState":  {
+                                                                                              "State":  "associated"
+                                                                                          }
+                                                                 },
+                                                                 {
+                                                                     "Main":  false,
+                                                                     "RouteTableAssociationId":  "rtbassoc-0dd3b7845ebbd2496",
+                                                                     "RouteTableId":  "rtb-0487fc2e33a5e2294",
+                                                                     "SubnetId":  "subnet-0e3ef16148620ea50",
+                                                                     "AssociationState":  {
+                                                                                              "State":  "associated"
+                                                                                          }
+                                                                 }
+                                                             ],
+                                            "PropagatingVgws":  [
+
+                                                                ],
+                                            "RouteTableId":  "rtb-0487fc2e33a5e2294",
+                                            "Routes":  [
+                                                           {
+                                                               "DestinationCidrBlock":  "10.0.0.0/16",
+                                                               "GatewayId":  "local",
+                                                               "Origin":  "CreateRouteTable",
+                                                               "State":  "active"
+                                                           },
+                                                           {
+                                                               "DestinationCidrBlock":  "0.0.0.0/0",
+                                                               "GatewayId":  "igw-0100d0c7fef28f38f",
+                                                               "Origin":  "CreateRoute",
+                                                               "State":  "active"
+                                                           }
+                                                       ],
+                                            "Tags":  [
+                                                         {
+                                                             "Key":  "DataClassification",
+                                                             "Value":  "internal"
+                                                         },
+                                                         {
+                                                             "Key":  "ManagedBy",
+                                                             "Value":  "manual-exception"
+                                                         },
+                                                         {
+                                                             "Key":  "BackupPolicy",
+                                                             "Value":  "none-approved"
+                                                         },
+                                                         {
+                                                             "Key":  "Environment",
+                                                             "Value":  "nonprod"
+                                                         },
+                                                         {
+                                                             "Key":  "System",
+                                                             "Value":  "shared-platform"
+                                                         },
+                                                         {
+                                                             "Key":  "CostCenter",
+                                                             "Value":  "CC-CLINIC-MIG-2026"
+                                                         },
+                                                         {
+                                                             "Key":  "Name",
+                                                             "Value":  "clinic-nonproduction-rtb-public"
+                                                         },
+                                                         {
+                                                             "Key":  "Owner",
+                                                             "Value":  "IT-Administrator"
+                                                         }
+                                                     ],
+                                            "VpcId":  "vpc-0dfbc450b3120b16c",
+                                            "OwnerId":  "119033255630"
+                                        },
+                                        {
+                                            "Associations":  [
+                                                                 {
+                                                                     "Main":  false,
+                                                                     "RouteTableAssociationId":  "rtbassoc-04a8d0f894b698329",
+                                                                     "RouteTableId":  "rtb-0914698fd756a45ff",
+                                                                     "SubnetId":  "subnet-06836be6443e37a7c",
+                                                                     "AssociationState":  {
+                                                                                              "State":  "associated"
+                                                                                          }
+                                                                 }
+                                                             ],
+                                            "PropagatingVgws":  [
+
+                                                                ],
+                                            "RouteTableId":  "rtb-0914698fd756a45ff",
+                                            "Routes":  [
+                                                           {
+                                                               "DestinationCidrBlock":  "10.0.0.0/16",
+                                                               "GatewayId":  "local",
+                                                               "Origin":  "CreateRouteTable",
+                                                               "State":  "active"
+                                                           },
+                                                           {
+                                                               "DestinationPrefixListId":  "pl-64a5400d",
+                                                               "GatewayId":  "vpce-02c654afe0052628a",
+                                                               "Origin":  "CreateRoute",
+                                                               "State":  "active"
+                                                           }
+                                                       ],
+                                            "Tags":  [
+                                                         {
+                                                             "Key":  "Owner",
+                                                             "Value":  "IT-Administrator"
+                                                         },
+                                                         {
+                                                             "Key":  "BackupPolicy",
+                                                             "Value":  "none-approved"
+                                                         },
+                                                         {
+                                                             "Key":  "System",
+                                                             "Value":  "shared-platform"
+                                                         },
+                                                         {
+                                                             "Key":  "Name",
+                                                             "Value":  "clinic-nonproduction-rtb-private2-ap-east-1b"
+                                                         },
+                                                         {
+                                                             "Key":  "CostCenter",
+                                                             "Value":  "CC-CLINIC-MIG-2026"
+                                                         },
+                                                         {
+                                                             "Key":  "Environment",
+                                                             "Value":  "nonprod"
+                                                         },
+                                                         {
+                                                             "Key":  "DataClassification",
+                                                             "Value":  "internal"
+                                                         },
+                                                         {
+                                                             "Key":  "ManagedBy",
+                                                             "Value":  "manual-exception"
+                                                         }
+                                                     ],
+                                            "VpcId":  "vpc-0dfbc450b3120b16c",
+                                            "OwnerId":  "119033255630"
+                                        },
+                                        {
+                                            "Associations":  [
+                                                                 {
+                                                                     "Main":  true,
+                                                                     "RouteTableAssociationId":  "rtbassoc-0a86d3e7de4cd432e",
+                                                                     "RouteTableId":  "rtb-062e9fd25e8c2e698",
+                                                                     "AssociationState":  {
+                                                                                              "State":  "associated"
+                                                                                          }
+                                                                 }
+                                                             ],
+                                            "PropagatingVgws":  [
+
+                                                                ],
+                                            "RouteTableId":  "rtb-062e9fd25e8c2e698",
+                                            "Routes":  [
+                                                           {
+                                                               "DestinationCidrBlock":  "10.0.0.0/16",
+                                                               "GatewayId":  "local",
+                                                               "Origin":  "CreateRouteTable",
+                                                               "State":  "active"
+                                                           }
+                                                       ],
+                                            "Tags":  [
+                                                         {
+                                                             "Key":  "BackupPolicy",
+                                                             "Value":  "none-approved"
+                                                         },
+                                                         {
+                                                             "Key":  "Environment",
+                                                             "Value":  "nonprod"
+                                                         },
+                                                         {
+                                                             "Key":  "System",
+                                                             "Value":  "shared-platform"
+                                                         },
+                                                         {
+                                                             "Key":  "CostCenter",
+                                                             "Value":  "CC-CLINIC-MIG-2026"
+                                                         },
+                                                         {
+                                                             "Key":  "DataClassification",
+                                                             "Value":  "internal"
+                                                         },
+                                                         {
+                                                             "Key":  "ManagedBy",
+                                                             "Value":  "aws-service"
+                                                         },
+                                                         {
+                                                             "Key":  "Owner",
+                                                             "Value":  "IT-Administrator"
+                                                         },
+                                                         {
+                                                             "Key":  "Name",
+                                                             "Value":  "clinic-nonproduction-rtb-main"
+                                                         }
+                                                     ],
+                                            "VpcId":  "vpc-0dfbc450b3120b16c",
+                                            "OwnerId":  "119033255630"
+                                        }
+                                    ],
+                    "SecurityGroups":  [
+                                           {
+                                               "GroupId":  "sg-0b57a86cb71e1b258",
+                                               "IpPermissionsEgress":  [
+
+                                                                       ],
+                                               "Tags":  [
+                                                            {
+                                                                "Key":  "BackupPolicy",
+                                                                "Value":  "none-approved"
+                                                            },
+                                                            {
+                                                                "Key":  "CostCenter",
+                                                                "Value":  "CC-CLINIC-MIG-2026"
+                                                            },
+                                                            {
+                                                                "Key":  "DataClassification",
+                                                                "Value":  "internal"
+                                                            },
+                                                            {
+                                                                "Key":  "Environment",
+                                                                "Value":  "nonprod"
+                                                            },
+                                                            {
+                                                                "Key":  "Name",
+                                                                "Value":  "clinic-nonproduction-sg-default"
+                                                            },
+                                                            {
+                                                                "Key":  "System",
+                                                                "Value":  "shared-platform"
+                                                            },
+                                                            {
+                                                                "Key":  "Owner",
+                                                                "Value":  "IT-Administrator"
+                                                            },
+                                                            {
+                                                                "Key":  "ManagedBy",
+                                                                "Value":  "aws-service"
+                                                            }
+                                                        ],
+                                               "VpcId":  "vpc-0dfbc450b3120b16c",
+                                               "SecurityGroupArn":  "arn:aws:ec2:ap-east-1:119033255630:security-group/sg-0b57a86cb71e1b258",
+                                               "OwnerId":  "119033255630",
+                                               "GroupName":  "default",
+                                               "Description":  "default VPC security group",
+                                               "IpPermissions":  [
+
+                                                                 ]
+                                           },
+                                           {
+                                               "GroupId":  "sg-0f43ac70d383b4859",
+                                               "IpPermissionsEgress":  [
+                                                                           {
+                                                                               "IpProtocol":  "-1",
+                                                                               "UserIdGroupPairs":  [
+
+                                                                                                    ],
+                                                                               "IpRanges":  [
+                                                                                                {
+                                                                                                    "CidrIp":  "0.0.0.0/0"
+                                                                                                }
+                                                                                            ],
+                                                                               "Ipv6Ranges":  [
+
+                                                                                              ],
+                                                                               "PrefixListIds":  [
+
+                                                                                                 ]
+                                                                           }
+                                                                       ],
+                                               "Tags":  [
+                                                            {
+                                                                "Key":  "BackupPolicy",
+                                                                "Value":  "none-approved"
+                                                            },
+                                                            {
+                                                                "Key":  "Environment",
+                                                                "Value":  "nonprod"
+                                                            },
+                                                            {
+                                                                "Key":  "System",
+                                                                "Value":  "shared-platform"
+                                                            },
+                                                            {
+                                                                "Key":  "DataClassification",
+                                                                "Value":  "internal"
+                                                            },
+                                                            {
+                                                                "Key":  "ManagedBy",
+                                                                "Value":  "manual-exception"
+                                                            },
+                                                            {
+                                                                "Key":  "CostCenter",
+                                                                "Value":  "CC-CLINIC-MIG-2026"
+                                                            },
+                                                            {
+                                                                "Key":  "Owner",
+                                                                "Value":  "IT-Administrator"
+                                                            }
+                                                        ],
+                                               "VpcId":  "vpc-0dfbc450b3120b16c",
+                                               "SecurityGroupArn":  "arn:aws:ec2:ap-east-1:119033255630:security-group/sg-0f43ac70d383b4859",
+                                               "OwnerId":  "119033255630",
+                                               "GroupName":  "d-c4677826f0_controllers",
+                                               "Description":  "AWS created security group for d-c4677826f0 directory controllers",
+                                               "IpPermissions":  [
+                                                                     {
+                                                                         "IpProtocol":  "udp",
+                                                                         "FromPort":  138,
+                                                                         "ToPort":  138,
+                                                                         "UserIdGroupPairs":  [
+
+                                                                                              ],
+                                                                         "IpRanges":  [
+                                                                                          {
+                                                                                              "CidrIp":  "10.0.0.0/16"
+                                                                                          }
+                                                                                      ],
+                                                                         "Ipv6Ranges":  [
+
+                                                                                        ],
+                                                                         "PrefixListIds":  [
+
+                                                                                           ]
+                                                                     },
+                                                                     {
+                                                                         "IpProtocol":  "udp",
+                                                                         "FromPort":  445,
+                                                                         "ToPort":  445,
+                                                                         "UserIdGroupPairs":  [
+
+                                                                                              ],
+                                                                         "IpRanges":  [
+                                                                                          {
+                                                                                              "CidrIp":  "10.0.0.0/16"
+                                                                                          }
+                                                                                      ],
+                                                                         "Ipv6Ranges":  [
+
+                                                                                        ],
+                                                                         "PrefixListIds":  [
+
+                                                                                           ]
+                                                                     },
+                                                                     {
+                                                                         "IpProtocol":  "udp",
+                                                                         "FromPort":  464,
+                                                                         "ToPort":  464,
+                                                                         "UserIdGroupPairs":  [
+                                                                                                  {
+                                                                                                      "UserId":  "119033255630",
+                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                  }
+                                                                                              ],
+                                                                         "IpRanges":  [
+                                                                                          {
+                                                                                              "CidrIp":  "10.0.0.0/16"
+                                                                                          }
+                                                                                      ],
+                                                                         "Ipv6Ranges":  [
+
+                                                                                        ],
+                                                                         "PrefixListIds":  [
+
+                                                                                           ]
+                                                                     },
+                                                                     {
+                                                                         "IpProtocol":  "tcp",
+                                                                         "FromPort":  464,
+                                                                         "ToPort":  464,
+                                                                         "UserIdGroupPairs":  [
+                                                                                                  {
+                                                                                                      "UserId":  "119033255630",
+                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                  }
+                                                                                              ],
+                                                                         "IpRanges":  [
+                                                                                          {
+                                                                                              "CidrIp":  "10.0.0.0/16"
+                                                                                          }
+                                                                                      ],
+                                                                         "Ipv6Ranges":  [
+
+                                                                                        ],
+                                                                         "PrefixListIds":  [
+
+                                                                                           ]
+                                                                     },
+                                                                     {
+                                                                         "IpProtocol":  "tcp",
+                                                                         "FromPort":  49152,
+                                                                         "ToPort":  65535,
+                                                                         "UserIdGroupPairs":  [
+                                                                                                  {
+                                                                                                      "UserId":  "119033255630",
+                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                  }
+                                                                                              ],
+                                                                         "IpRanges":  [
+
+                                                                                      ],
+                                                                         "Ipv6Ranges":  [
+
+                                                                                        ],
+                                                                         "PrefixListIds":  [
+
+                                                                                           ]
+                                                                     },
+                                                                     {
+                                                                         "IpProtocol":  "udp",
+                                                                         "FromPort":  389,
+                                                                         "ToPort":  389,
+                                                                         "UserIdGroupPairs":  [
+                                                                                                  {
+                                                                                                      "UserId":  "119033255630",
+                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                  }
+                                                                                              ],
+                                                                         "IpRanges":  [
+                                                                                          {
+                                                                                              "CidrIp":  "10.0.0.0/16"
+                                                                                          }
+                                                                                      ],
+                                                                         "Ipv6Ranges":  [
+
+                                                                                        ],
+                                                                         "PrefixListIds":  [
+
+                                                                                           ]
+                                                                     },
+                                                                     {
+                                                                         "IpProtocol":  "udp",
+                                                                         "FromPort":  53,
+                                                                         "ToPort":  53,
+                                                                         "UserIdGroupPairs":  [
+                                                                                                  {
+                                                                                                      "UserId":  "119033255630",
+                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                  }
+                                                                                              ],
+                                                                         "IpRanges":  [
+                                                                                          {
+                                                                                              "CidrIp":  "10.0.0.0/16"
+                                                                                          }
+                                                                                      ],
+                                                                         "Ipv6Ranges":  [
+
+                                                                                        ],
+                                                                         "PrefixListIds":  [
+
+                                                                                           ]
+                                                                     },
+                                                                     {
+                                                                         "IpProtocol":  "tcp",
+                                                                         "FromPort":  389,
+                                                                         "ToPort":  389,
+                                                                         "UserIdGroupPairs":  [
+                                                                                                  {
+                                                                                                      "UserId":  "119033255630",
+                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                  }
+                                                                                              ],
+                                                                         "IpRanges":  [
+                                                                                          {
+                                                                                              "CidrIp":  "10.0.0.0/16"
+                                                                                          }
+                                                                                      ],
+                                                                         "Ipv6Ranges":  [
+
+                                                                                        ],
+                                                                         "PrefixListIds":  [
+
+                                                                                           ]
+                                                                     },
+                                                                     {
+                                                                         "IpProtocol":  "icmp",
+                                                                         "FromPort":  -1,
+                                                                         "ToPort":  -1,
+                                                                         "UserIdGroupPairs":  [
+
+                                                                                              ],
+                                                                         "IpRanges":  [
+                                                                                          {
+                                                                                              "CidrIp":  "10.0.0.0/16"
+                                                                                          }
+                                                                                      ],
+                                                                         "Ipv6Ranges":  [
+
+                                                                                        ],
+                                                                         "PrefixListIds":  [
+
+                                                                                           ]
+                                                                     },
+                                                                     {
+                                                                         "IpProtocol":  "tcp",
+                                                                         "FromPort":  445,
+                                                                         "ToPort":  445,
+                                                                         "UserIdGroupPairs":  [
+                                                                                                  {
+                                                                                                      "UserId":  "119033255630",
+                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                  }
+                                                                                              ],
+                                                                         "IpRanges":  [
+                                                                                          {
+                                                                                              "CidrIp":  "10.0.0.0/16"
+                                                                                          }
+                                                                                      ],
+                                                                         "Ipv6Ranges":  [
+
+                                                                                        ],
+                                                                         "PrefixListIds":  [
+
+                                                                                           ]
+                                                                     },
+                                                                     {
+                                                                         "IpProtocol":  "udp",
+                                                                         "FromPort":  123,
+                                                                         "ToPort":  123,
+                                                                         "UserIdGroupPairs":  [
+                                                                                                  {
+                                                                                                      "UserId":  "119033255630",
+                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                  }
+                                                                                              ],
+                                                                         "IpRanges":  [
+                                                                                          {
+                                                                                              "CidrIp":  "10.0.0.0/16"
+                                                                                          }
+                                                                                      ],
+                                                                         "Ipv6Ranges":  [
+
+                                                                                        ],
+                                                                         "PrefixListIds":  [
+
+                                                                                           ]
+                                                                     },
+                                                                     {
+                                                                         "IpProtocol":  "tcp",
+                                                                         "FromPort":  9389,
+                                                                         "ToPort":  9389,
+                                                                         "UserIdGroupPairs":  [
+                                                                                                  {
+                                                                                                      "UserId":  "119033255630",
+                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                  }
+                                                                                              ],
+                                                                         "IpRanges":  [
+
+                                                                                      ],
+                                                                         "Ipv6Ranges":  [
+
+                                                                                        ],
+                                                                         "PrefixListIds":  [
+
+                                                                                           ]
+                                                                     },
+                                                                     {
+                                                                         "IpProtocol":  "tcp",
+                                                                         "FromPort":  5985,
+                                                                         "ToPort":  5985,
+                                                                         "UserIdGroupPairs":  [
+                                                                                                  {
+                                                                                                      "UserId":  "119033255630",
+                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                  }
+                                                                                              ],
+                                                                         "IpRanges":  [
+
+                                                                                      ],
+                                                                         "Ipv6Ranges":  [
+
+                                                                                        ],
+                                                                         "PrefixListIds":  [
+
+                                                                                           ]
+                                                                     },
+                                                                     {
+                                                                         "IpProtocol":  "tcp",
+                                                                         "FromPort":  88,
+                                                                         "ToPort":  88,
+                                                                         "UserIdGroupPairs":  [
+                                                                                                  {
+                                                                                                      "UserId":  "119033255630",
+                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                  }
+                                                                                              ],
+                                                                         "IpRanges":  [
+                                                                                          {
+                                                                                              "CidrIp":  "10.0.0.0/16"
+                                                                                          }
+                                                                                      ],
+                                                                         "Ipv6Ranges":  [
+
+                                                                                        ],
+                                                                         "PrefixListIds":  [
+
+                                                                                           ]
+                                                                     },
+                                                                     {
+                                                                         "IpProtocol":  "tcp",
+                                                                         "FromPort":  3268,
+                                                                         "ToPort":  3269,
+                                                                         "UserIdGroupPairs":  [
+                                                                                                  {
+                                                                                                      "UserId":  "119033255630",
+                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                  }
+                                                                                              ],
+                                                                         "IpRanges":  [
+                                                                                          {
+                                                                                              "CidrIp":  "10.0.0.0/16"
+                                                                                          }
+                                                                                      ],
+                                                                         "Ipv6Ranges":  [
+
+                                                                                        ],
+                                                                         "PrefixListIds":  [
+
+                                                                                           ]
+                                                                     },
+                                                                     {
+                                                                         "IpProtocol":  "tcp",
+                                                                         "FromPort":  1024,
+                                                                         "ToPort":  65535,
+                                                                         "UserIdGroupPairs":  [
+
+                                                                                              ],
+                                                                         "IpRanges":  [
+                                                                                          {
+                                                                                              "CidrIp":  "10.0.0.0/16"
+                                                                                          }
+                                                                                      ],
+                                                                         "Ipv6Ranges":  [
+
+                                                                                        ],
+                                                                         "PrefixListIds":  [
+
+                                                                                           ]
+                                                                     },
+                                                                     {
+                                                                         "IpProtocol":  "tcp",
+                                                                         "FromPort":  135,
+                                                                         "ToPort":  135,
+                                                                         "UserIdGroupPairs":  [
+                                                                                                  {
+                                                                                                      "UserId":  "119033255630",
+                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                  }
+                                                                                              ],
+                                                                         "IpRanges":  [
+                                                                                          {
+                                                                                              "CidrIp":  "10.0.0.0/16"
+                                                                                          }
+                                                                                      ],
+                                                                         "Ipv6Ranges":  [
+
+                                                                                        ],
+                                                                         "PrefixListIds":  [
+
+                                                                                           ]
+                                                                     },
+                                                                     {
+                                                                         "IpProtocol":  "tcp",
+                                                                         "FromPort":  636,
+                                                                         "ToPort":  636,
+                                                                         "UserIdGroupPairs":  [
+                                                                                                  {
+                                                                                                      "UserId":  "119033255630",
+                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                  }
+                                                                                              ],
+                                                                         "IpRanges":  [
+
+                                                                                      ],
+                                                                         "Ipv6Ranges":  [
+
+                                                                                        ],
+                                                                         "PrefixListIds":  [
+
+                                                                                           ]
+                                                                     },
+                                                                     {
+                                                                         "IpProtocol":  "tcp",
+                                                                         "FromPort":  53,
+                                                                         "ToPort":  53,
+                                                                         "UserIdGroupPairs":  [
+                                                                                                  {
+                                                                                                      "UserId":  "119033255630",
+                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                  }
+                                                                                              ],
+                                                                         "IpRanges":  [
+                                                                                          {
+                                                                                              "CidrIp":  "10.0.0.0/16"
+                                                                                          }
+                                                                                      ],
+                                                                         "Ipv6Ranges":  [
+
+                                                                                        ],
+                                                                         "PrefixListIds":  [
+
+                                                                                           ]
+                                                                     },
+                                                                     {
+                                                                         "IpProtocol":  "udp",
+                                                                         "FromPort":  88,
+                                                                         "ToPort":  88,
+                                                                         "UserIdGroupPairs":  [
+                                                                                                  {
+                                                                                                      "UserId":  "119033255630",
+                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                  }
+                                                                                              ],
+                                                                         "IpRanges":  [
+                                                                                          {
+                                                                                              "CidrIp":  "10.0.0.0/16"
+                                                                                          }
+                                                                                      ],
+                                                                         "Ipv6Ranges":  [
+
+                                                                                        ],
+                                                                         "PrefixListIds":  [
+
+                                                                                           ]
+                                                                     }
+                                                                 ]
+                                           },
+                                           {
+                                               "GroupId":  "sg-07659b5c68fe16b2a",
+                                               "IpPermissionsEgress":  [
+                                                                           {
+                                                                               "IpProtocol":  "-1",
+                                                                               "UserIdGroupPairs":  [
+                                                                                                        {
+                                                                                                            "UserId":  "119033255630",
+                                                                                                            "GroupId":  "sg-0f43ac70d383b4859"
+                                                                                                        }
+                                                                                                    ],
+                                                                               "IpRanges":  [
+
+                                                                                            ],
+                                                                               "Ipv6Ranges":  [
+
+                                                                                              ],
+                                                                               "PrefixListIds":  [
+
+                                                                                                 ]
+                                                                           }
+                                                                       ],
+                                               "Tags":  [
+                                                            {
+                                                                "Key":  "DataClassification",
+                                                                "Value":  "internal"
+                                                            },
+                                                            {
+                                                                "Key":  "ManagedBy",
+                                                                "Value":  "manual-exception"
+                                                            },
+                                                            {
+                                                                "Key":  "BackupPolicy",
+                                                                "Value":  "none-approved"
+                                                            },
+                                                            {
+                                                                "Key":  "Environment",
+                                                                "Value":  "nonprod"
+                                                            },
+                                                            {
+                                                                "Key":  "System",
+                                                                "Value":  "shared-platform"
+                                                            },
+                                                            {
+                                                                "Key":  "Owner",
+                                                                "Value":  "IT-Administrator"
+                                                            },
+                                                            {
+                                                                "Key":  "CostCenter",
+                                                                "Value":  "CC-CLINIC-MIG-2026"
+                                                            }
+                                                        ],
+                                               "VpcId":  "vpc-0dfbc450b3120b16c",
+                                               "SecurityGroupArn":  "arn:aws:ec2:ap-east-1:119033255630:security-group/sg-07659b5c68fe16b2a",
+                                               "OwnerId":  "119033255630",
+                                               "GroupName":  "Clinic-NonProd-Group",
+                                               "Description":  "Proceed SMB to the Private Group.",
+                                               "IpPermissions":  [
+
+                                                                 ]
+                                           }
+                                       ],
+                    "S3VpcEndpoint":  [
+                                          {
+                                              "VpcEndpointId":  "vpce-02c654afe0052628a",
+                                              "VpcEndpointType":  "Gateway",
+                                              "VpcId":  "vpc-0dfbc450b3120b16c",
+                                              "ServiceName":  "com.amazonaws.ap-east-1.s3",
+                                              "State":  "available",
+                                              "PolicyDocument":  "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"AllowCurrentAccountS3ResourcesOnly\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"s3:*\",\"Resource\":\"*\",\"Condition\":{\"StringEquals\":{\"aws:PrincipalAccount\":\"119033255630\",\"s3:ResourceAccount\":\"119033255630\"}}}]}",
+                                              "RouteTableIds":  [
+                                                                    "rtb-00425870121117812",
+                                                                    "rtb-0914698fd756a45ff"
+                                                                ],
+                                              "SubnetIds":  [
+
+                                                            ],
+                                              "Groups":  [
+
+                                                         ],
+                                              "IpAddressType":  "ipv4",
+                                              "DnsOptions":  {
+                                                                 "DnsRecordIpType":  "service-defined"
+                                                             },
+                                              "PrivateDnsEnabled":  false,
+                                              "RequesterManaged":  false,
+                                              "NetworkInterfaceIds":  [
+
+                                                                      ],
+                                              "DnsEntries":  [
+
+                                                             ],
+                                              "CreationTimestamp":  "2026-09-26T04:26:54+00:00",
+                                              "Tags":  [
+                                                           {
+                                                               "Key":  "Owner",
+                                                               "Value":  "IT-Administrator"
+                                                           },
+                                                           {
+                                                               "Key":  "ManagedBy",
+                                                               "Value":  "terraform"
+                                                           },
+                                                           {
+                                                               "Key":  "CostCenter",
+                                                               "Value":  "CC-CLINIC-MIG-2026"
+                                                           },
+                                                           {
+                                                               "Key":  "DataClassification",
+                                                               "Value":  "internal"
+                                                           },
+                                                           {
+                                                               "Key":  "Environment",
+                                                               "Value":  "nonprod"
+                                                           },
+                                                           {
+                                                               "Key":  "System",
+                                                               "Value":  "shared-platform"
+                                                           },
+                                                           {
+                                                               "Key":  "BackupPolicy",
+                                                               "Value":  "none-approved"
+                                                           },
+                                                           {
+                                                               "Key":  "Name",
+                                                               "Value":  "clinic-nonproduction-vpce-s3"
+                                                           }
+                                                       ],
+                                              "OwnerId":  "119033255630",
+                                              "ServiceRegion":  "ap-east-1"
+                                          }
+                                      ]
+                },
+    "Safety":  {
+                   "TerraformStateModified":  false,
+                   "AwsResourcesModified":  false,
+                   "TerraformSourceModified":  false
+               }
+}

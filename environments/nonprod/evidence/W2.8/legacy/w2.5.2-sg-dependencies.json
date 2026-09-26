@@ -1,0 +1,342 @@
+﻿[
+    {
+        "RuleId": "sgr-010d726a40b4fec3b",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "udp",
+        "FromPort": 53,
+        "ToPort": 53,
+        "CidrIPv4": "10.0.0.0/16",
+        "ReferencedGroup": null
+    },
+    {
+        "RuleId": "sgr-020bda31045c191ff",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "tcp",
+        "FromPort": 135,
+        "ToPort": 135,
+        "CidrIPv4": null,
+        "ReferencedGroup": "sg-07659b5c68fe16b2a"
+    },
+    {
+        "RuleId": "sgr-0c4f236dcd291226a",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "tcp",
+        "FromPort": 49152,
+        "ToPort": 65535,
+        "CidrIPv4": null,
+        "ReferencedGroup": "sg-07659b5c68fe16b2a"
+    },
+    {
+        "RuleId": "sgr-0734fd0528dee985b",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "tcp",
+        "FromPort": 88,
+        "ToPort": 88,
+        "CidrIPv4": "10.0.0.0/16",
+        "ReferencedGroup": null
+    },
+    {
+        "RuleId": "sgr-092f557e71ef397a9",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "tcp",
+        "FromPort": 445,
+        "ToPort": 445,
+        "CidrIPv4": "10.0.0.0/16",
+        "ReferencedGroup": null
+    },
+    {
+        "RuleId": "sgr-0d1f0e46d88133276",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "udp",
+        "FromPort": 138,
+        "ToPort": 138,
+        "CidrIPv4": "10.0.0.0/16",
+        "ReferencedGroup": null
+    },
+    {
+        "RuleId": "sgr-0710540e3ced6343c",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": true,
+        "Protocol": "-1",
+        "FromPort": -1,
+        "ToPort": -1,
+        "CidrIPv4": "0.0.0.0/0",
+        "ReferencedGroup": null
+    },
+    {
+        "RuleId": "sgr-0f1b7a19b4f44b4a2",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "udp",
+        "FromPort": 389,
+        "ToPort": 389,
+        "CidrIPv4": null,
+        "ReferencedGroup": "sg-07659b5c68fe16b2a"
+    },
+    {
+        "RuleId": "sgr-0354d166e673229b8",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "tcp",
+        "FromPort": 445,
+        "ToPort": 445,
+        "CidrIPv4": null,
+        "ReferencedGroup": "sg-07659b5c68fe16b2a"
+    },
+    {
+        "RuleId": "sgr-0486ee23ed3a97469",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "tcp",
+        "FromPort": 135,
+        "ToPort": 135,
+        "CidrIPv4": "10.0.0.0/16",
+        "ReferencedGroup": null
+    },
+    {
+        "RuleId": "sgr-059a95fb407858459",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "tcp",
+        "FromPort": 3268,
+        "ToPort": 3269,
+        "CidrIPv4": "10.0.0.0/16",
+        "ReferencedGroup": null
+    },
+    {
+        "RuleId": "sgr-06f0dc8f9612bc6ce",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "tcp",
+        "FromPort": 3268,
+        "ToPort": 3269,
+        "CidrIPv4": null,
+        "ReferencedGroup": "sg-07659b5c68fe16b2a"
+    },
+    {
+        "RuleId": "sgr-0deca7dee87f0d8af",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "udp",
+        "FromPort": 123,
+        "ToPort": 123,
+        "CidrIPv4": null,
+        "ReferencedGroup": "sg-07659b5c68fe16b2a"
+    },
+    {
+        "RuleId": "sgr-053c8cb45e03dc6f5",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "tcp",
+        "FromPort": 389,
+        "ToPort": 389,
+        "CidrIPv4": "10.0.0.0/16",
+        "ReferencedGroup": null
+    },
+    {
+        "RuleId": "sgr-005fee13be4cbdc62",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "tcp",
+        "FromPort": 53,
+        "ToPort": 53,
+        "CidrIPv4": "10.0.0.0/16",
+        "ReferencedGroup": null
+    },
+    {
+        "RuleId": "sgr-0c9e8f9cb4c9c36e9",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "udp",
+        "FromPort": 445,
+        "ToPort": 445,
+        "CidrIPv4": "10.0.0.0/16",
+        "ReferencedGroup": null
+    },
+    {
+        "RuleId": "sgr-0c10fff9ac8037bcf",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "tcp",
+        "FromPort": 9389,
+        "ToPort": 9389,
+        "CidrIPv4": null,
+        "ReferencedGroup": "sg-07659b5c68fe16b2a"
+    },
+    {
+        "RuleId": "sgr-028d7450dca1f0731",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "tcp",
+        "FromPort": 389,
+        "ToPort": 389,
+        "CidrIPv4": null,
+        "ReferencedGroup": "sg-07659b5c68fe16b2a"
+    },
+    {
+        "RuleId": "sgr-0de5a2d9c3f35210e",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "udp",
+        "FromPort": 464,
+        "ToPort": 464,
+        "CidrIPv4": "10.0.0.0/16",
+        "ReferencedGroup": null
+    },
+    {
+        "RuleId": "sgr-086ddcd432b87d9d1",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "udp",
+        "FromPort": 88,
+        "ToPort": 88,
+        "CidrIPv4": "10.0.0.0/16",
+        "ReferencedGroup": null
+    },
+    {
+        "RuleId": "sgr-0dd1434681b5e44ae",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "udp",
+        "FromPort": 88,
+        "ToPort": 88,
+        "CidrIPv4": null,
+        "ReferencedGroup": "sg-07659b5c68fe16b2a"
+    },
+    {
+        "RuleId": "sgr-0e3dba9c00e8bc289",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "icmp",
+        "FromPort": -1,
+        "ToPort": -1,
+        "CidrIPv4": "10.0.0.0/16",
+        "ReferencedGroup": null
+    },
+    {
+        "RuleId": "sgr-00ea5f3050c25141b",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "tcp",
+        "FromPort": 88,
+        "ToPort": 88,
+        "CidrIPv4": null,
+        "ReferencedGroup": "sg-07659b5c68fe16b2a"
+    },
+    {
+        "RuleId": "sgr-0d47e5e03d63a9029",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "tcp",
+        "FromPort": 464,
+        "ToPort": 464,
+        "CidrIPv4": "10.0.0.0/16",
+        "ReferencedGroup": null
+    },
+    {
+        "RuleId": "sgr-09708429b8ca59183",
+        "GroupId": "sg-07659b5c68fe16b2a",
+        "IsEgress": true,
+        "Protocol": "-1",
+        "FromPort": -1,
+        "ToPort": -1,
+        "CidrIPv4": null,
+        "ReferencedGroup": "sg-0f43ac70d383b4859"
+    },
+    {
+        "RuleId": "sgr-028e8457d66cd8eb8",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "udp",
+        "FromPort": 123,
+        "ToPort": 123,
+        "CidrIPv4": "10.0.0.0/16",
+        "ReferencedGroup": null
+    },
+    {
+        "RuleId": "sgr-054b5d386dab7dbb9",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "udp",
+        "FromPort": 389,
+        "ToPort": 389,
+        "CidrIPv4": "10.0.0.0/16",
+        "ReferencedGroup": null
+    },
+    {
+        "RuleId": "sgr-03df8faa96823206d",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "tcp",
+        "FromPort": 464,
+        "ToPort": 464,
+        "CidrIPv4": null,
+        "ReferencedGroup": "sg-07659b5c68fe16b2a"
+    },
+    {
+        "RuleId": "sgr-087984a431237c7da",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "tcp",
+        "FromPort": 5985,
+        "ToPort": 5985,
+        "CidrIPv4": null,
+        "ReferencedGroup": "sg-07659b5c68fe16b2a"
+    },
+    {
+        "RuleId": "sgr-00dba0794a7c16d50",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "tcp",
+        "FromPort": 53,
+        "ToPort": 53,
+        "CidrIPv4": null,
+        "ReferencedGroup": "sg-07659b5c68fe16b2a"
+    },
+    {
+        "RuleId": "sgr-0110fe5a9a26a5bfe",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "tcp",
+        "FromPort": 1024,
+        "ToPort": 65535,
+        "CidrIPv4": "10.0.0.0/16",
+        "ReferencedGroup": null
+    },
+    {
+        "RuleId": "sgr-05471687f251a0664",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "tcp",
+        "FromPort": 636,
+        "ToPort": 636,
+        "CidrIPv4": null,
+        "ReferencedGroup": "sg-07659b5c68fe16b2a"
+    },
+    {
+        "RuleId": "sgr-0c5c385a916baa29f",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "udp",
+        "FromPort": 53,
+        "ToPort": 53,
+        "CidrIPv4": null,
+        "ReferencedGroup": "sg-07659b5c68fe16b2a"
+    },
+    {
+        "RuleId": "sgr-0f4f6bf85e7b26be8",
+        "GroupId": "sg-0f43ac70d383b4859",
+        "IsEgress": false,
+        "Protocol": "udp",
+        "FromPort": 464,
+        "ToPort": 464,
+        "CidrIPv4": null,
+        "ReferencedGroup": "sg-07659b5c68fe16b2a"
+    }
+]

@@ -1,0 +1,573 @@
+﻿{
+    "EvidenceId":  "W2.5.1",
+    "CapturedAtUtc":  "2026-09-24T15:15:37.6843738Z",
+    "Region":  "ap-east-1",
+    "VpcId":  "vpc-0dfbc450b3120b16c",
+    "GroupCount":  3,
+    "Groups":  [
+                   {
+                       "GroupId":  "sg-0b57a86cb71e1b258",
+                       "GroupName":  "default",
+                       "Description":  "default VPC security group",
+                       "OwnerId":  "119033255630",
+                       "VpcId":  "vpc-0dfbc450b3120b16c",
+                       "Tags":  [
+                                    {
+                                        "Key":  "BackupPolicy",
+                                        "Value":  "none-approved"
+                                    },
+                                    {
+                                        "Key":  "CostCenter",
+                                        "Value":  "CC-CLINIC-MIG-2026"
+                                    },
+                                    {
+                                        "Key":  "DataClassification",
+                                        "Value":  "internal"
+                                    },
+                                    {
+                                        "Key":  "Environment",
+                                        "Value":  "nonprod"
+                                    },
+                                    {
+                                        "Key":  "Name",
+                                        "Value":  "clinic-nonproduction-sg-default"
+                                    },
+                                    {
+                                        "Key":  "System",
+                                        "Value":  "shared-platform"
+                                    },
+                                    {
+                                        "Key":  "Owner",
+                                        "Value":  "IT-Administrator"
+                                    },
+                                    {
+                                        "Key":  "ManagedBy",
+                                        "Value":  "aws-service"
+                                    }
+                                ],
+                       "Rules":  [
+
+                                 ]
+                   },
+                   {
+                       "GroupId":  "sg-0f43ac70d383b4859",
+                       "GroupName":  "d-c4677826f0_controllers",
+                       "Description":  "AWS created security group for d-c4677826f0 directory controllers",
+                       "OwnerId":  "119033255630",
+                       "VpcId":  "vpc-0dfbc450b3120b16c",
+                       "Tags":  [
+                                    {
+                                        "Key":  "BackupPolicy",
+                                        "Value":  "none-approved"
+                                    },
+                                    {
+                                        "Key":  "Environment",
+                                        "Value":  "nonprod"
+                                    },
+                                    {
+                                        "Key":  "System",
+                                        "Value":  "shared-platform"
+                                    },
+                                    {
+                                        "Key":  "DataClassification",
+                                        "Value":  "internal"
+                                    },
+                                    {
+                                        "Key":  "ManagedBy",
+                                        "Value":  "manual-exception"
+                                    },
+                                    {
+                                        "Key":  "CostCenter",
+                                        "Value":  "CC-CLINIC-MIG-2026"
+                                    },
+                                    {
+                                        "Key":  "Owner",
+                                        "Value":  "IT-Administrator"
+                                    }
+                                ],
+                       "Rules":  [
+                                     {
+                                         "RuleId":  "sgr-010d726a40b4fec3b",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "udp",
+                                         "FromPort":  53,
+                                         "ToPort":  53,
+                                         "CidrIpv4":  "10.0.0.0/16",
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  null,
+                                         "ReferencedGroupUserId":  null,
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-020bda31045c191ff",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "tcp",
+                                         "FromPort":  135,
+                                         "ToPort":  135,
+                                         "CidrIpv4":  null,
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
+                                         "ReferencedGroupUserId":  "119033255630",
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-0c4f236dcd291226a",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "tcp",
+                                         "FromPort":  49152,
+                                         "ToPort":  65535,
+                                         "CidrIpv4":  null,
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
+                                         "ReferencedGroupUserId":  "119033255630",
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-0734fd0528dee985b",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "tcp",
+                                         "FromPort":  88,
+                                         "ToPort":  88,
+                                         "CidrIpv4":  "10.0.0.0/16",
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  null,
+                                         "ReferencedGroupUserId":  null,
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-092f557e71ef397a9",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "tcp",
+                                         "FromPort":  445,
+                                         "ToPort":  445,
+                                         "CidrIpv4":  "10.0.0.0/16",
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  null,
+                                         "ReferencedGroupUserId":  null,
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-0d1f0e46d88133276",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "udp",
+                                         "FromPort":  138,
+                                         "ToPort":  138,
+                                         "CidrIpv4":  "10.0.0.0/16",
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  null,
+                                         "ReferencedGroupUserId":  null,
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-0710540e3ced6343c",
+                                         "IsEgress":  true,
+                                         "IpProtocol":  "-1",
+                                         "FromPort":  -1,
+                                         "ToPort":  -1,
+                                         "CidrIpv4":  "0.0.0.0/0",
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  null,
+                                         "ReferencedGroupUserId":  null,
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-0f1b7a19b4f44b4a2",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "udp",
+                                         "FromPort":  389,
+                                         "ToPort":  389,
+                                         "CidrIpv4":  null,
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
+                                         "ReferencedGroupUserId":  "119033255630",
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-0354d166e673229b8",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "tcp",
+                                         "FromPort":  445,
+                                         "ToPort":  445,
+                                         "CidrIpv4":  null,
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
+                                         "ReferencedGroupUserId":  "119033255630",
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-0486ee23ed3a97469",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "tcp",
+                                         "FromPort":  135,
+                                         "ToPort":  135,
+                                         "CidrIpv4":  "10.0.0.0/16",
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  null,
+                                         "ReferencedGroupUserId":  null,
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-059a95fb407858459",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "tcp",
+                                         "FromPort":  3268,
+                                         "ToPort":  3269,
+                                         "CidrIpv4":  "10.0.0.0/16",
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  null,
+                                         "ReferencedGroupUserId":  null,
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-06f0dc8f9612bc6ce",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "tcp",
+                                         "FromPort":  3268,
+                                         "ToPort":  3269,
+                                         "CidrIpv4":  null,
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
+                                         "ReferencedGroupUserId":  "119033255630",
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-0deca7dee87f0d8af",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "udp",
+                                         "FromPort":  123,
+                                         "ToPort":  123,
+                                         "CidrIpv4":  null,
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
+                                         "ReferencedGroupUserId":  "119033255630",
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-053c8cb45e03dc6f5",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "tcp",
+                                         "FromPort":  389,
+                                         "ToPort":  389,
+                                         "CidrIpv4":  "10.0.0.0/16",
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  null,
+                                         "ReferencedGroupUserId":  null,
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-005fee13be4cbdc62",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "tcp",
+                                         "FromPort":  53,
+                                         "ToPort":  53,
+                                         "CidrIpv4":  "10.0.0.0/16",
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  null,
+                                         "ReferencedGroupUserId":  null,
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-0c9e8f9cb4c9c36e9",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "udp",
+                                         "FromPort":  445,
+                                         "ToPort":  445,
+                                         "CidrIpv4":  "10.0.0.0/16",
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  null,
+                                         "ReferencedGroupUserId":  null,
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-0c10fff9ac8037bcf",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "tcp",
+                                         "FromPort":  9389,
+                                         "ToPort":  9389,
+                                         "CidrIpv4":  null,
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
+                                         "ReferencedGroupUserId":  "119033255630",
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-028d7450dca1f0731",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "tcp",
+                                         "FromPort":  389,
+                                         "ToPort":  389,
+                                         "CidrIpv4":  null,
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
+                                         "ReferencedGroupUserId":  "119033255630",
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-0de5a2d9c3f35210e",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "udp",
+                                         "FromPort":  464,
+                                         "ToPort":  464,
+                                         "CidrIpv4":  "10.0.0.0/16",
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  null,
+                                         "ReferencedGroupUserId":  null,
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-086ddcd432b87d9d1",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "udp",
+                                         "FromPort":  88,
+                                         "ToPort":  88,
+                                         "CidrIpv4":  "10.0.0.0/16",
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  null,
+                                         "ReferencedGroupUserId":  null,
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-0dd1434681b5e44ae",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "udp",
+                                         "FromPort":  88,
+                                         "ToPort":  88,
+                                         "CidrIpv4":  null,
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
+                                         "ReferencedGroupUserId":  "119033255630",
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-0e3dba9c00e8bc289",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "icmp",
+                                         "FromPort":  -1,
+                                         "ToPort":  -1,
+                                         "CidrIpv4":  "10.0.0.0/16",
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  null,
+                                         "ReferencedGroupUserId":  null,
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-00ea5f3050c25141b",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "tcp",
+                                         "FromPort":  88,
+                                         "ToPort":  88,
+                                         "CidrIpv4":  null,
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
+                                         "ReferencedGroupUserId":  "119033255630",
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-0d47e5e03d63a9029",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "tcp",
+                                         "FromPort":  464,
+                                         "ToPort":  464,
+                                         "CidrIpv4":  "10.0.0.0/16",
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  null,
+                                         "ReferencedGroupUserId":  null,
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-028e8457d66cd8eb8",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "udp",
+                                         "FromPort":  123,
+                                         "ToPort":  123,
+                                         "CidrIpv4":  "10.0.0.0/16",
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  null,
+                                         "ReferencedGroupUserId":  null,
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-054b5d386dab7dbb9",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "udp",
+                                         "FromPort":  389,
+                                         "ToPort":  389,
+                                         "CidrIpv4":  "10.0.0.0/16",
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  null,
+                                         "ReferencedGroupUserId":  null,
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-03df8faa96823206d",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "tcp",
+                                         "FromPort":  464,
+                                         "ToPort":  464,
+                                         "CidrIpv4":  null,
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
+                                         "ReferencedGroupUserId":  "119033255630",
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-087984a431237c7da",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "tcp",
+                                         "FromPort":  5985,
+                                         "ToPort":  5985,
+                                         "CidrIpv4":  null,
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
+                                         "ReferencedGroupUserId":  "119033255630",
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-00dba0794a7c16d50",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "tcp",
+                                         "FromPort":  53,
+                                         "ToPort":  53,
+                                         "CidrIpv4":  null,
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
+                                         "ReferencedGroupUserId":  "119033255630",
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-0110fe5a9a26a5bfe",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "tcp",
+                                         "FromPort":  1024,
+                                         "ToPort":  65535,
+                                         "CidrIpv4":  "10.0.0.0/16",
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  null,
+                                         "ReferencedGroupUserId":  null,
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-05471687f251a0664",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "tcp",
+                                         "FromPort":  636,
+                                         "ToPort":  636,
+                                         "CidrIpv4":  null,
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
+                                         "ReferencedGroupUserId":  "119033255630",
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-0c5c385a916baa29f",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "udp",
+                                         "FromPort":  53,
+                                         "ToPort":  53,
+                                         "CidrIpv4":  null,
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
+                                         "ReferencedGroupUserId":  "119033255630",
+                                         "Description":  null
+                                     },
+                                     {
+                                         "RuleId":  "sgr-0f4f6bf85e7b26be8",
+                                         "IsEgress":  false,
+                                         "IpProtocol":  "udp",
+                                         "FromPort":  464,
+                                         "ToPort":  464,
+                                         "CidrIpv4":  null,
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
+                                         "ReferencedGroupUserId":  "119033255630",
+                                         "Description":  null
+                                     }
+                                 ]
+                   },
+                   {
+                       "GroupId":  "sg-07659b5c68fe16b2a",
+                       "GroupName":  "Clinic-NonProd-Group",
+                       "Description":  "Proceed SMB to the Private Group.",
+                       "OwnerId":  "119033255630",
+                       "VpcId":  "vpc-0dfbc450b3120b16c",
+                       "Tags":  [
+                                    {
+                                        "Key":  "DataClassification",
+                                        "Value":  "internal"
+                                    },
+                                    {
+                                        "Key":  "ManagedBy",
+                                        "Value":  "manual-exception"
+                                    },
+                                    {
+                                        "Key":  "BackupPolicy",
+                                        "Value":  "none-approved"
+                                    },
+                                    {
+                                        "Key":  "Environment",
+                                        "Value":  "nonprod"
+                                    },
+                                    {
+                                        "Key":  "System",
+                                        "Value":  "shared-platform"
+                                    },
+                                    {
+                                        "Key":  "Owner",
+                                        "Value":  "IT-Administrator"
+                                    },
+                                    {
+                                        "Key":  "CostCenter",
+                                        "Value":  "CC-CLINIC-MIG-2026"
+                                    }
+                                ],
+                       "Rules":  [
+                                     {
+                                         "RuleId":  "sgr-09708429b8ca59183",
+                                         "IsEgress":  true,
+                                         "IpProtocol":  "-1",
+                                         "FromPort":  -1,
+                                         "ToPort":  -1,
+                                         "CidrIpv4":  null,
+                                         "CidrIpv6":  null,
+                                         "PrefixListId":  null,
+                                         "ReferencedGroupId":  "sg-0f43ac70d383b4859",
+                                         "ReferencedGroupUserId":  "119033255630",
+                                         "Description":  null
+                                     }
+                                 ]
+                   }
+               ]
+}
