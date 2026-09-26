@@ -8,21 +8,14 @@ This repository is used to learn and demonstrate Terraform engineering practices
 
 ---
 
-## Current Wave 1 Status
+## Current Project Status
 
-| Event | Topic | Status |
+| Wave | Topic | Status |
 |---|---|---|
-| W1.1 | Terraform workstation and repository foundation | ✅ Closed |
-| W1.2 | Variables, locals, provider authentication, data sources | ✅ Closed |
-| W1.3 | Terraform state fundamentals | ✅ Closed |
-| W1.4 | Import and lifecycle ownership | ✅ Closed |
-| W1.5 | First Terraform-managed AWS resource | ✅ Closed |
-| W1.6 | Controlled change, drift detection, and reconciliation | ✅ Closed |
-| W1.7A | Secure S3 remote-state backend bootstrap | ✅ Closed |
-| W1.7B | Local-to-S3 state migration and state locking | ✅ Closed |
-| W1.8 | Repository, security, and final Wave 1 review | 🟡 Closure checks in progress |
-
-Wave 1 is expected to close after the final repository hygiene, validation, and zero-drift checks are completed.
+| Wave 0 | Project foundation | CLOSED |
+| Wave 1 | Terraform and IaC foundations | CLOSED |
+| Wave 2 | Network foundation | CLOSED — PASS |
+| Wave 3 | Appointment API Workflow | NEXT / NOT STARTED |
 
 ---
 
@@ -664,7 +657,7 @@ By the end of Wave 1, the engineer should be able to explain:
 
 ---
 
-## Wave 1 Closure Target
+## Wave 1 Closure Result
 
 ```text
 W1.1  Terraform foundation                 ✅
@@ -674,9 +667,9 @@ W1.4  Import / lifecycle ownership         ✅
 W1.5  First managed resource               ✅
 W1.6  Drift / reconciliation               ✅
 W1.7  Remote state / locking               ✅
-W1.8  Repository / security review         🟡 final checks
+W1.8  Repository / security review         ✅
 
-Final target:
+Final result:
 
 WAVE 1
 ✅ PASS — TERRAFORM & IaC FOUNDATION COMPLETE
