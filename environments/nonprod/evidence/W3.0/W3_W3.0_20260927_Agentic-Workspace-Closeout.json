@@ -1,0 +1,37 @@
+{
+  "EvidenceId": "W3.0",
+  "Purpose": "Wave 3 Agentic Workspace and Terraform Readiness Closeout",
+  "TimestampUTC": "2026-09-26T16:12:25Z",
+  "Repository": {
+    "Branch": "wave-3-appointment-api",
+    "Wave3BaseCommit": "e2c1cc2f53dc0fec3a6239dfe1ed5ad7a00b8f4b",
+    "GovernanceCommit": "c98e8e7b7077f75a4375f8ec8acb42ad85fa5397"
+  },
+  "AgentControls": {
+    "AGENTSLoaded": true,
+    "ApprovalPolicy": "on-request",
+    "SandboxMode": "workspace-write",
+    "PersistentNetworkAccess": false,
+    "ManualAWSApprovalRequired": true
+  },
+  "Terraform": {
+    "FmtCheck": "PASS",
+    "Validate": "PASS",
+    "PlanExitCode": 0,
+    "NoChanges": true,
+    "ApplyExecuted": false
+  },
+  "AWSVerification": {
+    "AccountId": "119033255630",
+    "Region": "ap-east-1",
+    "VpcId": "vpc-0dfbc450b3120b16c",
+    "VpcCidr": "10.0.0.0/16"
+  },
+  "SecurityFinding": {
+    "ProfileAlias": "clinic-nonprod-readonly",
+    "AuthorizationBreadthVerifiedReadOnly": false,
+    "Finding": "Authenticated SSO role naming indicates Clinic-NonProd-Operator / Administrator context. Least-privilege read-only scope has not been independently proven.",
+    "Control": "AWS commands remain subject to explicit per-command manual approval until a dedicated least-privilege profile is verified."
+  },
+  "Result": "PASS"
+}
