@@ -26,4 +26,6 @@ module "appointment_api" {
   api_throttle_burst_limit   = 20
   waf_rate_limit             = 300
   maximum_request_body_bytes = 16384
+  maximum_clock_skew_seconds = 300
+  nonce_ttl_seconds          = 600
 }

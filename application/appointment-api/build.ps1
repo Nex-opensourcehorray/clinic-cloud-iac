@@ -3,6 +3,8 @@ param(
     [string]$OutputPath
 )
 
+$ErrorActionPreference = "Stop"
+
 $ScriptRoot = Split-Path -Parent $PSCommandPath
 
 if ([string]::IsNullOrWhiteSpace($ScriptRoot)) {
@@ -30,5 +32,35 @@ if (Test-Path -LiteralPath $OutputPath) {
     Remove-Item -LiteralPath $OutputPath -Force
 }
 
-Compress-Archive -Path (Join-Path $sourcePath "*") -DestinationPath $OutputPath
+Add-Type -AssemblyName System.IO.Compression
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+
+$archive = [System.IO.Compression.ZipFile]::Open(
+    $OutputPath,
+    [System.IO.Compression.ZipArchiveMode]::Create
+)
+
+try {
+    Get-ChildItem -LiteralPath $sourcePath -Recurse -File |
+        Where-Object {
+            $_.Extension -ne ".pyc" -and
+            $_.FullName -notmatch "[\\/]__pycache__[\\/]"
+        } |
+        ForEach-Object {
+            $entryName = $_.FullName.Substring($sourcePath.Length).TrimStart("\")
+            $entryName = $entryName.Replace("\", "/")
+            [System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile(
+                $archive,
+                $_.FullName,
+                $entryName,
+                [System.IO.Compression.CompressionLevel]::Optimal
+            ) | Out-Null
+        }
+}
+finally {
+    if ($null -ne $archive) {
+        $archive.Dispose()
+    }
+}
+
 Write-Output $OutputPath

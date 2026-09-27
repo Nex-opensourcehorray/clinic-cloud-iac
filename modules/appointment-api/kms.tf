@@ -1,5 +1,5 @@
-# W3.2 intentionally uses AWS-owned/service-managed encryption for DynamoDB,
-# SQS, and CloudWatch Logs. A customer-managed Appointment API key is deferred
-# until its key policy, recovery ownership, cost, and service-principal access
-# have received explicit review. No secret value is created or passed through
-# this module.
+# W3.3 continues to use AWS-owned/service-managed encryption for DynamoDB, SQS,
+# CloudWatch Logs, and the Secrets Manager secret metadata. A customer-managed
+# Appointment API key is deferred until its policy, recovery ownership, cost,
+# and service-principal access receive explicit review. No secret value is
+# created or passed through this module.

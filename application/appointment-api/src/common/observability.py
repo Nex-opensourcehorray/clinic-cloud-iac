@@ -1,4 +1,4 @@
-"""Data-minimized structured logging for the Appointment API foundation."""
+"""Data-minimized structured logging for the Appointment API."""
 
 from __future__ import annotations
 

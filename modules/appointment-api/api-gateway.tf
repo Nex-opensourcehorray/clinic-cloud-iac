@@ -43,8 +43,13 @@ resource "aws_api_gateway_method" "post_appointments" {
   }
 
   request_parameters = {
-    "method.request.header.Content-Type"    = true
-    "method.request.header.Idempotency-Key" = true
+    "method.request.header.Content-Type"       = true
+    "method.request.header.Idempotency-Key"    = true
+    "method.request.header.X-Clinic-Key-Id"    = true
+    "method.request.header.X-Clinic-Nonce"     = true
+    "method.request.header.X-Clinic-Signature" = true
+    "method.request.header.X-Clinic-Timestamp" = true
+    "method.request.header.X-Content-SHA256"   = true
   }
 }
 
@@ -98,6 +103,7 @@ resource "aws_api_gateway_deployment" "this" {
     redeployment = sha1(jsonencode({
       resource_id          = aws_api_gateway_resource.appointments.id
       method_id            = aws_api_gateway_method.post_appointments.id
+      request_parameters   = aws_api_gateway_method.post_appointments.request_parameters
       integration_uri      = aws_api_gateway_integration.intake.uri
       request_model_schema = aws_api_gateway_model.appointment_request.schema
       response_4xx         = aws_api_gateway_gateway_response.default_4xx.response_templates

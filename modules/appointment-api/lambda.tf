@@ -1,6 +1,6 @@
 resource "aws_lambda_function" "intake" {
   function_name = "${local.name_prefix}-intake"
-  description   = "Nonproduction Appointment API intake foundation; HMAC enforcement is deferred to W3.3"
+  description   = "Nonproduction authenticated Appointment API intake"
   role          = aws_iam_role.intake.arn
   runtime       = "python3.13"
   handler       = "intake.handler.lambda_handler"
@@ -15,9 +15,14 @@ resource "aws_lambda_function" "intake" {
 
   environment {
     variables = {
-      ENVIRONMENT          = var.environment
-      FOUNDATION_MODE      = "true"
-      IDEMPOTENCY_TTL_DAYS = tostring(var.idempotency_ttl_days)
+      ENVIRONMENT                = var.environment
+      HMAC_SECRET_ARN            = aws_secretsmanager_secret.hmac.arn
+      IDEMPOTENCY_TTL_SECONDS    = tostring(var.idempotency_ttl_days * 86400)
+      MAXIMUM_BODY_BYTES         = tostring(var.maximum_request_body_bytes)
+      MAXIMUM_CLOCK_SKEW_SECONDS = tostring(var.maximum_clock_skew_seconds)
+      NONCE_TTL_SECONDS          = tostring(var.nonce_ttl_seconds)
+      WORKFLOW_TABLE_NAME        = aws_dynamodb_table.workflow.name
+      WORK_QUEUE_URL             = aws_sqs_queue.work.id
     }
   }
 

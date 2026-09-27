@@ -34,6 +34,30 @@ resource "aws_iam_role" "reconciler" {
 
 data "aws_iam_policy_document" "intake" {
   statement {
+    sid    = "ReserveWorkflowState"
+    effect = "Allow"
+    actions = [
+      "dynamodb:GetItem",
+      "dynamodb:TransactWriteItems",
+    ]
+    resources = [aws_dynamodb_table.workflow.arn]
+  }
+
+  statement {
+    sid       = "SubmitAuthenticatedWork"
+    effect    = "Allow"
+    actions   = ["sqs:SendMessage"]
+    resources = [aws_sqs_queue.work.arn]
+  }
+
+  statement {
+    sid       = "ReadAppointmentHmacSecret"
+    effect    = "Allow"
+    actions   = ["secretsmanager:GetSecretValue"]
+    resources = [aws_secretsmanager_secret.hmac.arn]
+  }
+
+  statement {
     sid    = "WriteOwnLogs"
     effect = "Allow"
     actions = [

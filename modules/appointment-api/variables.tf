@@ -126,6 +126,28 @@ variable "idempotency_ttl_days" {
   }
 }
 
+variable "maximum_clock_skew_seconds" {
+  description = "Maximum accepted request timestamp skew in either direction"
+  type        = number
+  default     = 300
+
+  validation {
+    condition     = var.maximum_clock_skew_seconds == 300
+    error_message = "The Appointment API authentication contract requires a 300-second clock skew."
+  }
+}
+
+variable "nonce_ttl_seconds" {
+  description = "Replay-protection nonce retention period"
+  type        = number
+  default     = 600
+
+  validation {
+    condition     = var.nonce_ttl_seconds >= 600
+    error_message = "nonce_ttl_seconds must be at least 600 seconds."
+  }
+}
+
 variable "alarm_actions" {
   description = "Optional SNS topic ARNs for alarm notifications"
   type        = list(string)

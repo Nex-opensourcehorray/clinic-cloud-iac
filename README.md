@@ -22,10 +22,12 @@ Wave 3 checkpoints:
 - **W3.0 Agentic Workspace & Readiness — CLOSED — PASS**
 - **W3.1 Appointment API Architecture & Security Discovery — CLOSED — PASS**
 - **W3.2 Appointment API Foundation — CLOSED — PASS**
-- **W3.3 HMAC Authentication, Replay Protection, and Atomic Idempotency — IN PROGRESS**
+- **W3.3 HMAC Authentication, Replay Protection, and Atomic Idempotency — CLOSED — PASS**
+- **W3.4 WAF & Public API Abuse Hardening — IN PROGRESS**
 
-W3.2 established and validated the Appointment API foundation in code and with
-a Terraform plan only. No W3.2 infrastructure was applied.
+W3.2 and W3.3 established and validated the Appointment API foundation and its
+authentication controls in code and with Terraform plans only. No Wave 3
+infrastructure has yet been applied.
 
 ---
 
