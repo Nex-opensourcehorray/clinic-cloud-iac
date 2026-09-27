@@ -1,0 +1,57 @@
+{
+  "EvidenceId": "W3.6",
+  "Purpose": "Appointment API Monitoring, Alert Routing, and Operational Observability Validation",
+  "TimestampUTC": "2026-09-27T07:43:12Z",
+  "Branch": "wave-3-appointment-api",
+  "W3.5Commit": "d5483c5317426c16418940856cbbd8d9be477072",
+  "Validation": {
+    "TerraformFmt": "PASS",
+    "TerraformValidate": "PASS",
+    "AppointmentApiTests": {
+      "Result": "PASS",
+      "Count": 124
+    },
+    "LambdaPackaging": "PASS",
+    "SensitiveFileReview": "PASS"
+  },
+  "TerraformPlan": {
+    "ExitCode": 2,
+    "Add": 60,
+    "Change": 0,
+    "Destroy": 0,
+    "Replace": 0,
+    "SavedPlanCreated": false,
+    "ApplyExecuted": false
+  },
+  "Alerting": {
+    "DedicatedSnsTopic": "clinic-nonprod-appointment-api-alerts",
+    "SnsEncryption": "alias/aws/sns",
+    "AlarmCount": 14,
+    "AlarmActionsConnected": 14,
+    "OkActionsConnected": 14,
+    "HumanSubscriptions": 0
+  },
+  "Dashboard": {
+    "Name": "clinic-nonprod-appointment-api-operations",
+    "Present": true,
+    "ContainsSensitiveData": false
+  },
+  "Logging": {
+    "Wave3LogRetentionDays": 90,
+    "UnrelatedHistoricalLogsModified": false
+  },
+  "ExistingInfrastructureImpact": {
+    "Wave0ToWave2Modified": false,
+    "ControlTowerNotificationsModified": false,
+    "NetworkModified": false,
+    "FSxModified": false,
+    "DirectoryServiceModified": false
+  },
+  "AcceptedFollowUps": [
+    "An approved human alert subscription/destination must be configured before operational acceptance.",
+    "Actual HMAC key material remains separately gated.",
+    "Real clinical-system integration remains unavailable.",
+    "Deprecated DynamoDB hash_key/range_key syntax remains a separate follow-up."
+  ],
+  "Result": "PASS"
+}

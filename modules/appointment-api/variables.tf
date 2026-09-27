@@ -202,15 +202,3 @@ variable "reconciliation_batch_size" {
     error_message = "reconciliation_batch_size must be between 1 and 100."
   }
 }
-
-variable "alarm_actions" {
-  description = "Optional SNS topic ARNs for alarm notifications"
-  type        = list(string)
-  default     = []
-}
-
-variable "ok_actions" {
-  description = "Optional SNS topic ARNs for alarm recovery notifications"
-  type        = list(string)
-  default     = []
-}

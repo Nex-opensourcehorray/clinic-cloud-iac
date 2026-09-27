@@ -1,4 +1,6 @@
 locals {
+  alert_topic_actions = [aws_sns_topic.alerts.arn]
+
   monitored_lambda_functions = {
     intake     = aws_lambda_function.intake.function_name
     worker     = aws_lambda_function.worker.function_name
@@ -39,8 +41,8 @@ resource "aws_cloudwatch_metric_alarm" "workflow_operational" {
   threshold           = 0
   treat_missing_data  = "notBreaching"
 
-  alarm_actions = var.alarm_actions
-  ok_actions    = var.ok_actions
+  alarm_actions = local.alert_topic_actions
+  ok_actions    = local.alert_topic_actions
 
   tags = local.common_tags
 }
@@ -63,8 +65,8 @@ resource "aws_cloudwatch_metric_alarm" "lambda_errors" {
     FunctionName = each.value
   }
 
-  alarm_actions = var.alarm_actions
-  ok_actions    = var.ok_actions
+  alarm_actions = local.alert_topic_actions
+  ok_actions    = local.alert_topic_actions
 
   tags = local.common_tags
 }
@@ -87,8 +89,8 @@ resource "aws_cloudwatch_metric_alarm" "lambda_throttles" {
     FunctionName = each.value
   }
 
-  alarm_actions = var.alarm_actions
-  ok_actions    = var.ok_actions
+  alarm_actions = local.alert_topic_actions
+  ok_actions    = local.alert_topic_actions
 
   tags = local.common_tags
 }
@@ -110,8 +112,8 @@ resource "aws_cloudwatch_metric_alarm" "api_5xx" {
     Stage   = aws_api_gateway_stage.this.stage_name
   }
 
-  alarm_actions = var.alarm_actions
-  ok_actions    = var.ok_actions
+  alarm_actions = local.alert_topic_actions
+  ok_actions    = local.alert_topic_actions
 
   tags = local.common_tags
 }
@@ -132,8 +134,8 @@ resource "aws_cloudwatch_metric_alarm" "work_queue_age" {
     QueueName = aws_sqs_queue.work.name
   }
 
-  alarm_actions = var.alarm_actions
-  ok_actions    = var.ok_actions
+  alarm_actions = local.alert_topic_actions
+  ok_actions    = local.alert_topic_actions
 
   tags = local.common_tags
 }
@@ -154,8 +156,8 @@ resource "aws_cloudwatch_metric_alarm" "dead_letter_messages" {
     QueueName = aws_sqs_queue.dead_letter.name
   }
 
-  alarm_actions = var.alarm_actions
-  ok_actions    = var.ok_actions
+  alarm_actions = local.alert_topic_actions
+  ok_actions    = local.alert_topic_actions
 
   tags = local.common_tags
 }
@@ -165,19 +167,86 @@ resource "aws_cloudwatch_metric_alarm" "dynamodb_system_errors" {
   alarm_description   = "Appointment workflow table reported system errors"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 1
-  metric_name         = "SystemErrors"
-  namespace           = "AWS/DynamoDB"
-  period              = 300
-  statistic           = "Sum"
   threshold           = 0
   treat_missing_data  = "notBreaching"
 
-  dimensions = {
-    TableName = aws_dynamodb_table.workflow.name
+  metric_query {
+    id          = "system_errors"
+    expression  = "SUM([get_item,update_item,transact_write,query])"
+    label       = "Appointment workflow DynamoDB system errors"
+    return_data = true
   }
 
-  alarm_actions = var.alarm_actions
-  ok_actions    = var.ok_actions
+  metric_query {
+    id          = "get_item"
+    return_data = false
+
+    metric {
+      metric_name = "SystemErrors"
+      namespace   = "AWS/DynamoDB"
+      period      = 300
+      stat        = "Sum"
+
+      dimensions = {
+        Operation = "GetItem"
+        TableName = aws_dynamodb_table.workflow.name
+      }
+    }
+  }
+
+  metric_query {
+    id          = "update_item"
+    return_data = false
+
+    metric {
+      metric_name = "SystemErrors"
+      namespace   = "AWS/DynamoDB"
+      period      = 300
+      stat        = "Sum"
+
+      dimensions = {
+        Operation = "UpdateItem"
+        TableName = aws_dynamodb_table.workflow.name
+      }
+    }
+  }
+
+  metric_query {
+    id          = "transact_write"
+    return_data = false
+
+    metric {
+      metric_name = "SystemErrors"
+      namespace   = "AWS/DynamoDB"
+      period      = 300
+      stat        = "Sum"
+
+      dimensions = {
+        Operation = "TransactWriteItems"
+        TableName = aws_dynamodb_table.workflow.name
+      }
+    }
+  }
+
+  metric_query {
+    id          = "query"
+    return_data = false
+
+    metric {
+      metric_name = "SystemErrors"
+      namespace   = "AWS/DynamoDB"
+      period      = 300
+      stat        = "Sum"
+
+      dimensions = {
+        Operation = "Query"
+        TableName = aws_dynamodb_table.workflow.name
+      }
+    }
+  }
+
+  alarm_actions = local.alert_topic_actions
+  ok_actions    = local.alert_topic_actions
 
   tags = local.common_tags
 }

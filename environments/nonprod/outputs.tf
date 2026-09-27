@@ -70,3 +70,13 @@ output "appointment_dead_letter_queue_arn" {
   description = "Appointment dead-letter queue ARN"
   value       = module.appointment_api.dead_letter_queue_arn
 }
+
+output "appointment_alert_topic_arn" {
+  description = "Encrypted Appointment API operational alarm-routing topic ARN"
+  value       = module.appointment_api.alert_topic_arn
+}
+
+output "appointment_operations_dashboard_name" {
+  description = "Appointment API operational CloudWatch dashboard name"
+  value       = module.appointment_api.operations_dashboard_name
+}

@@ -42,3 +42,13 @@ output "web_acl_arn" {
   description = "Regional WAFv2 Web ACL ARN"
   value       = aws_wafv2_web_acl.this.arn
 }
+
+output "alert_topic_arn" {
+  description = "Encrypted Appointment API operational alarm-routing topic ARN"
+  value       = aws_sns_topic.alerts.arn
+}
+
+output "operations_dashboard_name" {
+  description = "Appointment API operational CloudWatch dashboard name"
+  value       = aws_cloudwatch_dashboard.operations.dashboard_name
+}
