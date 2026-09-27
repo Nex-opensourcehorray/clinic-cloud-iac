@@ -82,6 +82,10 @@ resource "aws_api_gateway_gateway_response" "default_4xx" {
       requestId = "$context.requestId"
     })
   }
+
+  response_parameters = {
+    "gatewayresponse.header.Cache-Control" = "'no-store'"
+  }
 }
 
 resource "aws_api_gateway_gateway_response" "default_5xx" {
@@ -93,6 +97,10 @@ resource "aws_api_gateway_gateway_response" "default_5xx" {
       message   = "Request could not be processed"
       requestId = "$context.requestId"
     })
+  }
+
+  response_parameters = {
+    "gatewayresponse.header.Cache-Control" = "'no-store'"
   }
 }
 
@@ -107,7 +115,9 @@ resource "aws_api_gateway_deployment" "this" {
       integration_uri      = aws_api_gateway_integration.intake.uri
       request_model_schema = aws_api_gateway_model.appointment_request.schema
       response_4xx         = aws_api_gateway_gateway_response.default_4xx.response_templates
+      response_4xx_headers = aws_api_gateway_gateway_response.default_4xx.response_parameters
       response_5xx         = aws_api_gateway_gateway_response.default_5xx.response_templates
+      response_5xx_headers = aws_api_gateway_gateway_response.default_5xx.response_parameters
     }))
   }
 

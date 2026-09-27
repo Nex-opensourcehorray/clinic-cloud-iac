@@ -86,6 +86,10 @@ class IntakeHandlerTests(unittest.TestCase):
         sqs = RecordingSqs()
         response = self.invoke(event, dynamo, sqs)
         self.assertEqual(401, response["statusCode"])
+        payload = json.loads(response["body"])
+        self.assertEqual("Request authentication failed.", payload["message"])
+        self.assertNotIn("BAD_HMAC", response["body"])
+        self.assertNotIn(event["headers"]["X-Clinic-Signature"], response["body"])
         self.assertEqual([], dynamo.transactions)
         self.assertEqual([], sqs.messages)
 

@@ -116,8 +116,9 @@ resource "aws_wafv2_web_acl" "this" {
 
     statement {
       rate_based_statement {
-        aggregate_key_type = "IP"
-        limit              = var.waf_rate_limit
+        aggregate_key_type    = "IP"
+        evaluation_window_sec = 300
+        limit                 = var.waf_rate_limit
       }
     }
 
@@ -162,6 +163,40 @@ resource "aws_wafv2_web_acl_logging_configuration" "this" {
     single_header {
       name = "x-clinic-signature"
     }
+  }
+
+  redacted_fields {
+    single_header {
+      name = "x-clinic-key-id"
+    }
+  }
+
+  redacted_fields {
+    single_header {
+      name = "x-clinic-timestamp"
+    }
+  }
+
+  redacted_fields {
+    single_header {
+      name = "x-clinic-nonce"
+    }
+  }
+
+  redacted_fields {
+    single_header {
+      name = "idempotency-key"
+    }
+  }
+
+  redacted_fields {
+    single_header {
+      name = "x-content-sha256"
+    }
+  }
+
+  redacted_fields {
+    query_string {}
   }
 
   depends_on = [aws_cloudwatch_log_group.waf]

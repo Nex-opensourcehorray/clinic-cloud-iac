@@ -106,6 +106,13 @@ class AuthenticationTests(unittest.TestCase):
         event = signed_event(body=b"{}")
         self.assert_category("BODY_TOO_LARGE", event, maximum_body_bytes=1)
 
+    def test_exact_16_kib_body_passes_size_gate(self) -> None:
+        result = self.authenticate(signed_event(body=b"A" * 16384))
+        self.assertEqual(16384, len(result.body_bytes))
+
+    def test_body_over_16_kib_is_rejected(self) -> None:
+        self.assert_category("BODY_TOO_LARGE", signed_event(body=b"A" * 16385))
+
     def test_wrong_content_type(self) -> None:
         event = signed_event()
         event["headers"]["Content-Type"] = "text/plain"
@@ -115,6 +122,16 @@ class AuthenticationTests(unittest.TestCase):
         event = signed_event()
         event["queryStringParameters"] = {"unexpected": "true"}
         self.assert_category("UNEXPECTED_QUERY_PARAMETERS", event)
+
+    def test_unsupported_http_method_is_rejected(self) -> None:
+        event = signed_event()
+        event["httpMethod"] = "GET"
+        self.assert_category("INVALID_REQUEST_TARGET", event)
+
+    def test_missing_idempotency_key_is_rejected(self) -> None:
+        event = signed_event()
+        del event["headers"]["Idempotency-Key"]
+        self.assert_category("MISSING_REQUIRED_HEADER", event)
 
     def test_header_lookup_is_case_insensitive(self) -> None:
         event = signed_event()

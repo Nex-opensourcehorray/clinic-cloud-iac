@@ -117,6 +117,8 @@ class WorkflowTests(unittest.TestCase):
         with self.assertRaises(WorkflowError) as raised:
             self.reserve(self.repository(dynamo, sqs))
         self.assertEqual("NONCE_REPLAY", raised.exception.category)
+        self.assertNotIn("nonce-000000000001", raised.exception.message)
+        self.assertNotIn("v1", raised.exception.message)
         self.assertEqual([], sqs.messages)
 
     def test_same_idempotency_key_and_digest_returns_existing_request(self) -> None:

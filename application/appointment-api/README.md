@@ -88,6 +88,25 @@ laboratory/radiology data, payment-card data, credentials, secrets, and free
 text. Logs contain only approved operational categories and identifiers—not
 request bodies, contact fields, secret values, or complete signatures.
 
+## Public-edge boundary
+
+The approved path is browser to the Vercel server, then Vercel to the Regional
+API Gateway endpoint. Browsers are not intended to call API Gateway directly,
+so the API intentionally publishes no CORS headers or preflight method. WAF
+managed rules, a 16 KiB fail-closed body-size rule, a 300-request/five-minute
+source-IP rate limit, and API throttling reduce abuse; they do not authenticate
+Vercel or replace HMAC, replay protection, or idempotency.
+
+Lambda responses and API Gateway-generated default errors use
+`Cache-Control: no-store`. WAF logs redact query strings, every HMAC/idempotency
+header, Authorization, and Cookie. API access and application logs contain
+operational metadata only and never record request bodies.
+
+The source-IP limit can affect clients sharing a NAT or proxy and cannot stop
+distributed abuse. WAF logging currently retains allowed and blocked request
+metadata; sampled-request display is disabled, while CloudWatch metrics remain
+enabled for each rule.
+
 ## Build
 
 Run `build.ps1` to create `dist/appointment-api.zip`. The generated directory

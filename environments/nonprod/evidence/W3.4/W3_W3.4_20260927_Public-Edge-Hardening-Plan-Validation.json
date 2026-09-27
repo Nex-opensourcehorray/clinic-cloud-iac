@@ -1,0 +1,53 @@
+{
+  "EvidenceId": "W3.4",
+  "Purpose": "Appointment API WAF and Public Edge Hardening Validation",
+  "TimestampUTC": "2026-09-27T05:18:44Z",
+  "Branch": "wave-3-appointment-api",
+  "W3.3Commit": "ff16a91714d6133a4db31bb63af591a0d9becdc4",
+  "Validation": {
+    "TerraformFmt": "PASS",
+    "TerraformValidate": "PASS",
+    "AppointmentApiTests": {
+      "Result": "PASS",
+      "Count": 50
+    },
+    "LambdaPackaging": "PASS",
+    "SensitiveFileReview": "PASS"
+  },
+  "TerraformPlan": {
+    "ExitCode": 2,
+    "Add": 53,
+    "Change": 0,
+    "Destroy": 0,
+    "Replace": 0,
+    "SavedPlanCreated": false,
+    "ApplyExecuted": false
+  },
+  "PublicBoundary": {
+    "ApiType": "Regional REST API",
+    "BusinessMethod": "POST /appointments",
+    "AlternateBusinessMethods": false,
+    "CorsConfigured": false,
+    "ApiCachingEnabled": false,
+    "WafAssociatedToOnlyStage": true,
+    "AuthenticationBypassFound": false
+  },
+  "WAF": {
+    "RequestSizeBytes": 16384,
+    "OversizeHandling": "MATCH",
+    "RateLimit": 300,
+    "RateWindowSeconds": 300,
+    "SampledRequestsEnabled": false,
+    "AuthenticationHeadersRedacted": true,
+    "QueryStringRedacted": true
+  },
+  "AcceptedFindings": [
+    "Source-IP rate limiting is not authentication and has NAT/distributed-abuse limitations.",
+    "WAF retains allowed and blocked request metadata.",
+    "Actual HMAC key material remains unprovisioned.",
+    "Alarm notification routing remains unresolved.",
+    "Stale QUEUE_PENDING and RECONCILE_REQUIRED recovery remains unimplemented.",
+    "Clinical-system adapter remains intentionally deferred."
+  ],
+  "Result": "PASS"
+}
