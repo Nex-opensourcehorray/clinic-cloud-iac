@@ -17,9 +17,11 @@ This repository is used to learn and demonstrate Terraform engineering practices
 | Wave 2 | Network foundation | CLOSED — PASS |
 | Wave 3 | Appointment API Workflow | IN PROGRESS |
 
-Wave 3 current checkpoint: **W3.0 Agentic Workspace & Readiness — CLOSED — PASS**
+Wave 3 checkpoints:
 
-Next: **W3.1 Appointment API Architecture & Security Discovery**
+- **W3.0 Agentic Workspace & Readiness — CLOSED — PASS**
+- **W3.1 Appointment API Architecture & Security Discovery — CLOSED — PASS**
+- **W3.2 Appointment API Foundation — IN PROGRESS**
 
 ---
 
