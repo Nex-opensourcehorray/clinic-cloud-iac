@@ -30,6 +30,7 @@ class LogMinimizationTests(unittest.TestCase):
     def test_logs_exclude_body_secret_signature_and_contact_values(self) -> None:
         contact_marker = "SYNTHETIC-CONTACT-NOT-FOR-LOGS"
         secret_marker = "synthetic-secret-not-for-logs-000000001"
+        secret_arn_marker = "arn:aws:secretsmanager:region:account:secret:not-for-logs"
         body = json.dumps(
             {
                 "patientReference": contact_marker,
@@ -45,7 +46,7 @@ class LogMinimizationTests(unittest.TestCase):
 
         with patch.dict(
             os.environ,
-            {"HMAC_SECRET_ARN": "arn:aws:secretsmanager:region:account:secret:test"},
+            {"HMAC_SECRET_ARN": secret_arn_marker},
             clear=False,
         ), contextlib.redirect_stdout(output):
             handle_request(
@@ -62,6 +63,7 @@ class LogMinimizationTests(unittest.TestCase):
         logged = output.getvalue()
         self.assertNotIn(contact_marker, logged)
         self.assertNotIn(secret_marker, logged)
+        self.assertNotIn(secret_arn_marker, logged)
         self.assertNotIn(signature_marker, logged)
         self.assertNotIn(event["headers"]["X-Clinic-Signature"], logged)
         self.assertNotIn("patientReference", logged)

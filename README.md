@@ -15,7 +15,9 @@ This repository is used to learn and demonstrate Terraform engineering practices
 | Wave 0 | Project foundation | CLOSED |
 | Wave 1 | Terraform and IaC foundations | CLOSED |
 | Wave 2 | Network foundation | CLOSED — PASS |
-| Wave 3 | Appointment API Workflow | IN PROGRESS |
+| Wave 3 | Appointment API Workflow | ENGINEERING CLOSED — DEPLOYMENT DEFERRED |
+| Wave 4 | Pharmacy migration | DESIGN VALIDATION NEXT — NEVER DEPLOY |
+| Wave 5 | Clinic/EMR shared MySQL migration | DESIGN VALIDATION ONLY — NEVER DEPLOY |
 
 Wave 3 checkpoints:
 
@@ -27,13 +29,21 @@ Wave 3 checkpoints:
 - **W3.5 Workflow, Exception & Reconciliation — CLOSED — PASS**
 - **W3.6 Monitoring, Alert Routing, and Operational Observability — CLOSED — PASS**
 - **W3.7 Security, Negative, Abuse, and Failure-Path Validation — CLOSED — PASS**
-- **W3.8 Deployment Readiness & Live Validation Gate — IN PROGRESS**
+- **W3.8 Deployment Readiness & Live Validation Gate — CLOSED — DEPLOYMENT DEFERRED**
 
-W3.2 through W3.7 established and validated the Appointment API foundation,
-authentication controls, public-edge protections, bounded workflow
-reconciliation, and operational alert routing in code and with Terraform plans
-only. No Wave 3 infrastructure has yet been applied. Human alert subscription
-remains pending operational approval.
+Wave 3 is **ENGINEERING CLOSED — DEPLOYMENT DEFERRED**. Its security and
+Terraform architectures, adversarial validation, and 205-test suite are
+complete. Thirty Wave 3 Terraform-managed resources exist; the final reviewed
+21-resource non-IAM remainder was intentionally not deployed. Four execution
+roles, two permissions boundaries, and the empty HMAC secret container are
+externally governed. The owner retained the IAM administrative boundary, and
+no broad IAM workaround was accepted. Wave 3 is not fully deployed,
+operationally accepted, production ready, or clinically integrated.
+
+Waves 4 and 5 are permanent design/security/migration-validation exercises.
+They may include local Terraform design, static tests, documentation, and
+read-only discovery, but they must never create or modify AWS resources and
+must never request deployment approval.
 
 ---
 

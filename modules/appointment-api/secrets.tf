@@ -1,18 +1,7 @@
-# Terraform owns only the secret metadata. The HMAC key document must be
-# provisioned through a separately approved out-of-band process.
-resource "aws_secretsmanager_secret" "hmac" {
-  name                    = "${local.name_prefix}/hmac-keys"
-  description             = "Appointment API HMAC key ring; value managed outside Terraform"
-  recovery_window_in_days = 30
-
-  tags = merge(
-    local.common_tags,
-    {
-      DataPurpose = "appointment-api-request-authentication"
-    }
-  )
-
-  lifecycle {
-    prevent_destroy = true
-  }
-}
+# EXTERNALLY MANAGED OPERATIONAL DEPENDENCY
+#
+# Terraform intentionally does not create, import, delete, or read the
+# Appointment API HMAC secret. The secret ARN is supplied through
+# var.hmac_secret_arn solely for the intake Lambda environment and its exact
+# secretsmanager:GetSecretValue IAM resource scope. Secret metadata and value
+# lifecycle remain in a separately approved out-of-band operational process.

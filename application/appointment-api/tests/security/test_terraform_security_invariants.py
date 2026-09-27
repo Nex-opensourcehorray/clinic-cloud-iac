@@ -26,7 +26,18 @@ class TerraformSecurityInvariantTests(unittest.TestCase):
         cls.monitoring = cls.files["monitoring.tf"]
         cls.secrets = cls.files["secrets.tf"]
         cls.sqs = cls.files["sqs.tf"]
+        cls.variables = cls.files["variables.tf"]
         cls.waf = cls.files["waf.tf"]
+        cls.environment_variables = (
+            REPOSITORY_ROOT / "environments" / "nonprod" / "variables.tf"
+        ).read_text(encoding="utf-8")
+        cls.environment_module = (
+            REPOSITORY_ROOT / "environments" / "nonprod" / "appointment-api.tf"
+        ).read_text(encoding="utf-8")
+        cls.readme = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
+        cls.deployment_readiness = (
+            PROJECT_ROOT / "DEPLOYMENT-READINESS.md"
+        ).read_text(encoding="utf-8")
 
     def test_api_has_one_regional_stage_and_one_processing_route(self) -> None:
         self.assertIn('types = ["REGIONAL"]', self.api)
@@ -109,11 +120,39 @@ class TerraformSecurityInvariantTests(unittest.TestCase):
         ):
             self.assertNotIn(forbidden, self.all_tf)
 
-    def test_hmac_secret_is_metadata_only(self) -> None:
-        self.assertIn('resource "aws_secretsmanager_secret" "hmac"', self.secrets)
+    def test_hmac_secret_is_an_external_operational_dependency(self) -> None:
+        self.assertNotRegex(
+            self.all_tf,
+            r'(?m)^\s*(resource|data)\s+"aws_secretsmanager_secret',
+        )
         self.assertNotIn("aws_secretsmanager_secret_version", self.all_tf)
-        self.assertNotRegex(self.secrets, r'(?m)^\s*(secret_string|secret_binary)\s*=')
-        self.assertIn("value managed outside Terraform", self.secrets)
+        self.assertNotRegex(self.all_tf, r'(?m)^\s*(secret_string|secret_binary)\s*=')
+        self.assertIn("EXTERNALLY MANAGED OPERATIONAL DEPENDENCY", self.secrets)
+        self.assertIn("does not create, import, delete, or read", self.secrets)
+
+    def test_external_hmac_secret_arn_is_a_required_validated_input(self) -> None:
+        self.assertIn('variable "hmac_secret_arn"', self.variables)
+        hmac_variable = self.variables.split('variable "hmac_secret_arn"', 1)[1].split(
+            '\n}\n', 1
+        )[0]
+        self.assertIn("type        = string", hmac_variable)
+        self.assertIn("secretsmanager", hmac_variable)
+        self.assertNotIn("default", hmac_variable)
+        self.assertIn(
+            'variable "appointment_api_hmac_secret_arn"',
+            self.environment_variables,
+        )
+        self.assertRegex(
+            self.environment_module,
+            r"hmac_secret_arn\s*=\s*var\.appointment_api_hmac_secret_arn",
+        )
+
+    def test_external_hmac_consumers_use_only_the_supplied_arn(self) -> None:
+        self.assertIn("HMAC_SECRET_ARN              = var.hmac_secret_arn", self.lambda_tf)
+        self.assertIn("`secretsmanager:GetSecretValue` permission", self.readme)
+        self.assertNotIn('"secretsmanager:*"', self.all_tf)
+        self.assertNotIn('"kms:Decrypt"', self.all_tf)
+        self.assertNotIn("aws_secretsmanager_secret.hmac", self.all_tf)
 
     def test_monitoring_routing_remains_fourteen_of_fourteen(self) -> None:
         self.assertEqual(7, self.monitoring.count('resource "aws_cloudwatch_metric_alarm"'))
@@ -123,14 +162,13 @@ class TerraformSecurityInvariantTests(unittest.TestCase):
         self.assertEqual(7, self.monitoring.count("ok_actions    = local.alert_topic_actions"))
         self.assertNotIn('resource "aws_sns_topic_subscription"', self.all_tf)
 
-    def test_topic_policy_and_lambda_iam_remain_scoped(self) -> None:
+    def test_topic_policy_remains_scoped(self) -> None:
         self.assertIn('identifiers = ["cloudwatch.amazonaws.com"]', self.alerts)
         self.assertIn('variable = "AWS:SourceAccount"', self.alerts)
         self.assertIn('variable = "AWS:SourceArn"', self.alerts)
         self.assertNotIn('identifiers = ["*"]', self.alerts)
-        self.assertNotRegex(self.iam, r'(?i)sns:(publish|\*)')
 
-    def test_no_broad_application_iam_grants_are_introduced(self) -> None:
+    def test_no_broad_application_iam_grants_are_introduced_in_terraform(self) -> None:
         for forbidden in (
             "AdministratorAccess",
             "PowerUserAccess",
@@ -139,11 +177,83 @@ class TerraformSecurityInvariantTests(unittest.TestCase):
             '"dynamodb:*"',
             '"secretsmanager:*"',
         ):
-            self.assertNotIn(forbidden, self.iam)
-        self.assertNotIn('"sqs:*"', self.iam)
-        self.assertEqual(3, self.iam.count('resources = ["*"]'))
-        self.assertEqual(3, self.iam.count('"xray:PutTraceSegments"'))
-        self.assertEqual(3, self.iam.count('"xray:PutTelemetryRecords"'))
+            self.assertNotIn(forbidden, self.all_tf)
+
+    def test_terraform_does_not_own_external_iam_roles_or_policies(self) -> None:
+        self.assertNotRegex(self.all_tf, r'resource\s+"aws_iam_role"')
+        self.assertNotRegex(self.all_tf, r'resource\s+"aws_iam_role_policy"')
+        self.assertNotRegex(self.all_tf, r'data\s+"aws_iam_role"')
+        self.assertNotRegex(self.all_tf, r'data\s+"aws_iam_policy"')
+        self.assertNotIn("assume_role_policy", self.all_tf)
+        self.assertNotIn("permissions_boundary", self.all_tf)
+        self.assertNotIn('actions = ["sts:AssumeRole"]', self.all_tf)
+
+    def test_external_role_arn_inputs_are_required_and_validated(self) -> None:
+        names = (
+            "intake_role_arn",
+            "worker_role_arn",
+            "reconciler_role_arn",
+            "api_gateway_logs_role_arn",
+        )
+        for name in names:
+            with self.subTest(name=name):
+                marker = f'variable "{name}"'
+                self.assertIn(marker, self.variables)
+                block = self.variables.split(marker, 1)[1].split("\n}\n", 1)[0]
+                self.assertIn("type        = string", block)
+                self.assertIn(":iam::", block)
+                self.assertIn(":role/", block)
+                self.assertNotIn("default", block)
+
+    def test_environment_exposes_and_passes_all_external_role_arns(self) -> None:
+        pairs = {
+            "appointment_api_intake_role_arn": "intake_role_arn",
+            "appointment_api_worker_role_arn": "worker_role_arn",
+            "appointment_api_reconciler_role_arn": "reconciler_role_arn",
+            "appointment_api_api_gateway_logs_role_arn": "api_gateway_logs_role_arn",
+        }
+        for root_name, module_name in pairs.items():
+            with self.subTest(root_name=root_name):
+                self.assertIn(f'variable "{root_name}"', self.environment_variables)
+                self.assertRegex(
+                    self.environment_module,
+                    rf"{module_name}\s*=\s*var\.{root_name}",
+                )
+
+    def test_compute_and_api_logging_consume_only_external_role_inputs(self) -> None:
+        for name in ("intake", "worker", "reconciler"):
+            self.assertIn(f"role          = var.{name}_role_arn", self.lambda_tf)
+        self.assertEqual(3, self.lambda_tf.count("role          = var."))
+        self.assertNotIn("aws_iam_role", self.lambda_tf)
+        self.assertIn(
+            "cloudwatch_role_arn = var.api_gateway_logs_role_arn",
+            self.iam,
+        )
+
+    def test_documentation_defines_exact_external_iam_contract(self) -> None:
+        expected_roles = (
+            "clinic-nonprod-appointment-api-intake",
+            "clinic-nonprod-appointment-api-worker",
+            "clinic-nonprod-appointment-api-reconciler",
+            "clinic-nonprod-appointment-api-api-logs",
+        )
+        for document in (self.readme, self.deployment_readiness):
+            with self.subTest(document=document[:40]):
+                self.assertIn("Externally managed IAM", document)
+                self.assertIn("lambda.amazonaws.com", document)
+                self.assertIn("apigateway.amazonaws.com", document)
+                self.assertIn("clinic-nonprod-appointment-api-runtime-boundary", document)
+                self.assertIn("clinic-nonprod-appointment-api-api-logs-boundary", document)
+                for role in expected_roles:
+                    self.assertIn(f"arn:aws:iam::119033255630:role/{role}", document)
+        self.assertNotRegex(
+            "\n".join(
+                line
+                for line in self.readme.splitlines()
+                if "arn:aws:iam::119033255630:role/" in line
+            ),
+            r"role/[^`|\s]*\*",
+        )
 
     def test_sqs_wildcard_actions_are_deny_only(self) -> None:
         self.assertEqual(2, self.sqs.count('actions   = ["sqs:*"]'))

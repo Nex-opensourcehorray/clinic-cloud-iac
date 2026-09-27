@@ -26,7 +26,6 @@ class WorkflowSecurityStaticTests(unittest.TestCase):
             SOURCE_ROOT / "common" / "observability.py"
         ).read_text(encoding="utf-8")
         cls.dynamodb = (MODULE_ROOT / "dynamodb.tf").read_text(encoding="utf-8")
-        cls.iam = (MODULE_ROOT / "iam.tf").read_text(encoding="utf-8")
         cls.monitoring = (MODULE_ROOT / "monitoring.tf").read_text(
             encoding="utf-8"
         )
@@ -47,22 +46,20 @@ class WorkflowSecurityStaticTests(unittest.TestCase):
         self.assertIn('IndexName=self._index_name', self.repository)
         self.assertIn('Limit=limit', self.repository)
 
-    def test_new_worker_and_reconciler_iam_is_narrow(self) -> None:
-        worker = self.iam.split('data "aws_iam_policy_document" "worker"', 1)[1].split(
-            'resource "aws_iam_role_policy" "worker"', 1
-        )[0]
-        reconciler = self.iam.split(
-            'data "aws_iam_policy_document" "reconciler"', 1
-        )[1].split('resource "aws_iam_role_policy" "reconciler"', 1)[0]
-        self.assertIn('"dynamodb:GetItem"', worker)
-        self.assertIn('"dynamodb:UpdateItem"', worker)
-        self.assertIn('"dynamodb:Query"', reconciler)
-        self.assertIn('"sqs:SendMessage"', reconciler)
-        for policy in (worker, reconciler):
-            self.assertNotIn('"dynamodb:*"', policy)
-            self.assertNotIn('"sqs:*"', policy)
-            self.assertNotIn('"iam:PassRole"', policy)
-            self.assertNotIn("AdministratorAccess", policy)
+    def test_worker_and_reconciler_external_iam_contract_is_narrow(self) -> None:
+        contract = self.readme.split("## Externally managed IAM prerequisites", 1)[
+            1
+        ].split("## Durable workflow", 1)[0]
+        for required in (
+            "Workflow-table `GetItem`/`UpdateItem`",
+            "reconciliation-index `Query`",
+            "work-queue `SendMessage`",
+            "clinic-nonprod-appointment-api-runtime-boundary",
+        ):
+            self.assertIn(required, contract)
+        self.assertNotIn("`dynamodb:*`", contract)
+        self.assertNotIn("`sqs:*`", contract)
+        self.assertNotIn("unrestricted `iam:PassRole` is approved", contract)
 
     def test_adapter_is_interface_only_and_has_no_external_client(self) -> None:
         self.assertIn("return AdapterOutcome.UNKNOWN_RESULT", self.adapter)

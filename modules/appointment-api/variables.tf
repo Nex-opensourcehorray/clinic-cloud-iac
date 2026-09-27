@@ -13,6 +13,56 @@ variable "common_tags" {
   type        = map(string)
 }
 
+variable "hmac_secret_arn" {
+  description = "ARN of the externally managed Secrets Manager secret used for Appointment API HMAC authentication"
+  type        = string
+
+  validation {
+    condition     = can(regex("^arn:[^:]+:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:.+$", var.hmac_secret_arn))
+    error_message = "hmac_secret_arn must be a non-empty AWS Secrets Manager secret ARN."
+  }
+}
+
+variable "intake_role_arn" {
+  description = "ARN of the externally managed Appointment API intake Lambda execution role"
+  type        = string
+
+  validation {
+    condition     = can(regex("^arn:[^:]+:iam::[0-9]{12}:role/[A-Za-z0-9+=,.@_/-]+$", var.intake_role_arn))
+    error_message = "intake_role_arn must be a valid IAM role ARN."
+  }
+}
+
+variable "worker_role_arn" {
+  description = "ARN of the externally managed Appointment API worker Lambda execution role"
+  type        = string
+
+  validation {
+    condition     = can(regex("^arn:[^:]+:iam::[0-9]{12}:role/[A-Za-z0-9+=,.@_/-]+$", var.worker_role_arn))
+    error_message = "worker_role_arn must be a valid IAM role ARN."
+  }
+}
+
+variable "reconciler_role_arn" {
+  description = "ARN of the externally managed Appointment API reconciler Lambda execution role"
+  type        = string
+
+  validation {
+    condition     = can(regex("^arn:[^:]+:iam::[0-9]{12}:role/[A-Za-z0-9+=,.@_/-]+$", var.reconciler_role_arn))
+    error_message = "reconciler_role_arn must be a valid IAM role ARN."
+  }
+}
+
+variable "api_gateway_logs_role_arn" {
+  description = "ARN of the externally managed API Gateway CloudWatch logging role"
+  type        = string
+
+  validation {
+    condition     = can(regex("^arn:[^:]+:iam::[0-9]{12}:role/[A-Za-z0-9+=,.@_/-]+$", var.api_gateway_logs_role_arn))
+    error_message = "api_gateway_logs_role_arn must be a valid IAM role ARN."
+  }
+}
+
 variable "request_schema" {
   description = "JSON Schema object used by the API Gateway request model"
   type        = any

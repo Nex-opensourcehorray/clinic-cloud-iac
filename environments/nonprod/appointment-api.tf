@@ -1,8 +1,13 @@
 module "appointment_api" {
   source = "../../modules/appointment-api"
 
-  resource_name_prefix = local.name_prefix
-  environment          = var.environment
+  resource_name_prefix      = local.name_prefix
+  environment               = var.environment
+  hmac_secret_arn           = var.appointment_api_hmac_secret_arn
+  intake_role_arn           = var.appointment_api_intake_role_arn
+  worker_role_arn           = var.appointment_api_worker_role_arn
+  reconciler_role_arn       = var.appointment_api_reconciler_role_arn
+  api_gateway_logs_role_arn = var.appointment_api_api_gateway_logs_role_arn
   common_tags = merge(
     local.common_tags,
     {

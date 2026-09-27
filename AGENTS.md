@@ -12,7 +12,10 @@ Current implementation status:
 - Wave 0: CLOSED
 - Wave 1: CLOSED
 - Wave 2: CLOSED — PASS
-- Next engineering mission: Wave 3 — Appointment API Workflow
+- Wave 3: ENGINEERING CLOSED — DEPLOYMENT DEFERRED
+- Wave 4: DESIGN / SECURITY / MIGRATION VALIDATION ONLY — NEVER DEPLOY
+- Wave 5: DESIGN / SECURITY / MIGRATION VALIDATION ONLY — NEVER DEPLOY
+- Next engineering mission: Wave 4 — Pharmacy Design Validation
 
 Do not reinterpret a closed wave as incomplete unless current evidence shows
 an actual defect or drift.
@@ -188,9 +191,13 @@ changes.
 
 ---
 
-## Wave 3 target
+## Wave 3 closed state
 
-Wave 3 is the Appointment API Workflow.
+Wave 3 is the Appointment API Workflow. Its engineering is closed with final
+deployment intentionally deferred. Thirty Terraform-managed Wave 3 resources
+exist; the reviewed remaining 21 non-IAM resources do not exist. Do not claim
+full deployment, production readiness, operational acceptance, or clinical
+integration.
 
 Expected architecture direction:
 
@@ -219,6 +226,29 @@ Core Wave 3 controls include:
 - failure/downtime fallback
 
 Do not start production deployment merely because the Terraform code validates.
+
+---
+
+## Permanent Wave 4 and Wave 5 non-deployment rule
+
+Wave 4 and Wave 5 are permanently limited to design, security, and migration
+validation. They may use local Terraform design, formatting, validation,
+static/security tests, read-only AWS discovery, architecture and migration
+documentation, rollback and backup/restore design, cost analysis, and
+portfolio evidence.
+
+For Wave 4 and Wave 5, never:
+
+- run `terraform apply`;
+- create or modify AWS resources;
+- create EC2, RDS, DMS, IAM roles, security groups, NAT gateways, or endpoints;
+- provision secrets;
+- perform a live database migration or cutover;
+- run destructive testing; or
+- request deployment approval or create a deployment gate.
+
+Any Wave 4 or Wave 5 Terraform plan is design validation only and must never be
+saved or represented as deployment authorization.
 
 ---
 

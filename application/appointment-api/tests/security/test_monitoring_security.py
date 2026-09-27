@@ -16,7 +16,6 @@ class MonitoringSecurityStaticTests(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.alerts = (MODULE_ROOT / "alerts.tf").read_text(encoding="utf-8")
         cls.dashboard = (MODULE_ROOT / "dashboard.tf").read_text(encoding="utf-8")
-        cls.iam = (MODULE_ROOT / "iam.tf").read_text(encoding="utf-8")
         cls.logging = (MODULE_ROOT / "logging.tf").read_text(encoding="utf-8")
         cls.monitoring = (MODULE_ROOT / "monitoring.tf").read_text(encoding="utf-8")
         cls.observability = (
@@ -26,6 +25,7 @@ class MonitoringSecurityStaticTests(unittest.TestCase):
             encoding="utf-8"
         )
         cls.runbook = (PROJECT_ROOT / "OPERATIONS.md").read_text(encoding="utf-8")
+        cls.readme = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
 
     def test_all_fourteen_alarms_use_dedicated_alarm_and_recovery_route(self) -> None:
         self.assertEqual(7, self.monitoring.count('resource "aws_cloudwatch_metric_alarm"'))
@@ -47,7 +47,10 @@ class MonitoringSecurityStaticTests(unittest.TestCase):
         self.assertIn('variable = "AWS:SourceArn"', self.alerts)
 
     def test_no_lambda_role_can_publish_to_sns(self) -> None:
-        self.assertNotRegex(self.iam, r'(?i)sns:(publish|\*)')
+        contract = self.readme.split("## Externally managed IAM prerequisites", 1)[
+            1
+        ].split("## Durable workflow", 1)[0]
+        self.assertNotRegex(contract, r'(?i)sns:(publish|\*)')
 
     def test_no_subscription_destination_is_fabricated(self) -> None:
         terraform = "\n".join(

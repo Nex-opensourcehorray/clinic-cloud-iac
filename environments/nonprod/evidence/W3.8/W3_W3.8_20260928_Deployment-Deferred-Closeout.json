@@ -1,0 +1,59 @@
+{
+  "EvidenceId": "W3.8",
+  "Purpose": "Wave 3 Engineering Closeout with Deployment Deferred",
+  "TimestampUTC": "2026-09-27T18:01:58.728Z",
+  "Branch": "wave-3-appointment-api",
+  "EngineeringValidation": {
+    "TerraformFmt": "PASS",
+    "TerraformValidate": "PASS",
+    "AppointmentApiTests": {
+      "Result": "PASS",
+      "Count": 205
+    },
+    "LambdaPackage": {
+      "Result": "PASS",
+      "FileCount": 14,
+      "Sha256": "597CF9C1ABBA1FFEE8685F60B307F5A85D2B1A6802EBC6B78552412749138571"
+    },
+    "SecurityNegativeTesting": "PASS",
+    "SensitiveFileReview": "PASS"
+  },
+  "Deployment": {
+    "TerraformManagedWave3ResourcesCurrentlyDeployed": 30,
+    "FullyDeployed": false,
+    "OperationallyAccepted": false,
+    "ProductionReady": false,
+    "ClinicallyIntegrated": false,
+    "DeferredPlan": {
+      "Add": 21,
+      "Change": 0,
+      "Destroy": 0,
+      "Replace": 0,
+      "Sha256": "761BD9223205D4688BDB04E11444B48902C1279C0E731FA6CFEA08368B37BC04",
+      "Reusable": false,
+      "DeletedAtCloseout": true
+    }
+  },
+  "Governance": {
+    "IamAdministrationOwnerControlled": true,
+    "IamAdministrationDelegated": false,
+    "BroadAdministratorWorkaroundUsed": false,
+    "DeploymentDeferralIntentional": true
+  },
+  "ExternalDependencies": {
+    "HmacSecretExternallyManaged": true,
+    "HmacSecretArn": "arn:aws:secretsmanager:ap-east-1:119033255630:secret:clinic-nonprod-appointment-api/hmac-keys-hG3SA7",
+    "HmacSecretVersions": 0,
+    "IamRolesExternallyManaged": true,
+    "RuntimePermissionsBoundaryExternallyManaged": true,
+    "ApiLoggingPermissionsBoundaryExternallyManaged": true
+  },
+  "RemainingWave3Gates": [
+    "Four external IAM roles must exist if deployment is ever resumed.",
+    "Exact service-restricted PassRole would be required.",
+    "Synthetic HMAC material remains unprovisioned.",
+    "Human alert destination remains unconfigured.",
+    "Live control validation remains incomplete."
+  ],
+  "Result": "ENGINEERING CLOSED — DEPLOYMENT DEFERRED"
+}

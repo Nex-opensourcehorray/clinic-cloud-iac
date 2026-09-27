@@ -1,7 +1,7 @@
 resource "aws_lambda_function" "intake" {
   function_name = "${local.name_prefix}-intake"
   description   = "Nonproduction authenticated Appointment API intake"
-  role          = aws_iam_role.intake.arn
+  role          = var.intake_role_arn
   runtime       = "python3.13"
   handler       = "intake.handler.lambda_handler"
 
@@ -16,7 +16,7 @@ resource "aws_lambda_function" "intake" {
   environment {
     variables = {
       ENVIRONMENT                  = var.environment
-      HMAC_SECRET_ARN              = aws_secretsmanager_secret.hmac.arn
+      HMAC_SECRET_ARN              = var.hmac_secret_arn
       IDEMPOTENCY_TTL_SECONDS      = tostring(var.idempotency_ttl_days * 86400)
       MAXIMUM_BODY_BYTES           = tostring(var.maximum_request_body_bytes)
       MAXIMUM_CLOCK_SKEW_SECONDS   = tostring(var.maximum_clock_skew_seconds)
@@ -33,16 +33,13 @@ resource "aws_lambda_function" "intake" {
 
   tags = local.common_tags
 
-  depends_on = [
-    aws_cloudwatch_log_group.intake,
-    aws_iam_role_policy.intake,
-  ]
+  depends_on = [aws_cloudwatch_log_group.intake]
 }
 
 resource "aws_lambda_function" "worker" {
   function_name = "${local.name_prefix}-worker"
   description   = "Nonproduction idempotent Appointment API worker; no clinical-system adapter"
-  role          = aws_iam_role.worker.arn
+  role          = var.worker_role_arn
   runtime       = "python3.13"
   handler       = "worker.handler.lambda_handler"
 
@@ -72,16 +69,13 @@ resource "aws_lambda_function" "worker" {
 
   tags = local.common_tags
 
-  depends_on = [
-    aws_cloudwatch_log_group.worker,
-    aws_iam_role_policy.worker,
-  ]
+  depends_on = [aws_cloudwatch_log_group.worker]
 }
 
 resource "aws_lambda_function" "reconciler" {
   function_name = "${local.name_prefix}-reconciler"
   description   = "Nonproduction bounded Appointment API reconciliation and exception handling"
-  role          = aws_iam_role.reconciler.arn
+  role          = var.reconciler_role_arn
   runtime       = "python3.13"
   handler       = "reconciler.handler.lambda_handler"
 
@@ -112,10 +106,7 @@ resource "aws_lambda_function" "reconciler" {
 
   tags = local.common_tags
 
-  depends_on = [
-    aws_cloudwatch_log_group.reconciler,
-    aws_iam_role_policy.reconciler,
-  ]
+  depends_on = [aws_cloudwatch_log_group.reconciler]
 }
 
 resource "aws_lambda_event_source_mapping" "worker" {

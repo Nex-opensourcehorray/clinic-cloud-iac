@@ -1,5 +1,10 @@
 # Appointment API authentication and workflow contract
 
+> **Wave 3 status:** ENGINEERING CLOSED — DEPLOYMENT DEFERRED. Thirty Wave 3
+> Terraform-managed resources exist. The reviewed final 21-resource non-IAM
+> remainder was not deployed. This design is not operationally accepted,
+> production ready, or clinically integrated.
+
 W3.3 adds fail-closed HMAC authentication, durable replay protection, atomic
 idempotency reservation, and a data-minimized SQS handoff. It does not include
 a clinical-system adapter or claim exactly-once queue delivery.
@@ -40,10 +45,20 @@ succeeds. HMAC comparison uses a constant-time comparison.
 
 ## Secret key-ring document
 
-Terraform creates only Secrets Manager metadata, using the AWS-managed Secrets
-Manager encryption key. It never creates a secret version. A separate approved
-out-of-band process must provision a document shaped like this, replacing the
-placeholders with generated secret material:
+The Secrets Manager container is an **externally managed operational
+dependency**. Its ARN is supplied to Terraform as a non-sensitive identifier so
+Terraform can configure the intake Lambda and scope its
+`secretsmanager:GetSecretValue` permission. Terraform does not create, import,
+delete, or read the secret resource or any secret version.
+
+This ownership boundary is a documented W3.8 recovery architecture decision.
+AWS provider v6.65.0 repeatedly stalled during both create and refresh of the
+Secrets Manager resource. Secret metadata and value lifecycle therefore remain
+outside Terraform for this deployment. A future provider remediation may allow
+the ownership decision to be reconsidered, but not during the current recovery.
+
+A separate approved out-of-band process must provision a document shaped like
+this, replacing the placeholders with generated secret material:
 
 ```json
 {
@@ -62,7 +77,37 @@ placeholders with generated secret material:
 
 Multiple enabled key IDs allow controlled overlap during rotation. Missing,
 unreadable, malformed, unknown, disabled, or undersized key material fails
-closed. Secrets and complete signatures are never logged.
+closed. The HMAC value remains outside Terraform, state, Git, logs, and evidence.
+Secrets, secret ARNs, and complete signatures are never logged.
+
+## Externally managed IAM prerequisites
+
+Terraform consumes the following exact nonproduction role ARNs as required
+inputs. It does not create, read, update, delete, or otherwise manage these
+roles, their trust policies, inline or managed policies, permissions
+boundaries, or lifecycle:
+
+| Purpose | Exact role ARN | Required trust | Reviewed permission contract | Expected boundary |
+|---|---|---|---|---|
+| Intake | `arn:aws:iam::119033255630:role/clinic-nonprod-appointment-api-intake` | `lambda.amazonaws.com` | Workflow-table `GetItem`/`TransactWriteItems`, work-queue `SendMessage`, exact HMAC-secret `GetSecretValue`, own log-stream writes, and X-Ray telemetry writes | `clinic-nonprod-appointment-api-runtime-boundary` |
+| Worker | `arn:aws:iam::119033255630:role/clinic-nonprod-appointment-api-worker` | `lambda.amazonaws.com` | Workflow-table `GetItem`/`UpdateItem`, work-queue receive/delete/visibility/attribute access, own log-stream writes, and X-Ray telemetry writes | `clinic-nonprod-appointment-api-runtime-boundary` |
+| Reconciler | `arn:aws:iam::119033255630:role/clinic-nonprod-appointment-api-reconciler` | `lambda.amazonaws.com` | Workflow-table `GetItem`/`UpdateItem`, reconciliation-index `Query`, work-queue `SendMessage`, own log-stream writes, and X-Ray telemetry writes | `clinic-nonprod-appointment-api-runtime-boundary` |
+| API logging | `arn:aws:iam::119033255630:role/clinic-nonprod-appointment-api-api-logs` | `apigateway.amazonaws.com` | Logging-only `CreateLogStream`, `DescribeLogStreams`, and `PutLogEvents` beneath the Appointment API access log group | `clinic-nonprod-appointment-api-api-logs-boundary` |
+
+The IAM owner is responsible for proving role existence and maintaining the
+reviewed trust, policy, and boundary configuration. These checks are required
+before apply and must be performed outside Terraform when the deployment
+identity cannot read IAM.
+
+The Terraform deployment identity requires narrowly scoped `iam:PassRole` for
+each exact role. The three Lambda roles must be restricted with
+`iam:PassedToService = lambda.amazonaws.com`; where authorization support is
+reliable, each must also retain the reviewed exact
+`iam:AssociatedResourceArn` pairing with its matching Lambda function. The API
+logging role must be restricted with
+`iam:PassedToService = apigateway.amazonaws.com`. Broad `iam:*`, unrestricted
+`iam:PassRole`, AdministratorAccess, and PowerUserAccess workarounds are not
+approved.
 
 ## Durable workflow
 
