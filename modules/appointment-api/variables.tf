@@ -148,6 +148,61 @@ variable "nonce_ttl_seconds" {
   }
 }
 
+variable "processing_lease_seconds" {
+  description = "Bounded worker and reconciler ownership lease duration"
+  type        = number
+  default     = 120
+
+  validation {
+    condition     = var.processing_lease_seconds >= 60 && var.processing_lease_seconds <= 900
+    error_message = "processing_lease_seconds must be between 60 and 900 seconds."
+  }
+}
+
+variable "reconciliation_stale_seconds" {
+  description = "Age after which a QUEUE_PENDING request becomes eligible for reconciliation"
+  type        = number
+  default     = 300
+
+  validation {
+    condition     = var.reconciliation_stale_seconds >= 60
+    error_message = "reconciliation_stale_seconds must be at least 60 seconds."
+  }
+}
+
+variable "reconciliation_backoff_seconds" {
+  description = "Delay before another bounded reconciliation attempt"
+  type        = number
+  default     = 300
+
+  validation {
+    condition     = var.reconciliation_backoff_seconds >= 60
+    error_message = "reconciliation_backoff_seconds must be at least 60 seconds."
+  }
+}
+
+variable "maximum_reconciliation_attempts" {
+  description = "Maximum re-enqueue attempts before manual-review escalation"
+  type        = number
+  default     = 3
+
+  validation {
+    condition     = var.maximum_reconciliation_attempts >= 1 && var.maximum_reconciliation_attempts <= 10
+    error_message = "maximum_reconciliation_attempts must be between 1 and 10."
+  }
+}
+
+variable "reconciliation_batch_size" {
+  description = "Maximum due requests queried per recoverable state per invocation"
+  type        = number
+  default     = 25
+
+  validation {
+    condition     = var.reconciliation_batch_size >= 1 && var.reconciliation_batch_size <= 100
+    error_message = "reconciliation_batch_size must be between 1 and 100."
+  }
+}
+
 variable "alarm_actions" {
   description = "Optional SNS topic ARNs for alarm notifications"
   type        = list(string)

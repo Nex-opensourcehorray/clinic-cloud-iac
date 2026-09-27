@@ -142,6 +142,9 @@ def handle_request(
             idempotency_ttl_seconds=int(
                 os.environ.get("IDEMPOTENCY_TTL_SECONDS", "604800")
             ),
+            reconciliation_stale_seconds=int(
+                os.environ.get("RECONCILIATION_STALE_SECONDS", "300")
+            ),
         )
     except KeyError:
         emit(

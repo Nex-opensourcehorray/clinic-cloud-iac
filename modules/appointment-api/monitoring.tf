@@ -4,6 +4,45 @@ locals {
     worker     = aws_lambda_function.worker.function_name
     reconciler = aws_lambda_function.reconciler.function_name
   }
+
+  workflow_operational_alarms = {
+    stale_queue_state = {
+      metric_name = "StaleQueueState"
+      description = "Appointment workflow contains stale queue or processing state"
+    }
+    reconciliation_failure = {
+      metric_name = "ReconciliationFailure"
+      description = "Appointment workflow reconciliation failed or remained uncertain"
+    }
+    manual_review_backlog = {
+      metric_name = "ManualReviewBacklog"
+      description = "Appointment workflow has requests awaiting manual operational review"
+    }
+    processing_lease_expired = {
+      metric_name = "ProcessingLeaseExpired"
+      description = "Appointment workflow processing ownership lease expired"
+    }
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "workflow_operational" {
+  for_each = local.workflow_operational_alarms
+
+  alarm_name          = "${local.name_prefix}-${replace(each.key, "_", "-")}"
+  alarm_description   = each.value.description
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = 1
+  metric_name         = each.value.metric_name
+  namespace           = "Clinic/AppointmentApi"
+  period              = 300
+  statistic           = "Sum"
+  threshold           = 0
+  treat_missing_data  = "notBreaching"
+
+  alarm_actions = var.alarm_actions
+  ok_actions    = var.ok_actions
+
+  tags = local.common_tags
 }
 
 resource "aws_cloudwatch_metric_alarm" "lambda_errors" {

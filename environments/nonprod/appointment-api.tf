@@ -19,13 +19,18 @@ module "appointment_api" {
     "${path.root}/../../application/appointment-api/dist/appointment-api.zip"
   )
 
-  stage_name                 = "nonprod"
-  idempotency_ttl_days       = 7
-  log_retention_days         = 90
-  api_throttle_rate_limit    = 10
-  api_throttle_burst_limit   = 20
-  waf_rate_limit             = 300
-  maximum_request_body_bytes = 16384
-  maximum_clock_skew_seconds = 300
-  nonce_ttl_seconds          = 600
+  stage_name                      = "nonprod"
+  idempotency_ttl_days            = 7
+  log_retention_days              = 90
+  api_throttle_rate_limit         = 10
+  api_throttle_burst_limit        = 20
+  waf_rate_limit                  = 300
+  maximum_request_body_bytes      = 16384
+  maximum_clock_skew_seconds      = 300
+  nonce_ttl_seconds               = 600
+  processing_lease_seconds        = 120
+  reconciliation_stale_seconds    = 300
+  reconciliation_backoff_seconds  = 300
+  maximum_reconciliation_attempts = 3
+  reconciliation_batch_size       = 25
 }

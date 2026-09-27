@@ -7,6 +7,8 @@ from dataclasses import dataclass
 from typing import Any
 
 from common.authentication import AuthenticatedRequest
+from common.observability import emit
+from common.state_machine import WorkflowState, require_legal_transition
 
 
 class WorkflowError(Exception):
@@ -19,10 +21,20 @@ class WorkflowError(Exception):
         self.status_code = status_code
 
 
+class WorkflowTransitionConflict(Exception):
+    """A conditional transition failed without a newer authoritative state."""
+
+
 @dataclass(frozen=True)
 class Reservation:
     created: bool
     request_id: str
+    status: str
+
+
+@dataclass(frozen=True)
+class TransitionResult:
+    applied: bool
     status: str
 
 
@@ -37,6 +49,22 @@ def _n(value: int) -> dict[str, str]:
 def _error_code(error: Exception) -> str:
     response = getattr(error, "response", {})
     return str((response.get("Error") or {}).get("Code") or "")
+
+
+def _is_conditional_failure(error: Exception) -> bool:
+    code = _error_code(error)
+    if code == "ConditionalCheckFailedException":
+        return True
+    if code != "TransactionCanceledException":
+        return False
+
+    response = getattr(error, "response", {})
+    reasons = response.get("CancellationReasons") or []
+    return any(
+        isinstance(reason, dict)
+        and reason.get("Code") == "ConditionalCheckFailed"
+        for reason in reasons
+    )
 
 
 def _item_value(item: dict[str, Any], name: str) -> str | None:
@@ -58,6 +86,7 @@ class WorkflowRepository:
         queue_url: str,
         nonce_ttl_seconds: int,
         idempotency_ttl_seconds: int,
+        reconciliation_stale_seconds: int,
     ) -> None:
         self._dynamodb = dynamodb_client
         self._sqs = sqs_client
@@ -65,6 +94,7 @@ class WorkflowRepository:
         self._queue_url = queue_url
         self._nonce_ttl_seconds = nonce_ttl_seconds
         self._idempotency_ttl_seconds = idempotency_ttl_seconds
+        self._reconciliation_stale_seconds = reconciliation_stale_seconds
 
     @staticmethod
     def _nonce_pk(authenticated: AuthenticatedRequest) -> str:
@@ -142,6 +172,10 @@ class WorkflowRepository:
                         "idempotency_reference": _s(idempotency_pk),
                         "request_id": _s(request_id),
                         "status": _s("QUEUE_PENDING"),
+                        "reconcile_status": _s("QUEUE_PENDING"),
+                        "next_attempt_at": _n(
+                            now_epoch + self._reconciliation_stale_seconds
+                        ),
                         "request_payload_json": _s(
                             json.dumps(
                                 request_document,
@@ -296,38 +330,125 @@ class WorkflowRepository:
                 503,
             ) from error
 
+        try:
+            request_item = self._get(self._request_pk(existing_request_id))
+            existing_status = _item_value(request_item, "status") or existing_status
+        except Exception as error:
+            raise WorkflowError(
+                "DYNAMODB_RESERVATION_FAILURE",
+                "Request could not be reserved.",
+                503,
+            ) from error
+
         return Reservation(False, existing_request_id, existing_status)
 
-    def _set_status(
+    def _transition_status(
         self,
         *,
         idempotency_pk: str,
         request_id: str,
-        status: str,
+        expected_status: str,
+        target_status: str,
         now_epoch: int,
         queue_message_id: str | None = None,
-    ) -> None:
-        values = {":status": _s(status), ":updated": _n(now_epoch)}
-        expression = "SET #status = :status, updated_at = :updated"
-        if queue_message_id:
-            values[":message_id"] = _s(queue_message_id)
-            expression += ", queue_message_id = :message_id"
+    ) -> TransitionResult:
+        require_legal_transition(expected_status, target_status)
 
-        updates = []
-        for pk in (idempotency_pk, self._request_pk(request_id)):
-            updates.append(
-                {
-                    "Update": {
-                        "TableName": self._table_name,
-                        "Key": {"PK": _s(pk), "SK": _s("METADATA")},
-                        "UpdateExpression": expression,
-                        "ConditionExpression": "attribute_exists(PK)",
-                        "ExpressionAttributeNames": {"#status": "status"},
-                        "ExpressionAttributeValues": values,
-                    }
-                }
+        idempotency_values = {
+            ":expected": _s(expected_status),
+            ":request_id": _s(request_id),
+            ":status": _s(target_status),
+            ":updated": _n(now_epoch),
+        }
+        request_values = {
+            ":expected": _s(expected_status),
+            ":idempotency_pk": _s(idempotency_pk),
+            ":request_id": _s(request_id),
+            ":status": _s(target_status),
+            ":updated": _n(now_epoch),
+        }
+        idempotency_expression = "SET #status = :status, updated_at = :updated"
+        request_expression = "SET #status = :status, updated_at = :updated"
+        if queue_message_id:
+            idempotency_values[":message_id"] = _s(queue_message_id)
+            request_values[":message_id"] = _s(queue_message_id)
+            idempotency_expression += ", queue_message_id = :message_id"
+            request_expression += ", queue_message_id = :message_id"
+
+        if target_status == WorkflowState.RECONCILE_REQUIRED.value:
+            request_values[":next_attempt"] = _n(
+                now_epoch + self._reconciliation_stale_seconds
             )
-        self._dynamodb.transact_write_items(TransactItems=updates)
+            request_expression += (
+                ", reconcile_status = :status, next_attempt_at = :next_attempt"
+            )
+        elif target_status == WorkflowState.QUEUED.value:
+            request_expression += " REMOVE reconcile_status, next_attempt_at"
+
+        updates = [
+            {
+                "Update": {
+                    "TableName": self._table_name,
+                    "Key": {"PK": _s(idempotency_pk), "SK": _s("METADATA")},
+                    "UpdateExpression": idempotency_expression,
+                    "ConditionExpression": (
+                        "#status = :expected AND request_id = :request_id"
+                    ),
+                    "ExpressionAttributeNames": {"#status": "status"},
+                    "ExpressionAttributeValues": idempotency_values,
+                }
+            },
+            {
+                "Update": {
+                    "TableName": self._table_name,
+                    "Key": {
+                        "PK": _s(self._request_pk(request_id)),
+                        "SK": _s("METADATA"),
+                    },
+                    "UpdateExpression": request_expression,
+                    "ConditionExpression": (
+                        "#status = :expected AND request_id = :request_id AND "
+                        "idempotency_reference = :idempotency_pk"
+                    ),
+                    "ExpressionAttributeNames": {"#status": "status"},
+                    "ExpressionAttributeValues": request_values,
+                }
+            },
+        ]
+        try:
+            self._dynamodb.transact_write_items(TransactItems=updates)
+            return TransitionResult(True, target_status)
+        except Exception as error:
+            if not _is_conditional_failure(error):
+                raise
+
+        request_item = self._get(self._request_pk(request_id))
+        authoritative_status = _item_value(request_item, "status")
+        advanced_states = {
+            state.value
+            for state in WorkflowState
+            if state != WorkflowState.QUEUE_PENDING
+        }
+        if authoritative_status in advanced_states:
+            emit(
+                "intake_state_transition_conflict",
+                request_id=request_id,
+                source_state=expected_status,
+                state=authoritative_status,
+                error_category="CONCURRENT_STATE_ADVANCE",
+            )
+            return TransitionResult(False, authoritative_status)
+
+        emit(
+            "intake_state_transition_conflict",
+            request_id=request_id,
+            source_state=expected_status,
+            state=authoritative_status or "UNKNOWN",
+            error_category="CONDITIONAL_STATE_CONFLICT",
+        )
+        raise WorkflowTransitionConflict(
+            "Conditional workflow transition could not be classified as an advance."
+        )
 
     def enqueue(
         self,
@@ -354,14 +475,27 @@ class WorkflowRepository:
             )
         except Exception as error:
             try:
-                self._set_status(
+                transition = self._transition_status(
                     idempotency_pk=idempotency_pk,
                     request_id=reservation.request_id,
-                    status="RECONCILE_REQUIRED",
+                    expected_status=WorkflowState.QUEUE_PENDING.value,
+                    target_status=WorkflowState.RECONCILE_REQUIRED.value,
                     now_epoch=now_epoch,
                 )
-            except Exception:
-                pass
+            except WorkflowTransitionConflict as state_error:
+                raise WorkflowError(
+                    "QUEUE_RECOVERY_STATE_CONFLICT",
+                    "Request queue recovery state could not be confirmed.",
+                    503,
+                ) from state_error
+            except Exception as state_error:
+                raise WorkflowError(
+                    "QUEUE_RECOVERY_STATE_FAILURE",
+                    "Request was reserved but queue recovery state could not be recorded.",
+                    503,
+                ) from state_error
+            if not transition.applied:
+                return transition.status
             raise WorkflowError(
                 "QUEUE_SUBMISSION_FAILURE",
                 "Request was reserved but could not be queued.",
@@ -370,13 +504,24 @@ class WorkflowRepository:
 
         message_id = str(result.get("MessageId") or "")
         try:
-            self._set_status(
+            transition = self._transition_status(
                 idempotency_pk=idempotency_pk,
                 request_id=reservation.request_id,
-                status="QUEUED",
+                expected_status=WorkflowState.QUEUE_PENDING.value,
+                target_status=WorkflowState.QUEUED.value,
                 now_epoch=now_epoch,
                 queue_message_id=message_id or None,
             )
-            return "QUEUED"
-        except Exception:
-            return "QUEUE_PENDING"
+            return transition.status
+        except WorkflowTransitionConflict as error:
+            raise WorkflowError(
+                "QUEUE_STATE_CONFIRMATION_CONFLICT",
+                "Request was queued but its workflow state could not be confirmed.",
+                503,
+            ) from error
+        except Exception as error:
+            raise WorkflowError(
+                "QUEUE_STATE_CONFIRMATION_FAILURE",
+                "Request was queued but confirmation remains pending.",
+                503,
+            ) from error

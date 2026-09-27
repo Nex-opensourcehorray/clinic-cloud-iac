@@ -14,6 +14,23 @@ resource "aws_dynamodb_table" "workflow" {
     type = "S"
   }
 
+  attribute {
+    name = "reconcile_status"
+    type = "S"
+  }
+
+  attribute {
+    name = "next_attempt_at"
+    type = "N"
+  }
+
+  global_secondary_index {
+    name            = "reconciliation-index"
+    hash_key        = "reconcile_status"
+    range_key       = "next_attempt_at"
+    projection_type = "KEYS_ONLY"
+  }
+
   ttl {
     attribute_name = "expires_at"
     enabled        = true
@@ -32,7 +49,7 @@ resource "aws_dynamodb_table" "workflow" {
   tags = merge(
     local.common_tags,
     {
-      DataPurpose = "nonce-idempotency-request-state"
+      DataPurpose = "nonce-idempotency-request-and-reconciliation-state"
     }
   )
 

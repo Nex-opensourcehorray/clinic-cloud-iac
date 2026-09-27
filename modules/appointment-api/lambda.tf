@@ -15,14 +15,15 @@ resource "aws_lambda_function" "intake" {
 
   environment {
     variables = {
-      ENVIRONMENT                = var.environment
-      HMAC_SECRET_ARN            = aws_secretsmanager_secret.hmac.arn
-      IDEMPOTENCY_TTL_SECONDS    = tostring(var.idempotency_ttl_days * 86400)
-      MAXIMUM_BODY_BYTES         = tostring(var.maximum_request_body_bytes)
-      MAXIMUM_CLOCK_SKEW_SECONDS = tostring(var.maximum_clock_skew_seconds)
-      NONCE_TTL_SECONDS          = tostring(var.nonce_ttl_seconds)
-      WORKFLOW_TABLE_NAME        = aws_dynamodb_table.workflow.name
-      WORK_QUEUE_URL             = aws_sqs_queue.work.id
+      ENVIRONMENT                  = var.environment
+      HMAC_SECRET_ARN              = aws_secretsmanager_secret.hmac.arn
+      IDEMPOTENCY_TTL_SECONDS      = tostring(var.idempotency_ttl_days * 86400)
+      MAXIMUM_BODY_BYTES           = tostring(var.maximum_request_body_bytes)
+      MAXIMUM_CLOCK_SKEW_SECONDS   = tostring(var.maximum_clock_skew_seconds)
+      NONCE_TTL_SECONDS            = tostring(var.nonce_ttl_seconds)
+      RECONCILIATION_STALE_SECONDS = tostring(var.reconciliation_stale_seconds)
+      WORKFLOW_TABLE_NAME          = aws_dynamodb_table.workflow.name
+      WORK_QUEUE_URL               = aws_sqs_queue.work.id
     }
   }
 
@@ -40,7 +41,7 @@ resource "aws_lambda_function" "intake" {
 
 resource "aws_lambda_function" "worker" {
   function_name = "${local.name_prefix}-worker"
-  description   = "Nonproduction Appointment API queue worker foundation; no clinical-system action"
+  description   = "Nonproduction idempotent Appointment API worker; no clinical-system adapter"
   role          = aws_iam_role.worker.arn
   runtime       = "python3.13"
   handler       = "worker.handler.lambda_handler"
@@ -55,8 +56,13 @@ resource "aws_lambda_function" "worker" {
 
   environment {
     variables = {
-      ENVIRONMENT     = var.environment
-      FOUNDATION_MODE = "true"
+      ENVIRONMENT                     = var.environment
+      MAXIMUM_RECONCILIATION_ATTEMPTS = tostring(var.maximum_reconciliation_attempts)
+      PROCESSING_LEASE_SECONDS        = tostring(var.processing_lease_seconds)
+      RECONCILIATION_BACKOFF_SECONDS  = tostring(var.reconciliation_backoff_seconds)
+      RECONCILIATION_INDEX_NAME       = "reconciliation-index"
+      WORKFLOW_TABLE_NAME             = aws_dynamodb_table.workflow.name
+      WORK_QUEUE_URL                  = aws_sqs_queue.work.id
     }
   }
 
@@ -74,7 +80,7 @@ resource "aws_lambda_function" "worker" {
 
 resource "aws_lambda_function" "reconciler" {
   function_name = "${local.name_prefix}-reconciler"
-  description   = "Nonproduction Appointment API reconciliation foundation; no workflow mutation"
+  description   = "Nonproduction bounded Appointment API reconciliation and exception handling"
   role          = aws_iam_role.reconciler.arn
   runtime       = "python3.13"
   handler       = "reconciler.handler.lambda_handler"
@@ -89,8 +95,14 @@ resource "aws_lambda_function" "reconciler" {
 
   environment {
     variables = {
-      ENVIRONMENT     = var.environment
-      FOUNDATION_MODE = "true"
+      ENVIRONMENT                     = var.environment
+      MAXIMUM_RECONCILIATION_ATTEMPTS = tostring(var.maximum_reconciliation_attempts)
+      PROCESSING_LEASE_SECONDS        = tostring(var.processing_lease_seconds)
+      RECONCILIATION_BACKOFF_SECONDS  = tostring(var.reconciliation_backoff_seconds)
+      RECONCILIATION_BATCH_SIZE       = tostring(var.reconciliation_batch_size)
+      RECONCILIATION_INDEX_NAME       = "reconciliation-index"
+      WORKFLOW_TABLE_NAME             = aws_dynamodb_table.workflow.name
+      WORK_QUEUE_URL                  = aws_sqs_queue.work.id
     }
   }
 
@@ -118,7 +130,7 @@ resource "aws_lambda_event_source_mapping" "worker" {
 
 resource "aws_cloudwatch_event_rule" "reconciler" {
   name                = "${local.name_prefix}-reconciler"
-  description         = "Invokes the foundation reconciler on a fixed schedule"
+  description         = "Invokes bounded appointment workflow reconciliation"
   schedule_expression = "rate(5 minutes)"
 
   tags = local.common_tags

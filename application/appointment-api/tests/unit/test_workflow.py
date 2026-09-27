@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+import contextlib
 import hashlib
+import io
 import json
+import re
 import sys
 import unittest
 from pathlib import Path
@@ -16,9 +19,13 @@ from intake.workflow import WorkflowError, WorkflowRepository  # noqa: E402
 
 
 class FakeAwsError(Exception):
-    def __init__(self, code: str) -> None:
+    def __init__(
+        self, code: str, *, cancellation_reasons: list[dict] | None = None
+    ) -> None:
         super().__init__(code)
         self.response = {"Error": {"Code": code}}
+        if cancellation_reasons is not None:
+            self.response["CancellationReasons"] = cancellation_reasons
 
 
 class FakeDynamo:
@@ -28,23 +35,41 @@ class FakeDynamo:
         initial_error: str | None = None,
         nonce_item: dict | None = None,
         idempotency_item: dict | None = None,
-        status_error: bool = False,
+        request_item: dict | None = None,
+        status_error: Exception | None = None,
+        request_read_error: Exception | None = None,
     ) -> None:
         self.initial_error = initial_error
         self.nonce_item = nonce_item or {}
         self.idempotency_item = idempotency_item or {}
+        self.request_item = request_item or {}
         self.status_error = status_error
+        self.request_read_error = request_read_error
         self.transactions: list[list[dict]] = []
         self.gets: list[str] = []
 
     def transact_write_items(self, *, TransactItems, **kwargs):
         del kwargs
         self.transactions.append(TransactItems)
+        for transaction_item in TransactItems:
+            update = transaction_item.get("Update")
+            if not update:
+                continue
+            expressions = " ".join(
+                str(update.get(name) or "")
+                for name in ("UpdateExpression", "ConditionExpression")
+            )
+            referenced = set(re.findall(r":[A-Za-z0-9_]+", expressions))
+            provided = set((update.get("ExpressionAttributeValues") or {}).keys())
+            if referenced != provided:
+                raise AssertionError(
+                    f"Expression placeholders differ: {referenced} != {provided}"
+                )
         if len(TransactItems) == 3 and self.initial_error:
             raise FakeAwsError(self.initial_error)
         if len(TransactItems) == 2 and all("Update" in item for item in TransactItems):
             if self.status_error:
-                raise FakeAwsError("InternalServerError")
+                raise self.status_error
         return {}
 
     def get_item(self, *, Key, **kwargs):
@@ -53,6 +78,10 @@ class FakeDynamo:
         self.gets.append(pk)
         if pk.startswith("NONCE#"):
             return {"Item": self.nonce_item} if self.nonce_item else {}
+        if pk.startswith("REQUEST#"):
+            if self.request_read_error:
+                raise self.request_read_error
+            return {"Item": self.request_item} if self.request_item else {}
         return {"Item": self.idempotency_item} if self.idempotency_item else {}
 
 
@@ -83,6 +112,21 @@ def authenticated(
 
 
 class WorkflowTests(unittest.TestCase):
+    @staticmethod
+    def request_item(status: str, **fields):
+        item = {
+            "request_id": {"S": "request-001"},
+            "status": {"S": status},
+        }
+        item.update(fields)
+        return item
+
+    def conditional_race(self, status: str, **kwargs) -> FakeDynamo:
+        return FakeDynamo(
+            request_item=self.request_item(status, **kwargs),
+            status_error=FakeAwsError("ConditionalCheckFailedException"),
+        )
+
     def repository(self, dynamo: FakeDynamo, sqs: FakeSqs) -> WorkflowRepository:
         return WorkflowRepository(
             dynamodb_client=dynamo,
@@ -91,6 +135,7 @@ class WorkflowTests(unittest.TestCase):
             queue_url="https://sqs.example/work",
             nonce_ttl_seconds=600,
             idempotency_ttl_seconds=604800,
+            reconciliation_stale_seconds=300,
         )
 
     def reserve(self, repository: WorkflowRepository, auth=None):
@@ -107,6 +152,9 @@ class WorkflowTests(unittest.TestCase):
         self.assertTrue(reservation.created)
         self.assertEqual(3, len(dynamo.transactions[0]))
         self.assertTrue(all("Put" in item for item in dynamo.transactions[0]))
+        request_item = dynamo.transactions[0][2]["Put"]["Item"]
+        self.assertEqual("QUEUE_PENDING", request_item["reconcile_status"]["S"])
+        self.assertEqual("2000000300", request_item["next_attempt_at"]["N"])
 
     def test_nonce_replay_is_rejected(self) -> None:
         dynamo = FakeDynamo(
@@ -188,6 +236,11 @@ class WorkflowTests(unittest.TestCase):
             "RECONCILE_REQUIRED",
             update["ExpressionAttributeValues"][":status"]["S"],
         )
+        idempotency_update = dynamo.transactions[-1][0]["Update"]
+        request_update = dynamo.transactions[-1][1]["Update"]
+        self.assertNotIn(":next_attempt", idempotency_update["ExpressionAttributeValues"])
+        self.assertIn(":next_attempt", request_update["ExpressionAttributeValues"])
+        self.assertIn("next_attempt_at", request_update["UpdateExpression"])
 
     def test_queue_payload_is_data_minimized(self) -> None:
         dynamo = FakeDynamo()
@@ -207,19 +260,231 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual({"correlationId", "requestId"}, set(payload))
         self.assertNotIn("patientReference", sqs.messages[0]["MessageBody"])
 
-    def test_uncertain_post_send_state_does_not_resend(self) -> None:
-        dynamo = FakeDynamo(status_error=True)
+    def test_normal_queue_pending_to_queued_transition_is_conditional(self) -> None:
+        dynamo = FakeDynamo()
+        repository = self.repository(dynamo, FakeSqs())
+        status = repository.enqueue(
+            authenticated(),
+            self.reserve(repository),
+            correlation_id="correlation-001",
+            now_epoch=2_000_000_000,
+        )
+        self.assertEqual("QUEUED", status)
+        request_update = dynamo.transactions[-1][1]["Update"]
+        self.assertIn("#status = :expected", request_update["ConditionExpression"])
+        self.assertEqual(
+            "QUEUE_PENDING",
+            request_update["ExpressionAttributeValues"][":expected"]["S"],
+        )
+
+    def test_processing_race_is_not_overwritten_by_queue_confirmation(self) -> None:
+        dynamo = self.conditional_race("PROCESSING")
+        repository = self.repository(dynamo, FakeSqs())
+        status = repository.enqueue(
+            authenticated(),
+            self.reserve(repository),
+            correlation_id="correlation-001",
+            now_epoch=2_000_000_000,
+        )
+        self.assertEqual("PROCESSING", status)
+        self.assertEqual(2, len(dynamo.transactions))
+
+    def test_failed_retryable_race_is_not_overwritten_by_queue_confirmation(self) -> None:
+        dynamo = self.conditional_race("FAILED_RETRYABLE")
+        repository = self.repository(dynamo, FakeSqs())
+        status = repository.enqueue(
+            authenticated(),
+            self.reserve(repository),
+            correlation_id="correlation-001",
+            now_epoch=2_000_000_000,
+        )
+        self.assertEqual("FAILED_RETRYABLE", status)
+        self.assertEqual(2, len(dynamo.transactions))
+
+    def test_reconcile_required_race_is_not_overwritten_by_queue_confirmation(self) -> None:
+        dynamo = self.conditional_race("RECONCILE_REQUIRED")
+        repository = self.repository(dynamo, FakeSqs())
+        status = repository.enqueue(
+            authenticated(),
+            self.reserve(repository),
+            correlation_id="correlation-001",
+            now_epoch=2_000_000_000,
+        )
+        self.assertEqual("RECONCILE_REQUIRED", status)
+        self.assertEqual(2, len(dynamo.transactions))
+
+    def test_manual_review_race_is_not_overwritten_by_queue_confirmation(self) -> None:
+        dynamo = self.conditional_race("MANUAL_REVIEW_REQUIRED")
+        repository = self.repository(dynamo, FakeSqs())
+        status = repository.enqueue(
+            authenticated(),
+            self.reserve(repository),
+            correlation_id="correlation-001",
+            now_epoch=2_000_000_000,
+        )
+        self.assertEqual("MANUAL_REVIEW_REQUIRED", status)
+        self.assertEqual(2, len(dynamo.transactions))
+
+    def test_succeeded_race_is_not_overwritten_by_queue_confirmation(self) -> None:
+        dynamo = self.conditional_race("SUCCEEDED")
+        repository = self.repository(dynamo, FakeSqs())
+        status = repository.enqueue(
+            authenticated(),
+            self.reserve(repository),
+            correlation_id="correlation-001",
+            now_epoch=2_000_000_000,
+        )
+        self.assertEqual("SUCCEEDED", status)
+        self.assertEqual(2, len(dynamo.transactions))
+
+    def test_duplicate_queued_confirmation_is_safe_and_idempotent(self) -> None:
+        dynamo = self.conditional_race("QUEUED")
+        repository = self.repository(dynamo, FakeSqs())
+        status = repository.enqueue(
+            authenticated(),
+            self.reserve(repository),
+            correlation_id="correlation-001",
+            now_epoch=2_000_000_000,
+        )
+        self.assertEqual("QUEUED", status)
+        self.assertEqual(2, len(dynamo.transactions))
+
+    def test_failed_send_processing_race_preserves_authoritative_state(self) -> None:
+        dynamo = self.conditional_race("PROCESSING")
+        repository = self.repository(dynamo, FakeSqs(fail=True))
+        status = repository.enqueue(
+            authenticated(),
+            self.reserve(repository),
+            correlation_id="correlation-001",
+            now_epoch=2_000_000_000,
+        )
+        self.assertEqual("PROCESSING", status)
+        self.assertEqual(2, len(dynamo.transactions))
+
+    def test_conditional_classification_read_never_grants_write_ownership(self) -> None:
+        dynamo = self.conditional_race("PROCESSING")
+        repository = self.repository(dynamo, FakeSqs())
+        repository.enqueue(
+            authenticated(),
+            self.reserve(repository),
+            correlation_id="correlation-001",
+            now_epoch=2_000_000_000,
+        )
+        self.assertEqual(["REQUEST#request-001"], dynamo.gets)
+        self.assertEqual(2, len(dynamo.transactions))
+
+    def test_request_and_idempotency_updates_are_one_guarded_transaction(self) -> None:
+        dynamo = FakeDynamo()
+        repository = self.repository(dynamo, FakeSqs())
+        repository.enqueue(
+            authenticated(),
+            self.reserve(repository),
+            correlation_id="correlation-001",
+            now_epoch=2_000_000_000,
+        )
+        updates = dynamo.transactions[-1]
+        self.assertEqual(2, len(updates))
+        self.assertTrue(all("Update" in item for item in updates))
+        self.assertIn("request_id = :request_id", updates[0]["Update"]["ConditionExpression"])
+        self.assertIn("#status = :expected", updates[0]["Update"]["ConditionExpression"])
+        self.assertIn("idempotency_reference = :idempotency_pk", updates[1]["Update"]["ConditionExpression"])
+        self.assertIn("#status = :expected", updates[1]["Update"]["ConditionExpression"])
+
+    def test_transaction_cancellation_with_conditional_reason_is_classified(self) -> None:
+        dynamo = FakeDynamo(
+            request_item=self.request_item("PROCESSING"),
+            status_error=FakeAwsError(
+                "TransactionCanceledException",
+                cancellation_reasons=[
+                    {"Code": "None"},
+                    {"Code": "ConditionalCheckFailed"},
+                ],
+            ),
+        )
+        repository = self.repository(dynamo, FakeSqs())
+        status = repository.enqueue(
+            authenticated(),
+            self.reserve(repository),
+            correlation_id="correlation-001",
+            now_epoch=2_000_000_000,
+        )
+        self.assertEqual("PROCESSING", status)
+
+    def test_conditional_failure_while_still_pending_fails_without_fallback(self) -> None:
+        dynamo = self.conditional_race("QUEUE_PENDING")
+        repository = self.repository(dynamo, FakeSqs())
+        with self.assertRaises(WorkflowError) as raised:
+            repository.enqueue(
+                authenticated(),
+                self.reserve(repository),
+                correlation_id="correlation-001",
+                now_epoch=2_000_000_000,
+            )
+        self.assertEqual("QUEUE_STATE_CONFIRMATION_CONFLICT", raised.exception.category)
+        self.assertEqual(2, len(dynamo.transactions))
+
+    def test_failed_send_service_failure_leaves_queue_pending_recoverable(self) -> None:
+        dynamo = FakeDynamo(
+            request_item=self.request_item("QUEUE_PENDING"),
+            status_error=FakeAwsError("InternalServerError"),
+        )
+        repository = self.repository(dynamo, FakeSqs(fail=True))
+        with self.assertRaises(WorkflowError) as raised:
+            repository.enqueue(
+                authenticated(),
+                self.reserve(repository),
+                correlation_id="correlation-001",
+                now_epoch=2_000_000_000,
+            )
+        self.assertEqual("QUEUE_RECOVERY_STATE_FAILURE", raised.exception.category)
+        self.assertEqual("QUEUE_PENDING", dynamo.request_item["status"]["S"])
+        self.assertEqual(2, len(dynamo.transactions))
+
+    def test_concurrency_log_excludes_sensitive_item_values(self) -> None:
+        marker = "SYNTHETIC-CONTACT-NOT-FOR-LOGS"
+        dynamo = self.conditional_race(
+            "PROCESSING", contact_value={"S": marker}
+        )
+        repository = self.repository(dynamo, FakeSqs())
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            repository.enqueue(
+                authenticated(),
+                self.reserve(repository),
+                correlation_id="correlation-001",
+                now_epoch=2_000_000_000,
+            )
+        self.assertNotIn(marker, output.getvalue())
+        self.assertNotIn("contact_value", output.getvalue())
+
+    def test_uncertain_post_send_state_is_surfaced_without_resend(self) -> None:
+        dynamo = FakeDynamo(status_error=FakeAwsError("InternalServerError"))
         sqs = FakeSqs()
         repository = self.repository(dynamo, sqs)
         reservation = self.reserve(repository)
-        status = repository.enqueue(
+        with self.assertRaises(WorkflowError) as raised:
+            repository.enqueue(
+                authenticated(),
+                reservation,
+                correlation_id="correlation-001",
+                now_epoch=2_000_000_000,
+            )
+        self.assertEqual("QUEUE_STATE_CONFIRMATION_FAILURE", raised.exception.category)
+        self.assertEqual(1, len(sqs.messages))
+
+    def test_queued_update_removes_reconciliation_index_attributes(self) -> None:
+        dynamo = FakeDynamo()
+        repository = self.repository(dynamo, FakeSqs())
+        reservation = self.reserve(repository)
+        repository.enqueue(
             authenticated(),
             reservation,
             correlation_id="correlation-001",
             now_epoch=2_000_000_000,
         )
-        self.assertEqual("QUEUE_PENDING", status)
-        self.assertEqual(1, len(sqs.messages))
+        request_update = dynamo.transactions[-1][1]["Update"]
+        self.assertIn("REMOVE reconcile_status, next_attempt_at", request_update["UpdateExpression"])
+        self.assertNotIn(":next_attempt", request_update["ExpressionAttributeValues"])
 
 
 if __name__ == "__main__":

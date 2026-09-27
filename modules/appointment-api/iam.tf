@@ -87,6 +87,16 @@ resource "aws_iam_role_policy" "intake" {
 
 data "aws_iam_policy_document" "worker" {
   statement {
+    sid    = "OwnWorkflowProcessing"
+    effect = "Allow"
+    actions = [
+      "dynamodb:GetItem",
+      "dynamodb:UpdateItem",
+    ]
+    resources = [aws_dynamodb_table.workflow.arn]
+  }
+
+  statement {
     sid    = "WriteOwnLogs"
     effect = "Allow"
     actions = [
@@ -127,6 +137,30 @@ resource "aws_iam_role_policy" "worker" {
 }
 
 data "aws_iam_policy_document" "reconciler" {
+  statement {
+    sid    = "UpdateReconciliationState"
+    effect = "Allow"
+    actions = [
+      "dynamodb:GetItem",
+      "dynamodb:UpdateItem",
+    ]
+    resources = [aws_dynamodb_table.workflow.arn]
+  }
+
+  statement {
+    sid       = "QueryDueReconciliationWork"
+    effect    = "Allow"
+    actions   = ["dynamodb:Query"]
+    resources = ["${aws_dynamodb_table.workflow.arn}/index/reconciliation-index"]
+  }
+
+  statement {
+    sid       = "RequeueReconciledWork"
+    effect    = "Allow"
+    actions   = ["sqs:SendMessage"]
+    resources = [aws_sqs_queue.work.arn]
+  }
+
   statement {
     sid    = "WriteOwnLogs"
     effect = "Allow"

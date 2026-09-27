@@ -81,6 +81,80 @@ never blindly re-sent by the intake invocation. SQS Standard remains
 at-least-once, and a future clinical adapter must keep worker processing
 idempotent. The current worker performs no clinical action.
 
+HTTP `202 Accepted` is an API response semantic, not a persisted workflow
+state. The intake transaction writes `QUEUE_PENDING` atomically; adding an
+intermediate `ACCEPTED` write would introduce another failure window.
+
+## W3.5 state and ownership model
+
+The request record is the authoritative workflow state. Legal business-state
+transitions are:
+
+| Current state | Legal next states |
+|---|---|
+| `QUEUE_PENDING` | `QUEUED`, `PROCESSING`, `RECONCILE_REQUIRED`, `MANUAL_REVIEW_REQUIRED` |
+| `QUEUED` | `PROCESSING`, `RECONCILE_REQUIRED`, `MANUAL_REVIEW_REQUIRED` |
+| `PROCESSING` | `FAILED_RETRYABLE`, `RECONCILE_REQUIRED`, `MANUAL_REVIEW_REQUIRED`, reserved future `SUCCEEDED` |
+| `FAILED_RETRYABLE` | `QUEUED`, `PROCESSING`, `RECONCILE_REQUIRED`, `MANUAL_REVIEW_REQUIRED` |
+| `RECONCILE_REQUIRED` | `QUEUED`, `PROCESSING`, `MANUAL_REVIEW_REQUIRED` |
+| `MANUAL_REVIEW_REQUIRED` | Terminal pending operator action |
+| `SUCCEEDED` | Terminal and reserved for a future approved clinical adapter |
+
+Application validation rejects invalid transitions before an update, while
+DynamoDB conditions remain authoritative against concurrent workers. Acquiring
+or renewing ownership without changing status is metadata mutation, not a
+business-state self-transition.
+
+Before any future clinical side effect, a worker conditionally changes an
+eligible request to `PROCESSING`, records an opaque owner token, increments the
+processing attempt, and sets a 120-second nonproduction lease. A fresh owner
+blocks duplicate delivery. An expired lease can be acquired atomically by one
+replacement worker. Ownership is never held only in Lambda memory.
+
+No approved clinical adapter exists. The foundation adapter returns
+`UNKNOWN_RESULT`; unknown, nonretryable, and even unexpected `SUCCESS` results
+are escalated to `MANUAL_REVIEW_REQUIRED`. W3.5 never writes `SUCCEEDED` and
+never reports a clinically confirmed appointment.
+
+## Reconciliation and manual review
+
+Only request records carry `reconcile_status` and `next_attempt_at`. The
+`reconciliation-index` GSI uses those fields as partition and sort keys with a
+`KEYS_ONLY` projection. The reconciler uses bounded `Query` operations, never a
+table scan, with a nonproduction limit of 25 records per eligible state.
+
+`QUEUE_PENDING` becomes eligible after the configurable 300-second stale
+threshold. `RECONCILE_REQUIRED`, `FAILED_RETRYABLE`, and expired `PROCESSING`
+records are also queryable. Reconciliation conditionally acquires an ownership
+lease, increments its attempt counter, and sends only request/correlation
+references. A confirmed send changes the request to `QUEUED`; an uncertain
+send remains recoverable with a 300-second backoff. After three attempts, the
+request becomes `MANUAL_REVIEW_REQUIRED`. These values are project defaults,
+not universal operating requirements.
+
+Manual-review state contains only safe operational identifiers, timestamps,
+counters, ownership metadata, and an exception category. It does not duplicate
+appointment, contact, clinical, authentication, or credential data. Durable
+DynamoDB state plus alarms is simpler than adding an exception queue for this
+foundation.
+
+## DLQ procedure
+
+The encrypted SQS DLQ is transport-failure evidence and diagnostic input; it
+is not authoritative workflow state. The nonproduction procedure is:
+
+1. The DLQ alarm fires; notification routing must be approved before operational acceptance.
+2. An operator inspects only the safe request/correlation reference.
+3. The operator checks the authoritative DynamoDB request state.
+4. Automated bounded reconciliation remains authoritative where eligible.
+5. Exhausted recovery becomes `MANUAL_REVIEW_REQUIRED`.
+6. DLQ messages are not automatically deleted or redriven.
+7. Any manual redrive requires separate operational approval.
+
+SQS Standard remains at-least-once. Duplicate transport messages are expected
+and are absorbed by conditional worker ownership; exactly-once delivery is not
+claimed.
+
 ## Data and logging boundary
 
 The schema intentionally excludes diagnosis, treatment notes, prescriptions,
