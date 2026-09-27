@@ -29,3 +29,9 @@ terraform.rc
 # OS/editor noise
 .DS_Store
 Thumbs.db
+
+# Python and generated Lambda packages
+**/__pycache__/
+*.pyc
+.pytest_cache/
+application/appointment-api/dist/

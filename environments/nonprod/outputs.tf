@@ -50,3 +50,23 @@ output "nonprod_s3_gateway_endpoint_id" {
   description = "S3 Gateway VPC Endpoint managed by Terraform for NonProd private routing."
   value       = module.network.s3_gateway_endpoint_id
 }
+
+output "appointment_api_invoke_url" {
+  description = "Nonproduction Appointment API invocation URL"
+  value       = module.appointment_api.api_invoke_url
+}
+
+output "appointment_workflow_table_name" {
+  description = "Appointment workflow DynamoDB table name"
+  value       = module.appointment_api.workflow_table_name
+}
+
+output "appointment_work_queue_arn" {
+  description = "Appointment work queue ARN"
+  value       = module.appointment_api.work_queue_arn
+}
+
+output "appointment_dead_letter_queue_arn" {
+  description = "Appointment dead-letter queue ARN"
+  value       = module.appointment_api.dead_letter_queue_arn
+}
