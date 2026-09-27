@@ -7,6 +7,7 @@ import json
 import re
 import sys
 import unittest
+from dataclasses import replace
 from pathlib import Path
 
 
@@ -121,6 +122,21 @@ class WorkflowTests(unittest.TestCase):
         item.update(fields)
         return item
 
+    @staticmethod
+    def existing_request_item(
+        auth: AuthenticatedRequest,
+        status: str,
+        request_id: str = "existing-request",
+    ):
+        return {
+            "body_digest": {"S": auth.body_digest},
+            "idempotency_reference": {
+                "S": f"IDEMPOTENCY#{auth.key_id}#{auth.idempotency_key}"
+            },
+            "request_id": {"S": request_id},
+            "status": {"S": status},
+        }
+
     def conditional_race(self, status: str, **kwargs) -> FakeDynamo:
         return FakeDynamo(
             request_item=self.request_item(status, **kwargs),
@@ -155,6 +171,8 @@ class WorkflowTests(unittest.TestCase):
         request_item = dynamo.transactions[0][2]["Put"]["Item"]
         self.assertEqual("QUEUE_PENDING", request_item["reconcile_status"]["S"])
         self.assertEqual("2000000300", request_item["next_attempt_at"]["N"])
+        nonce_put = dynamo.transactions[0][0]["Put"]
+        self.assertEqual("attribute_not_exists(PK)", nonce_put["ConditionExpression"])
 
     def test_nonce_replay_is_rejected(self) -> None:
         dynamo = FakeDynamo(
@@ -169,6 +187,36 @@ class WorkflowTests(unittest.TestCase):
         self.assertNotIn("v1", raised.exception.message)
         self.assertEqual([], sqs.messages)
 
+    def test_same_nonce_is_rejected_across_changed_retry_inputs(self) -> None:
+        base = authenticated()
+        variants = (
+            replace(base, idempotency_key="different-idempotency"),
+            replace(base, body_digest="0" * 64),
+        )
+        for auth in variants:
+            with self.subTest(auth=auth):
+                dynamo = FakeDynamo(
+                    initial_error="TransactionCanceledException",
+                    nonce_item={"PK": {"S": "existing"}},
+                    request_item=self.request_item("PROCESSING"),
+                )
+                sqs = FakeSqs()
+                with self.assertRaises(WorkflowError) as raised:
+                    self.reserve(self.repository(dynamo, sqs), auth)
+                self.assertEqual("NONCE_REPLAY", raised.exception.category)
+                self.assertEqual([], sqs.messages)
+
+    def test_replay_after_worker_processing_begins_is_rejected(self) -> None:
+        dynamo = FakeDynamo(
+            initial_error="TransactionCanceledException",
+            nonce_item={"PK": {"S": "existing"}},
+            request_item=self.request_item("PROCESSING"),
+        )
+        with self.assertRaises(WorkflowError) as raised:
+            self.reserve(self.repository(dynamo, FakeSqs()))
+        self.assertEqual("NONCE_REPLAY", raised.exception.category)
+        self.assertEqual(1, len(dynamo.transactions))
+
     def test_same_idempotency_key_and_digest_returns_existing_request(self) -> None:
         auth = authenticated(nonce="nonce-000000000002")
         dynamo = FakeDynamo(
@@ -178,6 +226,7 @@ class WorkflowTests(unittest.TestCase):
                 "request_id": {"S": "existing-request"},
                 "status": {"S": "QUEUED"},
             },
+            request_item=self.existing_request_item(auth, "QUEUED"),
         )
         sqs = FakeSqs()
         reservation = self.reserve(self.repository(dynamo, sqs), auth)
@@ -185,6 +234,82 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual("existing-request", reservation.request_id)
         self.assertEqual("QUEUED", reservation.status)
         self.assertEqual([], sqs.messages)
+
+    def test_idempotent_retry_requires_authoritative_request_record(self) -> None:
+        auth = authenticated(nonce="nonce-000000000002")
+        dynamo = FakeDynamo(
+            initial_error="TransactionCanceledException",
+            idempotency_item={
+                "body_digest": {"S": auth.body_digest},
+                "request_id": {"S": "existing-request"},
+                "status": {"S": "QUEUED"},
+            },
+        )
+        with self.assertRaises(WorkflowError) as raised:
+            self.reserve(self.repository(dynamo, FakeSqs()), auth)
+        self.assertEqual(
+            "IDEMPOTENCY_RECORD_INTEGRITY_FAILURE", raised.exception.category
+        )
+
+    def test_idempotent_retry_rejects_mismatched_request_linkage(self) -> None:
+        auth = authenticated(nonce="nonce-000000000002")
+        for field, value in (
+            ("request_id", {"S": "different-request"}),
+            ("idempotency_reference", {"S": "IDEMPOTENCY#v1#different"}),
+            ("body_digest", {"S": "0" * 64}),
+            ("status", {"S": "UNKNOWN_STATE"}),
+        ):
+            with self.subTest(field=field):
+                request_item = self.existing_request_item(auth, "QUEUED")
+                request_item[field] = value
+                dynamo = FakeDynamo(
+                    initial_error="TransactionCanceledException",
+                    idempotency_item={
+                        "body_digest": {"S": auth.body_digest},
+                        "request_id": {"S": "existing-request"},
+                        "status": {"S": "QUEUED"},
+                    },
+                    request_item=request_item,
+                )
+                with self.assertRaises(WorkflowError) as raised:
+                    self.reserve(self.repository(dynamo, FakeSqs()), auth)
+                self.assertEqual(
+                    "IDEMPOTENCY_RECORD_INTEGRITY_FAILURE",
+                    raised.exception.category,
+                )
+
+    def test_idempotent_retry_uses_authoritative_advanced_state_without_requeue(self) -> None:
+        for status in (
+            "QUEUED",
+            "PROCESSING",
+            "MANUAL_REVIEW_REQUIRED",
+            "SUCCEEDED",
+        ):
+            with self.subTest(status=status):
+                auth = authenticated(nonce="nonce-000000000002")
+                dynamo = FakeDynamo(
+                    initial_error="TransactionCanceledException",
+                    idempotency_item={
+                        "body_digest": {"S": auth.body_digest},
+                        "request_id": {"S": "existing-request"},
+                        "status": {"S": "QUEUE_PENDING"},
+                    },
+                    request_item=self.existing_request_item(auth, status),
+                )
+                sqs = FakeSqs()
+                reservation = self.reserve(self.repository(dynamo, sqs), auth)
+                self.assertFalse(reservation.created)
+                self.assertEqual(status, reservation.status)
+                self.assertEqual([], sqs.messages)
+
+    def test_request_without_idempotency_record_fails_closed(self) -> None:
+        dynamo = FakeDynamo(
+            initial_error="TransactionCanceledException",
+            request_item=self.request_item("QUEUED"),
+        )
+        with self.assertRaises(WorkflowError) as raised:
+            self.reserve(self.repository(dynamo, FakeSqs()))
+        self.assertEqual("DYNAMODB_RESERVATION_FAILURE", raised.exception.category)
 
     def test_same_idempotency_key_with_different_digest_conflicts(self) -> None:
         dynamo = FakeDynamo(
@@ -199,6 +324,28 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual("IDEMPOTENCY_DIGEST_CONFLICT", raised.exception.category)
         self.assertEqual(2, len(dynamo.transactions))
         self.assertIn("Put", dynamo.transactions[1][0])
+
+    def test_same_idempotency_key_with_changed_appointment_field_conflicts(self) -> None:
+        changed_body = b'{"patientReference":"SYNTHETIC-PATIENT-002"}'
+        changed_auth = replace(
+            authenticated(),
+            body_bytes=changed_body,
+            body_digest=hashlib.sha256(changed_body).hexdigest(),
+        )
+        original_digest = authenticated().body_digest
+        dynamo = FakeDynamo(
+            initial_error="TransactionCanceledException",
+            idempotency_item={
+                "body_digest": {"S": original_digest},
+                "request_id": {"S": "existing-request"},
+            },
+        )
+
+        with self.assertRaises(WorkflowError) as raised:
+            self.reserve(self.repository(dynamo, FakeSqs()), changed_auth)
+
+        self.assertEqual("IDEMPOTENCY_DIGEST_CONFLICT", raised.exception.category)
+        self.assertEqual(2, len(dynamo.transactions))
 
     def test_concurrent_identical_reservation_cannot_create_second_request(self) -> None:
         dynamo = FakeDynamo(

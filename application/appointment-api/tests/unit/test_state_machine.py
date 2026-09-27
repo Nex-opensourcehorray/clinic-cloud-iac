@@ -58,6 +58,29 @@ class StateMachineTests(unittest.TestCase):
         for state in TERMINAL_STATES:
             self.assertEqual(frozenset(), LEGAL_TRANSITIONS[state])
 
+    def test_bounded_invalid_state_names_are_always_rejected(self) -> None:
+        for state in (
+            "",
+            "queued",
+            "ACCEPTED",
+            "SUCCESS",
+            "SUCCEEDED ",
+            "PROCESSING\x00",
+            "未知状态",
+        ):
+            with self.subTest(state=state):
+                with self.assertRaises(InvalidStateTransition):
+                    require_legal_transition(state, "PROCESSING")
+
+    def test_every_undeclared_transition_is_rejected(self) -> None:
+        for current in WorkflowState:
+            for target in WorkflowState:
+                if target in LEGAL_TRANSITIONS[current]:
+                    continue
+                with self.subTest(current=current.value, target=target.value):
+                    with self.assertRaises(InvalidStateTransition):
+                        require_legal_transition(current.value, target.value)
+
 
 if __name__ == "__main__":
     unittest.main()

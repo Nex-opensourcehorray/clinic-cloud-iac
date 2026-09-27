@@ -46,6 +46,15 @@ class FakeAdapter:
         return self.outcome
 
 
+class RaisingAdapter:
+    def __init__(self) -> None:
+        self.calls: list[str] = []
+
+    def process(self, request_id: str):
+        self.calls.append(request_id)
+        raise RuntimeError("synthetic adapter failure")
+
+
 def event(*, extra: dict | None = None):
     body = {"requestId": "request-1", "correlationId": "correlation-1"}
     body.update(extra or {})
@@ -144,6 +153,29 @@ class WorkerHandlerTests(unittest.TestCase):
             repository.manual_calls[0]["reason"],
         )
 
+    def test_nonretryable_failure_escalates_without_success(self) -> None:
+        repository = FakeRepository()
+        result = self.invoke(
+            repository, FakeAdapter(AdapterOutcome.NONRETRYABLE_FAILURE)
+        )
+        self.assertEqual([], result["batchItemFailures"])
+        self.assertEqual(
+            "CLINICAL_ADAPTER_NONRETRYABLE_FAILURE",
+            repository.manual_calls[0]["reason"],
+        )
+        self.assertEqual([], repository.retryable_calls)
+
+    def test_adapter_exception_returns_partial_batch_failure(self) -> None:
+        repository = FakeRepository()
+        adapter = RaisingAdapter()
+        result = self.invoke(repository, adapter)
+        self.assertEqual(["request-1"], adapter.calls)
+        self.assertEqual(
+            [{"itemIdentifier": "message-1"}], result["batchItemFailures"]
+        )
+        self.assertEqual([], repository.manual_calls)
+        self.assertEqual([], repository.retryable_calls)
+
     def test_queue_envelope_rejects_clinical_payload(self) -> None:
         repository = FakeRepository()
         marker = "SYNTHETIC-CLINICAL-DATA"
@@ -154,6 +186,116 @@ class WorkerHandlerTests(unittest.TestCase):
         )
         self.assertEqual([{"itemIdentifier": "message-1"}], result["batchItemFailures"])
         self.assertEqual([], repository.acquire_calls)
+
+    def test_malformed_missing_and_oversized_envelopes_are_rejected(self) -> None:
+        bodies = (
+            "",
+            "{",
+            json.dumps({"correlationId": "correlation-1"}),
+            json.dumps({"requestId": "request-1"}),
+            json.dumps(
+                {
+                    "requestId": "R" * 129,
+                    "correlationId": "correlation-1",
+                }
+            ),
+            json.dumps(
+                {
+                    "requestId": "request-1",
+                    "correlationId": "correlation-1",
+                    "unexpected": "value",
+                }
+            ),
+            json.dumps(["request-1", "correlation-1"]),
+        )
+        for body in bodies:
+            with self.subTest(body=body):
+                repository = FakeRepository()
+                worker_event = {
+                    "Records": [
+                        {
+                            "messageId": "message-1",
+                            "body": body,
+                            "attributes": {"ApproximateReceiveCount": "5"},
+                        }
+                    ]
+                }
+                result = self.invoke(
+                    repository,
+                    FakeAdapter(AdapterOutcome.UNKNOWN_RESULT),
+                    worker_event,
+                )
+                self.assertEqual(
+                    [{"itemIdentifier": "message-1"}],
+                    result["batchItemFailures"],
+                )
+                self.assertEqual([], repository.acquire_calls)
+
+    def test_bounded_unexpected_envelope_keys_are_rejected(self) -> None:
+        for index in range(16):
+            with self.subTest(index=index):
+                repository = FakeRepository()
+                result = self.invoke(
+                    repository,
+                    FakeAdapter(AdapterOutcome.UNKNOWN_RESULT),
+                    event(extra={f"unexpected_{index}": "synthetic"}),
+                )
+                self.assertEqual(
+                    [{"itemIdentifier": "message-1"}],
+                    result["batchItemFailures"],
+                )
+                self.assertEqual([], repository.acquire_calls)
+
+    def test_unknown_request_is_data_minimized_noop(self) -> None:
+        repository = FakeRepository(OwnershipDecision(False, None))
+        adapter = FakeAdapter(AdapterOutcome.UNKNOWN_RESULT)
+        result = self.invoke(repository, adapter)
+        self.assertEqual([], result["batchItemFailures"])
+        self.assertEqual([], adapter.calls)
+        self.assertEqual([], repository.manual_calls)
+
+    def test_delayed_and_out_of_order_duplicates_never_call_adapter(self) -> None:
+        for status in (
+            "QUEUE_PENDING",
+            "QUEUED",
+            "PROCESSING",
+            "FAILED_RETRYABLE",
+            "RECONCILE_REQUIRED",
+            "MANUAL_REVIEW_REQUIRED",
+            "SUCCEEDED",
+        ):
+            with self.subTest(status=status):
+                repository = FakeRepository(
+                    OwnershipDecision(False, RequestState("request-1", status))
+                )
+                adapter = FakeAdapter(AdapterOutcome.UNKNOWN_RESULT)
+                self.invoke(repository, adapter)
+                self.assertEqual([], adapter.calls)
+
+    def test_repeated_retryable_delivery_is_one_attempt_per_invocation(self) -> None:
+        repository = FakeRepository()
+        adapter = FakeAdapter(AdapterOutcome.RETRYABLE_FAILURE)
+        first = self.invoke(repository, adapter)
+        second = self.invoke(repository, adapter)
+        self.assertEqual(2, len(repository.acquire_calls))
+        self.assertEqual(2, len(repository.retryable_calls))
+        self.assertEqual(2, len(adapter.calls))
+        self.assertEqual(1, len(first["batchItemFailures"]))
+        self.assertEqual(1, len(second["batchItemFailures"]))
+
+    def test_every_adapter_outcome_is_fail_safe(self) -> None:
+        for outcome in AdapterOutcome:
+            with self.subTest(outcome=outcome.value):
+                repository = FakeRepository()
+                result = self.invoke(repository, FakeAdapter(outcome))
+                if outcome == AdapterOutcome.RETRYABLE_FAILURE:
+                    self.assertEqual(1, len(repository.retryable_calls))
+                    self.assertEqual(1, len(result["batchItemFailures"]))
+                    self.assertEqual([], repository.manual_calls)
+                else:
+                    self.assertEqual(1, len(repository.manual_calls))
+                    self.assertEqual([], repository.retryable_calls)
+                    self.assertEqual([], result["batchItemFailures"])
 
     def test_worker_logs_exclude_rejected_payload_values(self) -> None:
         repository = FakeRepository()

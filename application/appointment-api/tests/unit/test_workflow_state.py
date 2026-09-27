@@ -136,17 +136,19 @@ class WorkflowStateRepositoryTests(unittest.TestCase):
         self.assertIn("lease_expires_at <= :now", dynamo.updates[1]["ConditionExpression"])
 
     def test_terminal_state_cannot_be_overwritten_by_stale_worker(self) -> None:
-        dynamo = ScriptedDynamo()
-        dynamo.current_item = state_item("MANUAL_REVIEW_REQUIRED")
-        dynamo.update_outcomes = [
-            FakeAwsError("ConditionalCheckFailedException"),
-            FakeAwsError("ConditionalCheckFailedException"),
-        ]
-        decision = self.repository(dynamo).acquire_processing(
-            request_id="request-1", owner_token="owner-3", now_epoch=1000
-        )
-        self.assertFalse(decision.acquired)
-        self.assertEqual("MANUAL_REVIEW_REQUIRED", decision.state.status)
+        for status in ("MANUAL_REVIEW_REQUIRED", "SUCCEEDED"):
+            with self.subTest(status=status):
+                dynamo = ScriptedDynamo()
+                dynamo.current_item = state_item(status)
+                dynamo.update_outcomes = [
+                    FakeAwsError("ConditionalCheckFailedException"),
+                    FakeAwsError("ConditionalCheckFailedException"),
+                ]
+                decision = self.repository(dynamo).acquire_processing(
+                    request_id="request-1", owner_token="owner-3", now_epoch=1000
+                )
+                self.assertFalse(decision.acquired)
+                self.assertEqual(status, decision.state.status)
 
     def test_out_of_order_sources_are_in_atomic_processing_condition(self) -> None:
         dynamo = ScriptedDynamo()
@@ -219,6 +221,141 @@ class WorkflowStateRepositoryTests(unittest.TestCase):
         self.assertTrue(decision.acquired)
         self.assertIn("next_attempt_at <= :now", dynamo.updates[0]["ConditionExpression"])
         self.assertIn("ADD reconciliation_attempts :one", dynamo.updates[0]["UpdateExpression"])
+        condition = dynamo.updates[0]["ConditionExpression"]
+        self.assertIn("#status = :expected", condition)
+        self.assertIn("next_attempt_at <= :now", condition)
+        self.assertIn("reconciliation_lease_expires_at <= :now", condition)
+        self.assertIn("reconciliation_attempts < :maximum_attempts", condition)
+
+    def test_stale_reconciler_cannot_regress_newer_worker_state(self) -> None:
+        dynamo = ScriptedDynamo()
+        dynamo.current_item = state_item("PROCESSING", reconciliation=1)
+        dynamo.update_outcomes = [
+            FakeAwsError("ConditionalCheckFailedException")
+        ]
+        decision = self.repository(dynamo).acquire_reconciliation(
+            request_id="request-1",
+            expected_status="QUEUE_PENDING",
+            owner_token="stale-reconciler",
+            now_epoch=1000,
+        )
+        self.assertFalse(decision.acquired)
+        self.assertEqual("PROCESSING", decision.state.status)
+        self.assertEqual(1, len(dynamo.updates))
+
+    def test_worker_and_reconciler_completion_require_matching_owner(self) -> None:
+        dynamo = ScriptedDynamo()
+        repository = self.repository(dynamo)
+        repository.mark_manual_review(
+            request_id="request-1",
+            owner_token="owner-1",
+            reason="SAFE_REASON",
+            now_epoch=1000,
+        )
+        repository.mark_failed_retryable(
+            request_id="request-1",
+            owner_token="owner-1",
+            reason="SAFE_REASON",
+            now_epoch=1000,
+        )
+        repository.complete_reconciliation(
+            request_id="request-1",
+            owner_token="reconciler-1",
+            message_id="message-1",
+            now_epoch=1000,
+        )
+        repository.record_reconciliation_failure(
+            request_id="request-1",
+            owner_token="reconciler-1",
+            attempt_count=1,
+            now_epoch=1000,
+        )
+        self.assertIn(
+            "processing_owner = :owner", dynamo.updates[0]["ConditionExpression"]
+        )
+        self.assertIn(
+            "processing_owner = :owner", dynamo.updates[1]["ConditionExpression"]
+        )
+        self.assertIn(
+            "reconciliation_owner = :owner",
+            dynamo.updates[2]["ConditionExpression"],
+        )
+        self.assertIn(
+            "reconciliation_owner = :owner",
+            dynamo.updates[3]["ConditionExpression"],
+        )
+
+    def test_wrong_owner_conditional_failures_are_not_treated_as_success(self) -> None:
+        operations = (
+            (
+                "complete_reconciliation",
+                {
+                    "request_id": "request-1",
+                    "owner_token": "wrong-owner",
+                    "message_id": "message-1",
+                    "now_epoch": 1000,
+                },
+            ),
+            (
+                "record_reconciliation_failure",
+                {
+                    "request_id": "request-1",
+                    "owner_token": "wrong-owner",
+                    "attempt_count": 1,
+                    "now_epoch": 1000,
+                },
+            ),
+        )
+        for operation, kwargs in operations:
+            with self.subTest(operation=operation):
+                dynamo = ScriptedDynamo()
+                dynamo.update_outcomes = [
+                    FakeAwsError("ConditionalCheckFailedException")
+                ]
+                with self.assertRaises(FakeAwsError):
+                    getattr(self.repository(dynamo), operation)(**kwargs)
+
+    def test_dynamodb_service_error_during_ownership_acquisition_propagates(self) -> None:
+        dynamo = ScriptedDynamo()
+        dynamo.update_outcomes = [FakeAwsError("InternalServerError")]
+        with self.assertRaises(FakeAwsError):
+            self.repository(dynamo).acquire_processing(
+                request_id="request-1", owner_token="owner-1", now_epoch=1000
+            )
+        self.assertEqual(1, len(dynamo.updates))
+
+    def test_reconciliation_attempts_zero_one_two_remain_bounded(self) -> None:
+        for attempt_count in (0, 1, 2):
+            with self.subTest(attempt_count=attempt_count):
+                dynamo = ScriptedDynamo()
+                target = self.repository(dynamo).record_reconciliation_failure(
+                    request_id="request-1",
+                    owner_token="reconciler-1",
+                    attempt_count=attempt_count,
+                    now_epoch=1000,
+                )
+                self.assertEqual("RECONCILE_REQUIRED", target)
+                self.assertEqual(
+                    "1300",
+                    dynamo.updates[0]["ExpressionAttributeValues"][":next_attempt"]["N"],
+                )
+
+    def test_query_is_one_bounded_page_per_invocation(self) -> None:
+        dynamo = ScriptedDynamo()
+        dynamo.query_results = [
+            {
+                "Items": [
+                    {"PK": {"S": "REQUEST#request-1"}, "SK": {"S": "METADATA"}}
+                ],
+                "LastEvaluatedKey": {"PK": {"S": "REQUEST#request-1"}},
+            }
+        ]
+        result = self.repository(dynamo).query_due(
+            status="FAILED_RETRYABLE", now_epoch=1000, limit=25
+        )
+        self.assertEqual(["request-1"], result)
+        self.assertEqual(1, len(dynamo.queries))
+        self.assertEqual(25, dynamo.queries[0]["Limit"])
 
     def test_failed_reconciliation_uses_backoff_before_next_attempt(self) -> None:
         dynamo = ScriptedDynamo()
@@ -250,6 +387,16 @@ class WorkflowStateRepositoryTests(unittest.TestCase):
             self.repository(dynamo).escalate_exhausted(
                 request_id="request-1",
                 expected_status="SUCCEEDED",
+                now_epoch=1000,
+            )
+        self.assertEqual([], dynamo.updates)
+
+    def test_manual_review_state_cannot_be_silently_reopened(self) -> None:
+        dynamo = ScriptedDynamo()
+        with self.assertRaises(InvalidStateTransition):
+            self.repository(dynamo).escalate_exhausted(
+                request_id="request-1",
+                expected_status="MANUAL_REVIEW_REQUIRED",
                 now_epoch=1000,
             )
         self.assertEqual([], dynamo.updates)

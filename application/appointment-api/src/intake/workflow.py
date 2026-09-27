@@ -332,7 +332,33 @@ class WorkflowRepository:
 
         try:
             request_item = self._get(self._request_pk(existing_request_id))
-            existing_status = _item_value(request_item, "status") or existing_status
+            request_id_from_record = _item_value(request_item, "request_id")
+            idempotency_reference = _item_value(
+                request_item, "idempotency_reference"
+            )
+            request_digest = _item_value(request_item, "body_digest")
+            request_status = _item_value(request_item, "status")
+            try:
+                WorkflowState(request_status or "")
+            except ValueError as error:
+                raise WorkflowError(
+                    "IDEMPOTENCY_RECORD_INTEGRITY_FAILURE",
+                    "Existing request state could not be verified.",
+                    503,
+                ) from error
+            if (
+                request_id_from_record != existing_request_id
+                or idempotency_reference != idempotency_pk
+                or request_digest != authenticated.body_digest
+            ):
+                raise WorkflowError(
+                    "IDEMPOTENCY_RECORD_INTEGRITY_FAILURE",
+                    "Existing request state could not be verified.",
+                    503,
+                )
+            existing_status = request_status
+        except WorkflowError:
+            raise
         except Exception as error:
             raise WorkflowError(
                 "DYNAMODB_RESERVATION_FAILURE",
