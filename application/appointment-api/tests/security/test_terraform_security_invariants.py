@@ -245,12 +245,12 @@ class TerraformSecurityInvariantTests(unittest.TestCase):
                 self.assertIn("clinic-nonprod-appointment-api-runtime-boundary", document)
                 self.assertIn("clinic-nonprod-appointment-api-api-logs-boundary", document)
                 for role in expected_roles:
-                    self.assertIn(f"arn:aws:iam::119033255630:role/{role}", document)
+                    self.assertIn(f"arn:aws:iam::<AWS_ACCOUNT_ID>:role/{role}", document)
         self.assertNotRegex(
             "\n".join(
                 line
                 for line in self.readme.splitlines()
-                if "arn:aws:iam::119033255630:role/" in line
+                if "arn:aws:iam::<AWS_ACCOUNT_ID>:role/" in line
             ),
             r"role/[^`|\s]*\*",
         )

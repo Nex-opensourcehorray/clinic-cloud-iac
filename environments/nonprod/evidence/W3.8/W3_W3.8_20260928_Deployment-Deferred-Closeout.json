@@ -42,7 +42,7 @@
   },
   "ExternalDependencies": {
     "HmacSecretExternallyManaged": true,
-    "HmacSecretArn": "arn:aws:secretsmanager:ap-east-1:119033255630:secret:clinic-nonprod-appointment-api/hmac-keys-hG3SA7",
+    "HmacSecretArn": "arn:aws:secretsmanager:ap-east-1:<AWS_ACCOUNT_ID>:secret:clinic-nonprod-appointment-api/hmac-keys-<REDACTED>",
     "HmacSecretVersions": 0,
     "IamRolesExternallyManaged": true,
     "RuntimePermissionsBoundaryExternallyManaged": true,

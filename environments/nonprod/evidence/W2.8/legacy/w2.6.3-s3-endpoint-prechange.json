@@ -1,22 +1,22 @@
-﻿{
+{
     "EvidenceBlock":  "W2.6.3",
     "Purpose":  "S3 Gateway Endpoint pre-adoption baseline",
     "CollectedUTC":  "2026-09-25T16:42:19.9741416Z",
     "Caller":  {
                    "UserId":  "AROARXNXPK3HCLAHUV6E7:Clinic-NonProd-Administrator",
-                   "Account":  "119033255630",
-                   "Arn":  "arn:aws:sts::119033255630:assumed-role/AWSReservedSSO_Clinic-NonProd-Operator_96b414772d96df13/Clinic-NonProd-Administrator"
+                   "Account":  "<AWS_ACCOUNT_ID>",
+                   "Arn":  "arn:aws:sts::<AWS_ACCOUNT_ID>:assumed-role/<SSO_ROLE>/<SESSION_NAME>"
                },
     "Target":  {
                    "Region":  "ap-east-1",
-                   "PrivateSubnetB":  "subnet-06836be6443e37a7c",
-                   "VpcId":  "vpc-0dfbc450b3120b16c",
+                   "PrivateSubnetB":  "subnet-<PRIVATE_B>",
+                   "VpcId":  "vpc-<REDACTED>",
                    "S3ServiceName":  "com.amazonaws.ap-east-1.s3",
-                   "PrivateSubnetA":  "subnet-0c7ffc0456bbfcb56"
+                   "PrivateSubnetA":  "subnet-<PRIVATE_A>"
                },
     "Vpc":  [
                 {
-                    "OwnerId":  "119033255630",
+                    "OwnerId":  "<AWS_ACCOUNT_ID>",
                     "InstanceTenancy":  "default",
                     "CidrBlockAssociationSet":  [
                                                     {
@@ -65,7 +65,7 @@
                     "BlockPublicAccessStates":  {
                                                     "InternetGatewayBlockMode":  "block-ingress"
                                                 },
-                    "VpcId":  "vpc-0dfbc450b3120b16c",
+                    "VpcId":  "vpc-<REDACTED>",
                     "State":  "available",
                     "CidrBlock":  "10.0.0.0/16",
                     "DhcpOptionsId":  "dopt-07ec0c17ac1c9534a"
@@ -82,11 +82,11 @@
                           },
     "RouteTables":  [
                         {
-                            "RouteTableId":  "rtb-00425870121117812",
+                            "RouteTableId":  "rtb-<PRIVATE_A>",
                             "Associations":  [
                                                  {
-                                                     "AssociationId":  "rtbassoc-02205eb8d58fe1593",
-                                                     "SubnetId":  "subnet-0c7ffc0456bbfcb56",
+                                                     "AssociationId":  "rtbassoc-<PRIVATE_A>",
+                                                     "SubnetId":  "subnet-<PRIVATE_A>",
                                                      "Main":  false
                                                  }
                                              ],
@@ -101,16 +101,16 @@
                                        ]
                         },
                         {
-                            "RouteTableId":  "rtb-0487fc2e33a5e2294",
+                            "RouteTableId":  "rtb-<PUBLIC>",
                             "Associations":  [
                                                  {
-                                                     "AssociationId":  "rtbassoc-01b8212f3690030cb",
-                                                     "SubnetId":  "subnet-06a1767aa230f8f8f",
+                                                     "AssociationId":  "rtbassoc-<PUBLIC_A>",
+                                                     "SubnetId":  "subnet-<PUBLIC_A>",
                                                      "Main":  false
                                                  },
                                                  {
-                                                     "AssociationId":  "rtbassoc-0dd3b7845ebbd2496",
-                                                     "SubnetId":  "subnet-0e3ef16148620ea50",
+                                                     "AssociationId":  "rtbassoc-<PUBLIC_B>",
+                                                     "SubnetId":  "subnet-<PUBLIC_B>",
                                                      "Main":  false
                                                  }
                                              ],
@@ -123,7 +123,7 @@
                                                "State":  "active"
                                            },
                                            {
-                                               "GatewayId":  "igw-0100d0c7fef28f38f",
+                                               "GatewayId":  "igw-<REDACTED>",
                                                "DestinationPrefixListId":  null,
                                                "NatGatewayId":  null,
                                                "DestinationCidrBlock":  "0.0.0.0/0",
@@ -132,11 +132,11 @@
                                        ]
                         },
                         {
-                            "RouteTableId":  "rtb-0914698fd756a45ff",
+                            "RouteTableId":  "rtb-<PRIVATE_B>",
                             "Associations":  [
                                                  {
-                                                     "AssociationId":  "rtbassoc-04a8d0f894b698329",
-                                                     "SubnetId":  "subnet-06836be6443e37a7c",
+                                                     "AssociationId":  "rtbassoc-<PRIVATE_B>",
+                                                     "SubnetId":  "subnet-<PRIVATE_B>",
                                                      "Main":  false
                                                  }
                                              ],
@@ -151,10 +151,10 @@
                                        ]
                         },
                         {
-                            "RouteTableId":  "rtb-062e9fd25e8c2e698",
+                            "RouteTableId":  "rtb-<MAIN>",
                             "Associations":  [
                                                  {
-                                                     "AssociationId":  "rtbassoc-0a86d3e7de4cd432e",
+                                                     "AssociationId":  "rtbassoc-<MAIN>",
                                                      "SubnetId":  null,
                                                      "Main":  true
                                                  }

@@ -1,0 +1,40 @@
+{
+  "EvidenceId": "W2.5.7-state-ownership-summary",
+  "Classification": "SANITIZED_PORTFOLIO_SUMMARY",
+  "SanitizedPortfolioCopy": true,
+  "IsTerraformState": false,
+  "Purpose": "Preserve the reviewed Terraform ownership result without publishing Terraform state, state lineage, provider metadata, or live resource identifiers.",
+  "SourceHandling": {
+    "OperationalSource": "Original state snapshot retained outside the public repository",
+    "PublicRepository": "Only this derived summary is retained",
+    "HistoryNotice": "The original snapshot remains in earlier Git history pending an owner-approved history rewrite"
+  },
+  "ObservedState": {
+    "TerraformVersion": "1.15.7",
+    "ManagedResourceCount": 19,
+    "DataSourceCount": 2,
+    "ManagedResourceTypes": [
+      "aws_default_security_group",
+      "aws_internet_gateway",
+      "aws_route",
+      "aws_route_table",
+      "aws_route_table_association",
+      "aws_security_group",
+      "aws_ssm_parameter",
+      "aws_subnet",
+      "aws_vpc",
+      "aws_vpc_security_group_egress_rule"
+    ],
+    "DataSourceTypes": [
+      "aws_caller_identity",
+      "aws_region"
+    ]
+  },
+  "RedactedFields": [
+    "account identifiers",
+    "resource identifiers",
+    "state lineage and serial",
+    "provider metadata",
+    "resource attributes and outputs"
+  ]
+}

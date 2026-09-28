@@ -10,16 +10,16 @@
 
 Repository evidence supports these existing facts:
 
-- AWS account `119033255630`, region `ap-east-1`.
-- DNS-enabled VPC `vpc-0dfbc450b3120b16c`, CIDR `10.0.0.0/16`.
-- Private subnets `subnet-0c7ffc0456bbfcb56` in `ap-east-1a` and
-  `subnet-06836be6443e37a7c` in `ap-east-1b` have no default route.
+- AWS account `<AWS_ACCOUNT_ID>`, region `ap-east-1`.
+- DNS-enabled VPC `vpc-<REDACTED>`, CIDR `10.0.0.0/16`.
+- Private subnets `subnet-<PRIVATE_A>` in `ap-east-1a` and
+  `subnet-<PRIVATE_B>` in `ap-east-1b` have no default route.
 - The only evidenced endpoint is S3 gateway endpoint
-  `vpce-02c654afe0052628a`.
+  `vpce-<S3_GATEWAY>`.
 - AWS Managed Microsoft AD and Windows FSx exist externally; the Directory
-  Service controller security group is `sg-0f43ac70d383b4859` and repository
-  evidence references directory `d-c4677826f0` and FSx
-  `fs-0c520115e42a87b17`.
+  Service controller security group is `sg-<DIRECTORY_CONTROLLERS>` and repository
+  evidence references directory `d-<REDACTED>` and FSx
+  `fs-<REDACTED>`.
 - No approved backup policy, VPN path, NAT gateway, SSM interface endpoints,
   controlled internet-egress path, Pharmacy IAM roles, Pharmacy secret, or
   Pharmacy KMS key is evidenced.

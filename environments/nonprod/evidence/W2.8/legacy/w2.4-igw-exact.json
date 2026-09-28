@@ -1,10 +1,10 @@
-﻿[
+[
     {
-        "InternetGatewayId": "igw-0100d0c7fef28f38f",
+        "InternetGatewayId": "igw-<REDACTED>",
         "Attachments": [
             {
                 "State": "available",
-                "VpcId": "vpc-0dfbc450b3120b16c"
+                "VpcId": "vpc-<REDACTED>"
             }
         ],
         "Tags": [

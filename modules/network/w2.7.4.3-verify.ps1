@@ -1,4 +1,4 @@
-$ModuleFile = "C:\Users\hehek\Desktop\clinic-cloud-iac\modules\network\main.tf"
+$ModuleFile = Join-Path $PSScriptRoot "main.tf"
 
 $ExpectedModuleResources = @(
     'resource "aws_vpc" "clinic_nonprod"',

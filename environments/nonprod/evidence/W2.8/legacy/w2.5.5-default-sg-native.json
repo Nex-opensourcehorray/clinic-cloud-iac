@@ -1,7 +1,7 @@
-﻿{
+{
     "SecurityGroups": [
         {
-            "GroupId": "sg-0b57a86cb71e1b258",
+            "GroupId": "sg-<DEFAULT>",
             "IpPermissionsEgress": [],
             "Tags": [
                 {
@@ -37,9 +37,9 @@
                     "Value": "aws-service"
                 }
             ],
-            "VpcId": "vpc-0dfbc450b3120b16c",
-            "SecurityGroupArn": "arn:aws:ec2:ap-east-1:119033255630:security-group/sg-0b57a86cb71e1b258",
-            "OwnerId": "119033255630",
+            "VpcId": "vpc-<REDACTED>",
+            "SecurityGroupArn": "arn:aws:ec2:ap-east-1:<AWS_ACCOUNT_ID>:security-group/sg-<DEFAULT>",
+            "OwnerId": "<AWS_ACCOUNT_ID>",
             "GroupName": "default",
             "Description": "default VPC security group",
             "IpPermissions": []

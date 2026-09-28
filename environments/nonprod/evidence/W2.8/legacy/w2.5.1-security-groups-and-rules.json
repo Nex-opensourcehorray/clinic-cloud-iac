@@ -1,16 +1,16 @@
-﻿{
+{
     "EvidenceId":  "W2.5.1",
     "CapturedAtUtc":  "2026-09-24T15:15:37.6843738Z",
     "Region":  "ap-east-1",
-    "VpcId":  "vpc-0dfbc450b3120b16c",
+    "VpcId":  "vpc-<REDACTED>",
     "GroupCount":  3,
     "Groups":  [
                    {
-                       "GroupId":  "sg-0b57a86cb71e1b258",
+                       "GroupId":  "sg-<DEFAULT>",
                        "GroupName":  "default",
                        "Description":  "default VPC security group",
-                       "OwnerId":  "119033255630",
-                       "VpcId":  "vpc-0dfbc450b3120b16c",
+                       "OwnerId":  "<AWS_ACCOUNT_ID>",
+                       "VpcId":  "vpc-<REDACTED>",
                        "Tags":  [
                                     {
                                         "Key":  "BackupPolicy",
@@ -50,11 +50,11 @@
                                  ]
                    },
                    {
-                       "GroupId":  "sg-0f43ac70d383b4859",
-                       "GroupName":  "d-c4677826f0_controllers",
-                       "Description":  "AWS created security group for d-c4677826f0 directory controllers",
-                       "OwnerId":  "119033255630",
-                       "VpcId":  "vpc-0dfbc450b3120b16c",
+                       "GroupId":  "sg-<DIRECTORY_CONTROLLERS>",
+                       "GroupName":  "d-<REDACTED>_controllers",
+                       "Description":  "AWS created security group for d-<REDACTED> directory controllers",
+                       "OwnerId":  "<AWS_ACCOUNT_ID>",
+                       "VpcId":  "vpc-<REDACTED>",
                        "Tags":  [
                                     {
                                         "Key":  "BackupPolicy",
@@ -87,7 +87,7 @@
                                 ],
                        "Rules":  [
                                      {
-                                         "RuleId":  "sgr-010d726a40b4fec3b",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "udp",
                                          "FromPort":  53,
@@ -100,7 +100,7 @@
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-020bda31045c191ff",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "tcp",
                                          "FromPort":  135,
@@ -108,12 +108,12 @@
                                          "CidrIpv4":  null,
                                          "CidrIpv6":  null,
                                          "PrefixListId":  null,
-                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
-                                         "ReferencedGroupUserId":  "119033255630",
+                                         "ReferencedGroupId":  "sg-<CLINIC_WORKLOAD>",
+                                         "ReferencedGroupUserId":  "<AWS_ACCOUNT_ID>",
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-0c4f236dcd291226a",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "tcp",
                                          "FromPort":  49152,
@@ -121,12 +121,12 @@
                                          "CidrIpv4":  null,
                                          "CidrIpv6":  null,
                                          "PrefixListId":  null,
-                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
-                                         "ReferencedGroupUserId":  "119033255630",
+                                         "ReferencedGroupId":  "sg-<CLINIC_WORKLOAD>",
+                                         "ReferencedGroupUserId":  "<AWS_ACCOUNT_ID>",
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-0734fd0528dee985b",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "tcp",
                                          "FromPort":  88,
@@ -139,7 +139,7 @@
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-092f557e71ef397a9",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "tcp",
                                          "FromPort":  445,
@@ -152,7 +152,7 @@
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-0d1f0e46d88133276",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "udp",
                                          "FromPort":  138,
@@ -165,7 +165,7 @@
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-0710540e3ced6343c",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  true,
                                          "IpProtocol":  "-1",
                                          "FromPort":  -1,
@@ -178,7 +178,7 @@
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-0f1b7a19b4f44b4a2",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "udp",
                                          "FromPort":  389,
@@ -186,12 +186,12 @@
                                          "CidrIpv4":  null,
                                          "CidrIpv6":  null,
                                          "PrefixListId":  null,
-                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
-                                         "ReferencedGroupUserId":  "119033255630",
+                                         "ReferencedGroupId":  "sg-<CLINIC_WORKLOAD>",
+                                         "ReferencedGroupUserId":  "<AWS_ACCOUNT_ID>",
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-0354d166e673229b8",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "tcp",
                                          "FromPort":  445,
@@ -199,12 +199,12 @@
                                          "CidrIpv4":  null,
                                          "CidrIpv6":  null,
                                          "PrefixListId":  null,
-                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
-                                         "ReferencedGroupUserId":  "119033255630",
+                                         "ReferencedGroupId":  "sg-<CLINIC_WORKLOAD>",
+                                         "ReferencedGroupUserId":  "<AWS_ACCOUNT_ID>",
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-0486ee23ed3a97469",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "tcp",
                                          "FromPort":  135,
@@ -217,7 +217,7 @@
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-059a95fb407858459",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "tcp",
                                          "FromPort":  3268,
@@ -230,7 +230,7 @@
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-06f0dc8f9612bc6ce",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "tcp",
                                          "FromPort":  3268,
@@ -238,12 +238,12 @@
                                          "CidrIpv4":  null,
                                          "CidrIpv6":  null,
                                          "PrefixListId":  null,
-                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
-                                         "ReferencedGroupUserId":  "119033255630",
+                                         "ReferencedGroupId":  "sg-<CLINIC_WORKLOAD>",
+                                         "ReferencedGroupUserId":  "<AWS_ACCOUNT_ID>",
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-0deca7dee87f0d8af",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "udp",
                                          "FromPort":  123,
@@ -251,12 +251,12 @@
                                          "CidrIpv4":  null,
                                          "CidrIpv6":  null,
                                          "PrefixListId":  null,
-                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
-                                         "ReferencedGroupUserId":  "119033255630",
+                                         "ReferencedGroupId":  "sg-<CLINIC_WORKLOAD>",
+                                         "ReferencedGroupUserId":  "<AWS_ACCOUNT_ID>",
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-053c8cb45e03dc6f5",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "tcp",
                                          "FromPort":  389,
@@ -269,7 +269,7 @@
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-005fee13be4cbdc62",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "tcp",
                                          "FromPort":  53,
@@ -282,7 +282,7 @@
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-0c9e8f9cb4c9c36e9",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "udp",
                                          "FromPort":  445,
@@ -295,7 +295,7 @@
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-0c10fff9ac8037bcf",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "tcp",
                                          "FromPort":  9389,
@@ -303,12 +303,12 @@
                                          "CidrIpv4":  null,
                                          "CidrIpv6":  null,
                                          "PrefixListId":  null,
-                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
-                                         "ReferencedGroupUserId":  "119033255630",
+                                         "ReferencedGroupId":  "sg-<CLINIC_WORKLOAD>",
+                                         "ReferencedGroupUserId":  "<AWS_ACCOUNT_ID>",
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-028d7450dca1f0731",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "tcp",
                                          "FromPort":  389,
@@ -316,12 +316,12 @@
                                          "CidrIpv4":  null,
                                          "CidrIpv6":  null,
                                          "PrefixListId":  null,
-                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
-                                         "ReferencedGroupUserId":  "119033255630",
+                                         "ReferencedGroupId":  "sg-<CLINIC_WORKLOAD>",
+                                         "ReferencedGroupUserId":  "<AWS_ACCOUNT_ID>",
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-0de5a2d9c3f35210e",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "udp",
                                          "FromPort":  464,
@@ -334,7 +334,7 @@
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-086ddcd432b87d9d1",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "udp",
                                          "FromPort":  88,
@@ -347,7 +347,7 @@
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-0dd1434681b5e44ae",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "udp",
                                          "FromPort":  88,
@@ -355,12 +355,12 @@
                                          "CidrIpv4":  null,
                                          "CidrIpv6":  null,
                                          "PrefixListId":  null,
-                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
-                                         "ReferencedGroupUserId":  "119033255630",
+                                         "ReferencedGroupId":  "sg-<CLINIC_WORKLOAD>",
+                                         "ReferencedGroupUserId":  "<AWS_ACCOUNT_ID>",
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-0e3dba9c00e8bc289",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "icmp",
                                          "FromPort":  -1,
@@ -373,7 +373,7 @@
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-00ea5f3050c25141b",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "tcp",
                                          "FromPort":  88,
@@ -381,12 +381,12 @@
                                          "CidrIpv4":  null,
                                          "CidrIpv6":  null,
                                          "PrefixListId":  null,
-                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
-                                         "ReferencedGroupUserId":  "119033255630",
+                                         "ReferencedGroupId":  "sg-<CLINIC_WORKLOAD>",
+                                         "ReferencedGroupUserId":  "<AWS_ACCOUNT_ID>",
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-0d47e5e03d63a9029",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "tcp",
                                          "FromPort":  464,
@@ -399,7 +399,7 @@
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-028e8457d66cd8eb8",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "udp",
                                          "FromPort":  123,
@@ -412,7 +412,7 @@
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-054b5d386dab7dbb9",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "udp",
                                          "FromPort":  389,
@@ -425,7 +425,7 @@
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-03df8faa96823206d",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "tcp",
                                          "FromPort":  464,
@@ -433,12 +433,12 @@
                                          "CidrIpv4":  null,
                                          "CidrIpv6":  null,
                                          "PrefixListId":  null,
-                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
-                                         "ReferencedGroupUserId":  "119033255630",
+                                         "ReferencedGroupId":  "sg-<CLINIC_WORKLOAD>",
+                                         "ReferencedGroupUserId":  "<AWS_ACCOUNT_ID>",
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-087984a431237c7da",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "tcp",
                                          "FromPort":  5985,
@@ -446,12 +446,12 @@
                                          "CidrIpv4":  null,
                                          "CidrIpv6":  null,
                                          "PrefixListId":  null,
-                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
-                                         "ReferencedGroupUserId":  "119033255630",
+                                         "ReferencedGroupId":  "sg-<CLINIC_WORKLOAD>",
+                                         "ReferencedGroupUserId":  "<AWS_ACCOUNT_ID>",
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-00dba0794a7c16d50",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "tcp",
                                          "FromPort":  53,
@@ -459,12 +459,12 @@
                                          "CidrIpv4":  null,
                                          "CidrIpv6":  null,
                                          "PrefixListId":  null,
-                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
-                                         "ReferencedGroupUserId":  "119033255630",
+                                         "ReferencedGroupId":  "sg-<CLINIC_WORKLOAD>",
+                                         "ReferencedGroupUserId":  "<AWS_ACCOUNT_ID>",
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-0110fe5a9a26a5bfe",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "tcp",
                                          "FromPort":  1024,
@@ -477,7 +477,7 @@
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-05471687f251a0664",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "tcp",
                                          "FromPort":  636,
@@ -485,12 +485,12 @@
                                          "CidrIpv4":  null,
                                          "CidrIpv6":  null,
                                          "PrefixListId":  null,
-                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
-                                         "ReferencedGroupUserId":  "119033255630",
+                                         "ReferencedGroupId":  "sg-<CLINIC_WORKLOAD>",
+                                         "ReferencedGroupUserId":  "<AWS_ACCOUNT_ID>",
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-0c5c385a916baa29f",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "udp",
                                          "FromPort":  53,
@@ -498,12 +498,12 @@
                                          "CidrIpv4":  null,
                                          "CidrIpv6":  null,
                                          "PrefixListId":  null,
-                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
-                                         "ReferencedGroupUserId":  "119033255630",
+                                         "ReferencedGroupId":  "sg-<CLINIC_WORKLOAD>",
+                                         "ReferencedGroupUserId":  "<AWS_ACCOUNT_ID>",
                                          "Description":  null
                                      },
                                      {
-                                         "RuleId":  "sgr-0f4f6bf85e7b26be8",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  false,
                                          "IpProtocol":  "udp",
                                          "FromPort":  464,
@@ -511,18 +511,18 @@
                                          "CidrIpv4":  null,
                                          "CidrIpv6":  null,
                                          "PrefixListId":  null,
-                                         "ReferencedGroupId":  "sg-07659b5c68fe16b2a",
-                                         "ReferencedGroupUserId":  "119033255630",
+                                         "ReferencedGroupId":  "sg-<CLINIC_WORKLOAD>",
+                                         "ReferencedGroupUserId":  "<AWS_ACCOUNT_ID>",
                                          "Description":  null
                                      }
                                  ]
                    },
                    {
-                       "GroupId":  "sg-07659b5c68fe16b2a",
+                       "GroupId":  "sg-<CLINIC_WORKLOAD>",
                        "GroupName":  "Clinic-NonProd-Group",
                        "Description":  "Proceed SMB to the Private Group.",
-                       "OwnerId":  "119033255630",
-                       "VpcId":  "vpc-0dfbc450b3120b16c",
+                       "OwnerId":  "<AWS_ACCOUNT_ID>",
+                       "VpcId":  "vpc-<REDACTED>",
                        "Tags":  [
                                     {
                                         "Key":  "DataClassification",
@@ -555,7 +555,7 @@
                                 ],
                        "Rules":  [
                                      {
-                                         "RuleId":  "sgr-09708429b8ca59183",
+                                         "RuleId":  "sgr-<REDACTED>",
                                          "IsEgress":  true,
                                          "IpProtocol":  "-1",
                                          "FromPort":  -1,
@@ -563,8 +563,8 @@
                                          "CidrIpv4":  null,
                                          "CidrIpv6":  null,
                                          "PrefixListId":  null,
-                                         "ReferencedGroupId":  "sg-0f43ac70d383b4859",
-                                         "ReferencedGroupUserId":  "119033255630",
+                                         "ReferencedGroupId":  "sg-<DIRECTORY_CONTROLLERS>",
+                                         "ReferencedGroupUserId":  "<AWS_ACCOUNT_ID>",
                                          "Description":  null
                                      }
                                  ]

@@ -1,5 +1,6 @@
 param(
-    [string]$Profile = "clinic-nonprod",
+    [Parameter(Mandatory = $true)]
+    [string]$Profile,
     [string]$Region  = "ap-east-1",
     [string]$OutDir  = ".\evidence\W2.6.1"
 )

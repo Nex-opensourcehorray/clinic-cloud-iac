@@ -2,7 +2,10 @@
 
 Terraform Infrastructure as Code (IaC) project for the **synthetic clinic AWS migration and cloud security engineering portfolio**.
 
-This repository is used to learn and demonstrate Terraform engineering practices across the clinic migration project, beginning with **Wave 1: Terraform & IaC Foundations**.
+This repository demonstrates a security-led AWS migration program across six
+portfolio waves, from Terraform foundations through a terminated hybrid
+integration discovery. Deployment, design-only, deferred, and terminated work
+are labeled separately so the repository does not imply production readiness.
 
 > **Data classification:** This portfolio uses synthetic/mock clinic data only. It is not a production clinical environment and does not contain real PHI/PII.
 
@@ -114,40 +117,42 @@ The main objectives are to understand and demonstrate:
 
 ```text
 clinic-cloud-iac/
-│
-├── .gitignore
-├── README.md
-│
+├── .codex/
+├── .github/
+│   └── workflows/
+├── application/
+│   ├── appointment-api/
+│   ├── pharmacy/
+│   └── clinic-emr/
 ├── bootstrap/
 │   └── state-backend/
-│       ├── main.tf
-│       ├── outputs.tf
-│       ├── providers.tf
-│       ├── variables.tf
-│       ├── versions.tf
-│       ├── terraform.tfvars
-│       └── .terraform.lock.hcl
-│
+├── docs/
+│   ├── mission-2-security/
+│   └── portfolio-closeout/
 ├── environments/
+│   ├── design/
+│   │   ├── pharmacy/
+│   │   └── clinic-emr/
 │   └── nonprod/
-│       ├── backend.tf
-│       ├── main.tf
-│       ├── locals.tf
-│       ├── outputs.tf
-│       ├── providers.tf
-│       ├── variables.tf
-│       ├── versions.tf
-│       ├── terraform.tfvars
-│       └── .terraform.lock.hcl
-│
 ├── modules/
-│
-└── docs/
+│   ├── network/
+│   ├── appointment-api/
+│   ├── pharmacy/
+│   └── clinic-emr/
+├── scripts/
+├── AGENTS.md
+├── README.md
+├── .gitattributes
+└── .gitignore
 ```
 
-### Root Modules
+Local `terraform.tfvars`, backend configuration, Terraform state, saved plans,
+working directories, and generated Lambda packages are intentionally excluded.
 
-This repository currently contains two independent Terraform root modules.
+### Terraform Roots
+
+The repository contains four Terraform roots with separate purposes and safety
+boundaries.
 
 #### `bootstrap/state-backend`
 
@@ -157,9 +162,22 @@ This root currently keeps its own bootstrap state locally.
 
 #### `environments/nonprod`
 
-Contains the NonProduction Terraform configuration.
+Contains the active NonProduction configuration for Waves 1 and 2 and the
+applicable Terraform-managed portion of Wave 3.
 
 Its state has been migrated from local state to the secured S3 remote backend.
+The public repository keeps only an empty backend declaration; private backend
+values are supplied from an untracked file based on `backend.hcl.example`.
+
+#### `environments/design/pharmacy`
+
+Wave 4 validation-only root. It has no remote backend and is permanently
+classified **NEVER DEPLOY**.
+
+#### `environments/design/clinic-emr`
+
+Wave 5 validation-only root. It has no remote backend and is permanently
+classified **NEVER DEPLOY**.
 
 ---
 
@@ -182,8 +200,8 @@ No long-lived AWS access key or secret key is stored in Terraform source code.
 Typical local profile selection:
 
 ```powershell
-$env:AWS_PROFILE="clinic-nonprod"
-aws sso login --profile clinic-nonprod
+$env:AWS_PROFILE="<AWS_PROFILE>"
+aws sso login --profile <AWS_PROFILE>
 aws sts get-caller-identity
 ```
 
@@ -528,6 +546,7 @@ Commit-worthy files normally include:
 README.md
 .gitignore
 terraform.tfvars.example
+backend.hcl.example
 documentation files
 ```
 
@@ -540,6 +559,7 @@ Do not commit:
 *.tfplan
 terraform.tfvars
 *.tfvars
+backend.hcl
 credentials
 private keys
 VPN PSKs
@@ -605,27 +625,44 @@ Wave 1 applies the following security practices:
 
 ---
 
-## Current Managed Infrastructure
+## Infrastructure Classification
 
-### NonProduction environment
+### Deployed and Terraform-managed
 
-Terraform currently manages:
+The separately bootstrapped backend manages the S3 state-storage controls. The
+NonProduction root has evidenced lifecycle ownership for the Wave 1 training
+parameter and the Wave 2 network foundation: VPC, public/private subnets,
+Internet Gateway, route tables and associations, security-group controls, and
+their relationships.
 
-```text
-aws_ssm_parameter.wave1_training
-```
+Wave 3 evidence confirms 30 Terraform-managed Appointment API resources exist.
+This is a partial deployment only; it is not production ready, operationally
+accepted, or clinically integrated.
 
-Terraform reads but does not own the lifecycle of:
+### Deployment deferred
 
-```text
-data.aws_caller_identity.current
-data.aws_region.current
-data.aws_vpc.clinic_nonprod
-```
+Wave 3 engineering is closed with deployment deferred. The reviewed remaining
+21 non-IAM resources were intentionally not deployed. No future apply is
+authorized by this repository state.
 
-### Backend bootstrap
+### Design-only and never deployed
 
-Terraform manages the S3 backend controls required for NonProduction remote state.
+Wave 4 Pharmacy and Wave 5 Clinic/EMR are validation-only designs with isolated
+local roots and no backend. They model EC2, RDS, DMS, networking, monitoring,
+backup, and migration controls, but created no AWS resources and moved no data.
+
+### Externally managed dependencies
+
+External ownership applies where documented to IAM roles and permission
+boundaries, Secrets Manager containers, KMS contracts, Directory Service, FSx,
+and related owner-controlled dependencies. Terraform data sources or input
+contracts do not imply lifecycle ownership.
+
+### Terminated
+
+Wave 6 Lab/Radiology hybrid implementation was terminated after read-only
+discovery because the external connectivity prerequisite was unavailable. No
+Terraform plan/apply or AWS mutation occurred.
 
 ---
 
@@ -739,9 +776,11 @@ WAVE 1
 
 ---
 
-## Future Waves
+## Engineering Workflow
 
-From Wave 2 onward, Terraform becomes an implementation method for the clinic cloud project rather than only a training subject.
+The portfolio waves are closed, deferred, design-only, or terminated as stated
+above. This workflow remains the governing pattern for any separately approved
+future work; it does not reopen Wave 6 or authorize deployment.
 
 The same core workflow remains:
 

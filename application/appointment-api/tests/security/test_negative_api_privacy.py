@@ -99,7 +99,7 @@ class NegativeApiPrivacyTests(unittest.TestCase):
             "workflow-table",
             "sqs.example",
             "clinic-nonprod-appointment-api-alerts",
-            "119033255630",
+            "<AWS_ACCOUNT_ID>",
             "traceback",
             "stack trace",
             "conditionalcheckfailed",

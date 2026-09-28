@@ -1,1 +1,2 @@
-6C828280E2F72CEFFBF304EFE64AD27C2F433EA7F060DD606E91B1B338F98882  w2.6.5-interface-endpoint-decision.json
+1309D0DE44BC481AB688778A090D900282BC160786A5F188B33B43DC73305AD4  w2.6.5-interface-endpoint-decision.json
+# SHA-256 of the sanitized portfolio copy; the private operational original is not published.

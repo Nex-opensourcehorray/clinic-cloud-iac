@@ -1,11 +1,11 @@
-﻿{
+{
     "Evidence":  "W2.6.3 S3 Gateway Endpoint Closeout",
     "Region":  "ap-east-1",
-    "EndpointId":  "vpce-02c654afe0052628a",
+    "EndpointId":  "vpce-<S3_GATEWAY>",
     "EndpointState":  "available",
     "EndpointType":  "Gateway",
     "ServiceName":  "com.amazonaws.ap-east-1.s3",
-    "VpcId":  "vpc-0dfbc450b3120b16c",
+    "VpcId":  "vpc-<REDACTED>",
     "Terraform":  {
                       "ResourceAddress":  "aws_vpc_endpoint.s3_gateway",
                       "Managed":  true,
@@ -14,24 +14,24 @@
                   },
     "RouteTableScope":  {
                             "PrivateA":  {
-                                             "RouteTableId":  "rtb-00425870121117812",
+                                             "RouteTableId":  "rtb-<PRIVATE_A>",
                                              "EndpointRoutePresent":  true
                                          },
                             "PrivateB":  {
-                                             "RouteTableId":  "rtb-0914698fd756a45ff",
+                                             "RouteTableId":  "rtb-<PRIVATE_B>",
                                              "EndpointRoutePresent":  true
                                          },
                             "Public":  {
-                                           "RouteTableId":  "rtb-0487fc2e33a5e2294",
+                                           "RouteTableId":  "rtb-<PUBLIC>",
                                            "EndpointRoutePresent":  false
                                        },
                             "EndpointReportedRouteTables":  [
-                                                                "rtb-00425870121117812",
-                                                                "rtb-0914698fd756a45ff"
+                                                                "rtb-<PRIVATE_A>",
+                                                                "rtb-<PRIVATE_B>"
                                                             ],
                             "ExpectedPrivateRouteTables":  [
-                                                               "rtb-00425870121117812",
-                                                               "rtb-0914698fd756a45ff"
+                                                               "rtb-<PRIVATE_A>",
+                                                               "rtb-<PRIVATE_B>"
                                                            ],
                             "PrivateScopeExactlyMatches":  true
                         },

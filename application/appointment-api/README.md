@@ -89,10 +89,10 @@ boundaries, or lifecycle:
 
 | Purpose | Exact role ARN | Required trust | Reviewed permission contract | Expected boundary |
 |---|---|---|---|---|
-| Intake | `arn:aws:iam::119033255630:role/clinic-nonprod-appointment-api-intake` | `lambda.amazonaws.com` | Workflow-table `GetItem`/`TransactWriteItems`, work-queue `SendMessage`, exact HMAC-secret `GetSecretValue`, own log-stream writes, and X-Ray telemetry writes | `clinic-nonprod-appointment-api-runtime-boundary` |
-| Worker | `arn:aws:iam::119033255630:role/clinic-nonprod-appointment-api-worker` | `lambda.amazonaws.com` | Workflow-table `GetItem`/`UpdateItem`, work-queue receive/delete/visibility/attribute access, own log-stream writes, and X-Ray telemetry writes | `clinic-nonprod-appointment-api-runtime-boundary` |
-| Reconciler | `arn:aws:iam::119033255630:role/clinic-nonprod-appointment-api-reconciler` | `lambda.amazonaws.com` | Workflow-table `GetItem`/`UpdateItem`, reconciliation-index `Query`, work-queue `SendMessage`, own log-stream writes, and X-Ray telemetry writes | `clinic-nonprod-appointment-api-runtime-boundary` |
-| API logging | `arn:aws:iam::119033255630:role/clinic-nonprod-appointment-api-api-logs` | `apigateway.amazonaws.com` | Logging-only `CreateLogStream`, `DescribeLogStreams`, and `PutLogEvents` beneath the Appointment API access log group | `clinic-nonprod-appointment-api-api-logs-boundary` |
+| Intake | `arn:aws:iam::<AWS_ACCOUNT_ID>:role/clinic-nonprod-appointment-api-intake` | `lambda.amazonaws.com` | Workflow-table `GetItem`/`TransactWriteItems`, work-queue `SendMessage`, exact HMAC-secret `GetSecretValue`, own log-stream writes, and X-Ray telemetry writes | `clinic-nonprod-appointment-api-runtime-boundary` |
+| Worker | `arn:aws:iam::<AWS_ACCOUNT_ID>:role/clinic-nonprod-appointment-api-worker` | `lambda.amazonaws.com` | Workflow-table `GetItem`/`UpdateItem`, work-queue receive/delete/visibility/attribute access, own log-stream writes, and X-Ray telemetry writes | `clinic-nonprod-appointment-api-runtime-boundary` |
+| Reconciler | `arn:aws:iam::<AWS_ACCOUNT_ID>:role/clinic-nonprod-appointment-api-reconciler` | `lambda.amazonaws.com` | Workflow-table `GetItem`/`UpdateItem`, reconciliation-index `Query`, work-queue `SendMessage`, own log-stream writes, and X-Ray telemetry writes | `clinic-nonprod-appointment-api-runtime-boundary` |
+| API logging | `arn:aws:iam::<AWS_ACCOUNT_ID>:role/clinic-nonprod-appointment-api-api-logs` | `apigateway.amazonaws.com` | Logging-only `CreateLogStream`, `DescribeLogStreams`, and `PutLogEvents` beneath the Appointment API access log group | `clinic-nonprod-appointment-api-api-logs-boundary` |
 
 The IAM owner is responsible for proving role existence and maintaining the
 reviewed trust, policy, and boundary configuration. These checks are required

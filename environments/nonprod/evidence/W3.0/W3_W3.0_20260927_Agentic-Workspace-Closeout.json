@@ -22,13 +22,13 @@
     "ApplyExecuted": false
   },
   "AWSVerification": {
-    "AccountId": "119033255630",
+    "AccountId": "<AWS_ACCOUNT_ID>",
     "Region": "ap-east-1",
-    "VpcId": "vpc-0dfbc450b3120b16c",
+    "VpcId": "vpc-<REDACTED>",
     "VpcCidr": "10.0.0.0/16"
   },
   "SecurityFinding": {
-    "ProfileAlias": "clinic-nonprod-readonly",
+    "ProfileAlias": "<READ_ONLY_AWS_PROFILE>",
     "AuthorizationBreadthVerifiedReadOnly": false,
     "Finding": "Authenticated SSO role naming indicates Clinic-NonProd-Operator / Administrator context. Least-privilege read-only scope has not been independently proven.",
     "Control": "AWS commands remain subject to explicit per-command manual approval until a dedicated least-privilege profile is verified."

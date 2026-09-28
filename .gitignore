@@ -12,6 +12,10 @@
 *.tfvars
 *.tfvars.json
 
+# Private backend configuration
+backend.hcl
+*.backend.hcl
+
 # Crash logs
 crash.log
 crash.*.log

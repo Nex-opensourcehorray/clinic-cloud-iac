@@ -1,4 +1,4 @@
-﻿{
+{
     "EvidenceId":  "W2.8.6",
     "Purpose":  "Wave 2 Final Security and Repository Closeout",
     "Timestamp":  "2026-09-26T09:50:31.4491808Z",
@@ -16,363 +16,363 @@
                        "UntrackedRiskArtifacts":  [
 
                                                   ],
-                       "PrivateArchiveRoot":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2"
+                       "PrivateArchiveRoot":  "<LOCAL_REPOSITORY>-private-archive\\Wave2"
                    },
     "CleanupActions":  [
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\network.tf.pre-w2.7.5.3",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\rollback\\network.tf.pre-w2.7.5.3"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\network.tf.pre-w2.7.5.3",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\rollback\\network.tf.pre-w2.7.5.3"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\outputs.tf.pre-w2.7.5.3",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\rollback\\outputs.tf.pre-w2.7.5.3"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\outputs.tf.pre-w2.7.5.3",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\rollback\\outputs.tf.pre-w2.7.5.3"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\route_associations.tf.pre-w2.7.5.3",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\rollback\\route_associations.tf.pre-w2.7.5.3"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\route_associations.tf.pre-w2.7.5.3",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\rollback\\route_associations.tf.pre-w2.7.5.3"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\s3-endpoint.tf.pre-w2.7.5.3",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\rollback\\s3-endpoint.tf.pre-w2.7.5.3"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\s3-endpoint.tf.pre-w2.7.5.3",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\rollback\\s3-endpoint.tf.pre-w2.7.5.3"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\security-groups.tf.pre-w2.7.5.3",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\rollback\\security-groups.tf.pre-w2.7.5.3"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\security-groups.tf.pre-w2.7.5.3",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\rollback\\security-groups.tf.pre-w2.7.5.3"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.2-postimport.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.2-postimport.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.2-postimport.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.2-postimport.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.2-preimport.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.2-preimport.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.2-preimport.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.2-preimport.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.2-refactor.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.2-refactor.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.2-refactor.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.2-refactor.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.3-output-reconcile.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.3-output-reconcile.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.3-output-reconcile.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.3-output-reconcile.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.3-postimport.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.3-postimport.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.3-postimport.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.3-postimport.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.3-preimport.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.3-preimport.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.3-preimport.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.3-preimport.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.4-assoc-postimport.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.4-assoc-postimport.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.4-assoc-postimport.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.4-assoc-postimport.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.4-assoc-preimport.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.4-assoc-preimport.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.4-assoc-preimport.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.4-assoc-preimport.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.4-igw-postimport.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.4-igw-postimport.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.4-igw-postimport.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.4-igw-postimport.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.4-igw-preimport.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.4-igw-preimport.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.4-igw-preimport.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.4-igw-preimport.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.4-main-boundary.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.4-main-boundary.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.4-main-boundary.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.4-main-boundary.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.4-route-postimport.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.4-route-postimport.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.4-route-postimport.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.4-route-postimport.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.4-route-preimport.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.4-route-preimport.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.4-route-preimport.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.4-route-preimport.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.4-rtb-postimport.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.4-rtb-postimport.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.4-rtb-postimport.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.4-rtb-postimport.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.4-rtb-preimport.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.4-rtb-preimport.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.4-rtb-preimport.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.4-rtb-preimport.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.4.7-final-reconcile.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.4.7-final-reconcile.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.4.7-final-reconcile.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.4.7-final-reconcile.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.2-ownership-boundary.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.5.2-ownership-boundary.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.5.2-ownership-boundary.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.5.2-ownership-boundary.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.3-sg-postimport.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.5.3-sg-postimport.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.5.3-sg-postimport.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.5.3-sg-postimport.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.3-sg-preimport.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.5.3-sg-preimport.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.5.3-sg-preimport.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.5.3-sg-preimport.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.4-rule-postimport.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.5.4-rule-postimport.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.5.4-rule-postimport.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.5.4-rule-postimport.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.4-rule-preimport.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.5.4-rule-preimport.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.5.4-rule-preimport.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.5.4-rule-preimport.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.5-default-sg-postimport.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.5.5-default-sg-postimport.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.5.5-default-sg-postimport.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.5.5-default-sg-postimport.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.5-default-sg-preimport.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.5.5-default-sg-preimport.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.5.5-default-sg-preimport.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.5.5-default-sg-preimport.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.6-directory-boundary.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.5.6-directory-boundary.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.5.6-directory-boundary.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.5.6-directory-boundary.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.6-directory-final.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.5.6-directory-final.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.5.6-directory-final.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.5.6-directory-final.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.7-discovery-cleanup.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.5.7-discovery-cleanup.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.5.7-discovery-cleanup.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.5.7-discovery-cleanup.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.7-final.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.5.7-final.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.5.7-final.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.5.7-final.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.8-final-reconcile.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.5.8-final-reconcile.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.5.8-final-reconcile.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.5.8-final-reconcile.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.6.2-endpoint-design.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.6.2-endpoint-design.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.6.2-endpoint-design.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.6.2-endpoint-design.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.6.3-s3-endpoint-preapply-v2.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.6.3-s3-endpoint-preapply-v2.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.6.3-s3-endpoint-preapply-v2.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.6.3-s3-endpoint-preapply-v2.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.6.3-s3-endpoint-preapply.tfplan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\terraform-plans\\w2.6.3-s3-endpoint-preapply.tfplan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.6.3-s3-endpoint-preapply.tfplan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\terraform-plans\\w2.6.3-s3-endpoint-preapply.tfplan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\terraform.tfstate",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\nonprod-local-state\\terraform.tfstate"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\terraform.tfstate",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\nonprod-local-state\\terraform.tfstate"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\terraform.tfstate.1790006065.backup",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\nonprod-local-state\\terraform.tfstate.1790006065.backup"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\terraform.tfstate.1790006065.backup",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\nonprod-local-state\\terraform.tfstate.1790006065.backup"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\terraform.tfstate.backup",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\nonprod-local-state\\terraform.tfstate.backup"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\terraform.tfstate.backup",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\nonprod-local-state\\terraform.tfstate.backup"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\terraform.tfstate.pre-s3-migration-backup",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\nonprod-local-state\\terraform.tfstate.pre-s3-migration-backup"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\terraform.tfstate.pre-s3-migration-backup",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\nonprod-local-state\\terraform.tfstate.pre-s3-migration-backup"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\terraform.tfstate.w1.3-backup",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\nonprod-local-state\\terraform.tfstate.w1.3-backup"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\terraform.tfstate.w1.3-backup",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\nonprod-local-state\\terraform.tfstate.w1.3-backup"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\$FinalPlan",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\misc\\$FinalPlan"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\$FinalPlan",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\misc\\$FinalPlan"
                            },
                            {
                                "Action":  "ARCHIVE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\endpoint.tf.w2.8-test",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac-private-archive\\Wave2\\stale-terraform\\endpoint.tf.w2.8-test"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\endpoint.tf.w2.8-test",
+                               "Destination":  "<LOCAL_REPOSITORY>-private-archive\\Wave2\\stale-terraform\\endpoint.tf.w2.8-test"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.3-subnets-exact.json",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.3-subnets-exact.json"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.3-subnets-exact.json",
+                               "Destination":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.3-subnets-exact.json"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.4-igw-exact.json",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.4-igw-exact.json"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.4-igw-exact.json",
+                               "Destination":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.4-igw-exact.json"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.4-route-tables-exact.json",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.4-route-tables-exact.json"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.4-route-tables-exact.json",
+                               "Destination":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.4-route-tables-exact.json"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.1-security-groups-and-rules.json",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.5.1-security-groups-and-rules.json"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.5.1-security-groups-and-rules.json",
+                               "Destination":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.5.1-security-groups-and-rules.json"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.2-directory-ownership.json",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.5.2-directory-ownership.json"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.5.2-directory-ownership.json",
+                               "Destination":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.5.2-directory-ownership.json"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.2-security-group-usage.json",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.5.2-security-group-usage.json"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.5.2-security-group-usage.json",
+                               "Destination":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.5.2-security-group-usage.json"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.2-sg-dependencies.json",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.5.2-sg-dependencies.json"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.5.2-sg-dependencies.json",
+                               "Destination":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.5.2-sg-dependencies.json"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.4-sg-native.json",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.5.4-sg-native.json"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.5.4-sg-native.json",
+                               "Destination":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.5.4-sg-native.json"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.4-sg-rules.json",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.5.4-sg-rules.json"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.5.4-sg-rules.json",
+                               "Destination":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.5.4-sg-rules.json"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.5-default-sg-native.json",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.5.5-default-sg-native.json"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.5.5-default-sg-native.json",
+                               "Destination":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.5.5-default-sg-native.json"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.5-default-sg-rules.json",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.5.5-default-sg-rules.json"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.5.5-default-sg-rules.json",
+                               "Destination":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.5.5-default-sg-rules.json"
+                           },
+                           {
+                               "Action":  "SANITIZE_SUMMARY",
+                               "Source":  "<PRIVATE_ARCHIVE>\\Wave2\\w2.5.7-state-before.json",
+                               "Destination":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.5.7-state-ownership-summary.json"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.5.7-state-before.json",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.5.7-state-before.json"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.6.3-s3-endpoint-closeout.json",
+                               "Destination":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.6.3-s3-endpoint-closeout.json"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.6.3-s3-endpoint-closeout.json",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.6.3-s3-endpoint-closeout.json"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.6.3-s3-endpoint-prechange.json",
+                               "Destination":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.6.3-s3-endpoint-prechange.json"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.6.3-s3-endpoint-prechange.json",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.6.3-s3-endpoint-prechange.json"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.6.4-interface-endpoint-readiness.json",
+                               "Destination":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.6.4-interface-endpoint-readiness.json"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.6.4-interface-endpoint-readiness.json",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.6.4-interface-endpoint-readiness.json"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.6.4-interface-endpoint-readiness.sha256.txt",
+                               "Destination":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.6.4-interface-endpoint-readiness.sha256.txt"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.6.4-interface-endpoint-readiness.sha256.txt",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.6.4-interface-endpoint-readiness.sha256.txt"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.7.1-module-refactor-readiness.json",
+                               "Destination":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.7.1-module-refactor-readiness.json"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.7.1-module-refactor-readiness.json",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.7.1-module-refactor-readiness.json"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.8.1-security-closure-discovery.json",
+                               "Destination":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.8.1-security-closure-discovery.json"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.8.1-security-closure-discovery.json",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\evidence\\W2.8\\legacy\\w2.8.1-security-closure-discovery.json"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.6.1-collect.ps1",
+                               "Destination":  "<LOCAL_REPOSITORY>\\scripts\\wave2\\w2.6.1-collect.ps1"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.6.1-collect.ps1",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\scripts\\wave2\\w2.6.1-collect.ps1"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.6.3-collect.ps1",
+                               "Destination":  "<LOCAL_REPOSITORY>\\scripts\\wave2\\w2.6.3-collect.ps1"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.6.3-collect.ps1",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\scripts\\wave2\\w2.6.3-collect.ps1"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.6.3-verify.ps1",
+                               "Destination":  "<LOCAL_REPOSITORY>\\scripts\\wave2\\w2.6.3-verify.ps1"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.6.3-verify.ps1",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\scripts\\wave2\\w2.6.3-verify.ps1"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.6.4-collect.ps1",
+                               "Destination":  "<LOCAL_REPOSITORY>\\scripts\\wave2\\w2.6.4-collect.ps1"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.6.4-collect.ps1",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\scripts\\wave2\\w2.6.4-collect.ps1"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.6.5-collect.ps1",
+                               "Destination":  "<LOCAL_REPOSITORY>\\scripts\\wave2\\w2.6.5-collect.ps1"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.6.5-collect.ps1",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\scripts\\wave2\\w2.6.5-collect.ps1"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.6.5-terraform-collect.ps1",
+                               "Destination":  "<LOCAL_REPOSITORY>\\scripts\\wave2\\w2.6.5-terraform-collect.ps1"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.6.5-terraform-collect.ps1",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\scripts\\wave2\\w2.6.5-terraform-collect.ps1"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.7.1-module-refactor-readiness.ps1",
+                               "Destination":  "<LOCAL_REPOSITORY>\\scripts\\wave2\\w2.7.1-module-refactor-readiness.ps1"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.7.1-module-refactor-readiness.ps1",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\scripts\\wave2\\w2.7.1-module-refactor-readiness.ps1"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.7.4.2-verify.ps1",
+                               "Destination":  "<LOCAL_REPOSITORY>\\scripts\\wave2\\w2.7.4.2-verify.ps1"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.7.4.2-verify.ps1",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\scripts\\wave2\\w2.7.4.2-verify.ps1"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.7.5.1-contract-freeze.ps1",
+                               "Destination":  "<LOCAL_REPOSITORY>\\scripts\\wave2\\w2.7.5.1-contract-freeze.ps1"
                            },
                            {
                                "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.7.5.1-contract-freeze.ps1",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\scripts\\wave2\\w2.7.5.1-contract-freeze.ps1"
-                           },
-                           {
-                               "Action":  "ORGANIZE",
-                               "Source":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.8.1-security-closure-discovery.ps1",
-                               "Destination":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\scripts\\wave2\\w2.8.1-security-closure-discovery.ps1"
+                               "Source":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.8.1-security-closure-discovery.ps1",
+                               "Destination":  "<LOCAL_REPOSITORY>\\scripts\\wave2\\w2.8.1-security-closure-discovery.ps1"
                            }
                        ],
     "AcceptedFollowUps":  [

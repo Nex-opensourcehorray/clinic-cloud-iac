@@ -83,10 +83,10 @@ their trust, policy, permissions-boundary, or lifecycle configuration.
 
 | Role | Required trust | Reviewed runtime scope | Expected boundary |
 |---|---|---|---|
-| `arn:aws:iam::119033255630:role/clinic-nonprod-appointment-api-intake` | `lambda.amazonaws.com` | Exact workflow-table reservation, work-queue send, HMAC-secret read, own logs, and X-Ray writes | `clinic-nonprod-appointment-api-runtime-boundary` |
-| `arn:aws:iam::119033255630:role/clinic-nonprod-appointment-api-worker` | `lambda.amazonaws.com` | Exact workflow-table processing, work-queue consumption, own logs, and X-Ray writes | `clinic-nonprod-appointment-api-runtime-boundary` |
-| `arn:aws:iam::119033255630:role/clinic-nonprod-appointment-api-reconciler` | `lambda.amazonaws.com` | Exact workflow-table and reconciliation-index access, work-queue send, own logs, and X-Ray writes | `clinic-nonprod-appointment-api-runtime-boundary` |
-| `arn:aws:iam::119033255630:role/clinic-nonprod-appointment-api-api-logs` | `apigateway.amazonaws.com` | Appointment API access-log stream creation, description, and writes only | `clinic-nonprod-appointment-api-api-logs-boundary` |
+| `arn:aws:iam::<AWS_ACCOUNT_ID>:role/clinic-nonprod-appointment-api-intake` | `lambda.amazonaws.com` | Exact workflow-table reservation, work-queue send, HMAC-secret read, own logs, and X-Ray writes | `clinic-nonprod-appointment-api-runtime-boundary` |
+| `arn:aws:iam::<AWS_ACCOUNT_ID>:role/clinic-nonprod-appointment-api-worker` | `lambda.amazonaws.com` | Exact workflow-table processing, work-queue consumption, own logs, and X-Ray writes | `clinic-nonprod-appointment-api-runtime-boundary` |
+| `arn:aws:iam::<AWS_ACCOUNT_ID>:role/clinic-nonprod-appointment-api-reconciler` | `lambda.amazonaws.com` | Exact workflow-table and reconciliation-index access, work-queue send, own logs, and X-Ray writes | `clinic-nonprod-appointment-api-runtime-boundary` |
+| `arn:aws:iam::<AWS_ACCOUNT_ID>:role/clinic-nonprod-appointment-api-api-logs` | `apigateway.amazonaws.com` | Appointment API access-log stream creation, description, and writes only | `clinic-nonprod-appointment-api-api-logs-boundary` |
 
 Before apply, the IAM owner must confirm all four roles exist and match this
 contract. The deployment identity must have exact-resource `iam:PassRole` with

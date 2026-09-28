@@ -1,20 +1,20 @@
-﻿{
+{
     "EvidenceId":  "W2.6.4",
     "Purpose":  "Interface Endpoint Readiness and SSM Dependency Discovery",
     "Timestamp":  "2026-09-26T04:54:21.2335125Z",
     "Region":  "ap-east-1",
     "Terraform":  {
-                      "VpcId":  "vpc-0dfbc450b3120b16c",
+                      "VpcId":  "vpc-<REDACTED>",
                       "PrivateSubnetIds":  [
-                                               "subnet-0c7ffc0456bbfcb56",
-                                               "subnet-06836be6443e37a7c"
+                                               "subnet-<PRIVATE_A>",
+                                               "subnet-<PRIVATE_B>"
                                            ],
-                      "ClinicSecurityGroupId":  "sg-07659b5c68fe16b2a"
+                      "ClinicSecurityGroupId":  "sg-<CLINIC_WORKLOAD>"
                   },
     "CallerIdentity":  {
                            "UserId":  "AROARXNXPK3HCLAHUV6E7:Clinic-NonProd-Administrator",
-                           "Account":  "119033255630",
-                           "Arn":  "arn:aws:sts::119033255630:assumed-role/AWSReservedSSO_Clinic-NonProd-Operator_96b414772d96df13/Clinic-NonProd-Administrator"
+                           "Account":  "<AWS_ACCOUNT_ID>",
+                           "Arn":  "arn:aws:sts::<AWS_ACCOUNT_ID>:assumed-role/<SSO_ROLE>/<SESSION_NAME>"
                        },
     "VpcDns":  {
                    "EnableDnsSupport":  true,
@@ -24,7 +24,7 @@
                            {
                                "AvailabilityZoneId":  "ape1-az2",
                                "MapCustomerOwnedIpOnLaunch":  false,
-                               "OwnerId":  "119033255630",
+                               "OwnerId":  "<AWS_ACCOUNT_ID>",
                                "AssignIpv6AddressOnCreation":  false,
                                "Ipv6CidrBlockAssociationSet":  [
 
@@ -63,7 +63,7 @@
                                                 "Value":  "IT-Administrator"
                                             }
                                         ],
-                               "SubnetArn":  "arn:aws:ec2:ap-east-1:119033255630:subnet/subnet-06836be6443e37a7c",
+                               "SubnetArn":  "arn:aws:ec2:ap-east-1:<AWS_ACCOUNT_ID>:subnet/subnet-<PRIVATE_B>",
                                "EnableDns64":  false,
                                "Ipv6Native":  false,
                                "PrivateDnsNameOptionsOnLaunch":  {
@@ -74,9 +74,9 @@
                                "BlockPublicAccessStates":  {
                                                                "InternetGatewayBlockMode":  "block-ingress"
                                                            },
-                               "SubnetId":  "subnet-06836be6443e37a7c",
+                               "SubnetId":  "subnet-<PRIVATE_B>",
                                "State":  "available",
-                               "VpcId":  "vpc-0dfbc450b3120b16c",
+                               "VpcId":  "vpc-<REDACTED>",
                                "CidrBlock":  "10.0.144.0/20",
                                "AvailableIpAddressCount":  4090,
                                "AvailabilityZone":  "ap-east-1b",
@@ -86,7 +86,7 @@
                            {
                                "AvailabilityZoneId":  "ape1-az1",
                                "MapCustomerOwnedIpOnLaunch":  false,
-                               "OwnerId":  "119033255630",
+                               "OwnerId":  "<AWS_ACCOUNT_ID>",
                                "AssignIpv6AddressOnCreation":  false,
                                "Ipv6CidrBlockAssociationSet":  [
 
@@ -125,7 +125,7 @@
                                                 "Value":  "shared-platform"
                                             }
                                         ],
-                               "SubnetArn":  "arn:aws:ec2:ap-east-1:119033255630:subnet/subnet-0c7ffc0456bbfcb56",
+                               "SubnetArn":  "arn:aws:ec2:ap-east-1:<AWS_ACCOUNT_ID>:subnet/subnet-<PRIVATE_A>",
                                "EnableDns64":  false,
                                "Ipv6Native":  false,
                                "PrivateDnsNameOptionsOnLaunch":  {
@@ -136,9 +136,9 @@
                                "BlockPublicAccessStates":  {
                                                                "InternetGatewayBlockMode":  "block-ingress"
                                                            },
-                               "SubnetId":  "subnet-0c7ffc0456bbfcb56",
+                               "SubnetId":  "subnet-<PRIVATE_A>",
                                "State":  "available",
-                               "VpcId":  "vpc-0dfbc450b3120b16c",
+                               "VpcId":  "vpc-<REDACTED>",
                                "CidrBlock":  "10.0.128.0/20",
                                "AvailableIpAddressCount":  4088,
                                "AvailabilityZone":  "ap-east-1a",
@@ -148,15 +148,15 @@
                        ],
     "ExistingVpcEndpoints":  [
                                  {
-                                     "VpcEndpointId":  "vpce-02c654afe0052628a",
+                                     "VpcEndpointId":  "vpce-<S3_GATEWAY>",
                                      "VpcEndpointType":  "Gateway",
-                                     "VpcId":  "vpc-0dfbc450b3120b16c",
+                                     "VpcId":  "vpc-<REDACTED>",
                                      "ServiceName":  "com.amazonaws.ap-east-1.s3",
                                      "State":  "available",
                                      "PolicyDocument":  "{\"Version\":\"2008-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"*\",\"Resource\":\"*\"}]}",
                                      "RouteTableIds":  [
-                                                           "rtb-00425870121117812",
-                                                           "rtb-0914698fd756a45ff"
+                                                           "rtb-<PRIVATE_A>",
+                                                           "rtb-<PRIVATE_B>"
                                                        ],
                                      "SubnetIds":  [
 
@@ -211,7 +211,7 @@
                                                       "Value":  "clinic-nonproduction-vpce-s3"
                                                   }
                                               ],
-                                     "OwnerId":  "119033255630",
+                                     "OwnerId":  "<AWS_ACCOUNT_ID>",
                                      "ServiceRegion":  "ap-east-1"
                                  }
                              ],
@@ -287,15 +287,15 @@
                                                                   "DeleteOnTermination":  false,
                                                                   "DeviceIndex":  1,
                                                                   "NetworkCardIndex":  0,
-                                                                  "InstanceOwnerId":  "418393558065",
+                                                                  "InstanceOwnerId":  "<AWS_SERVICE_ACCOUNT_ID_E>",
                                                                   "Status":  "attached"
                                                               },
                                                "AvailabilityZone":  "ap-east-1b",
-                                               "Description":  "AWS created network interface for directory d-c4677826f0",
+                                               "Description":  "AWS created network interface for directory d-<REDACTED>",
                                                "Groups":  [
                                                               {
-                                                                  "GroupId":  "sg-0f43ac70d383b4859",
-                                                                  "GroupName":  "d-c4677826f0_controllers"
+                                                                  "GroupId":  "sg-<DIRECTORY_CONTROLLERS>",
+                                                                  "GroupName":  "d-<REDACTED>_controllers"
                                                               }
                                                           ],
                                                "InterfaceType":  "interface",
@@ -303,23 +303,23 @@
 
                                                                  ],
                                                "MacAddress":  "0a:61:52:a7:d3:b7",
-                                               "NetworkInterfaceId":  "eni-0e6000b3651a3eb6d",
-                                               "OwnerId":  "119033255630",
-                                               "PrivateDnsName":  "ip-10-0-149-247.ap-east-1.compute.internal",
+                                               "NetworkInterfaceId":  "eni-<REDACTED_C>",
+                                               "OwnerId":  "<AWS_ACCOUNT_ID>",
+                                               "PrivateDnsName":  "<PRIVATE_DNS_NAME>",
                                                "PublicDnsName":  "",
-                                               "PrivateIpAddress":  "10.0.149.247",
+                                               "PrivateIpAddress":  "<PRIVATE_IP>",
                                                "PrivateIpAddresses":  [
                                                                           {
                                                                               "Primary":  true,
-                                                                              "PrivateDnsName":  "ip-10-0-149-247.ap-east-1.compute.internal",
-                                                                              "PrivateIpAddress":  "10.0.149.247"
+                                                                              "PrivateDnsName":  "<PRIVATE_DNS_NAME>",
+                                                                              "PrivateIpAddress":  "<PRIVATE_IP>"
                                                                           }
                                                                       ],
-                                               "RequesterId":  "418393558065",
+                                               "RequesterId":  "<AWS_SERVICE_ACCOUNT_ID_E>",
                                                "RequesterManaged":  true,
                                                "SourceDestCheck":  true,
                                                "Status":  "in-use",
-                                               "SubnetId":  "subnet-06836be6443e37a7c",
+                                               "SubnetId":  "subnet-<PRIVATE_B>",
                                                "TagSet":  [
                                                               {
                                                                   "Key":  "ManagedBy",
@@ -350,7 +350,7 @@
                                                                   "Value":  "shared-platform"
                                                               }
                                                           ],
-                                               "VpcId":  "vpc-0dfbc450b3120b16c",
+                                               "VpcId":  "vpc-<REDACTED>",
                                                "Operator":  {
                                                                 "Managed":  false,
                                                                 "HiddenByDefault":  false
@@ -364,14 +364,14 @@
                                                                   "DeleteOnTermination":  false,
                                                                   "DeviceIndex":  1,
                                                                   "NetworkCardIndex":  0,
-                                                                  "InstanceOwnerId":  "032418932104",
+                                                                  "InstanceOwnerId":  "<AWS_SERVICE_ACCOUNT_ID_A>",
                                                                   "Status":  "attached"
                                                               },
                                                "AvailabilityZone":  "ap-east-1a",
-                                               "Description":  "[Do not detach or untag] Amazon FSx network interface for fs-0c520115e42a87b17",
+                                               "Description":  "[Do not detach or untag] Amazon FSx network interface for fs-<REDACTED>",
                                                "Groups":  [
                                                               {
-                                                                  "GroupId":  "sg-07659b5c68fe16b2a",
+                                                                  "GroupId":  "sg-<CLINIC_WORKLOAD>",
                                                                   "GroupName":  "Clinic-NonProd-Group"
                                                               }
                                                           ],
@@ -380,35 +380,35 @@
 
                                                                  ],
                                                "MacAddress":  "06:47:4b:19:e2:6f",
-                                               "NetworkInterfaceId":  "eni-00d4bf7516cdc761f",
-                                               "OwnerId":  "119033255630",
-                                               "PrivateDnsName":  "ip-10-0-131-209.ap-east-1.compute.internal",
+                                               "NetworkInterfaceId":  "eni-<REDACTED_A>",
+                                               "OwnerId":  "<AWS_ACCOUNT_ID>",
+                                               "PrivateDnsName":  "<PRIVATE_DNS_NAME>",
                                                "PublicDnsName":  "",
-                                               "PrivateIpAddress":  "10.0.131.209",
+                                               "PrivateIpAddress":  "<PRIVATE_IP>",
                                                "PrivateIpAddresses":  [
                                                                           {
                                                                               "Primary":  true,
-                                                                              "PrivateDnsName":  "ip-10-0-131-209.ap-east-1.compute.internal",
-                                                                              "PrivateIpAddress":  "10.0.131.209"
+                                                                              "PrivateDnsName":  "<PRIVATE_DNS_NAME>",
+                                                                              "PrivateIpAddress":  "<PRIVATE_IP>"
                                                                           },
                                                                           {
                                                                               "Primary":  false,
-                                                                              "PrivateDnsName":  "ip-10-0-129-94.ap-east-1.compute.internal",
-                                                                              "PrivateIpAddress":  "10.0.129.94"
+                                                                              "PrivateDnsName":  "<PRIVATE_DNS_NAME>",
+                                                                              "PrivateIpAddress":  "<PRIVATE_IP>"
                                                                           }
                                                                       ],
-                                               "RequesterId":  "165409884345",
+                                               "RequesterId":  "<AWS_SERVICE_ACCOUNT_ID_D>",
                                                "RequesterManaged":  false,
                                                "SourceDestCheck":  true,
                                                "Status":  "in-use",
-                                               "SubnetId":  "subnet-0c7ffc0456bbfcb56",
+                                               "SubnetId":  "subnet-<PRIVATE_A>",
                                                "TagSet":  [
                                                               {
                                                                   "Key":  "AmazonFSx.FileSystemId",
-                                                                  "Value":  "fs-0c520115e42a87b17"
+                                                                  "Value":  "fs-<REDACTED>"
                                                               }
                                                           ],
-                                               "VpcId":  "vpc-0dfbc450b3120b16c",
+                                               "VpcId":  "vpc-<REDACTED>",
                                                "DenyAllIgwTraffic":  true,
                                                "Operator":  {
                                                                 "Managed":  false,
@@ -423,15 +423,15 @@
                                                                   "DeleteOnTermination":  false,
                                                                   "DeviceIndex":  1,
                                                                   "NetworkCardIndex":  0,
-                                                                  "InstanceOwnerId":  "418393558065",
+                                                                  "InstanceOwnerId":  "<AWS_SERVICE_ACCOUNT_ID_E>",
                                                                   "Status":  "attached"
                                                               },
                                                "AvailabilityZone":  "ap-east-1a",
-                                               "Description":  "AWS created network interface for directory d-c4677826f0",
+                                               "Description":  "AWS created network interface for directory d-<REDACTED>",
                                                "Groups":  [
                                                               {
-                                                                  "GroupId":  "sg-0f43ac70d383b4859",
-                                                                  "GroupName":  "d-c4677826f0_controllers"
+                                                                  "GroupId":  "sg-<DIRECTORY_CONTROLLERS>",
+                                                                  "GroupName":  "d-<REDACTED>_controllers"
                                                               }
                                                           ],
                                                "InterfaceType":  "interface",
@@ -439,23 +439,23 @@
 
                                                                  ],
                                                "MacAddress":  "06:ea:1f:dc:73:15",
-                                               "NetworkInterfaceId":  "eni-09d09e3af52be9bdc",
-                                               "OwnerId":  "119033255630",
-                                               "PrivateDnsName":  "ip-10-0-137-247.ap-east-1.compute.internal",
+                                               "NetworkInterfaceId":  "eni-<REDACTED_B>",
+                                               "OwnerId":  "<AWS_ACCOUNT_ID>",
+                                               "PrivateDnsName":  "<PRIVATE_DNS_NAME>",
                                                "PublicDnsName":  "",
-                                               "PrivateIpAddress":  "10.0.137.247",
+                                               "PrivateIpAddress":  "<PRIVATE_IP>",
                                                "PrivateIpAddresses":  [
                                                                           {
                                                                               "Primary":  true,
-                                                                              "PrivateDnsName":  "ip-10-0-137-247.ap-east-1.compute.internal",
-                                                                              "PrivateIpAddress":  "10.0.137.247"
+                                                                              "PrivateDnsName":  "<PRIVATE_DNS_NAME>",
+                                                                              "PrivateIpAddress":  "<PRIVATE_IP>"
                                                                           }
                                                                       ],
-                                               "RequesterId":  "418393558065",
+                                               "RequesterId":  "<AWS_SERVICE_ACCOUNT_ID_E>",
                                                "RequesterManaged":  true,
                                                "SourceDestCheck":  true,
                                                "Status":  "in-use",
-                                               "SubnetId":  "subnet-0c7ffc0456bbfcb56",
+                                               "SubnetId":  "subnet-<PRIVATE_A>",
                                                "TagSet":  [
                                                               {
                                                                   "Key":  "System",
@@ -486,7 +486,7 @@
                                                                   "Value":  "manual-exception"
                                                               }
                                                           ],
-                                               "VpcId":  "vpc-0dfbc450b3120b16c",
+                                               "VpcId":  "vpc-<REDACTED>",
                                                "Operator":  {
                                                                 "Managed":  false,
                                                                 "HiddenByDefault":  false
@@ -499,9 +499,9 @@
                                    "Associations":  [
                                                         {
                                                             "Main":  false,
-                                                            "RouteTableAssociationId":  "rtbassoc-02205eb8d58fe1593",
-                                                            "RouteTableId":  "rtb-00425870121117812",
-                                                            "SubnetId":  "subnet-0c7ffc0456bbfcb56",
+                                                            "RouteTableAssociationId":  "rtbassoc-<PRIVATE_A>",
+                                                            "RouteTableId":  "rtb-<PRIVATE_A>",
+                                                            "SubnetId":  "subnet-<PRIVATE_A>",
                                                             "AssociationState":  {
                                                                                      "State":  "associated"
                                                                                  }
@@ -510,7 +510,7 @@
                                    "PropagatingVgws":  [
 
                                                        ],
-                                   "RouteTableId":  "rtb-00425870121117812",
+                                   "RouteTableId":  "rtb-<PRIVATE_A>",
                                    "Routes":  [
                                                   {
                                                       "DestinationCidrBlock":  "10.0.0.0/16",
@@ -519,8 +519,8 @@
                                                       "State":  "active"
                                                   },
                                                   {
-                                                      "DestinationPrefixListId":  "pl-64a5400d",
-                                                      "GatewayId":  "vpce-02c654afe0052628a",
+                                                      "DestinationPrefixListId":  "pl-<S3_SERVICE>",
+                                                      "GatewayId":  "vpce-<S3_GATEWAY>",
                                                       "Origin":  "CreateRoute",
                                                       "State":  "active"
                                                   }
@@ -559,16 +559,16 @@
                                                     "Value":  "nonprod"
                                                 }
                                             ],
-                                   "VpcId":  "vpc-0dfbc450b3120b16c",
-                                   "OwnerId":  "119033255630"
+                                   "VpcId":  "vpc-<REDACTED>",
+                                   "OwnerId":  "<AWS_ACCOUNT_ID>"
                                },
                                {
                                    "Associations":  [
                                                         {
                                                             "Main":  false,
-                                                            "RouteTableAssociationId":  "rtbassoc-04a8d0f894b698329",
-                                                            "RouteTableId":  "rtb-0914698fd756a45ff",
-                                                            "SubnetId":  "subnet-06836be6443e37a7c",
+                                                            "RouteTableAssociationId":  "rtbassoc-<PRIVATE_B>",
+                                                            "RouteTableId":  "rtb-<PRIVATE_B>",
+                                                            "SubnetId":  "subnet-<PRIVATE_B>",
                                                             "AssociationState":  {
                                                                                      "State":  "associated"
                                                                                  }
@@ -577,7 +577,7 @@
                                    "PropagatingVgws":  [
 
                                                        ],
-                                   "RouteTableId":  "rtb-0914698fd756a45ff",
+                                   "RouteTableId":  "rtb-<PRIVATE_B>",
                                    "Routes":  [
                                                   {
                                                       "DestinationCidrBlock":  "10.0.0.0/16",
@@ -586,8 +586,8 @@
                                                       "State":  "active"
                                                   },
                                                   {
-                                                      "DestinationPrefixListId":  "pl-64a5400d",
-                                                      "GatewayId":  "vpce-02c654afe0052628a",
+                                                      "DestinationPrefixListId":  "pl-<S3_SERVICE>",
+                                                      "GatewayId":  "vpce-<S3_GATEWAY>",
                                                       "Origin":  "CreateRoute",
                                                       "State":  "active"
                                                   }
@@ -626,26 +626,26 @@
                                                     "Value":  "manual-exception"
                                                 }
                                             ],
-                                   "VpcId":  "vpc-0dfbc450b3120b16c",
-                                   "OwnerId":  "119033255630"
+                                   "VpcId":  "vpc-<REDACTED>",
+                                   "OwnerId":  "<AWS_ACCOUNT_ID>"
                                }
                            ],
     "ClinicSecurityGroupRules":  {
-                                     "SecurityGroupRuleId":  "sgr-09708429b8ca59183",
-                                     "GroupId":  "sg-07659b5c68fe16b2a",
-                                     "GroupOwnerId":  "119033255630",
+                                     "SecurityGroupRuleId":  "sgr-<REDACTED>",
+                                     "GroupId":  "sg-<CLINIC_WORKLOAD>",
+                                     "GroupOwnerId":  "<AWS_ACCOUNT_ID>",
                                      "IsEgress":  true,
                                      "IpProtocol":  "-1",
                                      "FromPort":  -1,
                                      "ToPort":  -1,
                                      "ReferencedGroupInfo":  {
-                                                                 "GroupId":  "sg-0f43ac70d383b4859",
-                                                                 "UserId":  "119033255630"
+                                                                 "GroupId":  "sg-<DIRECTORY_CONTROLLERS>",
+                                                                 "UserId":  "<AWS_ACCOUNT_ID>"
                                                              },
                                      "Tags":  [
 
                                               ],
-                                     "SecurityGroupRuleArn":  "arn:aws:ec2:ap-east-1:119033255630:security-group-rule/sgr-09708429b8ca59183"
+                                     "SecurityGroupRuleArn":  "arn:aws:ec2:ap-east-1:<AWS_ACCOUNT_ID>:security-group-rule/sgr-<REDACTED>"
                                  },
     "Summary":  {
                     "DnsSupportEnabled":  true,

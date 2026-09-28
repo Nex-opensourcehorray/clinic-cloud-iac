@@ -1,6 +1,6 @@
-﻿[
+[
     {
-        "RouteTableId": "rtb-00425870121117812",
+        "RouteTableId": "rtb-<PRIVATE_A>",
         "Routes": [
             {
                 "DestinationCidrBlock": "10.0.0.0/16",
@@ -12,9 +12,9 @@
         "Associations": [
             {
                 "Main": false,
-                "RouteTableAssociationId": "rtbassoc-02205eb8d58fe1593",
-                "RouteTableId": "rtb-00425870121117812",
-                "SubnetId": "subnet-0c7ffc0456bbfcb56",
+                "RouteTableAssociationId": "rtbassoc-<PRIVATE_A>",
+                "RouteTableId": "rtb-<PRIVATE_A>",
+                "SubnetId": "subnet-<PRIVATE_A>",
                 "AssociationState": {
                     "State": "associated"
                 }
@@ -57,7 +57,7 @@
         ]
     },
     {
-        "RouteTableId": "rtb-0487fc2e33a5e2294",
+        "RouteTableId": "rtb-<PUBLIC>",
         "Routes": [
             {
                 "DestinationCidrBlock": "10.0.0.0/16",
@@ -67,7 +67,7 @@
             },
             {
                 "DestinationCidrBlock": "0.0.0.0/0",
-                "GatewayId": "igw-0100d0c7fef28f38f",
+                "GatewayId": "igw-<REDACTED>",
                 "Origin": "CreateRoute",
                 "State": "active"
             }
@@ -75,18 +75,18 @@
         "Associations": [
             {
                 "Main": false,
-                "RouteTableAssociationId": "rtbassoc-01b8212f3690030cb",
-                "RouteTableId": "rtb-0487fc2e33a5e2294",
-                "SubnetId": "subnet-06a1767aa230f8f8f",
+                "RouteTableAssociationId": "rtbassoc-<PUBLIC_A>",
+                "RouteTableId": "rtb-<PUBLIC>",
+                "SubnetId": "subnet-<PUBLIC_A>",
                 "AssociationState": {
                     "State": "associated"
                 }
             },
             {
                 "Main": false,
-                "RouteTableAssociationId": "rtbassoc-0dd3b7845ebbd2496",
-                "RouteTableId": "rtb-0487fc2e33a5e2294",
-                "SubnetId": "subnet-0e3ef16148620ea50",
+                "RouteTableAssociationId": "rtbassoc-<PUBLIC_B>",
+                "RouteTableId": "rtb-<PUBLIC>",
+                "SubnetId": "subnet-<PUBLIC_B>",
                 "AssociationState": {
                     "State": "associated"
                 }
@@ -129,7 +129,7 @@
         ]
     },
     {
-        "RouteTableId": "rtb-0914698fd756a45ff",
+        "RouteTableId": "rtb-<PRIVATE_B>",
         "Routes": [
             {
                 "DestinationCidrBlock": "10.0.0.0/16",
@@ -141,9 +141,9 @@
         "Associations": [
             {
                 "Main": false,
-                "RouteTableAssociationId": "rtbassoc-04a8d0f894b698329",
-                "RouteTableId": "rtb-0914698fd756a45ff",
-                "SubnetId": "subnet-06836be6443e37a7c",
+                "RouteTableAssociationId": "rtbassoc-<PRIVATE_B>",
+                "RouteTableId": "rtb-<PRIVATE_B>",
+                "SubnetId": "subnet-<PRIVATE_B>",
                 "AssociationState": {
                     "State": "associated"
                 }
@@ -186,7 +186,7 @@
         ]
     },
     {
-        "RouteTableId": "rtb-062e9fd25e8c2e698",
+        "RouteTableId": "rtb-<MAIN>",
         "Routes": [
             {
                 "DestinationCidrBlock": "10.0.0.0/16",
@@ -198,8 +198,8 @@
         "Associations": [
             {
                 "Main": true,
-                "RouteTableAssociationId": "rtbassoc-0a86d3e7de4cd432e",
-                "RouteTableId": "rtb-062e9fd25e8c2e698",
+                "RouteTableAssociationId": "rtbassoc-<MAIN>",
+                "RouteTableId": "rtb-<MAIN>",
                 "AssociationState": {
                     "State": "associated"
                 }

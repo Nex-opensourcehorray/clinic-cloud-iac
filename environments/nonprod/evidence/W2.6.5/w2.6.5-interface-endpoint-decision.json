@@ -1,11 +1,11 @@
-﻿{
+{
     "EvidenceId":  "W2.6.5",
     "Purpose":  "Interface Endpoint Justification Decision",
     "Timestamp":  "2026-09-26T05:25:45.4920184Z",
     "Region":  "ap-east-1",
-    "VpcId":  "vpc-0dfbc450b3120b16c",
+    "VpcId":  "vpc-<REDACTED>",
     "SourceEvidence":  {
-                           "File":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod\\w2.6.4-interface-endpoint-readiness.json",
+                           "File":  "<LOCAL_REPOSITORY>\\environments\\nonprod\\w2.6.4-interface-endpoint-readiness.json",
                            "SHA256":  "A93B00DFC88DC6C833115D0C9EFD535C2482F8F2DB6E04153336CDD0D07728CC"
                        },
     "CurrentState":  {

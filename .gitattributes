@@ -1,0 +1,3 @@
+# Keep sanitized evidence and its sidecar digests byte-stable across platforms.
+environments/nonprod/evidence/**/*.json text eol=lf
+environments/nonprod/evidence/**/*.sha256.txt text eol=lf

@@ -198,7 +198,10 @@ class PharmacyDesignInvariantTests(unittest.TestCase):
     def test_validation_root_is_isolated_and_uses_placeholders(self) -> None:
         self.assertNotIn('backend "s3"', self.validation)
         self.assertIn("111122223333", self.validation)
-        self.assertNotIn("119033255630", self.validation)
+        self.assertNotRegex(
+            self.validation,
+            r"(?<!\d)(?!(?:111122223333|555555555555)\b)\d{12}(?!\d)",
+        )
         self.assertIn("skip_credentials_validation = true", self.validation)
         self.assertIn("database_master_password_wo", self.validation)
 

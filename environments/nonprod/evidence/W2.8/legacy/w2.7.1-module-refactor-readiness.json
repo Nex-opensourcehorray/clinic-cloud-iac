@@ -1,8 +1,8 @@
-﻿{
+{
     "EvidenceId":  "W2.7.1",
     "Purpose":  "Network Module Refactor Readiness Discovery",
     "Timestamp":  "2026-09-26T07:20:46.4553842Z",
-    "WorkingDirectory":  "C:\\Users\\hehek\\Desktop\\clinic-cloud-iac\\environments\\nonprod",
+    "WorkingDirectory":  "<LOCAL_REPOSITORY>\\environments\\nonprod",
     "Terraform":  {
                       "Version":  "1.15.7",
                       "Platform":  "windows_amd64",
@@ -12,7 +12,7 @@
                         {
                             "Name":  "backend.tf",
                             "Length":  238,
-                            "SHA256":  "0C79B0B89AD4A3C96EC9A428CF17D3888BA00D4CE79075DEA1D037190731153A"
+                            "SHA256":  "0C79B0B89AD4A3C96EC9A428CF17D3888BA00D4CE79075DEA1D<AWS_SERVICE_ACCOUNT_ID_B>A"
                         },
                         {
                             "Name":  "endpoint.tf",
@@ -47,7 +47,7 @@
                         {
                             "Name":  "route_associations.tf",
                             "Length":  1161,
-                            "SHA256":  "A2F3F610F157501272724CF6CFA1401A3AA574B01C3D7D747192571CC2639EAF"
+                            "SHA256":  "A2F3F610F<AWS_SERVICE_ACCOUNT_ID_C>CF6CFA1401A3AA574B01C3D7D747192571CC2639EAF"
                         },
                         {
                             "Name":  "s3-endpoint.tf",
@@ -385,7 +385,7 @@
                                     {
                                         "File":  "security-groups.tf",
                                         "Line":  39,
-                                        "Id":  "sg-0f43ac70d383b4859"
+                                        "Id":  "sg-<DIRECTORY_CONTROLLERS>"
                                     }
                                 ],
     "ProviderTopology":  [

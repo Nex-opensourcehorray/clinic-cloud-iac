@@ -1,6 +1,6 @@
-﻿[
+[
     {
-        "SubnetId": "subnet-06836be6443e37a7c",
+        "SubnetId": "subnet-<PRIVATE_B>",
         "CIDR": "10.0.144.0/20",
         "AZ": "ap-east-1b",
         "MapPublicIpOnLaunch": false,
@@ -41,7 +41,7 @@
         ]
     },
     {
-        "SubnetId": "subnet-0e3ef16148620ea50",
+        "SubnetId": "subnet-<PUBLIC_B>",
         "CIDR": "10.0.16.0/20",
         "AZ": "ap-east-1b",
         "MapPublicIpOnLaunch": false,
@@ -82,7 +82,7 @@
         ]
     },
     {
-        "SubnetId": "subnet-0c7ffc0456bbfcb56",
+        "SubnetId": "subnet-<PRIVATE_A>",
         "CIDR": "10.0.128.0/20",
         "AZ": "ap-east-1a",
         "MapPublicIpOnLaunch": false,
@@ -123,7 +123,7 @@
         ]
     },
     {
-        "SubnetId": "subnet-06a1767aa230f8f8f",
+        "SubnetId": "subnet-<PUBLIC_A>",
         "CIDR": "10.0.0.0/20",
         "AZ": "ap-east-1a",
         "MapPublicIpOnLaunch": false,

@@ -1,4 +1,4 @@
-﻿{
+{
     "EvidenceId":  "W2.8.1",
     "Purpose":  "Final Wave 2 Security and Closure Discovery",
     "Timestamp":  "2026-09-26T09:03:43.1461279Z",
@@ -35,7 +35,7 @@
                                                              {
                                                                  "Name":  "backend.tf",
                                                                  "Length":  238,
-                                                                 "SHA256":  "0C79B0B89AD4A3C96EC9A428CF17D3888BA00D4CE79075DEA1D037190731153A"
+                                                                 "SHA256":  "0C79B0B89AD4A3C96EC9A428CF17D3888BA00D4CE79075DEA1D<AWS_SERVICE_ACCOUNT_ID_B>A"
                                                              },
                                                              {
                                                                  "Name":  "directory-data.tf",
@@ -92,7 +92,7 @@
                                                          {
                                                              "Name":  "main.tf",
                                                              "Length":  6071,
-                                                             "SHA256":  "541634738455D5E617C77732E631BFC25BAE72D25616E63125D9BA86910C0BFC"
+                                                             "SHA256":  "<AWS_SERVICE_ACCOUNT_ID_F>D5E617C77732E631BFC25BAE72D25616E63125D9BA86910C0BFC"
                                                          },
                                                          {
                                                              "Name":  "outputs.tf",
@@ -360,7 +360,7 @@
     "LiveAws":  {
                     "Vpc":  [
                                 {
-                                    "OwnerId":  "119033255630",
+                                    "OwnerId":  "<AWS_ACCOUNT_ID>",
                                     "InstanceTenancy":  "default",
                                     "CidrBlockAssociationSet":  [
                                                                     {
@@ -409,7 +409,7 @@
                                     "BlockPublicAccessStates":  {
                                                                     "InternetGatewayBlockMode":  "block-ingress"
                                                                 },
-                                    "VpcId":  "vpc-0dfbc450b3120b16c",
+                                    "VpcId":  "vpc-<REDACTED>",
                                     "State":  "available",
                                     "CidrBlock":  "10.0.0.0/16",
                                     "DhcpOptionsId":  "dopt-07ec0c17ac1c9534a"
@@ -419,7 +419,7 @@
                                     {
                                         "AvailabilityZoneId":  "ape1-az2",
                                         "MapCustomerOwnedIpOnLaunch":  false,
-                                        "OwnerId":  "119033255630",
+                                        "OwnerId":  "<AWS_ACCOUNT_ID>",
                                         "AssignIpv6AddressOnCreation":  false,
                                         "Ipv6CidrBlockAssociationSet":  [
 
@@ -458,7 +458,7 @@
                                                          "Value":  "IT-Administrator"
                                                      }
                                                  ],
-                                        "SubnetArn":  "arn:aws:ec2:ap-east-1:119033255630:subnet/subnet-06836be6443e37a7c",
+                                        "SubnetArn":  "arn:aws:ec2:ap-east-1:<AWS_ACCOUNT_ID>:subnet/subnet-<PRIVATE_B>",
                                         "EnableDns64":  false,
                                         "Ipv6Native":  false,
                                         "PrivateDnsNameOptionsOnLaunch":  {
@@ -469,9 +469,9 @@
                                         "BlockPublicAccessStates":  {
                                                                         "InternetGatewayBlockMode":  "block-ingress"
                                                                     },
-                                        "SubnetId":  "subnet-06836be6443e37a7c",
+                                        "SubnetId":  "subnet-<PRIVATE_B>",
                                         "State":  "available",
-                                        "VpcId":  "vpc-0dfbc450b3120b16c",
+                                        "VpcId":  "vpc-<REDACTED>",
                                         "CidrBlock":  "10.0.144.0/20",
                                         "AvailableIpAddressCount":  4090,
                                         "AvailabilityZone":  "ap-east-1b",
@@ -481,7 +481,7 @@
                                     {
                                         "AvailabilityZoneId":  "ape1-az2",
                                         "MapCustomerOwnedIpOnLaunch":  false,
-                                        "OwnerId":  "119033255630",
+                                        "OwnerId":  "<AWS_ACCOUNT_ID>",
                                         "AssignIpv6AddressOnCreation":  false,
                                         "Ipv6CidrBlockAssociationSet":  [
 
@@ -520,7 +520,7 @@
                                                          "Value":  "shared-platform"
                                                      }
                                                  ],
-                                        "SubnetArn":  "arn:aws:ec2:ap-east-1:119033255630:subnet/subnet-0e3ef16148620ea50",
+                                        "SubnetArn":  "arn:aws:ec2:ap-east-1:<AWS_ACCOUNT_ID>:subnet/subnet-<PUBLIC_B>",
                                         "EnableDns64":  false,
                                         "Ipv6Native":  false,
                                         "PrivateDnsNameOptionsOnLaunch":  {
@@ -531,9 +531,9 @@
                                         "BlockPublicAccessStates":  {
                                                                         "InternetGatewayBlockMode":  "block-ingress"
                                                                     },
-                                        "SubnetId":  "subnet-0e3ef16148620ea50",
+                                        "SubnetId":  "subnet-<PUBLIC_B>",
                                         "State":  "available",
-                                        "VpcId":  "vpc-0dfbc450b3120b16c",
+                                        "VpcId":  "vpc-<REDACTED>",
                                         "CidrBlock":  "10.0.16.0/20",
                                         "AvailableIpAddressCount":  4091,
                                         "AvailabilityZone":  "ap-east-1b",
@@ -543,7 +543,7 @@
                                     {
                                         "AvailabilityZoneId":  "ape1-az1",
                                         "MapCustomerOwnedIpOnLaunch":  false,
-                                        "OwnerId":  "119033255630",
+                                        "OwnerId":  "<AWS_ACCOUNT_ID>",
                                         "AssignIpv6AddressOnCreation":  false,
                                         "Ipv6CidrBlockAssociationSet":  [
 
@@ -582,7 +582,7 @@
                                                          "Value":  "shared-platform"
                                                      }
                                                  ],
-                                        "SubnetArn":  "arn:aws:ec2:ap-east-1:119033255630:subnet/subnet-0c7ffc0456bbfcb56",
+                                        "SubnetArn":  "arn:aws:ec2:ap-east-1:<AWS_ACCOUNT_ID>:subnet/subnet-<PRIVATE_A>",
                                         "EnableDns64":  false,
                                         "Ipv6Native":  false,
                                         "PrivateDnsNameOptionsOnLaunch":  {
@@ -593,9 +593,9 @@
                                         "BlockPublicAccessStates":  {
                                                                         "InternetGatewayBlockMode":  "block-ingress"
                                                                     },
-                                        "SubnetId":  "subnet-0c7ffc0456bbfcb56",
+                                        "SubnetId":  "subnet-<PRIVATE_A>",
                                         "State":  "available",
-                                        "VpcId":  "vpc-0dfbc450b3120b16c",
+                                        "VpcId":  "vpc-<REDACTED>",
                                         "CidrBlock":  "10.0.128.0/20",
                                         "AvailableIpAddressCount":  4088,
                                         "AvailabilityZone":  "ap-east-1a",
@@ -605,7 +605,7 @@
                                     {
                                         "AvailabilityZoneId":  "ape1-az1",
                                         "MapCustomerOwnedIpOnLaunch":  false,
-                                        "OwnerId":  "119033255630",
+                                        "OwnerId":  "<AWS_ACCOUNT_ID>",
                                         "AssignIpv6AddressOnCreation":  false,
                                         "Ipv6CidrBlockAssociationSet":  [
 
@@ -644,7 +644,7 @@
                                                          "Value":  "none-approved"
                                                      }
                                                  ],
-                                        "SubnetArn":  "arn:aws:ec2:ap-east-1:119033255630:subnet/subnet-06a1767aa230f8f8f",
+                                        "SubnetArn":  "arn:aws:ec2:ap-east-1:<AWS_ACCOUNT_ID>:subnet/subnet-<PUBLIC_A>",
                                         "EnableDns64":  false,
                                         "Ipv6Native":  false,
                                         "PrivateDnsNameOptionsOnLaunch":  {
@@ -655,9 +655,9 @@
                                         "BlockPublicAccessStates":  {
                                                                         "InternetGatewayBlockMode":  "block-ingress"
                                                                     },
-                                        "SubnetId":  "subnet-06a1767aa230f8f8f",
+                                        "SubnetId":  "subnet-<PUBLIC_A>",
                                         "State":  "available",
-                                        "VpcId":  "vpc-0dfbc450b3120b16c",
+                                        "VpcId":  "vpc-<REDACTED>",
                                         "CidrBlock":  "10.0.0.0/20",
                                         "AvailableIpAddressCount":  4091,
                                         "AvailabilityZone":  "ap-east-1a",
@@ -670,9 +670,9 @@
                                             "Associations":  [
                                                                  {
                                                                      "Main":  false,
-                                                                     "RouteTableAssociationId":  "rtbassoc-02205eb8d58fe1593",
-                                                                     "RouteTableId":  "rtb-00425870121117812",
-                                                                     "SubnetId":  "subnet-0c7ffc0456bbfcb56",
+                                                                     "RouteTableAssociationId":  "rtbassoc-<PRIVATE_A>",
+                                                                     "RouteTableId":  "rtb-<PRIVATE_A>",
+                                                                     "SubnetId":  "subnet-<PRIVATE_A>",
                                                                      "AssociationState":  {
                                                                                               "State":  "associated"
                                                                                           }
@@ -681,7 +681,7 @@
                                             "PropagatingVgws":  [
 
                                                                 ],
-                                            "RouteTableId":  "rtb-00425870121117812",
+                                            "RouteTableId":  "rtb-<PRIVATE_A>",
                                             "Routes":  [
                                                            {
                                                                "DestinationCidrBlock":  "10.0.0.0/16",
@@ -690,8 +690,8 @@
                                                                "State":  "active"
                                                            },
                                                            {
-                                                               "DestinationPrefixListId":  "pl-64a5400d",
-                                                               "GatewayId":  "vpce-02c654afe0052628a",
+                                                               "DestinationPrefixListId":  "pl-<S3_SERVICE>",
+                                                               "GatewayId":  "vpce-<S3_GATEWAY>",
                                                                "Origin":  "CreateRoute",
                                                                "State":  "active"
                                                            }
@@ -730,25 +730,25 @@
                                                              "Value":  "nonprod"
                                                          }
                                                      ],
-                                            "VpcId":  "vpc-0dfbc450b3120b16c",
-                                            "OwnerId":  "119033255630"
+                                            "VpcId":  "vpc-<REDACTED>",
+                                            "OwnerId":  "<AWS_ACCOUNT_ID>"
                                         },
                                         {
                                             "Associations":  [
                                                                  {
                                                                      "Main":  false,
-                                                                     "RouteTableAssociationId":  "rtbassoc-01b8212f3690030cb",
-                                                                     "RouteTableId":  "rtb-0487fc2e33a5e2294",
-                                                                     "SubnetId":  "subnet-06a1767aa230f8f8f",
+                                                                     "RouteTableAssociationId":  "rtbassoc-<PUBLIC_A>",
+                                                                     "RouteTableId":  "rtb-<PUBLIC>",
+                                                                     "SubnetId":  "subnet-<PUBLIC_A>",
                                                                      "AssociationState":  {
                                                                                               "State":  "associated"
                                                                                           }
                                                                  },
                                                                  {
                                                                      "Main":  false,
-                                                                     "RouteTableAssociationId":  "rtbassoc-0dd3b7845ebbd2496",
-                                                                     "RouteTableId":  "rtb-0487fc2e33a5e2294",
-                                                                     "SubnetId":  "subnet-0e3ef16148620ea50",
+                                                                     "RouteTableAssociationId":  "rtbassoc-<PUBLIC_B>",
+                                                                     "RouteTableId":  "rtb-<PUBLIC>",
+                                                                     "SubnetId":  "subnet-<PUBLIC_B>",
                                                                      "AssociationState":  {
                                                                                               "State":  "associated"
                                                                                           }
@@ -757,7 +757,7 @@
                                             "PropagatingVgws":  [
 
                                                                 ],
-                                            "RouteTableId":  "rtb-0487fc2e33a5e2294",
+                                            "RouteTableId":  "rtb-<PUBLIC>",
                                             "Routes":  [
                                                            {
                                                                "DestinationCidrBlock":  "10.0.0.0/16",
@@ -767,7 +767,7 @@
                                                            },
                                                            {
                                                                "DestinationCidrBlock":  "0.0.0.0/0",
-                                                               "GatewayId":  "igw-0100d0c7fef28f38f",
+                                                               "GatewayId":  "igw-<REDACTED>",
                                                                "Origin":  "CreateRoute",
                                                                "State":  "active"
                                                            }
@@ -806,16 +806,16 @@
                                                              "Value":  "IT-Administrator"
                                                          }
                                                      ],
-                                            "VpcId":  "vpc-0dfbc450b3120b16c",
-                                            "OwnerId":  "119033255630"
+                                            "VpcId":  "vpc-<REDACTED>",
+                                            "OwnerId":  "<AWS_ACCOUNT_ID>"
                                         },
                                         {
                                             "Associations":  [
                                                                  {
                                                                      "Main":  false,
-                                                                     "RouteTableAssociationId":  "rtbassoc-04a8d0f894b698329",
-                                                                     "RouteTableId":  "rtb-0914698fd756a45ff",
-                                                                     "SubnetId":  "subnet-06836be6443e37a7c",
+                                                                     "RouteTableAssociationId":  "rtbassoc-<PRIVATE_B>",
+                                                                     "RouteTableId":  "rtb-<PRIVATE_B>",
+                                                                     "SubnetId":  "subnet-<PRIVATE_B>",
                                                                      "AssociationState":  {
                                                                                               "State":  "associated"
                                                                                           }
@@ -824,7 +824,7 @@
                                             "PropagatingVgws":  [
 
                                                                 ],
-                                            "RouteTableId":  "rtb-0914698fd756a45ff",
+                                            "RouteTableId":  "rtb-<PRIVATE_B>",
                                             "Routes":  [
                                                            {
                                                                "DestinationCidrBlock":  "10.0.0.0/16",
@@ -833,8 +833,8 @@
                                                                "State":  "active"
                                                            },
                                                            {
-                                                               "DestinationPrefixListId":  "pl-64a5400d",
-                                                               "GatewayId":  "vpce-02c654afe0052628a",
+                                                               "DestinationPrefixListId":  "pl-<S3_SERVICE>",
+                                                               "GatewayId":  "vpce-<S3_GATEWAY>",
                                                                "Origin":  "CreateRoute",
                                                                "State":  "active"
                                                            }
@@ -873,15 +873,15 @@
                                                              "Value":  "manual-exception"
                                                          }
                                                      ],
-                                            "VpcId":  "vpc-0dfbc450b3120b16c",
-                                            "OwnerId":  "119033255630"
+                                            "VpcId":  "vpc-<REDACTED>",
+                                            "OwnerId":  "<AWS_ACCOUNT_ID>"
                                         },
                                         {
                                             "Associations":  [
                                                                  {
                                                                      "Main":  true,
-                                                                     "RouteTableAssociationId":  "rtbassoc-0a86d3e7de4cd432e",
-                                                                     "RouteTableId":  "rtb-062e9fd25e8c2e698",
+                                                                     "RouteTableAssociationId":  "rtbassoc-<MAIN>",
+                                                                     "RouteTableId":  "rtb-<MAIN>",
                                                                      "AssociationState":  {
                                                                                               "State":  "associated"
                                                                                           }
@@ -890,7 +890,7 @@
                                             "PropagatingVgws":  [
 
                                                                 ],
-                                            "RouteTableId":  "rtb-062e9fd25e8c2e698",
+                                            "RouteTableId":  "rtb-<MAIN>",
                                             "Routes":  [
                                                            {
                                                                "DestinationCidrBlock":  "10.0.0.0/16",
@@ -933,13 +933,13 @@
                                                              "Value":  "clinic-nonproduction-rtb-main"
                                                          }
                                                      ],
-                                            "VpcId":  "vpc-0dfbc450b3120b16c",
-                                            "OwnerId":  "119033255630"
+                                            "VpcId":  "vpc-<REDACTED>",
+                                            "OwnerId":  "<AWS_ACCOUNT_ID>"
                                         }
                                     ],
                     "SecurityGroups":  [
                                            {
-                                               "GroupId":  "sg-0b57a86cb71e1b258",
+                                               "GroupId":  "sg-<DEFAULT>",
                                                "IpPermissionsEgress":  [
 
                                                                        ],
@@ -977,9 +977,9 @@
                                                                 "Value":  "aws-service"
                                                             }
                                                         ],
-                                               "VpcId":  "vpc-0dfbc450b3120b16c",
-                                               "SecurityGroupArn":  "arn:aws:ec2:ap-east-1:119033255630:security-group/sg-0b57a86cb71e1b258",
-                                               "OwnerId":  "119033255630",
+                                               "VpcId":  "vpc-<REDACTED>",
+                                               "SecurityGroupArn":  "arn:aws:ec2:ap-east-1:<AWS_ACCOUNT_ID>:security-group/sg-<DEFAULT>",
+                                               "OwnerId":  "<AWS_ACCOUNT_ID>",
                                                "GroupName":  "default",
                                                "Description":  "default VPC security group",
                                                "IpPermissions":  [
@@ -987,7 +987,7 @@
                                                                  ]
                                            },
                                            {
-                                               "GroupId":  "sg-0f43ac70d383b4859",
+                                               "GroupId":  "sg-<DIRECTORY_CONTROLLERS>",
                                                "IpPermissionsEgress":  [
                                                                            {
                                                                                "IpProtocol":  "-1",
@@ -1037,11 +1037,11 @@
                                                                 "Value":  "IT-Administrator"
                                                             }
                                                         ],
-                                               "VpcId":  "vpc-0dfbc450b3120b16c",
-                                               "SecurityGroupArn":  "arn:aws:ec2:ap-east-1:119033255630:security-group/sg-0f43ac70d383b4859",
-                                               "OwnerId":  "119033255630",
-                                               "GroupName":  "d-c4677826f0_controllers",
-                                               "Description":  "AWS created security group for d-c4677826f0 directory controllers",
+                                               "VpcId":  "vpc-<REDACTED>",
+                                               "SecurityGroupArn":  "arn:aws:ec2:ap-east-1:<AWS_ACCOUNT_ID>:security-group/sg-<DIRECTORY_CONTROLLERS>",
+                                               "OwnerId":  "<AWS_ACCOUNT_ID>",
+                                               "GroupName":  "d-<REDACTED>_controllers",
+                                               "Description":  "AWS created security group for d-<REDACTED> directory controllers",
                                                "IpPermissions":  [
                                                                      {
                                                                          "IpProtocol":  "udp",
@@ -1087,8 +1087,8 @@
                                                                          "ToPort":  464,
                                                                          "UserIdGroupPairs":  [
                                                                                                   {
-                                                                                                      "UserId":  "119033255630",
-                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                      "UserId":  "<AWS_ACCOUNT_ID>",
+                                                                                                      "GroupId":  "sg-<CLINIC_WORKLOAD>"
                                                                                                   }
                                                                                               ],
                                                                          "IpRanges":  [
@@ -1109,8 +1109,8 @@
                                                                          "ToPort":  464,
                                                                          "UserIdGroupPairs":  [
                                                                                                   {
-                                                                                                      "UserId":  "119033255630",
-                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                      "UserId":  "<AWS_ACCOUNT_ID>",
+                                                                                                      "GroupId":  "sg-<CLINIC_WORKLOAD>"
                                                                                                   }
                                                                                               ],
                                                                          "IpRanges":  [
@@ -1131,8 +1131,8 @@
                                                                          "ToPort":  65535,
                                                                          "UserIdGroupPairs":  [
                                                                                                   {
-                                                                                                      "UserId":  "119033255630",
-                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                      "UserId":  "<AWS_ACCOUNT_ID>",
+                                                                                                      "GroupId":  "sg-<CLINIC_WORKLOAD>"
                                                                                                   }
                                                                                               ],
                                                                          "IpRanges":  [
@@ -1151,8 +1151,8 @@
                                                                          "ToPort":  389,
                                                                          "UserIdGroupPairs":  [
                                                                                                   {
-                                                                                                      "UserId":  "119033255630",
-                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                      "UserId":  "<AWS_ACCOUNT_ID>",
+                                                                                                      "GroupId":  "sg-<CLINIC_WORKLOAD>"
                                                                                                   }
                                                                                               ],
                                                                          "IpRanges":  [
@@ -1173,8 +1173,8 @@
                                                                          "ToPort":  53,
                                                                          "UserIdGroupPairs":  [
                                                                                                   {
-                                                                                                      "UserId":  "119033255630",
-                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                      "UserId":  "<AWS_ACCOUNT_ID>",
+                                                                                                      "GroupId":  "sg-<CLINIC_WORKLOAD>"
                                                                                                   }
                                                                                               ],
                                                                          "IpRanges":  [
@@ -1195,8 +1195,8 @@
                                                                          "ToPort":  389,
                                                                          "UserIdGroupPairs":  [
                                                                                                   {
-                                                                                                      "UserId":  "119033255630",
-                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                      "UserId":  "<AWS_ACCOUNT_ID>",
+                                                                                                      "GroupId":  "sg-<CLINIC_WORKLOAD>"
                                                                                                   }
                                                                                               ],
                                                                          "IpRanges":  [
@@ -1236,8 +1236,8 @@
                                                                          "ToPort":  445,
                                                                          "UserIdGroupPairs":  [
                                                                                                   {
-                                                                                                      "UserId":  "119033255630",
-                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                      "UserId":  "<AWS_ACCOUNT_ID>",
+                                                                                                      "GroupId":  "sg-<CLINIC_WORKLOAD>"
                                                                                                   }
                                                                                               ],
                                                                          "IpRanges":  [
@@ -1258,8 +1258,8 @@
                                                                          "ToPort":  123,
                                                                          "UserIdGroupPairs":  [
                                                                                                   {
-                                                                                                      "UserId":  "119033255630",
-                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                      "UserId":  "<AWS_ACCOUNT_ID>",
+                                                                                                      "GroupId":  "sg-<CLINIC_WORKLOAD>"
                                                                                                   }
                                                                                               ],
                                                                          "IpRanges":  [
@@ -1280,8 +1280,8 @@
                                                                          "ToPort":  9389,
                                                                          "UserIdGroupPairs":  [
                                                                                                   {
-                                                                                                      "UserId":  "119033255630",
-                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                      "UserId":  "<AWS_ACCOUNT_ID>",
+                                                                                                      "GroupId":  "sg-<CLINIC_WORKLOAD>"
                                                                                                   }
                                                                                               ],
                                                                          "IpRanges":  [
@@ -1300,8 +1300,8 @@
                                                                          "ToPort":  5985,
                                                                          "UserIdGroupPairs":  [
                                                                                                   {
-                                                                                                      "UserId":  "119033255630",
-                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                      "UserId":  "<AWS_ACCOUNT_ID>",
+                                                                                                      "GroupId":  "sg-<CLINIC_WORKLOAD>"
                                                                                                   }
                                                                                               ],
                                                                          "IpRanges":  [
@@ -1320,8 +1320,8 @@
                                                                          "ToPort":  88,
                                                                          "UserIdGroupPairs":  [
                                                                                                   {
-                                                                                                      "UserId":  "119033255630",
-                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                      "UserId":  "<AWS_ACCOUNT_ID>",
+                                                                                                      "GroupId":  "sg-<CLINIC_WORKLOAD>"
                                                                                                   }
                                                                                               ],
                                                                          "IpRanges":  [
@@ -1342,8 +1342,8 @@
                                                                          "ToPort":  3269,
                                                                          "UserIdGroupPairs":  [
                                                                                                   {
-                                                                                                      "UserId":  "119033255630",
-                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                      "UserId":  "<AWS_ACCOUNT_ID>",
+                                                                                                      "GroupId":  "sg-<CLINIC_WORKLOAD>"
                                                                                                   }
                                                                                               ],
                                                                          "IpRanges":  [
@@ -1383,8 +1383,8 @@
                                                                          "ToPort":  135,
                                                                          "UserIdGroupPairs":  [
                                                                                                   {
-                                                                                                      "UserId":  "119033255630",
-                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                      "UserId":  "<AWS_ACCOUNT_ID>",
+                                                                                                      "GroupId":  "sg-<CLINIC_WORKLOAD>"
                                                                                                   }
                                                                                               ],
                                                                          "IpRanges":  [
@@ -1405,8 +1405,8 @@
                                                                          "ToPort":  636,
                                                                          "UserIdGroupPairs":  [
                                                                                                   {
-                                                                                                      "UserId":  "119033255630",
-                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                      "UserId":  "<AWS_ACCOUNT_ID>",
+                                                                                                      "GroupId":  "sg-<CLINIC_WORKLOAD>"
                                                                                                   }
                                                                                               ],
                                                                          "IpRanges":  [
@@ -1425,8 +1425,8 @@
                                                                          "ToPort":  53,
                                                                          "UserIdGroupPairs":  [
                                                                                                   {
-                                                                                                      "UserId":  "119033255630",
-                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                      "UserId":  "<AWS_ACCOUNT_ID>",
+                                                                                                      "GroupId":  "sg-<CLINIC_WORKLOAD>"
                                                                                                   }
                                                                                               ],
                                                                          "IpRanges":  [
@@ -1447,8 +1447,8 @@
                                                                          "ToPort":  88,
                                                                          "UserIdGroupPairs":  [
                                                                                                   {
-                                                                                                      "UserId":  "119033255630",
-                                                                                                      "GroupId":  "sg-07659b5c68fe16b2a"
+                                                                                                      "UserId":  "<AWS_ACCOUNT_ID>",
+                                                                                                      "GroupId":  "sg-<CLINIC_WORKLOAD>"
                                                                                                   }
                                                                                               ],
                                                                          "IpRanges":  [
@@ -1466,14 +1466,14 @@
                                                                  ]
                                            },
                                            {
-                                               "GroupId":  "sg-07659b5c68fe16b2a",
+                                               "GroupId":  "sg-<CLINIC_WORKLOAD>",
                                                "IpPermissionsEgress":  [
                                                                            {
                                                                                "IpProtocol":  "-1",
                                                                                "UserIdGroupPairs":  [
                                                                                                         {
-                                                                                                            "UserId":  "119033255630",
-                                                                                                            "GroupId":  "sg-0f43ac70d383b4859"
+                                                                                                            "UserId":  "<AWS_ACCOUNT_ID>",
+                                                                                                            "GroupId":  "sg-<DIRECTORY_CONTROLLERS>"
                                                                                                         }
                                                                                                     ],
                                                                                "IpRanges":  [
@@ -1517,9 +1517,9 @@
                                                                 "Value":  "CC-CLINIC-MIG-2026"
                                                             }
                                                         ],
-                                               "VpcId":  "vpc-0dfbc450b3120b16c",
-                                               "SecurityGroupArn":  "arn:aws:ec2:ap-east-1:119033255630:security-group/sg-07659b5c68fe16b2a",
-                                               "OwnerId":  "119033255630",
+                                               "VpcId":  "vpc-<REDACTED>",
+                                               "SecurityGroupArn":  "arn:aws:ec2:ap-east-1:<AWS_ACCOUNT_ID>:security-group/sg-<CLINIC_WORKLOAD>",
+                                               "OwnerId":  "<AWS_ACCOUNT_ID>",
                                                "GroupName":  "Clinic-NonProd-Group",
                                                "Description":  "Proceed SMB to the Private Group.",
                                                "IpPermissions":  [
@@ -1529,15 +1529,15 @@
                                        ],
                     "S3VpcEndpoint":  [
                                           {
-                                              "VpcEndpointId":  "vpce-02c654afe0052628a",
+                                              "VpcEndpointId":  "vpce-<S3_GATEWAY>",
                                               "VpcEndpointType":  "Gateway",
-                                              "VpcId":  "vpc-0dfbc450b3120b16c",
+                                              "VpcId":  "vpc-<REDACTED>",
                                               "ServiceName":  "com.amazonaws.ap-east-1.s3",
                                               "State":  "available",
-                                              "PolicyDocument":  "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"AllowCurrentAccountS3ResourcesOnly\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"s3:*\",\"Resource\":\"*\",\"Condition\":{\"StringEquals\":{\"aws:PrincipalAccount\":\"119033255630\",\"s3:ResourceAccount\":\"119033255630\"}}}]}",
+                                              "PolicyDocument":  "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Sid\":\"AllowCurrentAccountS3ResourcesOnly\",\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"s3:*\",\"Resource\":\"*\",\"Condition\":{\"StringEquals\":{\"aws:PrincipalAccount\":\"<AWS_ACCOUNT_ID>\",\"s3:ResourceAccount\":\"<AWS_ACCOUNT_ID>\"}}}]}",
                                               "RouteTableIds":  [
-                                                                    "rtb-00425870121117812",
-                                                                    "rtb-0914698fd756a45ff"
+                                                                    "rtb-<PRIVATE_A>",
+                                                                    "rtb-<PRIVATE_B>"
                                                                 ],
                                               "SubnetIds":  [
 
@@ -1592,7 +1592,7 @@
                                                                "Value":  "clinic-nonproduction-vpce-s3"
                                                            }
                                                        ],
-                                              "OwnerId":  "119033255630",
+                                              "OwnerId":  "<AWS_ACCOUNT_ID>",
                                               "ServiceRegion":  "ap-east-1"
                                           }
                                       ]

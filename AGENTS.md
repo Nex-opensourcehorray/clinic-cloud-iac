@@ -15,7 +15,13 @@ Current implementation status:
 - Wave 3: ENGINEERING CLOSED — DEPLOYMENT DEFERRED
 - Wave 4: DESIGN VALIDATED — NOT DEPLOYED
 - Wave 5: DESIGN VALIDATED — NOT DEPLOYED
-- Next engineering mission: Wave 6 — Lab/Radiology Hybrid Integration (not started)
+- Wave 6: DISCOVERY CLOSED — IMPLEMENTATION TERMINATED
+
+Wave 6 ended because the required external ISP/private-connectivity prerequisite
+was unavailable. Authenticated read-only discovery found an existing VGW-based
+dynamic-BGP Site-to-Site VPN foundation, but its tunnels were down and no usable
+routes were accepted. No Terraform plan/apply or AWS mutation occurred, and no
+production or clinical connectivity is claimed.
 
 Do not reinterpret a closed wave as incomplete unless current evidence shows
 an actual defect or drift.

@@ -6,11 +6,16 @@
 #   w2.6.4-interface-endpoint-readiness.sha256.txt
 # ============================================================
 
+param(
+    [Parameter(Mandatory = $true)]
+    [string]$Profile,
+    [string]$Region = "ap-east-1"
+)
+
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
-$env:AWS_PROFILE = "clinic-nonprod"
-$Region = "ap-east-1"
+$env:AWS_PROFILE = $Profile
 
 $OutputFile = "w2.6.4-interface-endpoint-readiness.json"
 $HashFile   = "w2.6.4-interface-endpoint-readiness.sha256.txt"

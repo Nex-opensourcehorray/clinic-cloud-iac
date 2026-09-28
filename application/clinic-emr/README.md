@@ -15,11 +15,11 @@ Known portfolio facts:
   security, and explicitly controlled break-glass users.
 - PHI, PII, clinical history, audit continuity, and patient matching are
   high-integrity requirements.
-- Repository evidence identifies AWS account `119033255630`, region
-  `ap-east-1`, VPC `vpc-0dfbc450b3120b16c` (`10.0.0.0/16`), two private
+- Repository evidence identifies AWS account `<AWS_ACCOUNT_ID>`, region
+  `ap-east-1`, VPC `vpc-<REDACTED>` (`10.0.0.0/16`), two private
   subnets without default routes, S3 gateway endpoint
-  `vpce-02c654afe0052628a`, AWS Managed Microsoft AD, and Windows FSx
-  `fs-0c520115e42a87b17`.
+  `vpce-<S3_GATEWAY>`, AWS Managed Microsoft AD, and Windows FSx
+  `fs-<REDACTED>`.
 - IAM roles, permissions boundaries, KMS keys, and secret containers follow the
   existing external owner-controlled governance model.
 

@@ -3,6 +3,12 @@ variable "aws_region" {
   type        = string
 }
 
+variable "offline_validation" {
+  description = "Disable AWS credential and account lookups only for local/CI terraform validate"
+  type        = bool
+  default     = false
+}
+
 variable "environment" {
   description = "Deployment environment name"
   type        = string
@@ -11,6 +17,16 @@ variable "environment" {
 variable "project_name" {
   description = "Logical project name"
   type        = string
+}
+
+variable "directory_controller_security_group_id" {
+  description = "ID of the externally managed Directory Service controller security group"
+  type        = string
+
+  validation {
+    condition     = can(regex("^sg-[0-9a-f]{8,17}$", var.directory_controller_security_group_id))
+    error_message = "directory_controller_security_group_id must be a valid security group ID."
+  }
 }
 
 variable "appointment_api_hmac_secret_arn" {

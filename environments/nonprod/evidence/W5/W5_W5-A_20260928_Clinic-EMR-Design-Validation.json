@@ -19,36 +19,36 @@
     "PatientRecordsIncluded": false
   },
   "ExistingEnvironmentEvidence": {
-    "AccountId": "119033255630",
+    "AccountId": "<AWS_ACCOUNT_ID>",
     "Region": "ap-east-1",
     "Vpc": {
-      "VpcId": "vpc-0dfbc450b3120b16c",
+      "VpcId": "vpc-<REDACTED>",
       "Cidr": "10.0.0.0/16",
       "DnsSupport": true,
       "DnsHostnames": true
     },
     "PrivateSubnets": [
       {
-        "SubnetId": "subnet-0c7ffc0456bbfcb56",
+        "SubnetId": "subnet-<PRIVATE_A>",
         "AvailabilityZone": "ap-east-1a",
         "Cidr": "10.0.128.0/20",
         "DefaultRoute": false
       },
       {
-        "SubnetId": "subnet-06836be6443e37a7c",
+        "SubnetId": "subnet-<PRIVATE_B>",
         "AvailabilityZone": "ap-east-1b",
         "Cidr": "10.0.144.0/20",
         "DefaultRoute": false
       }
     ],
     "EvidencedVpcEndpoints": [
-      "vpce-02c654afe0052628a (S3 gateway)"
+      "vpce-<S3_GATEWAY> (S3 gateway)"
     ],
     "ExternalDirectoryService": {
-      "DirectoryId": "d-c4677826f0",
-      "ControllerSecurityGroupId": "sg-0f43ac70d383b4859"
+      "DirectoryId": "d-<REDACTED>",
+      "ControllerSecurityGroupId": "sg-<DIRECTORY_CONTROLLERS>"
     },
-    "ExternalWindowsFsxId": "fs-0c520115e42a87b17",
+    "ExternalWindowsFsxId": "fs-<REDACTED>",
     "NotEvidenced": [
       "Approved source MySQL route or VPN",
       "SSM, logging, KMS, or Secrets Manager interface endpoints",
