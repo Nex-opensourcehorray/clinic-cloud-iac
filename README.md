@@ -18,6 +18,7 @@ This repository is used to learn and demonstrate Terraform engineering practices
 | Wave 3 | Appointment API Workflow | ENGINEERING CLOSED — DEPLOYMENT DEFERRED |
 | Wave 4 | Pharmacy migration | DESIGN VALIDATED — NOT DEPLOYED |
 | Wave 5 | Clinic/EMR shared MySQL migration | DESIGN VALIDATED — NOT DEPLOYED |
+| Wave 6 | Lab/Radiology hybrid integration | TERMINATED — EXTERNAL CONNECTIVITY PREREQUISITE UNAVAILABLE |
 
 Wave 3 checkpoints:
 
@@ -64,9 +65,19 @@ Terraform validation passed. No AWS resource, database migration, clinical UAT,
 cutover, or rollback was performed. Evidence is recorded in
 `environments/nonprod/evidence/W5/W5_W5-A_20260928_Clinic-EMR-Design-Validation.json`.
 
-Wave 6 is the next potential mission but has not started. Unlike Waves 4 and 5,
-it returns to the normal design, plan, explicit owner approval, controlled
-apply, and live-validation workflow.
+Wave 6 is **DISCOVERY CLOSED — IMPLEMENTATION TERMINATED**. The work remained
+read-only. Authenticated AWS discovery confirmed an existing VGW-based,
+dynamic-BGP Site-to-Site VPN foundation, but both tunnels were down, no routes
+were accepted, and the private route tables had neither VGW propagation nor
+explicit on-premises routes. Existing-VPN reuse was therefore classified as
+conditional rather than ready.
+
+Directory Service and FSx remained private-only and were not exposed through a
+working hybrid path. Exact Lab/Radiology endpoint CIDRs, protocols, and routing
+requirements remained vendor inputs, while the required external ISP
+connectivity prerequisite was unavailable. No Terraform plan or apply was run,
+no AWS resource was created or modified, and no production or clinical
+connectivity was claimed.
 
 ---
 
