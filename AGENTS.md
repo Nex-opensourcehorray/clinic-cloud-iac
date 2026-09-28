@@ -14,8 +14,8 @@ Current implementation status:
 - Wave 2: CLOSED — PASS
 - Wave 3: ENGINEERING CLOSED — DEPLOYMENT DEFERRED
 - Wave 4: DESIGN VALIDATED — NOT DEPLOYED
-- Wave 5: DESIGN / SECURITY / MIGRATION VALIDATION ONLY — NEVER DEPLOY
-- Next engineering mission: Wave 5 — Clinic/EMR Shared MySQL Design Validation
+- Wave 5: DESIGN VALIDATED — NOT DEPLOYED
+- Next engineering mission: Wave 6 — Lab/Radiology Hybrid Integration (not started)
 
 Do not reinterpret a closed wave as incomplete unless current evidence shows
 an actual defect or drift.

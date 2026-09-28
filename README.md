@@ -17,7 +17,7 @@ This repository is used to learn and demonstrate Terraform engineering practices
 | Wave 2 | Network foundation | CLOSED — PASS |
 | Wave 3 | Appointment API Workflow | ENGINEERING CLOSED — DEPLOYMENT DEFERRED |
 | Wave 4 | Pharmacy migration | DESIGN VALIDATED — NOT DEPLOYED |
-| Wave 5 | Clinic/EMR shared MySQL migration | DESIGN VALIDATION NEXT — NEVER DEPLOY |
+| Wave 5 | Clinic/EMR shared MySQL migration | DESIGN VALIDATED — NOT DEPLOYED |
 
 Wave 3 checkpoints:
 
@@ -54,8 +54,19 @@ passed. No AWS resource, live workload, data migration, or deployment was
 created or performed. Evidence is recorded in
 `environments/nonprod/evidence/W4/W4_W4-A_20260928_Pharmacy-Design-Validation.json`.
 
-Wave 5 is the next design-validation mission and remains subject to the same
-permanent non-deployment rule.
+Wave 5 is **DESIGN VALIDATED — NOT DEPLOYED**. Its isolated Terraform and
+portfolio documentation model the shared Clinic/EMR migration as private
+application compute, private RDS MySQL, and a temporary private DMS full-load
+plus CDC path. The package includes data classification, clinical RBAC/UAT,
+integrity and CDC validation, FSx consistency, backup/restore, cutover,
+rollback, threat analysis, and cost design. Thirty-four static design tests and
+Terraform validation passed. No AWS resource, database migration, clinical UAT,
+cutover, or rollback was performed. Evidence is recorded in
+`environments/nonprod/evidence/W5/W5_W5-A_20260928_Clinic-EMR-Design-Validation.json`.
+
+Wave 6 is the next potential mission but has not started. Unlike Waves 4 and 5,
+it returns to the normal design, plan, explicit owner approval, controlled
+apply, and live-validation workflow.
 
 ---
 
