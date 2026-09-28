@@ -1,0 +1,14 @@
+[
+    {
+        "RuleId": "sgr-<REDACTED>",
+        "Direction": true,
+        "Protocol": "-1",
+        "FromPort": -1,
+        "ToPort": -1,
+        "IPv4": null,
+        "IPv6": null,
+        "PrefixList": null,
+        "ReferencedSG": "sg-<DIRECTORY_CONTROLLERS>",
+        "Description": null
+    }
+]

@@ -1,0 +1,5 @@
+bucket       = "<STATE_BUCKET_NAME>"
+key          = "environments/nonprod/terraform.tfstate"
+region       = "ap-east-1"
+encrypt      = true
+use_lockfile = true

@@ -1,0 +1,66 @@
+[
+    {
+        "GroupId":  "sg-<DEFAULT>",
+        "GroupName":  "default",
+        "Description":  "default VPC security group",
+        "AttachedENIs":  {
+                             "value":  [
+
+                                       ],
+                             "Count":  0
+                         }
+    },
+    {
+        "GroupId":  "sg-<DIRECTORY_CONTROLLERS>",
+        "GroupName":  "d-<REDACTED>_controllers",
+        "Description":  "AWS created security group for d-<REDACTED> directory controllers",
+        "AttachedENIs":  {
+                             "value":  [
+                                           {
+                                               "NetworkInterfaceId":  "eni-<REDACTED_B>",
+                                               "InterfaceType":  "interface",
+                                               "Status":  "in-use",
+                                               "Description":  "AWS created network interface for directory d-<REDACTED>",
+                                               "PrivateIpAddress":  "<PRIVATE_IP>",
+                                               "SubnetId":  "subnet-<PRIVATE_A>",
+                                               "AttachmentInstanceId":  null,
+                                               "RequesterManaged":  true,
+                                               "RequesterId":  "<AWS_SERVICE_ACCOUNT_ID_E>"
+                                           },
+                                           {
+                                               "NetworkInterfaceId":  "eni-<REDACTED_C>",
+                                               "InterfaceType":  "interface",
+                                               "Status":  "in-use",
+                                               "Description":  "AWS created network interface for directory d-<REDACTED>",
+                                               "PrivateIpAddress":  "<PRIVATE_IP>",
+                                               "SubnetId":  "subnet-<PRIVATE_B>",
+                                               "AttachmentInstanceId":  null,
+                                               "RequesterManaged":  true,
+                                               "RequesterId":  "<AWS_SERVICE_ACCOUNT_ID_E>"
+                                           }
+                                       ],
+                             "Count":  2
+                         }
+    },
+    {
+        "GroupId":  "sg-<CLINIC_WORKLOAD>",
+        "GroupName":  "Clinic-NonProd-Group",
+        "Description":  "Proceed SMB to the Private Group.",
+        "AttachedENIs":  {
+                             "value":  [
+                                           {
+                                               "NetworkInterfaceId":  "eni-<REDACTED_A>",
+                                               "InterfaceType":  "interface",
+                                               "Status":  "in-use",
+                                               "Description":  "[Do not detach or untag] Amazon FSx network interface for fs-<REDACTED>",
+                                               "PrivateIpAddress":  "<PRIVATE_IP>",
+                                               "SubnetId":  "subnet-<PRIVATE_A>",
+                                               "AttachmentInstanceId":  null,
+                                               "RequesterManaged":  false,
+                                               "RequesterId":  "<AWS_SERVICE_ACCOUNT_ID_D>"
+                                           }
+                                       ],
+                             "Count":  1
+                         }
+    }
+]

@@ -1,0 +1,2 @@
+04073F1C8F07ADB29F2A3D397C9D4AFF70AD965D2EFB88860E9BB28281FCD283  w2.6.1-resource-baseline.json
+# SHA-256 of the sanitized portfolio copy; the private operational original is not published.

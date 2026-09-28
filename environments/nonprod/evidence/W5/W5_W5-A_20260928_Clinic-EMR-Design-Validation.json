@@ -1,0 +1,300 @@
+{
+  "EvidenceId": "W5-A",
+  "Purpose": "Wave 5 Clinic and EMR shared MySQL migration architecture, security, and migration design validation",
+  "TimestampUTC": "2026-09-28T02:46:11.090Z",
+  "Branch": "wave-5-clinic-emr",
+  "BaseCommit": "c464dabc11a7339459d57cf906f9433c1c87b35f",
+  "Scope": {
+    "PermanentNonDeployment": true,
+    "AwsDiscoverySource": "Existing sanitized repository evidence only",
+    "AwsApiCallsPerformed": false,
+    "AwsMutationsPerformed": false,
+    "TerraformPlanPerformed": false,
+    "TerraformApplyPerformed": false,
+    "DmsTaskExecuted": false,
+    "DatabaseMigrationPerformed": false,
+    "ClinicalUatPerformed": false,
+    "LiveCutoverPerformed": false,
+    "RollbackPerformed": false,
+    "PatientRecordsIncluded": false
+  },
+  "ExistingEnvironmentEvidence": {
+    "AccountId": "<AWS_ACCOUNT_ID>",
+    "Region": "ap-east-1",
+    "Vpc": {
+      "VpcId": "vpc-<REDACTED>",
+      "Cidr": "10.0.0.0/16",
+      "DnsSupport": true,
+      "DnsHostnames": true
+    },
+    "PrivateSubnets": [
+      {
+        "SubnetId": "subnet-<PRIVATE_A>",
+        "AvailabilityZone": "ap-east-1a",
+        "Cidr": "10.0.128.0/20",
+        "DefaultRoute": false
+      },
+      {
+        "SubnetId": "subnet-<PRIVATE_B>",
+        "AvailabilityZone": "ap-east-1b",
+        "Cidr": "10.0.144.0/20",
+        "DefaultRoute": false
+      }
+    ],
+    "EvidencedVpcEndpoints": [
+      "vpce-<S3_GATEWAY> (S3 gateway)"
+    ],
+    "ExternalDirectoryService": {
+      "DirectoryId": "d-<REDACTED>",
+      "ControllerSecurityGroupId": "sg-<DIRECTORY_CONTROLLERS>"
+    },
+    "ExternalWindowsFsxId": "fs-<REDACTED>",
+    "NotEvidenced": [
+      "Approved source MySQL route or VPN",
+      "SSM, logging, KMS, or Secrets Manager interface endpoints",
+      "Clinic/EMR application, IAM roles, secrets, KMS key, or backup policy"
+    ]
+  },
+  "KnownScenario": [
+    "Clinic Management and EMR share one MySQL datastore and must migrate together.",
+    "Doctors, nurses, reception, clinic managers, IT, security, and break-glass roles require distinct application authorization.",
+    "PHI, PII, clinical-history integrity, audit continuity, and patient matching are critical."
+  ],
+  "UnsupportedAssumptions": [
+    "No commercial Clinic or EMR product, vendor support matrix, source schema, or database inventory was supplied.",
+    "MySQL version, size, change rate, topology, storage engines, keys, LOBs, charset, collation, time zone, and application connection behavior are unknown.",
+    "Stored procedures, triggers, events, views, grants, partitions, generated columns, and unsupported data types are unknown.",
+    "Source route, redundant VPN, DNS, firewall rules, source impact tolerance, and integration contracts are unknown.",
+    "RPO 15 minutes, RTO four hours, and 300-second CDC alarm threshold are scenario placeholders, not owner-approved clinical requirements."
+  ],
+  "Architecture": {
+    "ApplicationTier": "Private EC2, no public IP, no SSH or RDP ingress, IMDSv2, encrypted gp3, Session Manager through external endpoints",
+    "DatabaseTier": "Private Single-AZ RDS MySQL 8.0 design baseline, db.t3.small, encrypted gp3, TLS-required parameter group, automated backups, final snapshot, deletion protection",
+    "MigrationTier": "Private Single-AZ DMS dms.t3.small design using full-load-and-cdc, endpoint TLS verify-full, task validation, bounded logging, and external secrets",
+    "DatabaseFlow": "Application SG and DMS SG to database SG only on TCP/3306",
+    "SourceFlow": "DMS SG to exact private source MySQL CIDRs only on TCP/3306",
+    "SharedFiles": "Existing FSx is optional and external; SMB/445 is modeled only when vendor evidence requires it",
+    "DesignResourceBlockCount": 34,
+    "ResourcesCreated": 0
+  },
+  "RdsDesign": {
+    "EngineBaseline": "MySQL 8.0; source and vendor confirmation required",
+    "InstanceClass": "db.t3.small conceptual nonproduction baseline",
+    "Availability": "Single-AZ design constraint; not a production recommendation",
+    "Storage": "20 GiB gp3 with 100 GiB ceiling, encrypted using external KMS",
+    "PubliclyAccessible": false,
+    "TlsRequired": true,
+    "BackupRetentionDays": 7,
+    "DeletionProtection": true,
+    "FinalSnapshot": true,
+    "CloudWatchExports": [
+      "error"
+    ],
+    "RequiresConfirmation": [
+      "Exact engine version and upgrade path",
+      "Instance, IOPS, connection, and storage sizing",
+      "Character set, collation, SQL mode, time zone, and parameter compatibility",
+      "Audit plugin, protected log destination, and approved retention"
+    ]
+  },
+  "DmsDesign": {
+    "MigrationType": "full-load-and-cdc",
+    "PrivateConnectivity": true,
+    "PubliclyAccessible": false,
+    "EndpointCredentials": "External Secrets Manager ARNs via externally governed exact-purpose role",
+    "EndpointTls": "verify-full with externally governed certificate ARNs",
+    "TableMapping": "Exact application schema with placeholder all-table selection pending reviewed inventory",
+    "LobMode": "Limited LOB mode with conceptual 32 KiB threshold; profiling required and any data or truncation error stops the task",
+    "ValidationEnabled": true,
+    "Logging": "Default severity and no intentional row payload, SQL literal, PHI, PII, or secret content",
+    "SourcePrerequisites": [
+      "ROW binary logging and required row image",
+      "Adequate binlog retention and unique server ID",
+      "Least-privilege DMS user",
+      "TLS and certificate validation",
+      "Primary or unique keys for reliable CDC",
+      "Measured source performance headroom"
+    ],
+    "CompatibilityRisks": [
+      "Procedures, functions, triggers, events, views, users, and grants require separate handling",
+      "LOB, data type, collation, time zone, generated-column, and DDL behavior require testing",
+      "DMS validation does not replace independent clinical integrity and audit validation"
+    ],
+    "TaskExecuted": false
+  },
+  "DataClassification": {
+    "PhiAndPii": [
+      "Patient demographics and identifiers",
+      "Appointments",
+      "Encounters and clinical notes",
+      "Diagnoses and medication history",
+      "Billing references",
+      "Attachments and file references"
+    ],
+    "SecurityAndAudit": [
+      "User and account metadata",
+      "Audit history",
+      "Break-glass events"
+    ],
+    "OperationalMetadata": [
+      "DMS metrics",
+      "Task state",
+      "Sanitized infrastructure logs"
+    ]
+  },
+  "RbacDesign": {
+    "ApplicationLayerAuthoritative": true,
+    "DirectClinicalUserDatabaseAccess": false,
+    "Roles": [
+      "Doctor",
+      "Nurse",
+      "Reception",
+      "Clinic Manager",
+      "IT Administrator",
+      "Security Administrator",
+      "Break Glass"
+    ],
+    "BreakGlassControls": [
+      "Named strongly authenticated identity",
+      "Explicit reason and time-limited minimum scope",
+      "Immediate alert",
+      "Complete event logging",
+      "Mandatory security and clinical post-use review"
+    ]
+  },
+  "ExternalOwnership": {
+    "IamRolesExternallyManaged": true,
+    "SecretMetadataAndValuesExternallyManaged": true,
+    "KmsKeyExternallyManaged": true,
+    "TerraformConsumesOnlyExactArns": true,
+    "EmbeddedDatabasePasswords": false,
+    "SecretRotation": "Owner-approved process and rotation evidence required"
+  },
+  "FsxDesign": {
+    "ExistingFsxAssumedCompatible": false,
+    "UseConditionalOnVendorEvidence": true,
+    "DatabaseStores": "Structured records and stable file references",
+    "FsxMayStore": "Encrypted reports, exports, attachments, or legacy shared files",
+    "ConsistencyControls": [
+      "Stable identifier",
+      "Object size and checksum",
+      "Orphan and duplicate detection",
+      "Aligned recovery points",
+      "Database-reference and file-object reconciliation"
+    ]
+  },
+  "IntegrityValidationDesign": [
+    "Row counts by table and clinically meaningful partition",
+    "Patient, appointment, encounter, and audit identifier uniqueness",
+    "Declared and application-enforced referential integrity",
+    "Null and value distributions",
+    "Timestamp, time-zone, precision, and ordering behavior",
+    "Encoding, collation, sorting, and equality behavior",
+    "Duplicate and deleted-record semantics",
+    "Clinical-history version/order totals",
+    "Audit continuity",
+    "Database-reference and FSx-object consistency"
+  ],
+  "CdcValidationDesign": [
+    "Insert propagation",
+    "Update propagation",
+    "Delete propagation",
+    "High-change interval",
+    "Replication lag",
+    "DMS restart",
+    "Network interruption",
+    "Duplicate prevention",
+    "DDL freeze behavior",
+    "Source and target reconciliation"
+  ],
+  "CutoverDesign": [
+    "Readiness checks",
+    "Schema and permission change freeze",
+    "Full-load completion and validation",
+    "CDC stability and lag monitoring",
+    "Final source-write freeze",
+    "Replication catch-up to owner-approved threshold",
+    "Independent integrity validation",
+    "Reviewed application connection switch",
+    "Role-based synthetic smoke and UAT",
+    "Explicit go or no-go",
+    "Downtime and source-target reconciliation"
+  ],
+  "RollbackDesign": [
+    "Stop target writes and integrations",
+    "Preserve state, logs, checkpoints, tests, and decision evidence",
+    "Identify and reconcile every target-only or downtime transaction",
+    "Return applications to source through reviewed configuration reversal",
+    "Revalidate source integrity and authentication before reopening",
+    "Choose forward-fix or later retry through change governance"
+  ],
+  "BackupRestoreDesign": {
+    "RdsAutomatedBackupDays": 7,
+    "AwsBackupRetentionDays": 35,
+    "ManualPreCutoverSnapshot": true,
+    "Covers": [
+      "EC2 application instance",
+      "RDS database",
+      "External FSx only when explicitly selected"
+    ],
+    "RestoreValidation": "Isolated private restore with integrity, application, RBAC, audit, attachment, and recovery-time checks",
+    "RpoAssumption": "15 minutes; owner approval absent",
+    "RtoAssumption": "4 hours; owner approval absent"
+  },
+  "Validation": {
+    "StaticDesignTests": {
+      "Result": "PASS",
+      "Count": 34
+    },
+    "TerraformFmtRecursive": "PASS",
+    "TerraformFmtCheckRecursive": "PASS",
+    "DesignRootValidate": "PASS",
+    "NonproductionRootValidate": "PASS_WITH_EXISTING_DEPRECATION_WARNINGS",
+    "SensitiveFileReview": "PASS",
+    "CredentialAndPrivateKeySignatureScan": "PASS",
+    "KnownWarnings": [
+      "Sandbox cannot read the user-level Terraform CLI directory; formatting and validation returned exit code 0.",
+      "Existing Appointment API DynamoDB hash_key and range_key arguments are deprecated."
+    ]
+  },
+  "SecurityFindings": {
+    "BLOCKER": [
+      "Source/vendor/schema/size/change-rate compatibility is unknown.",
+      "No approved private source route or required interface endpoints are evidenced.",
+      "RPO, RTO, acceptable CDC lag, downtime, and clinical continuity decisions are unapproved."
+    ],
+    "DESIGN REQUIREMENT": [
+      "Private RDS and DMS with SG-reference-only target access.",
+      "Application-layer clinical RBAC and no direct clinical database users.",
+      "External least-privilege IAM, secrets, KMS, certificates, and backup ownership.",
+      "Verified endpoint TLS, protected minimal logs, independent integrity validation, and explicit break-glass controls."
+    ],
+    "DESIGN CONSTRAINT": [
+      "Single-AZ is portfolio sizing, not a production recommendation.",
+      "Existing FSx use and compatibility are conditional.",
+      "DMS cannot migrate or convert every source object and server setting."
+    ],
+    "FOLLOW_UP": [
+      "Profile source database and LOBs, confirm private connectivity, approve clinical recovery and lag thresholds, and define protected audit retention before any implementation design."
+    ]
+  },
+  "CostConsiderations": [
+    "RDS MySQL runtime, gp3 storage, snapshots, and backups",
+    "Private EC2 and EBS",
+    "Temporary DMS replication runtime and storage",
+    "CloudWatch logs, metrics, and alarms",
+    "KMS operations and AWS Backup retention",
+    "Interface endpoints and hybrid data transfer",
+    "Optional FSx capacity and backup",
+    "DMS removal only after separately authorized migration acceptance in a real implementation"
+  ],
+  "Documents": [
+    "application/clinic-emr/README.md",
+    "application/clinic-emr/MIGRATION-RUNBOOK.md",
+    "application/clinic-emr/RBAC-UAT.md",
+    "application/clinic-emr/SECURITY-VALIDATION.md"
+  ],
+  "TerraformModule": "modules/clinic-emr",
+  "TerraformValidationRoot": "environments/design/clinic-emr",
+  "DeploymentStatus": "DESIGN VALIDATED — NOT DEPLOYED"
+}

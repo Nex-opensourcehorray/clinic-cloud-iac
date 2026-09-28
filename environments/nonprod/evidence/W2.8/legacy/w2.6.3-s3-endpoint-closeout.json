@@ -1,0 +1,48 @@
+{
+    "Evidence":  "W2.6.3 S3 Gateway Endpoint Closeout",
+    "Region":  "ap-east-1",
+    "EndpointId":  "vpce-<S3_GATEWAY>",
+    "EndpointState":  "available",
+    "EndpointType":  "Gateway",
+    "ServiceName":  "com.amazonaws.ap-east-1.s3",
+    "VpcId":  "vpc-<REDACTED>",
+    "Terraform":  {
+                      "ResourceAddress":  "aws_vpc_endpoint.s3_gateway",
+                      "Managed":  true,
+                      "PlanExitCode":  0,
+                      "NoDrift":  true
+                  },
+    "RouteTableScope":  {
+                            "PrivateA":  {
+                                             "RouteTableId":  "rtb-<PRIVATE_A>",
+                                             "EndpointRoutePresent":  true
+                                         },
+                            "PrivateB":  {
+                                             "RouteTableId":  "rtb-<PRIVATE_B>",
+                                             "EndpointRoutePresent":  true
+                                         },
+                            "Public":  {
+                                           "RouteTableId":  "rtb-<PUBLIC>",
+                                           "EndpointRoutePresent":  false
+                                       },
+                            "EndpointReportedRouteTables":  [
+                                                                "rtb-<PRIVATE_A>",
+                                                                "rtb-<PRIVATE_B>"
+                                                            ],
+                            "ExpectedPrivateRouteTables":  [
+                                                               "rtb-<PRIVATE_A>",
+                                                               "rtb-<PRIVATE_B>"
+                                                           ],
+                            "PrivateScopeExactlyMatches":  true
+                        },
+    "Gate":  {
+                 "EndpointAvailable":  true,
+                 "CorrectType":  true,
+                 "CorrectService":  true,
+                 "PrivateAConnected":  true,
+                 "PrivateBConnected":  true,
+                 "PublicExcluded":  true,
+                 "NoTerraformDrift":  true,
+                 "OverallPass":  true
+             }
+}

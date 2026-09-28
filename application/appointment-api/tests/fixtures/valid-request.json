@@ -1,0 +1,8 @@
+{
+  "patientReference": "SYNTHETIC-PATIENT-001",
+  "appointmentTypeCode": "GENERAL_CONSULT",
+  "requestedDate": "2030-01-15",
+  "timePreference": "MORNING",
+  "locationCode": "CLINIC_A",
+  "contactPreference": "PHONE"
+}

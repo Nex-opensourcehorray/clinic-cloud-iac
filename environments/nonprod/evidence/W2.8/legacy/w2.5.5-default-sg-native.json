@@ -1,0 +1,48 @@
+{
+    "SecurityGroups": [
+        {
+            "GroupId": "sg-<DEFAULT>",
+            "IpPermissionsEgress": [],
+            "Tags": [
+                {
+                    "Key": "BackupPolicy",
+                    "Value": "none-approved"
+                },
+                {
+                    "Key": "CostCenter",
+                    "Value": "CC-CLINIC-MIG-2026"
+                },
+                {
+                    "Key": "DataClassification",
+                    "Value": "internal"
+                },
+                {
+                    "Key": "Environment",
+                    "Value": "nonprod"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "clinic-nonproduction-sg-default"
+                },
+                {
+                    "Key": "System",
+                    "Value": "shared-platform"
+                },
+                {
+                    "Key": "Owner",
+                    "Value": "IT-Administrator"
+                },
+                {
+                    "Key": "ManagedBy",
+                    "Value": "aws-service"
+                }
+            ],
+            "VpcId": "vpc-<REDACTED>",
+            "SecurityGroupArn": "arn:aws:ec2:ap-east-1:<AWS_ACCOUNT_ID>:security-group/sg-<DEFAULT>",
+            "OwnerId": "<AWS_ACCOUNT_ID>",
+            "GroupName": "default",
+            "Description": "default VPC security group",
+            "IpPermissions": []
+        }
+    ]
+}

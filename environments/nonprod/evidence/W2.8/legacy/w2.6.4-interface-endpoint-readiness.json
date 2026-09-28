@@ -1,0 +1,662 @@
+{
+    "EvidenceId":  "W2.6.4",
+    "Purpose":  "Interface Endpoint Readiness and SSM Dependency Discovery",
+    "Timestamp":  "2026-09-26T04:54:21.2335125Z",
+    "Region":  "ap-east-1",
+    "Terraform":  {
+                      "VpcId":  "vpc-<REDACTED>",
+                      "PrivateSubnetIds":  [
+                                               "subnet-<PRIVATE_A>",
+                                               "subnet-<PRIVATE_B>"
+                                           ],
+                      "ClinicSecurityGroupId":  "sg-<CLINIC_WORKLOAD>"
+                  },
+    "CallerIdentity":  {
+                           "UserId":  "AROARXNXPK3HCLAHUV6E7:Clinic-NonProd-Administrator",
+                           "Account":  "<AWS_ACCOUNT_ID>",
+                           "Arn":  "arn:aws:sts::<AWS_ACCOUNT_ID>:assumed-role/<SSO_ROLE>/<SESSION_NAME>"
+                       },
+    "VpcDns":  {
+                   "EnableDnsSupport":  true,
+                   "EnableDnsHostnames":  true
+               },
+    "PrivateSubnets":  [
+                           {
+                               "AvailabilityZoneId":  "ape1-az2",
+                               "MapCustomerOwnedIpOnLaunch":  false,
+                               "OwnerId":  "<AWS_ACCOUNT_ID>",
+                               "AssignIpv6AddressOnCreation":  false,
+                               "Ipv6CidrBlockAssociationSet":  [
+
+                                                               ],
+                               "Tags":  [
+                                            {
+                                                "Key":  "System",
+                                                "Value":  "shared-platform"
+                                            },
+                                            {
+                                                "Key":  "Environment",
+                                                "Value":  "nonprod"
+                                            },
+                                            {
+                                                "Key":  "BackupPolicy",
+                                                "Value":  "none-approved"
+                                            },
+                                            {
+                                                "Key":  "ManagedBy",
+                                                "Value":  "manual-exception"
+                                            },
+                                            {
+                                                "Key":  "CostCenter",
+                                                "Value":  "CC-CLINIC-MIG-2026"
+                                            },
+                                            {
+                                                "Key":  "DataClassification",
+                                                "Value":  "internal"
+                                            },
+                                            {
+                                                "Key":  "Name",
+                                                "Value":  "clinic-nonproduction-subnet-private2-ap-east-1b"
+                                            },
+                                            {
+                                                "Key":  "Owner",
+                                                "Value":  "IT-Administrator"
+                                            }
+                                        ],
+                               "SubnetArn":  "arn:aws:ec2:ap-east-1:<AWS_ACCOUNT_ID>:subnet/subnet-<PRIVATE_B>",
+                               "EnableDns64":  false,
+                               "Ipv6Native":  false,
+                               "PrivateDnsNameOptionsOnLaunch":  {
+                                                                     "HostnameType":  "ip-name",
+                                                                     "EnableResourceNameDnsARecord":  false,
+                                                                     "EnableResourceNameDnsAAAARecord":  false
+                                                                 },
+                               "BlockPublicAccessStates":  {
+                                                               "InternetGatewayBlockMode":  "block-ingress"
+                                                           },
+                               "SubnetId":  "subnet-<PRIVATE_B>",
+                               "State":  "available",
+                               "VpcId":  "vpc-<REDACTED>",
+                               "CidrBlock":  "10.0.144.0/20",
+                               "AvailableIpAddressCount":  4090,
+                               "AvailabilityZone":  "ap-east-1b",
+                               "DefaultForAz":  false,
+                               "MapPublicIpOnLaunch":  false
+                           },
+                           {
+                               "AvailabilityZoneId":  "ape1-az1",
+                               "MapCustomerOwnedIpOnLaunch":  false,
+                               "OwnerId":  "<AWS_ACCOUNT_ID>",
+                               "AssignIpv6AddressOnCreation":  false,
+                               "Ipv6CidrBlockAssociationSet":  [
+
+                                                               ],
+                               "Tags":  [
+                                            {
+                                                "Key":  "Owner",
+                                                "Value":  "IT-Administrator"
+                                            },
+                                            {
+                                                "Key":  "ManagedBy",
+                                                "Value":  "manual-exception"
+                                            },
+                                            {
+                                                "Key":  "Environment",
+                                                "Value":  "nonprod"
+                                            },
+                                            {
+                                                "Key":  "DataClassification",
+                                                "Value":  "internal"
+                                            },
+                                            {
+                                                "Key":  "BackupPolicy",
+                                                "Value":  "none-approved"
+                                            },
+                                            {
+                                                "Key":  "CostCenter",
+                                                "Value":  "CC-CLINIC-MIG-2026"
+                                            },
+                                            {
+                                                "Key":  "Name",
+                                                "Value":  "clinic-nonproduction-subnet-private1-ap-east-1a"
+                                            },
+                                            {
+                                                "Key":  "System",
+                                                "Value":  "shared-platform"
+                                            }
+                                        ],
+                               "SubnetArn":  "arn:aws:ec2:ap-east-1:<AWS_ACCOUNT_ID>:subnet/subnet-<PRIVATE_A>",
+                               "EnableDns64":  false,
+                               "Ipv6Native":  false,
+                               "PrivateDnsNameOptionsOnLaunch":  {
+                                                                     "HostnameType":  "ip-name",
+                                                                     "EnableResourceNameDnsARecord":  false,
+                                                                     "EnableResourceNameDnsAAAARecord":  false
+                                                                 },
+                               "BlockPublicAccessStates":  {
+                                                               "InternetGatewayBlockMode":  "block-ingress"
+                                                           },
+                               "SubnetId":  "subnet-<PRIVATE_A>",
+                               "State":  "available",
+                               "VpcId":  "vpc-<REDACTED>",
+                               "CidrBlock":  "10.0.128.0/20",
+                               "AvailableIpAddressCount":  4088,
+                               "AvailabilityZone":  "ap-east-1a",
+                               "DefaultForAz":  false,
+                               "MapPublicIpOnLaunch":  false
+                           }
+                       ],
+    "ExistingVpcEndpoints":  [
+                                 {
+                                     "VpcEndpointId":  "vpce-<S3_GATEWAY>",
+                                     "VpcEndpointType":  "Gateway",
+                                     "VpcId":  "vpc-<REDACTED>",
+                                     "ServiceName":  "com.amazonaws.ap-east-1.s3",
+                                     "State":  "available",
+                                     "PolicyDocument":  "{\"Version\":\"2008-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":\"*\",\"Action\":\"*\",\"Resource\":\"*\"}]}",
+                                     "RouteTableIds":  [
+                                                           "rtb-<PRIVATE_A>",
+                                                           "rtb-<PRIVATE_B>"
+                                                       ],
+                                     "SubnetIds":  [
+
+                                                   ],
+                                     "Groups":  [
+
+                                                ],
+                                     "IpAddressType":  "ipv4",
+                                     "DnsOptions":  {
+                                                        "DnsRecordIpType":  "service-defined"
+                                                    },
+                                     "PrivateDnsEnabled":  false,
+                                     "RequesterManaged":  false,
+                                     "NetworkInterfaceIds":  [
+
+                                                             ],
+                                     "DnsEntries":  [
+
+                                                    ],
+                                     "CreationTimestamp":  "2026-09-26T04:26:54+00:00",
+                                     "Tags":  [
+                                                  {
+                                                      "Key":  "Owner",
+                                                      "Value":  "IT-Administrator"
+                                                  },
+                                                  {
+                                                      "Key":  "ManagedBy",
+                                                      "Value":  "terraform"
+                                                  },
+                                                  {
+                                                      "Key":  "CostCenter",
+                                                      "Value":  "CC-CLINIC-MIG-2026"
+                                                  },
+                                                  {
+                                                      "Key":  "DataClassification",
+                                                      "Value":  "internal"
+                                                  },
+                                                  {
+                                                      "Key":  "Environment",
+                                                      "Value":  "nonprod"
+                                                  },
+                                                  {
+                                                      "Key":  "System",
+                                                      "Value":  "shared-platform"
+                                                  },
+                                                  {
+                                                      "Key":  "BackupPolicy",
+                                                      "Value":  "none-approved"
+                                                  },
+                                                  {
+                                                      "Key":  "Name",
+                                                      "Value":  "clinic-nonproduction-vpce-s3"
+                                                  }
+                                              ],
+                                     "OwnerId":  "<AWS_ACCOUNT_ID>",
+                                     "ServiceRegion":  "ap-east-1"
+                                 }
+                             ],
+    "CandidateInterfaceEndpointServices":  [
+                                               {
+                                                   "ShortName":  "ssm",
+                                                   "ServiceName":  "com.amazonaws.ap-east-1.ssm",
+                                                   "Available":  true,
+                                                   "Types":  [
+                                                                 "Interface"
+                                                             ]
+                                               },
+                                               {
+                                                   "ShortName":  "ssmmessages",
+                                                   "ServiceName":  "com.amazonaws.ap-east-1.ssmmessages",
+                                                   "Available":  true,
+                                                   "Types":  [
+                                                                 "Interface"
+                                                             ]
+                                               },
+                                               {
+                                                   "ShortName":  "ec2messages",
+                                                   "ServiceName":  "com.amazonaws.ap-east-1.ec2messages",
+                                                   "Available":  true,
+                                                   "Types":  [
+                                                                 "Interface"
+                                                             ]
+                                               },
+                                               {
+                                                   "ShortName":  "logs",
+                                                   "ServiceName":  "com.amazonaws.ap-east-1.logs",
+                                                   "Available":  true,
+                                                   "Types":  [
+                                                                 "Interface"
+                                                             ]
+                                               },
+                                               {
+                                                   "ShortName":  "kms",
+                                                   "ServiceName":  "com.amazonaws.ap-east-1.kms",
+                                                   "Available":  true,
+                                                   "Types":  [
+                                                                 "Interface"
+                                                             ]
+                                               },
+                                               {
+                                                   "ShortName":  "sts",
+                                                   "ServiceName":  "com.amazonaws.ap-east-1.sts",
+                                                   "Available":  true,
+                                                   "Types":  [
+                                                                 "Interface"
+                                                             ]
+                                               },
+                                               {
+                                                   "ShortName":  "secretsmanager",
+                                                   "ServiceName":  "com.amazonaws.ap-east-1.secretsmanager",
+                                                   "Available":  true,
+                                                   "Types":  [
+                                                                 "Interface"
+                                                             ]
+                                               }
+                                           ],
+    "PrivateEc2Instances":  [
+
+                            ],
+    "SsmManagedNodes":  [
+
+                        ],
+    "PrivateSubnetNetworkInterfaces":  [
+                                           {
+                                               "Attachment":  {
+                                                                  "AttachTime":  "2026-08-09T07:30:28+00:00",
+                                                                  "AttachmentId":  "eni-attach-03c0630fb3a0b54d2",
+                                                                  "DeleteOnTermination":  false,
+                                                                  "DeviceIndex":  1,
+                                                                  "NetworkCardIndex":  0,
+                                                                  "InstanceOwnerId":  "<AWS_SERVICE_ACCOUNT_ID_E>",
+                                                                  "Status":  "attached"
+                                                              },
+                                               "AvailabilityZone":  "ap-east-1b",
+                                               "Description":  "AWS created network interface for directory d-<REDACTED>",
+                                               "Groups":  [
+                                                              {
+                                                                  "GroupId":  "sg-<DIRECTORY_CONTROLLERS>",
+                                                                  "GroupName":  "d-<REDACTED>_controllers"
+                                                              }
+                                                          ],
+                                               "InterfaceType":  "interface",
+                                               "Ipv6Addresses":  [
+
+                                                                 ],
+                                               "MacAddress":  "0a:61:52:a7:d3:b7",
+                                               "NetworkInterfaceId":  "eni-<REDACTED_C>",
+                                               "OwnerId":  "<AWS_ACCOUNT_ID>",
+                                               "PrivateDnsName":  "<PRIVATE_DNS_NAME>",
+                                               "PublicDnsName":  "",
+                                               "PrivateIpAddress":  "<PRIVATE_IP>",
+                                               "PrivateIpAddresses":  [
+                                                                          {
+                                                                              "Primary":  true,
+                                                                              "PrivateDnsName":  "<PRIVATE_DNS_NAME>",
+                                                                              "PrivateIpAddress":  "<PRIVATE_IP>"
+                                                                          }
+                                                                      ],
+                                               "RequesterId":  "<AWS_SERVICE_ACCOUNT_ID_E>",
+                                               "RequesterManaged":  true,
+                                               "SourceDestCheck":  true,
+                                               "Status":  "in-use",
+                                               "SubnetId":  "subnet-<PRIVATE_B>",
+                                               "TagSet":  [
+                                                              {
+                                                                  "Key":  "ManagedBy",
+                                                                  "Value":  "manual-exception"
+                                                              },
+                                                              {
+                                                                  "Key":  "Owner",
+                                                                  "Value":  "IT-Administrator"
+                                                              },
+                                                              {
+                                                                  "Key":  "CostCenter",
+                                                                  "Value":  "CC-CLINIC-MIG-2026"
+                                                              },
+                                                              {
+                                                                  "Key":  "DataClassification",
+                                                                  "Value":  "internal"
+                                                              },
+                                                              {
+                                                                  "Key":  "Environment",
+                                                                  "Value":  "nonprod"
+                                                              },
+                                                              {
+                                                                  "Key":  "BackupPolicy",
+                                                                  "Value":  "none-approved"
+                                                              },
+                                                              {
+                                                                  "Key":  "System",
+                                                                  "Value":  "shared-platform"
+                                                              }
+                                                          ],
+                                               "VpcId":  "vpc-<REDACTED>",
+                                               "Operator":  {
+                                                                "Managed":  false,
+                                                                "HiddenByDefault":  false
+                                                            },
+                                               "AvailabilityZoneId":  "ape1-az2"
+                                           },
+                                           {
+                                               "Attachment":  {
+                                                                  "AttachTime":  "2026-09-08T14:16:01+00:00",
+                                                                  "AttachmentId":  "eni-attach-0ab270787340b9c41",
+                                                                  "DeleteOnTermination":  false,
+                                                                  "DeviceIndex":  1,
+                                                                  "NetworkCardIndex":  0,
+                                                                  "InstanceOwnerId":  "<AWS_SERVICE_ACCOUNT_ID_A>",
+                                                                  "Status":  "attached"
+                                                              },
+                                               "AvailabilityZone":  "ap-east-1a",
+                                               "Description":  "[Do not detach or untag] Amazon FSx network interface for fs-<REDACTED>",
+                                               "Groups":  [
+                                                              {
+                                                                  "GroupId":  "sg-<CLINIC_WORKLOAD>",
+                                                                  "GroupName":  "Clinic-NonProd-Group"
+                                                              }
+                                                          ],
+                                               "InterfaceType":  "interface",
+                                               "Ipv6Addresses":  [
+
+                                                                 ],
+                                               "MacAddress":  "06:47:4b:19:e2:6f",
+                                               "NetworkInterfaceId":  "eni-<REDACTED_A>",
+                                               "OwnerId":  "<AWS_ACCOUNT_ID>",
+                                               "PrivateDnsName":  "<PRIVATE_DNS_NAME>",
+                                               "PublicDnsName":  "",
+                                               "PrivateIpAddress":  "<PRIVATE_IP>",
+                                               "PrivateIpAddresses":  [
+                                                                          {
+                                                                              "Primary":  true,
+                                                                              "PrivateDnsName":  "<PRIVATE_DNS_NAME>",
+                                                                              "PrivateIpAddress":  "<PRIVATE_IP>"
+                                                                          },
+                                                                          {
+                                                                              "Primary":  false,
+                                                                              "PrivateDnsName":  "<PRIVATE_DNS_NAME>",
+                                                                              "PrivateIpAddress":  "<PRIVATE_IP>"
+                                                                          }
+                                                                      ],
+                                               "RequesterId":  "<AWS_SERVICE_ACCOUNT_ID_D>",
+                                               "RequesterManaged":  false,
+                                               "SourceDestCheck":  true,
+                                               "Status":  "in-use",
+                                               "SubnetId":  "subnet-<PRIVATE_A>",
+                                               "TagSet":  [
+                                                              {
+                                                                  "Key":  "AmazonFSx.FileSystemId",
+                                                                  "Value":  "fs-<REDACTED>"
+                                                              }
+                                                          ],
+                                               "VpcId":  "vpc-<REDACTED>",
+                                               "DenyAllIgwTraffic":  true,
+                                               "Operator":  {
+                                                                "Managed":  false,
+                                                                "HiddenByDefault":  false
+                                                            },
+                                               "AvailabilityZoneId":  "ape1-az1"
+                                           },
+                                           {
+                                               "Attachment":  {
+                                                                  "AttachTime":  "2026-08-09T07:30:27+00:00",
+                                                                  "AttachmentId":  "eni-attach-063591b13b606e263",
+                                                                  "DeleteOnTermination":  false,
+                                                                  "DeviceIndex":  1,
+                                                                  "NetworkCardIndex":  0,
+                                                                  "InstanceOwnerId":  "<AWS_SERVICE_ACCOUNT_ID_E>",
+                                                                  "Status":  "attached"
+                                                              },
+                                               "AvailabilityZone":  "ap-east-1a",
+                                               "Description":  "AWS created network interface for directory d-<REDACTED>",
+                                               "Groups":  [
+                                                              {
+                                                                  "GroupId":  "sg-<DIRECTORY_CONTROLLERS>",
+                                                                  "GroupName":  "d-<REDACTED>_controllers"
+                                                              }
+                                                          ],
+                                               "InterfaceType":  "interface",
+                                               "Ipv6Addresses":  [
+
+                                                                 ],
+                                               "MacAddress":  "06:ea:1f:dc:73:15",
+                                               "NetworkInterfaceId":  "eni-<REDACTED_B>",
+                                               "OwnerId":  "<AWS_ACCOUNT_ID>",
+                                               "PrivateDnsName":  "<PRIVATE_DNS_NAME>",
+                                               "PublicDnsName":  "",
+                                               "PrivateIpAddress":  "<PRIVATE_IP>",
+                                               "PrivateIpAddresses":  [
+                                                                          {
+                                                                              "Primary":  true,
+                                                                              "PrivateDnsName":  "<PRIVATE_DNS_NAME>",
+                                                                              "PrivateIpAddress":  "<PRIVATE_IP>"
+                                                                          }
+                                                                      ],
+                                               "RequesterId":  "<AWS_SERVICE_ACCOUNT_ID_E>",
+                                               "RequesterManaged":  true,
+                                               "SourceDestCheck":  true,
+                                               "Status":  "in-use",
+                                               "SubnetId":  "subnet-<PRIVATE_A>",
+                                               "TagSet":  [
+                                                              {
+                                                                  "Key":  "System",
+                                                                  "Value":  "shared-platform"
+                                                              },
+                                                              {
+                                                                  "Key":  "Environment",
+                                                                  "Value":  "nonprod"
+                                                              },
+                                                              {
+                                                                  "Key":  "BackupPolicy",
+                                                                  "Value":  "none-approved"
+                                                              },
+                                                              {
+                                                                  "Key":  "CostCenter",
+                                                                  "Value":  "CC-CLINIC-MIG-2026"
+                                                              },
+                                                              {
+                                                                  "Key":  "Owner",
+                                                                  "Value":  "IT-Administrator"
+                                                              },
+                                                              {
+                                                                  "Key":  "DataClassification",
+                                                                  "Value":  "internal"
+                                                              },
+                                                              {
+                                                                  "Key":  "ManagedBy",
+                                                                  "Value":  "manual-exception"
+                                                              }
+                                                          ],
+                                               "VpcId":  "vpc-<REDACTED>",
+                                               "Operator":  {
+                                                                "Managed":  false,
+                                                                "HiddenByDefault":  false
+                                                            },
+                                               "AvailabilityZoneId":  "ape1-az1"
+                                           }
+                                       ],
+    "PrivateRouteTables":  [
+                               {
+                                   "Associations":  [
+                                                        {
+                                                            "Main":  false,
+                                                            "RouteTableAssociationId":  "rtbassoc-<PRIVATE_A>",
+                                                            "RouteTableId":  "rtb-<PRIVATE_A>",
+                                                            "SubnetId":  "subnet-<PRIVATE_A>",
+                                                            "AssociationState":  {
+                                                                                     "State":  "associated"
+                                                                                 }
+                                                        }
+                                                    ],
+                                   "PropagatingVgws":  [
+
+                                                       ],
+                                   "RouteTableId":  "rtb-<PRIVATE_A>",
+                                   "Routes":  [
+                                                  {
+                                                      "DestinationCidrBlock":  "10.0.0.0/16",
+                                                      "GatewayId":  "local",
+                                                      "Origin":  "CreateRouteTable",
+                                                      "State":  "active"
+                                                  },
+                                                  {
+                                                      "DestinationPrefixListId":  "pl-<S3_SERVICE>",
+                                                      "GatewayId":  "vpce-<S3_GATEWAY>",
+                                                      "Origin":  "CreateRoute",
+                                                      "State":  "active"
+                                                  }
+                                              ],
+                                   "Tags":  [
+                                                {
+                                                    "Key":  "Owner",
+                                                    "Value":  "IT-Administrator"
+                                                },
+                                                {
+                                                    "Key":  "BackupPolicy",
+                                                    "Value":  "none-approved"
+                                                },
+                                                {
+                                                    "Key":  "System",
+                                                    "Value":  "shared-platform"
+                                                },
+                                                {
+                                                    "Key":  "CostCenter",
+                                                    "Value":  "CC-CLINIC-MIG-2026"
+                                                },
+                                                {
+                                                    "Key":  "Name",
+                                                    "Value":  "clinic-nonproduction-rtb-private1-ap-east-1a"
+                                                },
+                                                {
+                                                    "Key":  "ManagedBy",
+                                                    "Value":  "manual-exception"
+                                                },
+                                                {
+                                                    "Key":  "DataClassification",
+                                                    "Value":  "internal"
+                                                },
+                                                {
+                                                    "Key":  "Environment",
+                                                    "Value":  "nonprod"
+                                                }
+                                            ],
+                                   "VpcId":  "vpc-<REDACTED>",
+                                   "OwnerId":  "<AWS_ACCOUNT_ID>"
+                               },
+                               {
+                                   "Associations":  [
+                                                        {
+                                                            "Main":  false,
+                                                            "RouteTableAssociationId":  "rtbassoc-<PRIVATE_B>",
+                                                            "RouteTableId":  "rtb-<PRIVATE_B>",
+                                                            "SubnetId":  "subnet-<PRIVATE_B>",
+                                                            "AssociationState":  {
+                                                                                     "State":  "associated"
+                                                                                 }
+                                                        }
+                                                    ],
+                                   "PropagatingVgws":  [
+
+                                                       ],
+                                   "RouteTableId":  "rtb-<PRIVATE_B>",
+                                   "Routes":  [
+                                                  {
+                                                      "DestinationCidrBlock":  "10.0.0.0/16",
+                                                      "GatewayId":  "local",
+                                                      "Origin":  "CreateRouteTable",
+                                                      "State":  "active"
+                                                  },
+                                                  {
+                                                      "DestinationPrefixListId":  "pl-<S3_SERVICE>",
+                                                      "GatewayId":  "vpce-<S3_GATEWAY>",
+                                                      "Origin":  "CreateRoute",
+                                                      "State":  "active"
+                                                  }
+                                              ],
+                                   "Tags":  [
+                                                {
+                                                    "Key":  "Owner",
+                                                    "Value":  "IT-Administrator"
+                                                },
+                                                {
+                                                    "Key":  "BackupPolicy",
+                                                    "Value":  "none-approved"
+                                                },
+                                                {
+                                                    "Key":  "System",
+                                                    "Value":  "shared-platform"
+                                                },
+                                                {
+                                                    "Key":  "Name",
+                                                    "Value":  "clinic-nonproduction-rtb-private2-ap-east-1b"
+                                                },
+                                                {
+                                                    "Key":  "CostCenter",
+                                                    "Value":  "CC-CLINIC-MIG-2026"
+                                                },
+                                                {
+                                                    "Key":  "Environment",
+                                                    "Value":  "nonprod"
+                                                },
+                                                {
+                                                    "Key":  "DataClassification",
+                                                    "Value":  "internal"
+                                                },
+                                                {
+                                                    "Key":  "ManagedBy",
+                                                    "Value":  "manual-exception"
+                                                }
+                                            ],
+                                   "VpcId":  "vpc-<REDACTED>",
+                                   "OwnerId":  "<AWS_ACCOUNT_ID>"
+                               }
+                           ],
+    "ClinicSecurityGroupRules":  {
+                                     "SecurityGroupRuleId":  "sgr-<REDACTED>",
+                                     "GroupId":  "sg-<CLINIC_WORKLOAD>",
+                                     "GroupOwnerId":  "<AWS_ACCOUNT_ID>",
+                                     "IsEgress":  true,
+                                     "IpProtocol":  "-1",
+                                     "FromPort":  -1,
+                                     "ToPort":  -1,
+                                     "ReferencedGroupInfo":  {
+                                                                 "GroupId":  "sg-<DIRECTORY_CONTROLLERS>",
+                                                                 "UserId":  "<AWS_ACCOUNT_ID>"
+                                                             },
+                                     "Tags":  [
+
+                                              ],
+                                     "SecurityGroupRuleArn":  "arn:aws:ec2:ap-east-1:<AWS_ACCOUNT_ID>:security-group-rule/sgr-<REDACTED>"
+                                 },
+    "Summary":  {
+                    "DnsSupportEnabled":  true,
+                    "DnsHostnamesEnabled":  true,
+                    "PrivateSubnetCount":  2,
+                    "ExistingVpcEndpointCount":  1,
+                    "PrivateEc2InstanceCount":  0,
+                    "SsmManagedNodeCount":  0,
+                    "CollectorErrorCount":  0
+                },
+    "CollectorErrors":  [
+
+                        ]
+}

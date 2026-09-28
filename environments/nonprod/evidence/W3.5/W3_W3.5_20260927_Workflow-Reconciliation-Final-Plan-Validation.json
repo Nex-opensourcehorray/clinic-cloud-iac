@@ -1,0 +1,67 @@
+{
+  "EvidenceId": "W3.5",
+  "Purpose": "Appointment API Workflow, Reconciliation, Concurrency, and Exception Handling Validation",
+  "TimestampUTC": "2026-09-27T07:11:12Z",
+  "Branch": "wave-3-appointment-api",
+  "W3.4Commit": "b9b0ae1270d4cbd4e13e3a8ffcb98b5808704106",
+  "Validation": {
+    "TerraformFmt": "PASS",
+    "TerraformValidate": "PASS",
+    "AppointmentApiTests": {
+      "Result": "PASS",
+      "Count": 112
+    },
+    "LambdaPackaging": "PASS",
+    "SensitiveFileReview": "PASS"
+  },
+  "TerraformPlan": {
+    "ExitCode": 2,
+    "Add": 57,
+    "Change": 0,
+    "Destroy": 0,
+    "Replace": 0,
+    "SavedPlanCreated": false,
+    "ApplyExecuted": false
+  },
+  "Workflow": {
+    "AtomicWorkerOwnership": true,
+    "ProcessingLeaseSeconds": 120,
+    "ReconciliationStaleSeconds": 300,
+    "ReconciliationBackoffSeconds": 300,
+    "MaximumReconciliationAttempts": 3,
+    "ReconciliationBatchSize": 25,
+    "ManualReviewEscalation": true,
+    "FalseClinicalSuccessPrevented": true
+  },
+  "Concurrency": {
+    "StaleIntakeOverwriteRaceResolved": true,
+    "ExpectedSourceStateCondition": "QUEUE_PENDING",
+    "WorkerStateRegressionPrevented": true,
+    "ConditionalOwnership": true
+  },
+  "DynamoDB": {
+    "ReconciliationIndex": "reconciliation-index",
+    "Projection": "KEYS_ONLY",
+    "TableScanRequired": false,
+    "BillingMode": "PAY_PER_REQUEST"
+  },
+  "DLQ": {
+    "AutomaticDelete": false,
+    "AutomaticInfiniteRedrive": false,
+    "ManualRedriveRequiresApproval": true
+  },
+  "ExistingInfrastructureImpact": {
+    "Wave0ToWave2Modified": false,
+    "NetworkModified": false,
+    "FSxModified": false,
+    "DirectoryServiceModified": false,
+    "RDSCreated": false
+  },
+  "AcceptedFollowUps": [
+    "Alarm notification and escalation routing must be completed before operational acceptance.",
+    "Actual HMAC key material remains separately gated.",
+    "Real clinical-system adapter remains intentionally unavailable.",
+    "Deprecated DynamoDB hash_key/range_key Terraform syntax should be migrated separately."
+  ],
+  "Result": "PASS"
+}

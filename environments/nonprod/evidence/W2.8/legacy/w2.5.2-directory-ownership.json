@@ -1,0 +1,14 @@
+[
+    {
+        "DirectoryId": "d-<REDACTED>",
+        "Name": "<INTERNAL_DOMAIN>",
+        "Type": "MicrosoftAD",
+        "Stage": "Active",
+        "VpcId": "vpc-<REDACTED>",
+        "SubnetIds": [
+            "subnet-<PRIVATE_A>",
+            "subnet-<PRIVATE_B>"
+        ],
+        "SecurityGroupId": "sg-<DIRECTORY_CONTROLLERS>"
+    }
+]

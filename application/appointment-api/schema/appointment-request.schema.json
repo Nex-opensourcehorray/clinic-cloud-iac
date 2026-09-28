@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Nonproduction Appointment Request",
+  "description": "Data-minimized request contract. Contact and clinical details remain outside this boundary.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "patientReference",
+    "appointmentTypeCode",
+    "requestedDate"
+  ],
+  "properties": {
+    "patientReference": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[A-Za-z0-9._-]+$"
+    },
+    "appointmentTypeCode": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40,
+      "pattern": "^[A-Z0-9_-]+$"
+    },
+    "requestedDate": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "timePreference": {
+      "type": "string",
+      "enum": [
+        "MORNING",
+        "AFTERNOON",
+        "EVENING",
+        "ANY"
+      ]
+    },
+    "locationCode": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40,
+      "pattern": "^[A-Z0-9_-]+$"
+    },
+    "contactPreference": {
+      "type": "string",
+      "enum": [
+        "PHONE",
+        "EMAIL",
+        "SMS"
+      ]
+    }
+  }
+}

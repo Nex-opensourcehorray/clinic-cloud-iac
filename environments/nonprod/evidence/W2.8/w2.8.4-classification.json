@@ -1,0 +1,135 @@
+{
+    "EvidenceId":  "W2.8.4",
+    "Purpose":  "Wave 2 Closeout Classification",
+    "Timestamp":  "2026-09-26T09:49:39.7572730Z",
+    "Checks":  {
+                   "TrackedTfvarsExampleCount":  2,
+                   "GitTrackedRiskCount":  0,
+                   "GitUntrackedRiskCount":  5,
+                   "GitIgnoredRiskCount":  45,
+                   "BackendType":  "s3",
+                   "RemoteBackend":  true,
+                   "RemoteStateReadable":  true,
+                   "ModuleNetworkResources":  18,
+                   "OldRootResources":  0,
+                   "PreCleanupValidate":  true,
+                   "PreCleanupPlanExit":  0,
+                   "PreCleanupPlanClean":  true,
+                   "RollbackFiles":  5,
+                   "PlanFiles":  31,
+                   "LocalStateFiles":  5,
+                   "FinalPlanPresent":  true,
+                   "EndpointCatalogStale":  true,
+                   "DnsSupport":  true,
+                   "DnsHostnames":  true,
+                   "SubnetsWithAutomaticPublicIp":  0,
+                   "PublicSubnetsShareRouteTable":  true,
+                   "PublicInternetRouteCount":  1,
+                   "PrivateADefaultRoutes":  0,
+                   "PrivateBDefaultRoutes":  0,
+                   "PrivateAS3Routes":  1,
+                   "PrivateBS3Routes":  1,
+                   "ClinicIngressRules":  0,
+                   "ClinicEgressRules":  1,
+                   "ClinicDirectoryReferences":  1,
+                   "DefaultSgIngressRules":  0,
+                   "DefaultSgEgressRules":  0,
+                   "S3EndpointState":  "available",
+                   "S3EndpointType":  "Gateway",
+                   "S3EndpointRouteTablesCorrect":  true,
+                   "S3EndpointPolicyAccountBound":  true
+               },
+    "Findings":  [
+                     {
+                         "Id":  "GIT-TFVARS-EXAMPLE",
+                         "Classification":  "PASS",
+                         "Description":  "2 tracked terraform.tfvars.example templates are intentionally retained."
+                     },
+                     {
+                         "Id":  "GIT-001",
+                         "Classification":  "PASS",
+                         "Description":  "No Terraform state, plans, tfvars, cache contents, or rollback artifacts are tracked by Git."
+                     },
+                     {
+                         "Id":  "TFSTATE-001",
+                         "Classification":  "PASS",
+                         "Description":  "All 18 network resources are inside module.network and no old root addresses remain."
+                     },
+                     {
+                         "Id":  "TFPLAN-001",
+                         "Classification":  "PASS",
+                         "Description":  "Terraform currently reports no infrastructure changes."
+                     },
+                     {
+                         "Id":  "REPO-ROLLBACK",
+                         "Classification":  "CLEANUP",
+                         "Description":  "5 W2.7 rollback files remain."
+                     },
+                     {
+                         "Id":  "REPO-PLAN",
+                         "Classification":  "CLEANUP",
+                         "Description":  "31 historical binary Terraform plans remain locally."
+                     },
+                     {
+                         "Id":  "REPO-STATE",
+                         "Classification":  "CLEANUP",
+                         "Description":  "5 local state/backups remain even though the configured remote backend is readable."
+                     },
+                     {
+                         "Id":  "REPO-FINALPLAN",
+                         "Classification":  "CLEANUP",
+                         "Description":  "Literal $FinalPlan temporary artifact exists."
+                     },
+                     {
+                         "Id":  "REPO-ENDPOINT",
+                         "Classification":  "CLEANUP-CANDIDATE",
+                         "Description":  "endpoint.tf appears inconsistent with the live S3 Gateway Endpoint architecture."
+                     },
+                     {
+                         "Id":  "NET-DNS",
+                         "Classification":  "PASS",
+                         "Description":  "VPC DNS support and DNS hostnames are enabled."
+                     },
+                     {
+                         "Id":  "NET-SUBNET",
+                         "Classification":  "PASS",
+                         "Description":  "None of the four subnets automatically assign public IPv4 addresses."
+                     },
+                     {
+                         "Id":  "NET-ROUTES",
+                         "Classification":  "PASS",
+                         "Description":  "Public/private routing boundaries and private S3 endpoint routes are correct."
+                     },
+                     {
+                         "Id":  "SG-CLINIC",
+                         "Classification":  "PASS",
+                         "Description":  "Clinic SG has no ingress and its single egress boundary targets the Directory Service SG."
+                     },
+                     {
+                         "Id":  "SG-DEFAULT",
+                         "Classification":  "PASS",
+                         "Description":  "Default VPC security group has no ingress or egress rules."
+                     },
+                     {
+                         "Id":  "SG-DIRECTORY",
+                         "Classification":  "ACCEPTED-EXTERNAL",
+                         "Description":  "Directory controller SG is an external AWS Directory Service dependency and is not modified by module.network."
+                     },
+                     {
+                         "Id":  "VPCE-S3",
+                         "Classification":  "PASS",
+                         "Description":  "S3 Gateway Endpoint is available, private-route scoped, and account constrained."
+                     },
+                     {
+                         "Id":  "VPCE-S3-LP",
+                         "Classification":  "FUTURE-HARDENING",
+                         "Description":  "Endpoint policy remains account-scoped with s3:* and Resource=*; narrow later when actual workload buckets/actions are known."
+                     }
+                 ],
+    "Summary":  {
+                    "PassFindings":  10,
+                    "CleanupFindings":  5,
+                    "Blockers":  0,
+                    "CleanupRequested":  true
+                }
+}

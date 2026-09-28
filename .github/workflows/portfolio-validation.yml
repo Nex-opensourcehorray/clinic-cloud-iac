@@ -1,0 +1,114 @@
+name: Portfolio validation
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - final
+
+permissions:
+  contents: read
+
+jobs:
+  repository-hygiene:
+    name: Repository hygiene
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Scan tracked files
+        shell: pwsh
+        run: ./scripts/ci/Test-RepositoryHygiene.ps1
+
+  terraform-format:
+    name: Terraform format
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.15.7
+
+      - name: Check recursive formatting
+        run: terraform fmt -check -recursive
+
+  terraform-validate:
+    name: Terraform validate (${{ matrix.root }})
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ci-validation-only
+      AWS_SECRET_ACCESS_KEY: ci-validation-only-not-a-secret
+      AWS_EC2_METADATA_DISABLED: "true"
+      TF_VAR_offline_validation: "true"
+    strategy:
+      fail-fast: false
+      matrix:
+        root:
+          - bootstrap/state-backend
+          - environments/nonprod
+          - environments/design/pharmacy
+          - environments/design/clinic-emr
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.15.7
+
+      - name: Initialize without a backend
+        working-directory: ${{ matrix.root }}
+        run: terraform init -backend=false -input=false -no-color
+
+      - name: Validate configuration
+        working-directory: ${{ matrix.root }}
+        run: terraform validate -no-color
+
+  application-tests:
+    name: Local application tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Test Appointment API
+        run: python -m unittest discover -s application/appointment-api/tests -p "test_*.py"
+
+      - name: Test Pharmacy design invariants
+        run: python -m unittest discover -s application/pharmacy/tests -p "test_*.py"
+
+      - name: Test Clinic EMR design invariants
+        run: python -m unittest discover -s application/clinic-emr/tests -p "test_*.py"
+
+  validation-gate:
+    name: Portfolio validation gate
+    if: ${{ always() }}
+    needs:
+      - repository-hygiene
+      - terraform-format
+      - terraform-validate
+      - application-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require all validation jobs
+        env:
+          HYGIENE_RESULT: ${{ needs.repository-hygiene.result }}
+          FORMAT_RESULT: ${{ needs.terraform-format.result }}
+          VALIDATE_RESULT: ${{ needs.terraform-validate.result }}
+          TEST_RESULT: ${{ needs.application-tests.result }}
+        run: |
+          test "$HYGIENE_RESULT" = "success"
+          test "$FORMAT_RESULT" = "success"
+          test "$VALIDATE_RESULT" = "success"
+          test "$TEST_RESULT" = "success"

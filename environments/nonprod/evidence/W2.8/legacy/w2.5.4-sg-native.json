@@ -1,0 +1,19 @@
+{
+    "GroupId": "sg-<CLINIC_WORKLOAD>",
+    "GroupName": "Clinic-NonProd-Group",
+    "Ingress": [],
+    "Egress": [
+        {
+            "IpProtocol": "-1",
+            "UserIdGroupPairs": [
+                {
+                    "UserId": "<AWS_ACCOUNT_ID>",
+                    "GroupId": "sg-<DIRECTORY_CONTROLLERS>"
+                }
+            ],
+            "IpRanges": [],
+            "Ipv6Ranges": [],
+            "PrefixListIds": []
+        }
+    ]
+}

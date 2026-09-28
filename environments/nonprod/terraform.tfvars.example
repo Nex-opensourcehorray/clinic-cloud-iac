@@ -2,5 +2,14 @@ aws_region   = "ap-east-1"
 environment  = "nonprod"
 project_name = "clinic"
 
+# Replace with the owner-controlled Directory Service controller security group.
+directory_controller_security_group_id = "sg-<REDACTED>"
+
+appointment_api_hmac_secret_arn = "arn:aws:secretsmanager:ap-east-1:111122223333:secret:clinic-nonprod-appointment-api/hmac-keys-example"
+appointment_api_intake_role_arn = "arn:aws:iam::111122223333:role/clinic-nonprod-appointment-api-intake-example"
+appointment_api_worker_role_arn = "arn:aws:iam::111122223333:role/clinic-nonprod-appointment-api-worker-example"
+appointment_api_reconciler_role_arn = "arn:aws:iam::111122223333:role/clinic-nonprod-appointment-api-reconciler-example"
+appointment_api_api_gateway_logs_role_arn = "arn:aws:iam::111122223333:role/clinic-nonprod-appointment-api-api-logs-example"
+
 training_parameter_name  = "/clinic/nonprod/iac/wave1/owner"
 training_parameter_value = "terraform-training"

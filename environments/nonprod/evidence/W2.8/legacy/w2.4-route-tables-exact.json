@@ -1,0 +1,244 @@
+[
+    {
+        "RouteTableId": "rtb-<PRIVATE_A>",
+        "Routes": [
+            {
+                "DestinationCidrBlock": "10.0.0.0/16",
+                "GatewayId": "local",
+                "Origin": "CreateRouteTable",
+                "State": "active"
+            }
+        ],
+        "Associations": [
+            {
+                "Main": false,
+                "RouteTableAssociationId": "rtbassoc-<PRIVATE_A>",
+                "RouteTableId": "rtb-<PRIVATE_A>",
+                "SubnetId": "subnet-<PRIVATE_A>",
+                "AssociationState": {
+                    "State": "associated"
+                }
+            }
+        ],
+        "PropagatingVgws": [],
+        "Tags": [
+            {
+                "Key": "Owner",
+                "Value": "IT-Administrator"
+            },
+            {
+                "Key": "BackupPolicy",
+                "Value": "none-approved"
+            },
+            {
+                "Key": "System",
+                "Value": "shared-platform"
+            },
+            {
+                "Key": "CostCenter",
+                "Value": "CC-CLINIC-MIG-2026"
+            },
+            {
+                "Key": "Name",
+                "Value": "clinic-nonproduction-rtb-private1-ap-east-1a"
+            },
+            {
+                "Key": "ManagedBy",
+                "Value": "manual-exception"
+            },
+            {
+                "Key": "DataClassification",
+                "Value": "internal"
+            },
+            {
+                "Key": "Environment",
+                "Value": "nonprod"
+            }
+        ]
+    },
+    {
+        "RouteTableId": "rtb-<PUBLIC>",
+        "Routes": [
+            {
+                "DestinationCidrBlock": "10.0.0.0/16",
+                "GatewayId": "local",
+                "Origin": "CreateRouteTable",
+                "State": "active"
+            },
+            {
+                "DestinationCidrBlock": "0.0.0.0/0",
+                "GatewayId": "igw-<REDACTED>",
+                "Origin": "CreateRoute",
+                "State": "active"
+            }
+        ],
+        "Associations": [
+            {
+                "Main": false,
+                "RouteTableAssociationId": "rtbassoc-<PUBLIC_A>",
+                "RouteTableId": "rtb-<PUBLIC>",
+                "SubnetId": "subnet-<PUBLIC_A>",
+                "AssociationState": {
+                    "State": "associated"
+                }
+            },
+            {
+                "Main": false,
+                "RouteTableAssociationId": "rtbassoc-<PUBLIC_B>",
+                "RouteTableId": "rtb-<PUBLIC>",
+                "SubnetId": "subnet-<PUBLIC_B>",
+                "AssociationState": {
+                    "State": "associated"
+                }
+            }
+        ],
+        "PropagatingVgws": [],
+        "Tags": [
+            {
+                "Key": "DataClassification",
+                "Value": "internal"
+            },
+            {
+                "Key": "ManagedBy",
+                "Value": "manual-exception"
+            },
+            {
+                "Key": "BackupPolicy",
+                "Value": "none-approved"
+            },
+            {
+                "Key": "Environment",
+                "Value": "nonprod"
+            },
+            {
+                "Key": "System",
+                "Value": "shared-platform"
+            },
+            {
+                "Key": "CostCenter",
+                "Value": "CC-CLINIC-MIG-2026"
+            },
+            {
+                "Key": "Name",
+                "Value": "clinic-nonproduction-rtb-public"
+            },
+            {
+                "Key": "Owner",
+                "Value": "IT-Administrator"
+            }
+        ]
+    },
+    {
+        "RouteTableId": "rtb-<PRIVATE_B>",
+        "Routes": [
+            {
+                "DestinationCidrBlock": "10.0.0.0/16",
+                "GatewayId": "local",
+                "Origin": "CreateRouteTable",
+                "State": "active"
+            }
+        ],
+        "Associations": [
+            {
+                "Main": false,
+                "RouteTableAssociationId": "rtbassoc-<PRIVATE_B>",
+                "RouteTableId": "rtb-<PRIVATE_B>",
+                "SubnetId": "subnet-<PRIVATE_B>",
+                "AssociationState": {
+                    "State": "associated"
+                }
+            }
+        ],
+        "PropagatingVgws": [],
+        "Tags": [
+            {
+                "Key": "Owner",
+                "Value": "IT-Administrator"
+            },
+            {
+                "Key": "BackupPolicy",
+                "Value": "none-approved"
+            },
+            {
+                "Key": "System",
+                "Value": "shared-platform"
+            },
+            {
+                "Key": "Name",
+                "Value": "clinic-nonproduction-rtb-private2-ap-east-1b"
+            },
+            {
+                "Key": "CostCenter",
+                "Value": "CC-CLINIC-MIG-2026"
+            },
+            {
+                "Key": "Environment",
+                "Value": "nonprod"
+            },
+            {
+                "Key": "DataClassification",
+                "Value": "internal"
+            },
+            {
+                "Key": "ManagedBy",
+                "Value": "manual-exception"
+            }
+        ]
+    },
+    {
+        "RouteTableId": "rtb-<MAIN>",
+        "Routes": [
+            {
+                "DestinationCidrBlock": "10.0.0.0/16",
+                "GatewayId": "local",
+                "Origin": "CreateRouteTable",
+                "State": "active"
+            }
+        ],
+        "Associations": [
+            {
+                "Main": true,
+                "RouteTableAssociationId": "rtbassoc-<MAIN>",
+                "RouteTableId": "rtb-<MAIN>",
+                "AssociationState": {
+                    "State": "associated"
+                }
+            }
+        ],
+        "PropagatingVgws": [],
+        "Tags": [
+            {
+                "Key": "BackupPolicy",
+                "Value": "none-approved"
+            },
+            {
+                "Key": "Environment",
+                "Value": "nonprod"
+            },
+            {
+                "Key": "System",
+                "Value": "shared-platform"
+            },
+            {
+                "Key": "CostCenter",
+                "Value": "CC-CLINIC-MIG-2026"
+            },
+            {
+                "Key": "DataClassification",
+                "Value": "internal"
+            },
+            {
+                "Key": "ManagedBy",
+                "Value": "aws-service"
+            },
+            {
+                "Key": "Owner",
+                "Value": "IT-Administrator"
+            },
+            {
+                "Key": "Name",
+                "Value": "clinic-nonproduction-rtb-main"
+            }
+        ]
+    }
+]

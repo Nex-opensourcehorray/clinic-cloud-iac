@@ -1,0 +1,52 @@
+{
+  "EvidenceId": "W3.7",
+  "Purpose": "Appointment API Security, Negative, Abuse, and Failure-Path Validation",
+  "TimestampUTC": "2026-09-27T09:05:44Z",
+  "Branch": "wave-3-appointment-api",
+  "W3.6Commit": "2f9a292b55627d232d1165d72622c9e3c4ca6050",
+  "Validation": {
+    "TerraformFmt": "PASS",
+    "TerraformValidate": "PASS",
+    "AppointmentApiTests": {
+      "Result": "PASS",
+      "Count": 198
+    },
+    "LambdaPackaging": "PASS",
+    "SensitiveFileReview": "PASS"
+  },
+  "TerraformPlan": {
+    "ExitCode": 2,
+    "Add": 60,
+    "Change": 0,
+    "Destroy": 0,
+    "Replace": 0,
+    "SavedPlanCreated": false,
+    "ApplyExecuted": false
+  },
+  "SecurityValidation": {
+    "AuthenticationAttacks": "PASS",
+    "Canonicalization": "PASS",
+    "ReplayProtection": "PASS",
+    "IdempotencyAbuse": "PASS",
+    "ConcurrencyStateRegression": "PASS",
+    "QueueFailurePaths": "PASS",
+    "ReconciliationNegatives": "PASS",
+    "PublicApiAbuse": "PASS",
+    "ResponseLeakage": "PASS",
+    "LoggingPrivacy": "PASS",
+    "TerraformStaticSecurity": "PASS",
+    "IAMReview": "PASS",
+    "FalseClinicalSuccessPrevention": "PASS"
+  },
+  "LambdaArtifactSha256": "597CF9C1ABBA1FFEE8685F60B307F5A85D2B1A6802EBC6B78552412749138571",
+  "ExistingInfrastructureImpact": {
+    "Wave0ToWave2Modified": false
+  },
+  "AcceptedOperationalGates": [
+    "Approved human alert subscription/destination is not yet configured.",
+    "Actual HMAC secret material is not yet provisioned.",
+    "Real clinical-system adapter/integration is not yet implemented.",
+    "Live deployed-control validation remains outstanding."
+  ],
+  "Result": "PASS"
+}

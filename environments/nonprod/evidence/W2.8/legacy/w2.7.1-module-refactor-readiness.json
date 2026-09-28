@@ -1,0 +1,407 @@
+{
+    "EvidenceId":  "W2.7.1",
+    "Purpose":  "Network Module Refactor Readiness Discovery",
+    "Timestamp":  "2026-09-26T07:20:46.4553842Z",
+    "WorkingDirectory":  "<LOCAL_REPOSITORY>\\environments\\nonprod",
+    "Terraform":  {
+                      "Version":  "1.15.7",
+                      "Platform":  "windows_amd64",
+                      "Workspace":  "default"
+                  },
+    "SourceFiles":  [
+                        {
+                            "Name":  "backend.tf",
+                            "Length":  238,
+                            "SHA256":  "0C79B0B89AD4A3C96EC9A428CF17D3888BA00D4CE79075DEA1D<AWS_SERVICE_ACCOUNT_ID_B>A"
+                        },
+                        {
+                            "Name":  "endpoint.tf",
+                            "Length":  2655,
+                            "SHA256":  "FEBE846357356F1A10D434AA9E111F25696308B4566B2EBE2F6B773EEAC06C67"
+                        },
+                        {
+                            "Name":  "locals.tf",
+                            "Length":  197,
+                            "SHA256":  "BCF755FAD24C9A14C811768435BB6AEAD7BF53805CE1651F747CA7211B2F6D40"
+                        },
+                        {
+                            "Name":  "main.tf",
+                            "Length":  341,
+                            "SHA256":  "2BB897BB7D9A596AC9F2C917D73435DE62A77889D846ABA16D8CC3BB9C7120AF"
+                        },
+                        {
+                            "Name":  "network.tf",
+                            "Length":  5553,
+                            "SHA256":  "2D80995926FF413D3A870A5949971EB68D37F6F67A24283B1459F50CC5C218E2"
+                        },
+                        {
+                            "Name":  "outputs.tf",
+                            "Length":  1999,
+                            "SHA256":  "2C25C7395BB34AB38FEE05EA55E4795D2ED61A6ADF76003C115A0129AADDD3CF"
+                        },
+                        {
+                            "Name":  "providers.tf",
+                            "Length":  46,
+                            "SHA256":  "C226C97D2FC32BA95AC5078FE454F307690763D9A7E7F572C9C4FFB2BAE94B4B"
+                        },
+                        {
+                            "Name":  "route_associations.tf",
+                            "Length":  1161,
+                            "SHA256":  "A2F3F610F<AWS_SERVICE_ACCOUNT_ID_C>CF6CFA1401A3AA574B01C3D7D747192571CC2639EAF"
+                        },
+                        {
+                            "Name":  "s3-endpoint.tf",
+                            "Length":  1180,
+                            "SHA256":  "C1D68F95E5F2B9F7EBAFA703E511A522DEDDE6EE3AB0CF775CDF1634F323277C"
+                        },
+                        {
+                            "Name":  "security-groups.tf",
+                            "Length":  1331,
+                            "SHA256":  "CB43DD99AD07593FB6F151A2F45E4B5BDB49979234B4954BD0ADEFCE8D955A39"
+                        },
+                        {
+                            "Name":  "variables.tf",
+                            "Length":  630,
+                            "SHA256":  "F30F9BAA5EE5CC6ED27043CFFFE217E0DCFCCC122E1DC51426660F1615E2931B"
+                        },
+                        {
+                            "Name":  "versions.tf",
+                            "Length":  157,
+                            "SHA256":  "B8FC930DE8854570481C1DA976FBAA68F1CF6F54AFD41FF403FFF5A61DD082D1"
+                        }
+                    ],
+    "CurrentConfiguration":  {
+                                 "ResourceBlocks":  [
+                                                        {
+                                                            "File":  "main.tf",
+                                                            "Line":  5,
+                                                            "ResourceType":  "aws_ssm_parameter",
+                                                            "ResourceName":  "wave1_training",
+                                                            "Address":  "aws_ssm_parameter.wave1_training"
+                                                        },
+                                                        {
+                                                            "File":  "network.tf",
+                                                            "Line":  1,
+                                                            "ResourceType":  "aws_vpc",
+                                                            "ResourceName":  "clinic_nonprod",
+                                                            "Address":  "aws_vpc.clinic_nonprod"
+                                                        },
+                                                        {
+                                                            "File":  "network.tf",
+                                                            "Line":  23,
+                                                            "ResourceType":  "aws_subnet",
+                                                            "ResourceName":  "public_a",
+                                                            "Address":  "aws_subnet.public_a"
+                                                        },
+                                                        {
+                                                            "File":  "network.tf",
+                                                            "Line":  45,
+                                                            "ResourceType":  "aws_subnet",
+                                                            "ResourceName":  "public_b",
+                                                            "Address":  "aws_subnet.public_b"
+                                                        },
+                                                        {
+                                                            "File":  "network.tf",
+                                                            "Line":  67,
+                                                            "ResourceType":  "aws_subnet",
+                                                            "ResourceName":  "private_a",
+                                                            "Address":  "aws_subnet.private_a"
+                                                        },
+                                                        {
+                                                            "File":  "network.tf",
+                                                            "Line":  89,
+                                                            "ResourceType":  "aws_subnet",
+                                                            "ResourceName":  "private_b",
+                                                            "Address":  "aws_subnet.private_b"
+                                                        },
+                                                        {
+                                                            "File":  "network.tf",
+                                                            "Line":  111,
+                                                            "ResourceType":  "aws_internet_gateway",
+                                                            "ResourceName":  "clinic_nonprod",
+                                                            "Address":  "aws_internet_gateway.clinic_nonprod"
+                                                        },
+                                                        {
+                                                            "File":  "network.tf",
+                                                            "Line":  130,
+                                                            "ResourceType":  "aws_route_table",
+                                                            "ResourceName":  "private_a",
+                                                            "Address":  "aws_route_table.private_a"
+                                                        },
+                                                        {
+                                                            "File":  "network.tf",
+                                                            "Line":  149,
+                                                            "ResourceType":  "aws_route_table",
+                                                            "ResourceName":  "public",
+                                                            "Address":  "aws_route_table.public"
+                                                        },
+                                                        {
+                                                            "File":  "network.tf",
+                                                            "Line":  168,
+                                                            "ResourceType":  "aws_route_table",
+                                                            "ResourceName":  "private_b",
+                                                            "Address":  "aws_route_table.private_b"
+                                                        },
+                                                        {
+                                                            "File":  "network.tf",
+                                                            "Line":  187,
+                                                            "ResourceType":  "aws_route",
+                                                            "ResourceName":  "public_internet",
+                                                            "Address":  "aws_route.public_internet"
+                                                        },
+                                                        {
+                                                            "File":  "route_associations.tf",
+                                                            "Line":  1,
+                                                            "ResourceType":  "aws_route_table_association",
+                                                            "ResourceName":  "public_a",
+                                                            "Address":  "aws_route_table_association.public_a"
+                                                        },
+                                                        {
+                                                            "File":  "route_associations.tf",
+                                                            "Line":  6,
+                                                            "ResourceType":  "aws_route_table_association",
+                                                            "ResourceName":  "public_b",
+                                                            "Address":  "aws_route_table_association.public_b"
+                                                        },
+                                                        {
+                                                            "File":  "route_associations.tf",
+                                                            "Line":  11,
+                                                            "ResourceType":  "aws_route_table_association",
+                                                            "ResourceName":  "private_a",
+                                                            "Address":  "aws_route_table_association.private_a"
+                                                        },
+                                                        {
+                                                            "File":  "route_associations.tf",
+                                                            "Line":  16,
+                                                            "ResourceType":  "aws_route_table_association",
+                                                            "ResourceName":  "private_b",
+                                                            "Address":  "aws_route_table_association.private_b"
+                                                        },
+                                                        {
+                                                            "File":  "s3-endpoint.tf",
+                                                            "Line":  1,
+                                                            "ResourceType":  "aws_vpc_endpoint",
+                                                            "ResourceName":  "s3_gateway",
+                                                            "Address":  "aws_vpc_endpoint.s3_gateway"
+                                                        },
+                                                        {
+                                                            "File":  "security-groups.tf",
+                                                            "Line":  1,
+                                                            "ResourceType":  "aws_security_group",
+                                                            "ResourceName":  "clinic_nonprod",
+                                                            "Address":  "aws_security_group.clinic_nonprod"
+                                                        },
+                                                        {
+                                                            "File":  "security-groups.tf",
+                                                            "Line":  17,
+                                                            "ResourceType":  "aws_vpc_security_group_egress_rule",
+                                                            "ResourceName":  "clinic_to_directory",
+                                                            "Address":  "aws_vpc_security_group_egress_rule.clinic_to_directory"
+                                                        },
+                                                        {
+                                                            "File":  "security-groups.tf",
+                                                            "Line":  23,
+                                                            "ResourceType":  "aws_default_security_group",
+                                                            "ResourceName":  "clinic_nonprod",
+                                                            "Address":  "aws_default_security_group.clinic_nonprod"
+                                                        }
+                                                    ],
+                                 "DataBlocks":  [
+                                                    {
+                                                        "File":  "main.tf",
+                                                        "Line":  1,
+                                                        "DataType":  "aws_caller_identity",
+                                                        "DataName":  "current",
+                                                        "Address":  "data.aws_caller_identity.current"
+                                                    },
+                                                    {
+                                                        "File":  "main.tf",
+                                                        "Line":  3,
+                                                        "DataType":  "aws_region",
+                                                        "DataName":  "current",
+                                                        "Address":  "data.aws_region.current"
+                                                    },
+                                                    {
+                                                        "File":  "security-groups.tf",
+                                                        "Line":  38,
+                                                        "DataType":  "aws_security_group",
+                                                        "DataName":  "directory_controllers",
+                                                        "Address":  "data.aws_security_group.directory_controllers"
+                                                    }
+                                                ],
+                                 "ModuleBlocks":  [
+
+                                                  ],
+                                 "VariableBlocks":  [
+                                                        {
+                                                            "File":  "variables.tf",
+                                                            "Line":  1,
+                                                            "VariableName":  "aws_region"
+                                                        },
+                                                        {
+                                                            "File":  "variables.tf",
+                                                            "Line":  6,
+                                                            "VariableName":  "environment"
+                                                        },
+                                                        {
+                                                            "File":  "variables.tf",
+                                                            "Line":  11,
+                                                            "VariableName":  "project_name"
+                                                        },
+                                                        {
+                                                            "File":  "variables.tf",
+                                                            "Line":  16,
+                                                            "VariableName":  "training_parameter_name"
+                                                        },
+                                                        {
+                                                            "File":  "variables.tf",
+                                                            "Line":  21,
+                                                            "VariableName":  "training_parameter_value"
+                                                        }
+                                                    ],
+                                 "OutputBlocks":  [
+                                                      {
+                                                          "File":  "outputs.tf",
+                                                          "Line":  1,
+                                                          "OutputName":  "aws_account_id"
+                                                      },
+                                                      {
+                                                          "File":  "outputs.tf",
+                                                          "Line":  6,
+                                                          "OutputName":  "aws_region"
+                                                      },
+                                                      {
+                                                          "File":  "outputs.tf",
+                                                          "Line":  11,
+                                                          "OutputName":  "nonprod_vpc_id"
+                                                      },
+                                                      {
+                                                          "File":  "outputs.tf",
+                                                          "Line":  16,
+                                                          "OutputName":  "nonprod_vpc_cidr"
+                                                      },
+                                                      {
+                                                          "File":  "outputs.tf",
+                                                          "Line":  21,
+                                                          "OutputName":  "name_prefix"
+                                                      },
+                                                      {
+                                                          "File":  "outputs.tf",
+                                                          "Line":  26,
+                                                          "OutputName":  "wave1_training_parameter_arn"
+                                                      },
+                                                      {
+                                                          "File":  "outputs.tf",
+                                                          "Line":  31,
+                                                          "OutputName":  "nonprod_subnet_ids"
+                                                      },
+                                                      {
+                                                          "File":  "outputs.tf",
+                                                          "Line":  42,
+                                                          "OutputName":  "nonprod_route_table_ids"
+                                                      },
+                                                      {
+                                                          "File":  "outputs.tf",
+                                                          "Line":  51,
+                                                          "OutputName":  "nonprod_internet_gateway_id"
+                                                      },
+                                                      {
+                                                          "File":  "outputs.tf",
+                                                          "Line":  55,
+                                                          "OutputName":  "nonprod_security_group_ids"
+                                                      },
+                                                      {
+                                                          "File":  "outputs.tf",
+                                                          "Line":  65,
+                                                          "OutputName":  "nonprod_s3_gateway_endpoint_id"
+                                                      }
+                                                  ],
+                                 "MovedBlocks":  [
+
+                                                 ]
+                             },
+    "TerraformState":  {
+                           "TotalResourceCount":  22,
+                           "AllResources":  [
+                                                "data.aws_caller_identity.current",
+                                                "data.aws_region.current",
+                                                "data.aws_security_group.directory_controllers",
+                                                "aws_default_security_group.clinic_nonprod",
+                                                "aws_internet_gateway.clinic_nonprod",
+                                                "aws_route.public_internet",
+                                                "aws_route_table.private_a",
+                                                "aws_route_table.private_b",
+                                                "aws_route_table.public",
+                                                "aws_route_table_association.private_a",
+                                                "aws_route_table_association.private_b",
+                                                "aws_route_table_association.public_a",
+                                                "aws_route_table_association.public_b",
+                                                "aws_security_group.clinic_nonprod",
+                                                "aws_ssm_parameter.wave1_training",
+                                                "aws_subnet.private_a",
+                                                "aws_subnet.private_b",
+                                                "aws_subnet.public_a",
+                                                "aws_subnet.public_b",
+                                                "aws_vpc.clinic_nonprod",
+                                                "aws_vpc_endpoint.s3_gateway",
+                                                "aws_vpc_security_group_egress_rule.clinic_to_directory"
+                                            ],
+                           "NetworkResourceCount":  18,
+                           "NetworkResources":  [
+                                                    "aws_default_security_group.clinic_nonprod",
+                                                    "aws_internet_gateway.clinic_nonprod",
+                                                    "aws_route.public_internet",
+                                                    "aws_route_table.private_a",
+                                                    "aws_route_table.private_b",
+                                                    "aws_route_table.public",
+                                                    "aws_route_table_association.private_a",
+                                                    "aws_route_table_association.private_b",
+                                                    "aws_route_table_association.public_a",
+                                                    "aws_route_table_association.public_b",
+                                                    "aws_security_group.clinic_nonprod",
+                                                    "aws_subnet.private_a",
+                                                    "aws_subnet.private_b",
+                                                    "aws_subnet.public_a",
+                                                    "aws_subnet.public_b",
+                                                    "aws_vpc.clinic_nonprod",
+                                                    "aws_vpc_endpoint.s3_gateway",
+                                                    "aws_vpc_security_group_egress_rule.clinic_to_directory"
+                                                ],
+                           "NonNetworkResourceCount":  4,
+                           "NonNetworkResources":  [
+                                                       "data.aws_caller_identity.current",
+                                                       "data.aws_region.current",
+                                                       "data.aws_security_group.directory_controllers",
+                                                       "aws_ssm_parameter.wave1_training"
+                                                   ]
+                       },
+    "ExistingModuleCount":  0,
+    "HardcodedAwsIdentifiers":  [
+                                    {
+                                        "File":  "security-groups.tf",
+                                        "Line":  27,
+                                        "Id":  "sg-defa"
+                                    },
+                                    {
+                                        "File":  "security-groups.tf",
+                                        "Line":  39,
+                                        "Id":  "sg-<DIRECTORY_CONTROLLERS>"
+                                    }
+                                ],
+    "ProviderTopology":  [
+                             "",
+                             "Providers required by configuration:",
+                             ".",
+                             "鈹斺攢鈹€ provider[registry.terraform.io/hashicorp/aws] ~\u003e 6.0",
+                             "",
+                             "Providers required by state:",
+                             "",
+                             "    provider[registry.terraform.io/hashicorp/aws]",
+                             ""
+                         ],
+    "Safety":  {
+                   "TerraformStateModified":  false,
+                   "AwsResourcesModified":  false,
+                   "TerraformSourceModified":  false
+               }
+}

@@ -1,0 +1,45 @@
+[
+    {
+        "InternetGatewayId": "igw-<REDACTED>",
+        "Attachments": [
+            {
+                "State": "available",
+                "VpcId": "vpc-<REDACTED>"
+            }
+        ],
+        "Tags": [
+            {
+                "Key": "DataClassification",
+                "Value": "internal"
+            },
+            {
+                "Key": "CostCenter",
+                "Value": "CC-CLINIC-MIG-2026"
+            },
+            {
+                "Key": "System",
+                "Value": "shared-platform"
+            },
+            {
+                "Key": "Owner",
+                "Value": "IT-Administrator"
+            },
+            {
+                "Key": "BackupPolicy",
+                "Value": "none-approved"
+            },
+            {
+                "Key": "Environment",
+                "Value": "nonprod"
+            },
+            {
+                "Key": "ManagedBy",
+                "Value": "manual-exception"
+            },
+            {
+                "Key": "Name",
+                "Value": "clinic-nonproduction-igw"
+            }
+        ]
+    }
+]

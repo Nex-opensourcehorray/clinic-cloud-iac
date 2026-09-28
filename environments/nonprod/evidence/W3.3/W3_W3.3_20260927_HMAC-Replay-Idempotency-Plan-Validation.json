@@ -1,0 +1,62 @@
+{
+  "EvidenceId": "W3.3",
+  "Purpose": "Appointment API HMAC Authentication, Replay Protection, and Idempotency Validation",
+  "TimestampUTC": "2026-09-27T04:30:39Z",
+  "Branch": "wave-3-appointment-api",
+  "W3.2Commit": "1645709a479a5712ad4f66d4f5576c77e0c5d8dd",
+  "Validation": {
+    "TerraformFmt": "PASS",
+    "TerraformValidate": "PASS",
+    "AppointmentApiTests": {
+      "Result": "PASS",
+      "Count": 39
+    },
+    "LambdaPackaging": "PASS",
+    "GitDiffCheck": "PASS",
+    "SensitiveFileReview": "PASS"
+  },
+  "TerraformPlan": {
+    "ExitCode": 2,
+    "Add": 53,
+    "Change": 0,
+    "Destroy": 0,
+    "Replace": 0,
+    "SavedPlanCreated": false,
+    "ApplyExecuted": false
+  },
+  "Authentication": {
+    "Algorithm": "HMAC-SHA-256",
+    "TimestampSkewSeconds": 300,
+    "NonceRetentionMinimumSeconds": 600,
+    "IdempotencyRetentionDays": 7,
+    "ConstantTimeComparison": true,
+    "FailClosed": true
+  },
+  "Secrets": {
+    "TerraformSecretMetadataOnly": true,
+    "SecretVersionManagedByTerraform": false,
+    "SecretValueInTerraform": false,
+    "SecretValueInGit": false,
+    "ActualSecretProvisioned": false
+  },
+  "ReplayAndIdempotency": {
+    "AtomicDynamoDBReservation": true,
+    "NonceReplayProtection": true,
+    "IdempotencyDigestConflictProtection": true,
+    "QueueDeliverySemantics": "at-least-once"
+  },
+  "ExistingInfrastructureImpact": {
+    "Wave0ToWave2Modified": false,
+    "NetworkModified": false,
+    "FSxModified": false,
+    "DirectoryServiceModified": false,
+    "RDSCreated": false
+  },
+  "AcceptedFollowUps": [
+    "Actual HMAC key material must be provisioned out of band before authenticated operation.",
+    "Alarm notification actions remain unresolved.",
+    "Stale QUEUE_PENDING and RECONCILE_REQUIRED recovery remains to be implemented.",
+    "Clinical-system adapter remains intentionally deferred."
+  ],
+  "Result": "PASS"
+}

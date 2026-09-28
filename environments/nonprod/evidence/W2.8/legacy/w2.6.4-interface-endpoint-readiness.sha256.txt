@@ -1,0 +1,2 @@
+3491B723AD6746732D7872AA5567BDBD0B38BFCE6EE0CD33CC6FC4BD105F8523  w2.6.4-interface-endpoint-readiness.json
+# SHA-256 of the sanitized portfolio copy; the private operational original is not published.

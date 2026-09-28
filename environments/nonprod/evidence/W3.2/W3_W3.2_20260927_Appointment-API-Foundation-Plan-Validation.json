@@ -1,0 +1,52 @@
+{
+  "EvidenceId": "W3.2",
+  "Purpose": "Appointment API Foundation Code and Terraform Plan Validation",
+  "TimestampUTC": "2026-09-27T03:48:54Z",
+  "Branch": "wave-3-appointment-api",
+  "W3.1Commit": "cfc54b02dfafd98e21a2ec3885cdf7f38f9ef0bf",
+  "Validation": {
+    "TerraformFmt": "PASS",
+    "TerraformValidate": "PASS",
+    "PythonTests": {
+      "Result": "PASS",
+      "Count": 7
+    },
+    "LambdaPackaging": "PASS",
+    "GitDiffCheck": "PASS",
+    "SensitiveFileReview": "PASS"
+  },
+  "TerraformPlan": {
+    "ExitCode": 2,
+    "Add": 52,
+    "Change": 0,
+    "Destroy": 0,
+    "Replace": 0,
+    "SavedPlanCreated": false,
+    "ApplyExecuted": false
+  },
+  "Architecture": {
+    "ApiGateway": "Regional REST API",
+    "IntakeLambdaVpcAttached": false,
+    "WorkerLambdaVpcAttached": false,
+    "ReconcilerLambdaVpcAttached": false,
+    "DynamoDB": true,
+    "SQS": true,
+    "DLQ": true,
+    "WAF": true
+  },
+  "ExistingInfrastructureImpact": {
+    "Wave0ToWave2Modified": false,
+    "NetworkModified": false,
+    "FSxModified": false,
+    "DirectoryServiceModified": false,
+    "RDSCreated": false
+  },
+  "AcceptedFindings": [
+    "HMAC authentication is not implemented in W3.2; deployment remains prohibited.",
+    "API Gateway CloudWatch account role is currently unconfigured and W3.2 proposes establishing it.",
+    "Alarm notification actions remain unresolved before operational acceptance.",
+    "DynamoDB and SQS currently use AWS/service-managed encryption.",
+    "X-Ray write APIs require Resource=* where resource-level scoping is unsupported."
+  ],
+  "Result": "PASS"
+}
