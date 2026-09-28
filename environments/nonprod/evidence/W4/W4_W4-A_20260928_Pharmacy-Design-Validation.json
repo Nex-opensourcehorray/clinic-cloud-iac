@@ -1,0 +1,179 @@
+{
+  "EvidenceId": "W4-A",
+  "Purpose": "Wave 4 Pharmacy architecture, security, and migration design validation",
+  "TimestampUTC": "2026-09-27T18:18:39.656Z",
+  "Branch": "wave-4-pharmacy",
+  "BaseCommit": "148758173ad9b47632253bb069783fc88da3eb60",
+  "Scope": {
+    "PermanentNonDeployment": true,
+    "AwsDiscoverySource": "Existing sanitized repository evidence only",
+    "AwsApiCallsPerformed": false,
+    "TerraformPlanPerformed": false,
+    "TerraformApplyPerformed": false,
+    "AwsMutationsPerformed": false,
+    "LiveMigrationOrCutoverPerformed": false,
+    "SyntheticDataOnly": true
+  },
+  "ExistingEnvironmentEvidence": {
+    "AccountId": "119033255630",
+    "Region": "ap-east-1",
+    "Vpc": {
+      "VpcId": "vpc-0dfbc450b3120b16c",
+      "Cidr": "10.0.0.0/16",
+      "DnsSupport": true,
+      "DnsHostnames": true
+    },
+    "PrivateSubnets": [
+      {
+        "SubnetId": "subnet-0c7ffc0456bbfcb56",
+        "AvailabilityZone": "ap-east-1a",
+        "Cidr": "10.0.128.0/20",
+        "DefaultRoute": false
+      },
+      {
+        "SubnetId": "subnet-06836be6443e37a7c",
+        "AvailabilityZone": "ap-east-1b",
+        "Cidr": "10.0.144.0/20",
+        "DefaultRoute": false
+      }
+    ],
+    "EvidencedVpcEndpoints": [
+      "vpce-02c654afe0052628a (S3 gateway)"
+    ],
+    "ExternalDirectoryService": {
+      "DirectoryId": "d-c4677826f0",
+      "ControllerSecurityGroupId": "sg-0f43ac70d383b4859"
+    },
+    "ExternalWindowsFsxId": "fs-0c520115e42a87b17"
+  },
+  "UnsupportedAssumptions": [
+    "No commercial Pharmacy application, vendor support matrix, or schema was supplied.",
+    "Windows Server EC2 compatibility and sizing are unverified.",
+    "RDS for SQL Server edition, version, collation, SQL Agent, licensing, and driver compatibility are unverified.",
+    "Provider endpoint, authentication, certificates, allowlists, retry semantics, and SFTP need are unknown.",
+    "Private clinic connectivity, controlled provider egress, and required SSM interface endpoints are not evidenced.",
+    "RPO 15 minutes and RTO four hours are design assumptions, not approved clinical requirements.",
+    "Directory authentication and DNS integration require validation before selection."
+  ],
+  "Architecture": {
+    "ApplicationTier": "Private Windows EC2, no public IP, no inbound RDP, IMDSv2, encrypted gp3 EBS, Session Manager administration through external endpoints",
+    "DatabaseTier": "Private Single-AZ RDS for SQL Server Express, db.t3.small, encrypted gp3, automated backups, final snapshot and deletion protection",
+    "DatabaseFlow": "Application security group to database security group only on TCP/1433 with TLS required at the client",
+    "ProviderBaseline": "Controlled outbound HTTPS API with idempotency, bounded retries, timeout handling, audit correlation, and reconciliation",
+    "ProviderAlternatives": [
+      "Authenticated callback through a separately designed ingress boundary",
+      "SFTP with host-key pinning only when required by the vendor"
+    ],
+    "ProhibitedIntegration": "FTP",
+    "IdentityOwnership": "External owner-controlled least-privilege roles and instance profile",
+    "SecretOwnership": "External Secrets Manager metadata and value lifecycle; Terraform receives ARN contracts only",
+    "KmsOwnership": "External governed KMS key ARN contract"
+  },
+  "SecurityControls": [
+    "No public EC2 or RDS address",
+    "No routine RDP ingress",
+    "No broad SQL CIDR ingress",
+    "No default-route provider egress allowlist",
+    "No IAM role or secret resource ownership in the module",
+    "Encrypted EC2, RDS, log, and backup storage",
+    "RDS automated backup, AWS Backup design, final snapshot, deletion protection, and prevent_destroy",
+    "Externally governed Session Manager, telemetry, KMS, secret, backup, and alert dependencies",
+    "Synthetic-data-only functional and migration validation"
+  ],
+  "BackupRestoreDesign": {
+    "RdsAutomatedBackupDays": 7,
+    "AwsBackupRetentionDays": 35,
+    "Covers": [
+      "EC2 application instance",
+      "RDS database"
+    ],
+    "Validation": "Restore to isolated validation boundary, verify integrity and control totals, then reconcile synthetic prescription and audit records",
+    "RpoAssumption": "15 minutes",
+    "RtoAssumption": "4 hours"
+  },
+  "MigrationDesign": {
+    "Phases": [
+      "Pre-cutover checks",
+      "Transaction freeze",
+      "Final synchronization",
+      "Application and database validation",
+      "Provider connectivity validation",
+      "Go/no-go decision",
+      "Cutover",
+      "Rollback when required",
+      "Post-cutover reconciliation"
+    ],
+    "LiveCutoverPerformed": false,
+    "RollbackAndReconciliationDocumented": true
+  },
+  "FunctionalValidationDesign": {
+    "StaticTestResult": "PASS",
+    "StaticTestCount": 19,
+    "SyntheticScenarios": [
+      "Prescription create",
+      "Amendment",
+      "Dispense",
+      "Duplicate and retry",
+      "Audit trail",
+      "Provider success, failure, timeout, and unknown result",
+      "Database failure",
+      "Backup restore",
+      "Authorization",
+      "Downtime fallback",
+      "Rollback",
+      "Post-cutover reconciliation"
+    ]
+  },
+  "TerraformDesign": {
+    "ModulePath": "modules/pharmacy",
+    "ValidationRoot": "environments/design/pharmacy",
+    "ValidationRootHasBackend": false,
+    "PlaceholderIdentifiersOnly": true,
+    "TerraformFmtRecursive": "PASS",
+    "TerraformFmtCheckRecursive": "PASS",
+    "DesignRootValidate": "PASS",
+    "NonproductionRootValidate": "PASS_WITH_EXISTING_DEPRECATION_WARNINGS",
+    "KnownWarnings": [
+      "Sandbox cannot read the user-level Terraform CLI directory; formatting and validation still returned exit code 0.",
+      "Existing Appointment API DynamoDB hash_key and range_key arguments are deprecated."
+    ]
+  },
+  "CostConsiderations": [
+    "RDS for SQL Server license-included runtime",
+    "Windows EC2 runtime",
+    "EBS and RDS gp3 storage",
+    "Automated backup, AWS Backup, and snapshot retention",
+    "CloudWatch logs, metrics, and alarms",
+    "KMS requests",
+    "Interface endpoints if a future design supplied private service access",
+    "NAT Gateway or Transfer Family only if an evidenced provider requirement justified their fixed cost"
+  ],
+  "Findings": {
+    "BLOCKER": [
+      "No vendor application, support matrix, schema, or integration contract exists in project evidence.",
+      "The evidenced private subnets have no SSM or provider egress path beyond the S3 gateway endpoint."
+    ],
+    "DESIGN REQUIREMENT": [
+      "Keep RDS private and scope TCP/1433 to the application security group only.",
+      "Use Session Manager without routine RDP and supply exact external IAM, secret, KMS, backup, and alert dependencies.",
+      "Validate TLS, restore integrity, prescription audit data, and reconciliation before acceptance."
+    ],
+    "DESIGN CONSTRAINT": [
+      "Single-AZ is a cost-conscious portfolio pilot and not a production availability recommendation.",
+      "Directory authentication, private client connectivity, and FSx need remain unverified."
+    ],
+    "COST CONSIDERATION": [
+      "SQL Server licensing and Windows runtime are primary recurring drivers.",
+      "NAT, Transfer Family, and interface endpoints add fixed hourly cost and remain absent unless requirements justify them."
+    ],
+    "FOLLOW-UP": [
+      "Obtain vendor, provider, clinical-owner, audit-retention, RPO, RTO, authentication, and network-path requirements before any future implementation design."
+    ]
+  },
+  "Documents": [
+    "application/pharmacy/README.md",
+    "application/pharmacy/MIGRATION-RUNBOOK.md",
+    "application/pharmacy/SECURITY-VALIDATION.md"
+  ],
+  "DeploymentStatus": "DESIGN VALIDATED — NOT DEPLOYED"
+}

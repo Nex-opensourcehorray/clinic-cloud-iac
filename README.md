@@ -16,8 +16,8 @@ This repository is used to learn and demonstrate Terraform engineering practices
 | Wave 1 | Terraform and IaC foundations | CLOSED |
 | Wave 2 | Network foundation | CLOSED — PASS |
 | Wave 3 | Appointment API Workflow | ENGINEERING CLOSED — DEPLOYMENT DEFERRED |
-| Wave 4 | Pharmacy migration | DESIGN VALIDATION NEXT — NEVER DEPLOY |
-| Wave 5 | Clinic/EMR shared MySQL migration | DESIGN VALIDATION ONLY — NEVER DEPLOY |
+| Wave 4 | Pharmacy migration | DESIGN VALIDATED — NOT DEPLOYED |
+| Wave 5 | Clinic/EMR shared MySQL migration | DESIGN VALIDATION NEXT — NEVER DEPLOY |
 
 Wave 3 checkpoints:
 
@@ -44,6 +44,18 @@ Waves 4 and 5 are permanent design/security/migration-validation exercises.
 They may include local Terraform design, static tests, documentation, and
 read-only discovery, but they must never create or modify AWS resources and
 must never request deployment approval.
+
+Wave 4 is **DESIGN VALIDATED — NOT DEPLOYED**. Its reusable Pharmacy design
+models a private Windows EC2 application tier, private RDS for SQL Server,
+narrow security-group flows, externally governed identity and secrets,
+monitoring, backup, provider-integration alternatives, and a synthetic
+migration validation path. Terraform validation and 19 static design tests
+passed. No AWS resource, live workload, data migration, or deployment was
+created or performed. Evidence is recorded in
+`environments/nonprod/evidence/W4/W4_W4-A_20260928_Pharmacy-Design-Validation.json`.
+
+Wave 5 is the next design-validation mission and remains subject to the same
+permanent non-deployment rule.
 
 ---
 
